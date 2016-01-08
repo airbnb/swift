@@ -196,4 +196,30 @@ class MyClass {
 ```
 * Avoid using optionals unless there’s a good semantic meaning.
 
+* Name members of tuples for extra clarity. If you've got more than 3 fields, you should use a struct. 
+```swift
+// WRONG
+func whatever() -> (Int, Int) {
+  return (4, 4)
+}
+let thing = whatever()
+print(thing.0)
+
+// RIGHT
+func whatever() -> (x: Int, y: Int) {
+  return (x: 4, y: 4)
+}
+
+// THIS IS ALSO OKAY
+func whatever2() -> (x: Int, y: Int) {
+  let x = 4
+  let y = 4
+  return (x, y)
+}
+
+let coord = whatever()
+coord.x
+coord.y
+```
+
 
