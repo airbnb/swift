@@ -222,4 +222,28 @@ coord.x
 coord.y
 ```
 
+* Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others
+```swift
+// WRONG
+let rect = CGRectMake(10, 10, 10, 10)
 
+// RIGHT
+let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
+```
+
+* where do we want the colon to go?
+** The colon always goes immediately after the identifier, followed by a sapce
+`var something: Int`
+** For type declarations, it's not clear what is better
+```swift
+// OKAY?
+class MyClass : SuperClass { 
+}
+
+// OKAY?
+class MyClass: SuperClass {
+	
+}
+```
+** for dictionaries, have space on both sides of the colon, (except for an empty dictionary literal `[:]`)
+`var dict = [KeyType : ValueType]()`
