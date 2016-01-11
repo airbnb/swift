@@ -4,7 +4,7 @@
 
 # Swift Style Guide
 
-* capitalize constants, and prefer putting them in the top level of a class if they are private. If they are public, put the constant as a static property, so we get nice namespaces.  
+* Capitalize constants, and prefer putting them in the top level of a class if they are private. If they are public, put the constant as a static property, so we get nice namespaces.  
 ```swift
 private let PrivateValue = "secret"
   
@@ -12,22 +12,28 @@ class MyClass {
   static let PublicValue = "something"
 
   func doSomething() {
-    print(MaxTime)
+    print(PrivateValue)
+	print(MyClass.PublicValue)
   }
 }
 ```
     
-* always use “self” for properties. Don’t use it for methods. 
+* Don't use self unless it's necessary for disambiguation or required by the language. 
 ```swift
 class MyClass {
   var aProp: Int
+
+  init(aProp: Int) {
+	// okay to use self here
+    self.aProp = aProp
+  }
     
   func doSomething() {
     // WRONG
-    aProp = 4
+    self.aProp = 4
     
     // RIGHT
-    self.aProp = 4
+    aProp = 4
     
     // WRONG
     self.otherMethod()
@@ -75,12 +81,12 @@ class MyClass {
 }
 
 // RIGHT
-// easier to read more clear that there are side effects of setting
+// easier to read and clearer that there are side effects of setting or nontrivial computation going on
 class MyClass {
-  func someValue() {
+  func someValue() -> Int {
   }
   
-  func setSomeValue() {
+  func setSomeValue(newValue: Int) {
   }
 }
 ```
@@ -108,7 +114,14 @@ class MyClass {
   {
     // Will cause correct level of indentation
   }
-}
+}  
+  
+// Invokation:
+foo.doSomething(4, 
+  anotherArg: 5,
+  yetAnotherArg: 4,
+  andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
+
 ```
     
 * Avoid large callback blocks - instead organize them into methods.  This makes weak-self in blocks much simpler.
@@ -159,13 +172,18 @@ class MyClass {
         print(val2)
     }
 ```
+
 * Don’t include return type Void in blocks even though that’s what autocomplete does
 ```swift
 	// WRONG
-    someAsyncThing() { argument -> Void in ... }
+    someAsyncThing() { argument -> Void in 
+		... 
+	}
     
     // RIGHT
-    someAsyncThing() { argument in ... }
+    someAsyncThing() { argument in 
+		... 
+	}
 ```
 
 * prefer immutable values whenever possible. use map and flatmap instead of appending to a new array.  mutable variables increase complexity, so try to keep them in as small a scope as possible if you have to use them. 
