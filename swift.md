@@ -130,9 +130,12 @@ foo.doSomething(4,
     // WRONG
     class MyClass {
       func doRequest(completion: () -> Void) {
-        API.request() { response in
-          // lots of processing and whatever
+        API.request() { [weak self] response in
+		  if let sSelf = self {
+	        // lots of processing and side effects and whatever			  
+		  }
           completion()
+		  
         }
       }
     }
@@ -140,8 +143,8 @@ foo.doSomething(4,
     // RIGHT
     class MyClass {
       func doRequest(completion: () -> Void) {
-        API.request() { response in 
-          self.processResponse(response)
+        API.request() { [weak self] response in 
+          self?.processResponse(response)
           completion()
         }
       }
@@ -152,8 +155,7 @@ foo.doSomething(4,
     }
 ```
       
-* Guard
-    * Only add to top of functions. Goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity
+* Only add guard to top of functions. Goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity
 
 * How do we deal with multiple let clauses in an if clause?
 ```swift
@@ -202,7 +204,15 @@ foo.doSomething(4,
     // WRONG
     func doSomething() {
       var someHash = getHashFromSomewhere()
-      someHash["someNewKey"] = someComputation()
+	  for key in keysToMassage() {
+		someHash[key] = massageValue(someHash[key])
+	  }
+	  
+	  for key in someHash['subresource'] {
+		someHash[key] = someHash['subresource'][key]
+	  }
+	  // Lots of other junk
+	  
       doSomethingWithHash(someHash)
     }
     
