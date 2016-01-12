@@ -90,19 +90,19 @@ class MyClass {
   }
 }
 ```
-* Separate long function names on each argument and put the open curly on the next line so the body is indented correctly. 
+* Separate long function declarations on each argument and put the open curly on the next line so the body is indented correctly. 
 ```swift
 class MyClass {
   // WRONG
-  func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) {
-      // This is just too long and will probably auto-wrap in a weird way
+  func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) -> String {
+    // This is just too long and will probably auto-wrap in a weird way
   }
   
   // WRONG
   func doSomething(arg: Int,
     anotherArg: Int,
     yetAnotherArg: Int,
-    andOneMoreArgForGoodMeasure: String) {
+    andOneMoreArgForGoodMeasure: String) -> String {
       // XCode will indent the body an extra level in
   }
   
@@ -110,18 +110,19 @@ class MyClass {
     arg: Int,
     anotherArg: Int,
     yetAnotherArg: Int,
-    andOneMoreArgForGoodMeasure: String) 
+    andOneMoreArgForGoodMeasure: String) -> String
   {
     // Will cause correct level of indentation
   }
 }  
-  
-// Invokation:
+```
+* Long function invocations should also break on each argument, and also put the closing parenthesis on the following line. 
+```swift
 foo.doSomething(4, 
   anotherArg: 5,
   yetAnotherArg: 4,
-  andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
-
+  andOneMoreArgForGoodMeasure: "oaiwjeifajwe"
+)
 ```
     
 * Avoid large callback blocks - instead organize them into methods.  This makes weak-self in blocks much simpler.
