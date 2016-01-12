@@ -249,19 +249,29 @@ let rect = CGRectMake(10, 10, 10, 10)
 let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
 ```
 
-* where do we want the colon to go?
-** The colon always goes immediately after the identifier, followed by a sapce
-`var something: Int`
-** For type declarations, it's not clear what is better
+* The colon always goes immediately after the identifier, followed by a space
 ```swift
-// OKAY?
+// WRONG
+var something : Int = 0
+
+// RIGHT
+var something: Int = 0
+
+// WRONG
 class MyClass : SuperClass { 
 }
 
-// OKAY?
+// RIGHT
 class MyClass: SuperClass {
 	
 }
+
+// WRONG
+var dict = [KeyType:ValueType]()
+var dict = [KeyType : ValueType]()
+
+// RIGHT
+var dict = [KeyType: ValueType]()
 ```
-** for dictionaries, have space on both sides of the colon, (except for an empty dictionary literal `[:]`)
-`var dict = [KeyType : ValueType]()`
+
+
