@@ -175,53 +175,66 @@ foo.doSomething(4,
         print(val2)
     }
 ```
+* Proposal: Keep if-let statements simple and to one line, otherwise use multiple guard statements
 
 * Don’t include return type Void in blocks even though that’s what autocomplete does
 ```swift
-	// WRONG
-    someAsyncThing() { argument -> Void in 
-		... 
-	}
+// WRONG
+someAsyncThing() { argument -> Void in 
+  ... 
+}
     
-    // RIGHT
-    someAsyncThing() { argument in 
-		... 
-	}
+// RIGHT
+someAsyncThing() { argument in 
+  ... 
+}
 ```
 
-* prefer immutable values whenever possible. use map and flatmap instead of appending to a new array.  mutable variables increase complexity, so try to keep them in as small a scope as possible if you have to use them. 
+* prefer immutable values whenever possible. use `map` and `flatMap` instead of appending to a new array.  mutable variables increase complexity, so try to keep them in as small a scope as possible if you have to use them. 
 ```swift
-	// WRONG
-    var results = []
-    for element in input {
-      let result = transform(element)
-      results.append(result)
-    }
-    
-    // RIGHT
-    let results = input.map(transform)
-    
-    // WRONG
-    func doSomething() {
-      var someHash = getHashFromSomewhere()
-	  for key in keysToMassage() {
-		someHash[key] = massageValue(someHash[key])
-	  }
-	  
-	  for key in someHash['subresource'] {
-		someHash[key] = someHash['subresource'][key]
-	  }
-	  // Lots of other junk
-	  
-      doSomethingWithHash(someHash)
-    }
-    
-    // RIGHT 
-    func doSomething() {
-      let someHash = getHashFromSomewhere()
-      let modifiedHash = modifyHash(someHash)
-      doSomethingWithHash(modifiedHash)
-    }
+// WRONG
+var results = [SomeType]()
+for element in input {
+  let result = transform(element)
+  results.append(result)
+}
+
+// RIGHT
+let results = input.map(transform)
+let anotherExample = input.map { $0.something }
+
+// Use flatMap to filter optionals
+// WRONG
+var results = [SomeType]()
+for element in input {
+  if let result = transformThatReturnsAnOptional(element) {
+    results.append(result)
+  }
+}
+
+// RIGHT
+let results = input.flatMap(transformThatReturnsAnOptional)
+
+// WRONG
+func doSomething() {
+  var someHash = getHashFromSomewhere()
+  for key in keysToMassage() {
+    someHash[key] = massageValue(someHash[key])
+  }
+
+  for key in someHash['subresource'] {
+    someHash[key] = someHash['subresource'][key]
+  }
+  // Lots of other junk
+  doSomethingWithHash(someHash)
+}
+
+// RIGHT 
+func doSomething() {
+  let someHash = getHashFromSomewhere()
+  let modifiedHash = modifyHash(someHash)
+  doSomethingWithHash(modifiedHash)
+}
 ```
 * Avoid using optionals unless there’s a good semantic meaning.
 
