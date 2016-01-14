@@ -190,50 +190,70 @@ someAsyncThing() { argument in
 }
 ```
 
-* prefer immutable values whenever possible. use `map` and `flatMap` instead of appending to a new array.  mutable variables increase complexity, so try to keep them in as small a scope as possible if you have to use them. 
+* Prefer immutable values whenever possible. use `map` and `flatMap` instead of appending to a new collection.  Use filter instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
 ```swift
 // WRONG
-var results = [SomeType]()
-for element in input {
-  let result = transform(element)
-  results.append(result)
-}
-
-// RIGHT
-let results = input.map(transform)
-let anotherExample = input.map { $0.something }
-
-// Use flatMap to filter optionals
-// WRONG
-var results = [SomeType]()
-for element in input {
-  if let result = transformThatReturnsAnOptional(element) {
+func computeResults(input: [String]) -> [SomeType] {
+  var results = [SomeType]()
+  for element in input {
+    let result = transform(element)
     results.append(result)
   }
 }
 
 // RIGHT
-let results = input.flatMap(transformThatReturnsAnOptional)
+func computeResults(input: [String]) -> [SomeType] {
+  let results = input.map(transform)
+  return anotherExample
+}
+
+func computeResults(input: [String]) -> [SomeType] {
+  let anotherExample = input.map { $0.something }
+}
+
+
+// Use flatMap to filter optionals
+// WRONG
+func computeResults(input: [String]) -> [SomeType] {
+  var results = [SomeType]()
+  for element in input {
+    if let result = transformThatReturnsAnOptional(element) {
+      results.append(result)
+    }
+  }
+  return results
+}
+
+// RIGHT
+func computeResults(input: [String]) -> [SomeType] {
+  let results = input.flatMap(transformThatReturnsAnOptional)
+  return results
+}
 
 // WRONG
-func doSomething() {
-  var someHash = getHashFromSomewhere()
-  for key in keysToMassage() {
-    someHash[key] = massageValue(someHash[key])
+func updateDisplayedData() {
+  var data = dataSource.getData()
+
+  // Apply first transformation to data
+  for key in data.keys {
+    data[key] = massageValue(data[key])
   }
 
-  for key in someHash['subresource'] {
-    someHash[key] = someHash['subresource'][key]
+  // Apply second transformation to data
+  for key in data.keys {
+    data[key] = beatUpValue(data[key])
   }
-  // Lots of other junk
-  doSomethingWithHash(someHash)
+
+  // Display transformed data
+  display(someHash)
 }
 
 // RIGHT 
-func doSomething() {
-  let someHash = getHashFromSomewhere()
-  let modifiedHash = modifyHash(someHash)
-  doSomethingWithHash(modifiedHash)
+func updateDisplayedData() {
+  let data = dataSource.getData()
+  let massagedData = massageData(data)
+  let beatUpData = beatUpData(massagedData)
+  display(beatUpData)
 }
 ```
 * Avoid using optionals unless there’s a good semantic meaning.
