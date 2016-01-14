@@ -1,7 +1,3 @@
-# Airbnb iOS Style Guide
-
-*Swift*
-
 # Swift Style Guide
 
 * Capitalize constants, and prefer putting them in the top level of a class if they are private. If they are public, put the constant as a static property, so we get nice namespaces.  
