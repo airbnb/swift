@@ -17,7 +17,41 @@ class MyClass {
   }
 }
 ```
-    
+
+* Don't include types when they can be easily inferred
+** Declaring identifiers
+```swift
+// WRONG
+let something: MyClass = MyClass()
+
+// RIGHT:
+let something = MyClass()
+
+```
+*** Do include the type for `CGFloat`s because they don't auto-bridge with `Double`
+```swift
+// OPEN QUESTION: DO THIS?
+let someMargin: CGFloat = 5
+// OR THIS
+let someMargin = CGFloat(5)
+```
+** Enum cases
+```swift
+enum Direction {
+  case Left
+  case Right
+}
+
+
+func someDirection() -> Direction {
+	// WRONG
+	return Direction.Left
+	
+	// RIGHT
+	return .Left
+}
+```
+
 * Don't use self unless it's necessary for disambiguation or required by the language. 
 ```swift
 class MyClass {
