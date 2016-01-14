@@ -233,16 +233,16 @@ func computeResults(input: [String]) -> [SomeType] {
     let result = transform(element)
     results.append(result)
   }
+  return results
 }
 
 // RIGHT
 func computeResults(input: [String]) -> [SomeType] {
-  let results = input.map(transform)
-  return anotherExample
+  return input.map(transform)
 }
 
-func computeResults(input: [String]) -> [SomeType] {
-  let anotherExample = input.map { $0.something }
+func computeMoreResults(input: [String]) -> [SomeType] {
+  return input.map { $0.something }
 }
 
 
@@ -260,8 +260,7 @@ func computeResults(input: [String]) -> [SomeType] {
 
 // RIGHT
 func computeResults(input: [String]) -> [SomeType] {
-  let results = input.flatMap(transformThatReturnsAnOptional)
-  return results
+  return input.flatMap(transformThatReturnsAnOptional)
 }
 
 // WRONG
