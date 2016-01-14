@@ -28,11 +28,11 @@ let something: MyClass = MyClass()
 let something = MyClass()
 
 ```
-*** Do include the type for `CGFloat`s because they don't auto-bridge with `Double`
+*** Do include the type for `CGFloat`s because they don't auto-bridge with `Double` or `Int`
 ```swift
-// OPEN QUESTION: DO THIS?
+// RIGHT
 let someMargin: CGFloat = 5
-// OR THIS
+// WRONG
 let someMargin = CGFloat(5)
 ```
 ** Enum cases
