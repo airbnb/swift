@@ -1,6 +1,184 @@
 # Swift Style Guide
 
+## Principles
+
+* Aim for clarity and maintainability first, and conciseness only as a secondary goal.
+* More principles here...
+
+## Naming
+
+* **Use camelCase for property, method, and variable names.**
+
+```swift
+var greetingText = "hello"
+
+func displayGreetingText(greetingText: String) {
+  // ...
+}
+```
+
+* **Use TitleCase for type names and constants.**
+
+```swift
+class Greeter {
+  static let MaxGreetings = 10
+}
+```
+
+* **Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It also reduces the likelihood of name collisions with other arguments and other local variables.
+
+* **Avoid global functions whenever possible.** Prefer methods within type definitions.
+
+```swift
+// WRONG
+
+func jump(person: Person) {
+  // ...
+}
+
+func personAgeStringFromTimeInterval(timeinTerval: NSTimeInterval) {
+  // ...
+}
+
+// RIGHT
+
+class Person {
+
+  static func ageStringFromTimeInterval(timeinTerval: NSTimeInterval) {
+    // ...
+  }
+
+  func jump() {
+    // ...
+  }
+
+}
+```
+
+* **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
+
+```swift
+// WRONG
+
+class UrlValidator {
+
+  func isValidUrl(URL: NSURL) -> Bool {
+    // ...
+  }
+}
+
+let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+
+// RIGHT
+
+class URLValidator {
+
+  func isValidURL(url: NSURL) -> Bool {
+    // ...
+  }
+}
+
+let urlValidator = URLValidator().isValidURL(/* some URL */)
+```
+
+* **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
+
+```swift
+// WRONG
+
+let rightTitleMargin: CGFloat
+let leftTitleMargin: CGFloat
+let bodyRightMargin: CGFloat
+let bodyLeftMargin: CGFloat
+
+// RIGHT
+
+let titleMarginRight: CGFloat
+let titleMarginLeft: CGFloat
+let bodyMarginRight: CGFloat
+let bodyMarginLeft: CGFloat
+```
+
+* **Include a hint about type in a name if it would otherwise be ambiguous.**
+
+```swift
+// WRONG
+
+let title: UILabel
+let cancel: UIButton
+
+// RIGHT
+
+let titleLabel: UILabel
+let cancelButton: UIButton
+```
+
+* **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `dynamic` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
+
+```swift
+// WRONG
+
+class MyClass {
+
+  private func _handleFooTap() {
+    // ...
+  }
+
+  internal func _modelChanged() {
+    // ...
+  }
+}
+
+// RIGHT
+
+class MyClass {
+
+  private func _didTapFoo() {
+    // ...
+  }
+
+  dynamic private func _modelDidChange() {
+    // ...
+  }
+}
+```
+
+* **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+
+```swift
+// WRONG
+
+class AIRAccountManager {
+  // ...
+}
+
+// RIGHT
+
+class AccountManager {
+  // ...
+}
+```
+
+* **Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
+
+```swift
+// WRONG
+
+class AccountController {
+  // ...
+}
+
+// RIGHT
+
+class AccountManager {
+  // ...
+}
+```
+
+## Recommendations
+
 * Capitalize constants, and prefer putting them in the top level of a class if they are private. If they are public, put the constant as a static property, so we get nice namespaces.  
+
 ```swift
 private let PrivateValue = "secret"
   
