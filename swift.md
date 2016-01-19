@@ -170,91 +170,6 @@ class AccountManager {
 }
 ```
 
-## Architecture
-
-* **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
-
-```swift
-// WRONG
-class MyClass: NSObject {
-  var someValue: Int!
-  
-  init() {
-    super.init()
-    someValue = 5
-  }
-}
-
-// RIGHT
-class MyClass: NSObject {
-  var someValue: Int
-  
-  init() {
-    someValue = 0
-    super.init()
-  }
-}
-```
-
-* **Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
-
-```swift
-// WRONG
-// this is less readable
-class MyClass {
-  var someValue: Int {
-    get {
-      // return something computed
-    }
-    set(newValue) {
-      // set a bunch of other values
-    }
-  }
-}
-
-// RIGHT
-// easier to read and clearer that there are side effects of setting or nontrivial computation going on
-class MyClass {
-  func someValue() -> Int {
-  }
-  
-  func setSomeValue(newValue: Int) {
-  }
-}
-```
-
-* **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler.
-
-```swift
-//WRONG
-class MyClass {
-  func doRequest(completion: () -> Void) {
-    API.request() { [weak self] response in
-      if let sSelf = self {
-        // lots of processing and side effects and whatever
-      }
-      completion()
-    }
-  }
-}
-
-// RIGHT
-class MyClass {
-  func doRequest(completion: () -> Void) {
-    API.request() { [weak self] response in
-      self?.processResponse(response)
-      completion()
-    }
-  }
-
-  func processResponse(response) {
-    // do actual processing here
-  }
-}
-```
-
-* **Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
-
 ## Style
 
 * **Don't include types where they can be easily inferred.** One exception is for `CGFLoat`s because they don't auto-bridge with `Double` or `Int`.
@@ -528,4 +443,87 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
+## Architecture
 
+* **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+
+```swift
+// WRONG
+class MyClass: NSObject {
+  var someValue: Int!
+  
+  init() {
+    super.init()
+    someValue = 5
+  }
+}
+
+// RIGHT
+class MyClass: NSObject {
+  var someValue: Int
+  
+  init() {
+    someValue = 0
+    super.init()
+  }
+}
+```
+
+* **Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
+
+```swift
+// WRONG
+// this is less readable
+class MyClass {
+  var someValue: Int {
+    get {
+      // return something computed
+    }
+    set(newValue) {
+      // set a bunch of other values
+    }
+  }
+}
+
+// RIGHT
+// easier to read and clearer that there are side effects of setting or nontrivial computation going on
+class MyClass {
+  func someValue() -> Int {
+  }
+  
+  func setSomeValue(newValue: Int) {
+  }
+}
+```
+
+* **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler.
+
+```swift
+//WRONG
+class MyClass {
+  func doRequest(completion: () -> Void) {
+    API.request() { [weak self] response in
+      if let sSelf = self {
+        // lots of processing and side effects and whatever
+      }
+      completion()
+    }
+  }
+}
+
+// RIGHT
+class MyClass {
+  func doRequest(completion: () -> Void) {
+    API.request() { [weak self] response in
+      self?.processResponse(response)
+      completion()
+    }
+  }
+
+  func processResponse(response) {
+    // do actual processing here
+  }
+}
+```
+
+* **Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
