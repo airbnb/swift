@@ -598,6 +598,66 @@ var atmosphere: Atmosphere {
 }
 ```
 
+* **Example**
+
+```swift
+public class Spacefleet {
+  typealias Enemy = Spacefleet
+
+  // MARK: Lifecycle
+
+  public init(spaceships: [Spaceship], captain: Person) {
+    _spaceships = spaceships
+    _captain = captain
+    _changeFormation(.Launch)
+  }
+
+  // MARK: Public
+
+  public func launch() {
+    // ...
+    _changeFormation(.Default)
+  }
+
+  // MARK: Internal
+
+  func attack(enemy: Enemy) {
+    _changeFormation(.Attack)
+    // ...
+  }
+
+  // MARK: Private
+
+  let _spaceships: [Spaceship]
+  let _captain: Person
+
+  private func _changeFormation(formation: Formation) {
+    // ...
+  }
+}
+
+// MARK: - SpaceshipDelegate
+
+extension Spacefleet: SpaceshipDelegate {
+
+  func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
+    // ...
+  }
+
+  func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
+    // ...
+  }
+}
+
+// MARK: - Formation
+
+private enum Formation {
+  case Launch
+  case Default
+  case Attack
+}
+```
+
 ## Objective-C Interoperability
 
 * **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
