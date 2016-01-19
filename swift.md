@@ -540,6 +540,64 @@ class MyClass {
 
 * **If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
 
+## File Organization
+
+* **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
+  * `// MARK: Lifecycle` for `init` and `deinit` methods.
+  * `// MARK: Public` for `public` properties and methods.
+  * `// MARK: Internal` for `internal` properties and methods.
+  * `// MARK: Private` for `private` properties and methods.
+  * If the type in question is an enum, its cases should go above the first `// MARK:`.
+  * If there are typealiases, they should go above the first `// MARK:`.
+  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
+
+* **Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above).
+
+* **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
+
+* **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
+  * Constants (e.g. `static let Gravity: CGFloat = 9.8`)
+  * Static properties (e.g. `static let sharedInstance = Foo()`)
+  * Instance properties
+  * Static methods
+  * Class methods
+  * Instance methods
+
+* **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
+
+```swift
+// WRONG
+static let GravityEarth: CGFloat = 9.8
+static let GravityMoon: CGFloat = 1.6
+var gravity: CGFloat
+
+// RIGHT
+static let GravityEarth: CGFloat = 9.8
+static let GravityMoon: CGFloat = 1.6
+
+var gravity: CGFloat
+```
+
+* **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
+
+```swift
+// WRONG
+var atmosphere: Atmosphere {
+  didSet {
+    print("oh my god, the atmosphere changed")
+  }
+}
+var gravity: CGFloat
+
+// RIGHT
+var gravity: CGFloat
+var atmosphere: Atmosphere {
+  didSet {
+    print("oh my god, the atmosphere changed")
+  }
+}
+```
+
 ## Objective-C Interoperability
 
 * **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
