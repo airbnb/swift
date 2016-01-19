@@ -469,6 +469,8 @@ class MyClass: NSObject {
 }
 ```
 
+* **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+
 * **Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
 
 ```swift
@@ -527,3 +529,13 @@ class MyClass {
 ```
 
 * **Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
+
+* **Use the following rules when deciding how to set up communication between objects.**
+  * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
+  * Use the callback pattern for communicating the status of some requested task (i.e. failure, progress, completion, etc.)
+  * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
+  * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
+
+* **Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
+
+* **If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
