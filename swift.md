@@ -27,7 +27,7 @@ class Greeter {
 
 * **Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It also reduces the likelihood of name collisions with other arguments and other local variables.
 
-* **Prefer putting constants in the top level of a class if they are private.** If they are public, define them static properties, for namespacing purposes.
+* **Prefer putting constants in the top level of a file if they are private.** If they are public, define them static properties, for namespacing purposes.
 
 ```swift
 private let PrivateValue = "secret"
@@ -50,13 +50,13 @@ func jump(person: Person) {
   // ...
 }
 
-func personAgeStringFromTimeInterval(timeinTerval: NSTimeInterval) {
+func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
   // ...
 }
 
 // RIGHT
 class Person {
-  static func ageStringFromTimeInterval(timeinTerval: NSTimeInterval) {
+  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
     // ...
   }
 
@@ -170,9 +170,11 @@ class AccountManager {
 }
 ```
 
+* **Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
+
 ## Style
 
-* **Don't include types where they can be easily inferred.** One exception is for `CGFLoat`s because they don't auto-bridge with `Double` or `Int`.
+* **Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
 
 ```swift
 // WRONG
