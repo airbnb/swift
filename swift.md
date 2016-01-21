@@ -1,9 +1,14 @@
-# Swift Style Guide
+# Airbnb Swift Style Guide
 
-## Principles
+## Goals
 
-* Aim for clarity and maintainability first, and conciseness only as a secondary goal.
-* More principles here...
+Following this style guide should:
+
+* Make it easier to read and begin understanding unfamiliar code
+* Make code easier to maintain
+* Reduce simple programmer errors
+
+Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
 
 ## Naming
 
