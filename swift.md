@@ -67,54 +67,9 @@ class Foo {
 }
 ```
 
-* **[1.4](#1.4) Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them static properties, for namespacing purposes.
+* **[1.4](#1.4) Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
-```swift
-private let PrivateValue = "secret"
-  
-class MyClass {
-
-  // MARK: Public
-
-  public static let PublicValue = "something"
-  
-  // MARK: Internal
-
-  func doSomething() {
-    print(PrivateValue)
-    print(MyClass.PublicValue)
-  }
-}
-```
-
-* **[1.5](#1.5) Avoid global functions whenever possible.** Prefer methods within type definitions.
-
-```swift
-// WRONG
-func jump(person: Person) {
-  // ...
-}
-
-func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
-  // ...
-}
-
-// RIGHT
-class Person {
-
-  // MARK: Internal
-
-  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
-    // ...
-  }
-
-  func jump() {
-    // ...
-  }
-}
-```
-
-* **[1.6](#1.6) Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
+* **[1.5](#1.5) Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
 
 ```swift
 // WRONG
@@ -142,7 +97,7 @@ class URLValidator {
 let urlValidator = URLValidator().isValidURL(/* some URL */)
 ```
 
-* **[1.7](#1.7) Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
+* **[1.6](#1.6) Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
 
 ```swift
 // WRONG
@@ -158,7 +113,7 @@ let bodyMarginRight: CGFloat
 let bodyMarginLeft: CGFloat
 ```
 
-* **[1.8](#1.8) Include a hint about type in a name if it would otherwise be ambiguous.**
+* **[1.7](#1.7) Include a hint about type in a name if it would otherwise be ambiguous.**
 
 ```swift
 // WRONG
@@ -170,7 +125,7 @@ let titleLabel: UILabel
 let cancelButton: UIButton
 ```
 
-* **[1.9](#1.9) Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
+* **[1.8](#1.8) Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
 
 ```swift
 // WRONG
@@ -202,7 +157,7 @@ class MyClass {
 }
 ```
 
-* **[1.10](#1.10) Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+* **[1.9](#1.9) Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
 ```swift
 // WRONG
@@ -216,7 +171,7 @@ class AccountManager {
 }
 ```
 
-* **[1.11](#1.11) Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
+* **[1.10](#1.10) Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
 
 ```swift
 // WRONG
@@ -230,7 +185,7 @@ class AccountManager {
 }
 ```
 
-* **[1.12](#1.12) Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
+* **[1.11](#1.11) Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
 
 ## [2](#2) Style
 
@@ -626,6 +581,53 @@ class MyClass {
 * **[3.7](#3.7) Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
 
 * **[3.8](#3.8) If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
+
+* **[3.9](#3.9) Avoid global functions whenever possible.** Prefer methods within type definitions.
+
+```swift
+// WRONG
+func jump(person: Person) {
+  // ...
+}
+
+func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
+  // ...
+}
+
+// RIGHT
+class Person {
+
+  // MARK: Internal
+
+  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
+    // ...
+  }
+
+  func jump() {
+    // ...
+  }
+}
+```
+
+* **[3.10](#3.10) Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
+
+```swift
+private let PrivateValue = "secret"
+  
+class MyClass {
+
+  // MARK: Public
+
+  public static let PublicValue = "something"
+  
+  // MARK: Internal
+
+  func doSomething() {
+    print(PrivateValue)
+    print(MyClass.PublicValue)
+  }
+}
+```
 
 ## [4](#4) File Organization
 
