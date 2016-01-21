@@ -631,6 +631,7 @@ class MyClass {
   * If the type in question is an enum, its cases should go above the first `// MARK:`.
   * If there are typealiases, they should go above the first `// MARK:`.
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
+  * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
 * **[4.2](#4.2) Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above).
 
