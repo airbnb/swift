@@ -300,14 +300,18 @@ class MyClass {
 }  
 ```
 
-* **[2.5](#2.5) Long function invocations should also break on each argument.** Also put the closing parenthesis on the following line. 
+* **[2.5](#2.5) Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. If the first argument is a named argument, put it on the second line. Otherwise, leave it on the first line.
 
 ```swift
 foo.doSomething(4, 
   anotherArg: 5,
   yetAnotherArg: 4,
-  andOneMoreArgForGoodMeasure: "oaiwjeifajwe"
-)
+  andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
+  
+bar.doAnotherThing(
+  duck: 0,
+  anotherDuck: 100,
+  goose: "quack")
 ```
 
 * **[2.6](#2.6) When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body.
