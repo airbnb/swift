@@ -1,13 +1,24 @@
-# Swift Style Guide
+# Airbnb Swift Style Guide
 
-## Principles
+1. [Goals](#1)
+2. [Naming](#2)
+3. [Architecture](#3)
+4. [File Organization](#4)
+5. [Objective-C Interoperability](#5)
 
-* Aim for clarity and maintainability first, and conciseness only as a secondary goal.
-* More principles here...
+## Goals
 
-## Naming
+Following this style guide should:
 
-* **Use camelCase for property, method, and variable names.**
+* Make it easier to read and begin understanding unfamiliar code
+* Make code easier to maintain
+* Reduce simple programmer errors
+
+Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
+
+## [1](#1) Naming
+
+* **[1.1](#1.1) Use camelCase for property, method, and variable names.**
 
 ```swift
 var greetingText = "hello"
@@ -17,60 +28,55 @@ func displayGreetingText(greetingText: String) {
 }
 ```
 
-* **Use TitleCase for type names and constants.**
+* **[1.2](#1.2) Use TitleCase for type names and constants.**
 
 ```swift
 class Greeter {
+
+  // MARK: Internal
+  
   static let MaxGreetings = 10
 }
 ```
 
-* **Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It also reduces the likelihood of name collisions with other arguments and other local variables.
-
-* **Prefer putting constants in the top level of a file if they are private.** If they are public, define them static properties, for namespacing purposes.
+* **[1.3](#1.3) Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It reduces the likelihood of name collisions with other arguments and local variables. Finally, it simplifies implementation of privately-modified but publicy-exposed properties.
 
 ```swift
-private let PrivateValue = "secret"
-  
-class MyClass {
-  static let PublicValue = "something"
+struct MyStruct {
+  var hello: String
+  var world: String
+}
 
-  func doSomething() {
-    print(PrivateValue)
-    print(MyClass.PublicValue)
+class Foo {
+
+  // MARK: Lifecycle
+
+  init() {
+    _myStruct = MyStruct(hello: "hello", world: "world")
   }
+
+  // MARK: Internal
+
+  var myStruct: MyStruct {
+    return _myStruct
+  }
+
+  // MARK: Private
+
+  private var _myStruct: MyStruct
 }
 ```
 
-* **Avoid global functions whenever possible.** Prefer methods within type definitions.
+* **[1.4](#1.4) Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
-```swift
-// WRONG
-func jump(person: Person) {
-  // ...
-}
-
-func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
-  // ...
-}
-
-// RIGHT
-class Person {
-  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
-    // ...
-  }
-
-  func jump() {
-    // ...
-  }
-}
-```
-
-* **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
+* **[1.5](#1.5) Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
 
 ```swift
 // WRONG
 class UrlValidator {
+
+  // MARK: Internal
+  
   func isValidUrl(URL: NSURL) -> Bool {
     // ...
   }
@@ -80,6 +86,9 @@ let URLValidator = UrlValidator().isValidUrl(/* some URL */)
 
 // RIGHT
 class URLValidator {
+
+  // MARK: Internal
+
   func isValidURL(url: NSURL) -> Bool {
     // ...
   }
@@ -88,7 +97,7 @@ class URLValidator {
 let urlValidator = URLValidator().isValidURL(/* some URL */)
 ```
 
-* **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
+* **[1.6](#1.6) Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
 
 ```swift
 // WRONG
@@ -104,7 +113,7 @@ let bodyMarginRight: CGFloat
 let bodyMarginLeft: CGFloat
 ```
 
-* **Include a hint about type in a name if it would otherwise be ambiguous.**
+* **[1.7](#1.7) Include a hint about type in a name if it would otherwise be ambiguous.**
 
 ```swift
 // WRONG
@@ -116,11 +125,14 @@ let titleLabel: UILabel
 let cancelButton: UIButton
 ```
 
-* **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
+* **[1.8](#1.8) Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
 
 ```swift
 // WRONG
 class MyClass {
+
+  // MARK: Private
+
   private func _handleFooTap() {
     // ...
   }
@@ -132,6 +144,9 @@ class MyClass {
 
 // RIGHT
 class MyClass {
+
+  // MARK: Private
+
   private func _didTapFoo() {
     // ...
   }
@@ -142,7 +157,7 @@ class MyClass {
 }
 ```
 
-* **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+* **[1.9](#1.9) Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
 ```swift
 // WRONG
@@ -156,7 +171,7 @@ class AccountManager {
 }
 ```
 
-* **Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
+* **[1.10](#1.10) Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
 
 ```swift
 // WRONG
@@ -170,11 +185,11 @@ class AccountManager {
 }
 ```
 
-* **Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
+* **[1.11](#1.11) Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
 
-## Style
+## [2](#2) Style
 
-* **Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
+* **[2.1](#2.1) Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
 
 ```swift
 // WRONG
@@ -207,16 +222,21 @@ func someDirection() -> Direction {
 }
 ```
 
-* **Don't use `self` unless it's necessary for disambiguation or required by the language.**
+* **[2.2](#2.2) Don't use `self` unless it's necessary for disambiguation or required by the language.**
 
 ```swift
 class MyClass {
-  var aProp: Int
+
+  // MARK: Lifecycle
 
   init(aProp: Int) {
 	// Okay to use self here
     self.aProp = aProp
   }
+  
+  // MARK: Internal
+  
+  var aProp: Int
     
   func doSomething() {
     // WRONG
@@ -234,7 +254,7 @@ class MyClass {
 }
 ```
 
-* **Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.)
+* **[2.3](#2.3) Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.)
 
 ```swift
 // WRONG
@@ -248,10 +268,13 @@ someAsyncThing() { argument in
 }
 ```
 
-* **Separate long function declarations with line breaks before each argument.** Also put the open curly brace on the next line so the body is indented correctly. 
+* **[2.4](#2.4) Separate long function declarations with line breaks before each argument.** Also put the open curly brace on the next line so the body is indented correctly. 
 
 ```swift
 class MyClass {
+
+  // MARK: Internal
+
   // WRONG
   func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) -> String {
     // This is just too long and will probably auto-wrap in a weird way
@@ -265,6 +288,7 @@ class MyClass {
       // XCode will indent the body an extra level in
   }
   
+  // RIGHT
   func doSomething(
     arg: Int,
     anotherArg: Int,
@@ -276,7 +300,7 @@ class MyClass {
 }  
 ```
 
-* **Long function invocations should also break on each argument.** Also put the closing parenthesis on the following line. 
+* **[2.5](#2.5) Long function invocations should also break on each argument.** Also put the closing parenthesis on the following line. 
 
 ```swift
 foo.doSomething(4, 
@@ -286,27 +310,19 @@ foo.doSomething(4,
 )
 ```
 
-* **OPEN: How do we deal with multiple let clauses in an if clause?**
+* **[2.6](#2.6) When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body.
 
 ```swift
-// This feels weird, but is how autoindent works right now in XCode
 if
   let val1 = val1,
   let val2 = val2
-  where !val2.isEmpty {
-    print(val2)
-}
-
-// Putting the first let on the same line as the if makes the body indent an extra level
-// This also looks kind of gross
-if let val1 = val1,
-  let val2 = val2
-  where !val2.isEmpty {
-    print(val2)
+  where !val2.isEmpty 
+{
+  print(val2)
 }
 ```
 
-* **Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
+* **[2.7](#2.7) Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
 
 ```swift
 // WRONG
@@ -375,9 +391,9 @@ func updateDisplayedData() {
 }
 ```
 
-* **Avoid using optionals unless there’s a good semantic meaning.**
+* **[2.8](#2.8) Avoid using optionals unless there’s a good semantic meaning.**
 
-* **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. 
+* **[2.9](#2.9) Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. 
 
 ```swift
 // WRONG
@@ -404,7 +420,7 @@ coord.x
 coord.y
 ```
 
-* **Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.**
+* **[2.10](#2.10) Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.**
 
 ```swift
 // WRONG
@@ -414,7 +430,7 @@ let rect = CGRectMake(10, 10, 10, 10)
 let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
 ```
 
-* **Place the colon immediately after an identifier, followed by a space.**
+* **[2.11](#2.11) Place the colon immediately after an identifier, followed by a space.**
 
 ```swift
 // WRONG
@@ -445,40 +461,53 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
-## Architecture
+## [3](#3) Architecture
 
-* **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+* **[3.1](#3.1) Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
 
 ```swift
 // WRONG
 class MyClass: NSObject {
-  var someValue: Int!
+  
+  // MARK: Lifecycle
   
   init() {
     super.init()
     someValue = 5
   }
+  
+  // MARK: Internal
+  
+  var someValue: Int!
 }
 
 // RIGHT
 class MyClass: NSObject {
-  var someValue: Int
+
+  // MARK: Lifecycle
   
   init() {
     someValue = 0
     super.init()
   }
+  
+  // MARK: Internal
+  
+  var someValue: Int
 }
 ```
 
-* **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+* **[3.2](#3.2) Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-* **Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
+* **[3.3](#3.3) Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
 
 ```swift
 // WRONG
-// this is less readable
+// Less readable
 class MyClass {
+
+  // MARK: Internal
+
   var someValue: Int {
     get {
       // return something computed
@@ -490,8 +519,11 @@ class MyClass {
 }
 
 // RIGHT
-// easier to read and clearer that there are side effects of setting or nontrivial computation going on
+// More readable and clearer that there are side effects or nontrivial computation
 class MyClass {
+
+  // MARK: Internal
+
   func someValue() -> Int {
   }
   
@@ -500,11 +532,14 @@ class MyClass {
 }
 ```
 
-* **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler.
+* **[3.4](#3.4) Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler.
 
 ```swift
 //WRONG
 class MyClass {
+
+  // MARK: Internal
+  
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
       if let sSelf = self {
@@ -517,34 +552,86 @@ class MyClass {
 
 // RIGHT
 class MyClass {
+
+  // MARK: Internal
+  
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
-      self?.processResponse(response)
+      self?._processResponse(response)
       completion()
     }
   }
 
-  func processResponse(response) {
+  // MARK: Private
+
+  func _processResponse(response) {
     // do actual processing here
   }
 }
 ```
 
-* **Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
+* **[3.5](#3.5) Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
 
-* **Use the following rules when deciding how to set up communication between objects.**
+* **[3.6](#3.6) Use the following rules when deciding how to set up communication between objects.**
   * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
   * Use the callback pattern for communicating the status of some requested task (i.e. failure, progress, completion, etc.)
   * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
   * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
 
-* **Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
+* **[3.7](#3.7) Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
 
-* **If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
+* **[3.8](#3.8) If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
 
-## File Organization
+* **[3.9](#3.9) Avoid global functions whenever possible.** Prefer methods within type definitions.
 
-* **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
+```swift
+// WRONG
+func jump(person: Person) {
+  // ...
+}
+
+func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
+  // ...
+}
+
+// RIGHT
+class Person {
+
+  // MARK: Internal
+
+  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
+    // ...
+  }
+
+  func jump() {
+    // ...
+  }
+}
+```
+
+* **[3.10](#3.10) Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
+
+```swift
+private let PrivateValue = "secret"
+  
+class MyClass {
+
+  // MARK: Public
+
+  public static let PublicValue = "something"
+  
+  // MARK: Internal
+
+  func doSomething() {
+    print(PrivateValue)
+    print(MyClass.PublicValue)
+  }
+}
+```
+
+## [4](#4) File Organization
+
+* **[4.1](#4.1) Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Public` for `public` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
@@ -552,12 +639,13 @@ class MyClass {
   * If the type in question is an enum, its cases should go above the first `// MARK:`.
   * If there are typealiases, they should go above the first `// MARK:`.
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
+  * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
-* **Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above).
+* **[4.2](#4.2) Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above).
 
-* **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
+* **[4.3](#4.3) Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
 
-* **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
+* **[4.4](#4.4) Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let Gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Foo()`)
   * Instance properties
@@ -565,7 +653,7 @@ class MyClass {
   * Class methods
   * Instance methods
 
-* **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
+* **[4.5](#4.5) There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
 
 ```swift
 // WRONG
@@ -580,7 +668,7 @@ static let GravityMoon: CGFloat = 1.6
 var gravity: CGFloat
 ```
 
-* **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
+* **[4.6](#4.6) Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
 
 ```swift
 // WRONG
@@ -600,7 +688,7 @@ var atmosphere: Atmosphere {
 }
 ```
 
-* **Example**
+* **[4.7](#4.7) Example**
 
 ```swift
 public class Spacefleet {
@@ -660,6 +748,6 @@ private enum Formation {
 }
 ```
 
-## Objective-C Interoperability
+## [5](#5) Objective-C Interoperability
 
-* **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
+* **[5.1](#5.1) Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
