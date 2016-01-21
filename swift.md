@@ -1,11 +1,5 @@
 # Airbnb Swift Style Guide
 
-1. [Goals](#1)
-2. [Naming](#2)
-3. [Architecture](#3)
-4. [File Organization](#4)
-5. [Objective-C Interoperability](#5)
-
 ## Goals
 
 Following this style guide should:
@@ -13,8 +7,17 @@ Following this style guide should:
 * Make it easier to read and begin understanding unfamiliar code
 * Make code easier to maintain
 * Reduce simple programmer errors
+* Reduce cognitive load while coding
 
 Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
+
+## Sections
+
+1. [Naming](#1)
+2. [Style](#2)
+3. [Architecture](#3)
+4. [File Organization](#4)
+5. [Objective-C Interoperability](#5)
 
 ## [1](#1) <a name='1'></a> Naming
 
