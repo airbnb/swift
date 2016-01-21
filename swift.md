@@ -1,5 +1,11 @@
 # Airbnb Swift Style Guide
 
+1. [Goals](#1)
+2. [Naming](#2)
+3. [Architecture](#3)
+4. [File Organization](#4)
+5. [Objective-C Interoperability](#5)
+
 ## Goals
 
 Following this style guide should:
