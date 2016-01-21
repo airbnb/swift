@@ -638,7 +638,7 @@ public class Spacefleet {
   }
 }
 
-// MARK: - SpaceshipDelegate
+// MARK: SpaceshipDelegate
 
 extension Spacefleet: SpaceshipDelegate {
 
