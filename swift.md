@@ -326,78 +326,7 @@ if
 }
 ```
 
-* **[2.7](#2.7) <a name='2.7'></a> Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
-
-```swift
-// WRONG
-func computeResults(input: [String]) -> [SomeType] {
-  var results = [SomeType]()
-  for element in input {
-    let result = transform(element)
-    results.append(result)
-  }
-  return results
-}
-
-// RIGHT
-func computeResults(input: [String]) -> [SomeType] {
-  return input.map(transform)
-}
-
-func computeMoreResults(input: [String]) -> [SomeType] {
-  return input.map { $0.something }
-}
-```
-
-```swift
-// WRONG
-func computeResults(input: [String]) -> [SomeType] {
-  var results = [SomeType]()
-  for element in input {
-    if let result = transformThatReturnsAnOptional(element) {
-      results.append(result)
-    }
-  }
-  return results
-}
-
-// RIGHT
-func computeResults(input: [String]) -> [SomeType] {
-  return input.flatMap(transformThatReturnsAnOptional)
-}
-```
-
-```swift
-// WRONG
-func updateDisplayedData() {
-  var data = dataSource.getData()
-
-  // Apply first transformation to data
-  for key in data.keys {
-    data[key] = massageValue(data[key])
-  }
-
-  // Apply second transformation to data
-  for key in data.keys {
-    data[key] = manipulateValue(data[key])
-  }
-
-  // Display transformed data
-  display(someHash)
-}
-
-// RIGHT 
-func updateDisplayedData() {
-  let data = dataSource.getData()
-  let massagedData = massageData(data)
-  let manipulatedData = manipulateData(massagedData)
-  display(manipulatedData)
-}
-```
-
-* **[2.8](#2.8) <a name='2.8'></a> Avoid using optionals unless there’s a good semantic meaning.**
-
-* **[2.9](#2.9) <a name='2.9'></a> Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. 
+* **[2.7](#2.7) <a name='2.7'></a> Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. 
 
 ```swift
 // WRONG
@@ -424,7 +353,7 @@ coord.x
 coord.y
 ```
 
-* **[2.10](#2.10) <a name='2.10'></a> Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.**
+* **[2.8](#2.8) <a name='2.10'></a> Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.**
 
 ```swift
 // WRONG
@@ -434,7 +363,7 @@ let rect = CGRectMake(10, 10, 10, 10)
 let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
 ```
 
-* **[2.11](#2.11) <a name='2.11'></a> Place the colon immediately after an identifier, followed by a space.**
+* **[2.9](#2.9) <a name='2.9'></a> Place the colon immediately after an identifier, followed by a space.**
 
 ```swift
 // WRONG
@@ -630,6 +559,77 @@ class MyClass {
     print(PrivateValue)
     print(MyClass.PublicValue)
   }
+}
+```
+
+* **[3.11](#3.11) <a name='3.11'></a> Avoid using optionals unless there’s a good semantic meaning.**
+
+* **[3.12](#3.12) <a name='3.12'></a> Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
+
+```swift
+// WRONG
+func computeResults(input: [String]) -> [SomeType] {
+  var results = [SomeType]()
+  for element in input {
+    let result = transform(element)
+    results.append(result)
+  }
+  return results
+}
+
+// RIGHT
+func computeResults(input: [String]) -> [SomeType] {
+  return input.map(transform)
+}
+
+func computeMoreResults(input: [String]) -> [SomeType] {
+  return input.map { $0.something }
+}
+```
+
+```swift
+// WRONG
+func computeResults(input: [String]) -> [SomeType] {
+  var results = [SomeType]()
+  for element in input {
+    if let result = transformThatReturnsAnOptional(element) {
+      results.append(result)
+    }
+  }
+  return results
+}
+
+// RIGHT
+func computeResults(input: [String]) -> [SomeType] {
+  return input.flatMap(transformThatReturnsAnOptional)
+}
+```
+
+```swift
+// WRONG
+func updateDisplayedData() {
+  var data = dataSource.getData()
+
+  // Apply first transformation to data
+  for key in data.keys {
+    data[key] = massageValue(data[key])
+  }
+
+  // Apply second transformation to data
+  for key in data.keys {
+    data[key] = manipulateValue(data[key])
+  }
+
+  // Display transformed data
+  display(someHash)
+}
+
+// RIGHT 
+func updateDisplayedData() {
+  let data = dataSource.getData()
+  let massagedData = massageData(data)
+  let manipulatedData = manipulateData(massagedData)
+  display(manipulatedData)
 }
 ```
 
