@@ -26,6 +26,9 @@ func displayGreetingText(greetingText: String) {
 
 ```swift
 class Greeter {
+
+  // MARK: Internal
+  
   static let MaxGreetings = 10
 }
 ```
@@ -34,7 +37,6 @@ class Greeter {
 
 ```swift
 struct MyStruct {
-
   var hello: String
   var world: String
 }
@@ -59,13 +61,18 @@ class Foo {
 }
 ```
 
-* **Prefer putting constants in the top level of a file if they are private.** If they are public, define them static properties, for namespacing purposes.
+* **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them static properties, for namespacing purposes.
 
 ```swift
 private let PrivateValue = "secret"
   
 class MyClass {
-  static let PublicValue = "something"
+
+  // MARK: Public
+
+  public static let PublicValue = "something"
+  
+  // MARK: Internal
 
   func doSomething() {
     print(PrivateValue)
@@ -88,6 +95,9 @@ func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
 
 // RIGHT
 class Person {
+
+  // MARK: Internal
+
   static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
     // ...
   }
@@ -103,6 +113,9 @@ class Person {
 ```swift
 // WRONG
 class UrlValidator {
+
+  // MARK: Internal
+  
   func isValidUrl(URL: NSURL) -> Bool {
     // ...
   }
@@ -112,6 +125,9 @@ let URLValidator = UrlValidator().isValidUrl(/* some URL */)
 
 // RIGHT
 class URLValidator {
+
+  // MARK: Internal
+
   func isValidURL(url: NSURL) -> Bool {
     // ...
   }
@@ -153,6 +169,9 @@ let cancelButton: UIButton
 ```swift
 // WRONG
 class MyClass {
+
+  // MARK: Private
+
   private func _handleFooTap() {
     // ...
   }
@@ -164,6 +183,9 @@ class MyClass {
 
 // RIGHT
 class MyClass {
+
+  // MARK: Private
+
   private func _didTapFoo() {
     // ...
   }
@@ -243,12 +265,17 @@ func someDirection() -> Direction {
 
 ```swift
 class MyClass {
-  var aProp: Int
+
+  // MARK: Lifecycle
 
   init(aProp: Int) {
 	// Okay to use self here
     self.aProp = aProp
   }
+  
+  // MARK: Internal
+  
+  var aProp: Int
     
   func doSomething() {
     // WRONG
@@ -284,6 +311,9 @@ someAsyncThing() { argument in
 
 ```swift
 class MyClass {
+
+  // MARK: Internal
+
   // WRONG
   func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) -> String {
     // This is just too long and will probably auto-wrap in a weird way
@@ -297,6 +327,7 @@ class MyClass {
       // XCode will indent the body an extra level in
   }
   
+  // RIGHT
   func doSomething(
     arg: Int,
     anotherArg: Int,
@@ -484,22 +515,32 @@ var dict = [KeyType: ValueType]()
 ```swift
 // WRONG
 class MyClass: NSObject {
-  var someValue: Int!
+  
+  // MARK: Lifecycle
   
   init() {
     super.init()
     someValue = 5
   }
+  
+  // MARK: Internal
+  
+  var someValue: Int!
 }
 
 // RIGHT
 class MyClass: NSObject {
-  var someValue: Int
+
+  // MARK: Lifecycle
   
   init() {
     someValue = 0
     super.init()
   }
+  
+  // MARK: Internal
+  
+  var someValue: Int
 }
 ```
 
@@ -509,8 +550,11 @@ class MyClass: NSObject {
 
 ```swift
 // WRONG
-// this is less readable
+// Less readable
 class MyClass {
+
+  // MARK: Internal
+
   var someValue: Int {
     get {
       // return something computed
@@ -522,8 +566,11 @@ class MyClass {
 }
 
 // RIGHT
-// easier to read and clearer that there are side effects of setting or nontrivial computation going on
+// More readable and clearer that there are side effects or nontrivial computation
 class MyClass {
+
+  // MARK: Internal
+
   func someValue() -> Int {
   }
   
@@ -537,6 +584,9 @@ class MyClass {
 ```swift
 //WRONG
 class MyClass {
+
+  // MARK: Internal
+  
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
       if let sSelf = self {
@@ -549,14 +599,19 @@ class MyClass {
 
 // RIGHT
 class MyClass {
+
+  // MARK: Internal
+  
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
-      self?.processResponse(response)
+      self?._processResponse(response)
       completion()
     }
   }
 
-  func processResponse(response) {
+  // MARK: Private
+
+  func _processResponse(response) {
     // do actual processing here
   }
 }
