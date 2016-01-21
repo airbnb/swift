@@ -349,23 +349,15 @@ foo.doSomething(4,
 )
 ```
 
-* **OPEN: How do we deal with multiple let clauses in an if clause?**
+* **When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body.
 
 ```swift
-// This feels weird, but is how autoindent works right now in XCode
 if
   let val1 = val1,
   let val2 = val2
-  where !val2.isEmpty {
-    print(val2)
-}
-
-// Putting the first let on the same line as the if makes the body indent an extra level
-// This also looks kind of gross
-if let val1 = val1,
-  let val2 = val2
-  where !val2.isEmpty {
-    print(val2)
+  where !val2.isEmpty 
+{
+  print(val2)
 }
 ```
 
