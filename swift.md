@@ -116,7 +116,7 @@ let titleLabel: UILabel
 let cancelButton: UIButton
 ```
 
-* **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `dynamic` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
+* **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
 
 ```swift
 // WRONG
@@ -136,7 +136,7 @@ class MyClass {
     // ...
   }
 
-  dynamic private func _modelDidChange() {
+  @objc private func _modelDidChange() {
     // ...
   }
 }
