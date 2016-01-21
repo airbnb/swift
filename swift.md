@@ -30,7 +30,34 @@ class Greeter {
 }
 ```
 
-* **Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It also reduces the likelihood of name collisions with other arguments and other local variables.
+* **Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It reduces the likelihood of name collisions with other arguments and local variables. Finally, it simplifies implementation of privately-modified but publicy-exposed properties.
+
+```swift
+struct MyStruct {
+
+  var hello: String
+  var world: String
+}
+
+class Foo {
+
+  // MARK: Lifecycle
+
+  init() {
+    _myStruct = MyStruct(hello: "hello", world: "world")
+  }
+
+  // MARK: Internal
+
+  var myStruct: MyStruct {
+    return _myStruct
+  }
+
+  // MARK: Private
+
+  private var _myStruct: MyStruct
+}
+```
 
 * **Prefer putting constants in the top level of a file if they are private.** If they are public, define them static properties, for namespacing purposes.
 
