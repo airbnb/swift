@@ -37,7 +37,7 @@ func displayGreetingText(greetingText: String) {
 class Greeter {
 
   // MARK: Internal
-  
+
   static let MaxGreetings = 10
 }
 ```
@@ -79,7 +79,7 @@ class Foo {
 class UrlValidator {
 
   // MARK: Internal
-  
+
   func isValidUrl(URL: NSURL) -> Bool {
     // ...
   }
@@ -120,11 +120,11 @@ let bodyMarginLeft: CGFloat
 
 ```swift
 // WRONG
-let title: UILabel
+let title: String
 let cancel: UIButton
 
 // RIGHT
-let titleLabel: UILabel
+let titleText: String
 let cancelButton: UIButton
 ```
 
@@ -188,8 +188,6 @@ class AccountManager {
 }
 ```
 
-* **[1.11](#1.11) <a name='1.11'></a> Avoid naming variables or methods `description`.** This can result in conflicts with the `NSObject` property.
-
 ## [2](#2) <a name='2'></a> Style
 
 * **[2.1](#2.1) <a name='2.1'></a> Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
@@ -219,7 +217,7 @@ enum Direction {
 func someDirection() -> Direction {
 	// WRONG
 	return Direction.Left
-	
+
 	// RIGHT
 	return .Left
 }
@@ -236,21 +234,21 @@ class MyClass {
 	// Okay to use self here
     self.aProp = aProp
   }
-  
+
   // MARK: Internal
-  
+
   var aProp: Int
-    
+
   func doSomething() {
     // WRONG
     self.aProp = 4
-    
+
     // RIGHT
     aProp = 4
-    
+
     // WRONG
     self.otherMethod()
-    
+
     // RIGHT
     otherMethod()
   }
@@ -261,17 +259,17 @@ class MyClass {
 
 ```swift
 // WRONG
-someAsyncThing() { argument -> Void in 
-  ... 
+someAsyncThing() { argument -> Void in
+  ...
 }
-    
+
 // RIGHT
-someAsyncThing() { argument in 
-  ... 
+someAsyncThing() { argument in
+  ...
 }
 ```
 
-* **[2.4](#2.4) <a name='2.4'></a> Separate long function declarations with line breaks before each argument.** Also put the open curly brace on the next line so the body is indented correctly. 
+* **[2.4](#2.4) <a name='2.4'></a> Separate long function declarations with line breaks before each argument.** Also put the open curly brace on the next line so the body is indented correctly.
 
 ```swift
 class MyClass {
@@ -282,7 +280,7 @@ class MyClass {
   func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) -> String {
     // This is just too long and will probably auto-wrap in a weird way
   }
-  
+
   // WRONG
   func doSomething(arg: Int,
     anotherArg: Int,
@@ -290,7 +288,7 @@ class MyClass {
     andOneMoreArgForGoodMeasure: String) -> String {
       // XCode will indent the body an extra level in
   }
-  
+
   // RIGHT
   func doSomething(
     arg: Int,
@@ -300,17 +298,17 @@ class MyClass {
   {
     // Will cause correct level of indentation
   }
-}  
+}
 ```
 
 * **[2.5](#2.5) <a name='2.5'></a> Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. If the first argument is a named argument, put it on the second line. Otherwise, leave it on the first line.
 
 ```swift
-foo.doSomething(4, 
+foo.doSomething(4,
   anotherArg: 5,
   yetAnotherArg: 4,
   andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
-  
+
 bar.doAnotherThing(
   duck: 0,
   anotherDuck: 100,
@@ -323,13 +321,13 @@ bar.doAnotherThing(
 if
   let val1 = val1,
   let val2 = val2
-  where !val2.isEmpty 
+  where !val2.isEmpty
 {
   print(val2)
 }
 ```
 
-* **[2.7](#2.7) <a name='2.7'></a> Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. 
+* **[2.7](#2.7) <a name='2.7'></a> Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
 ```swift
 // WRONG
@@ -378,7 +376,7 @@ var something: Int = 0
 
 ```swift
 // WRONG
-class MyClass : SuperClass { 
+class MyClass : SuperClass {
 	// ...
 }
 
@@ -404,16 +402,16 @@ var dict = [KeyType: ValueType]()
 ```swift
 // WRONG
 class MyClass: NSObject {
-  
+
   // MARK: Lifecycle
-  
+
   init() {
     super.init()
     someValue = 5
   }
-  
+
   // MARK: Internal
-  
+
   var someValue: Int!
 }
 
@@ -421,14 +419,14 @@ class MyClass: NSObject {
 class MyClass: NSObject {
 
   // MARK: Lifecycle
-  
+
   init() {
     someValue = 0
     super.init()
   }
-  
+
   // MARK: Internal
-  
+
   var someValue: Int
 }
 ```
@@ -462,7 +460,7 @@ class MyClass {
 
   func someValue() -> Int {
   }
-  
+
   func setSomeValue(newValue: Int) {
   }
 }
@@ -475,7 +473,7 @@ class MyClass {
 class MyClass {
 
   // MARK: Internal
-  
+
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
       if let sSelf = self {
@@ -490,7 +488,7 @@ class MyClass {
 class MyClass {
 
   // MARK: Internal
-  
+
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
       self?._processResponse(response)
@@ -549,13 +547,13 @@ class Person {
 
 ```swift
 private let PrivateValue = "secret"
-  
+
 class MyClass {
 
   // MARK: Public
 
   public static let PublicValue = "something"
-  
+
   // MARK: Internal
 
   func doSomething() {
@@ -567,7 +565,7 @@ class MyClass {
 
 * **[3.11](#3.11) <a name='3.11'></a> Avoid using optionals unless there’s a good semantic meaning.**
 
-* **[3.12](#3.12) <a name='3.12'></a> Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. 
+* **[3.12](#3.12) <a name='3.12'></a> Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
 ```swift
 // WRONG
@@ -627,7 +625,7 @@ func updateDisplayedData() {
   display(someHash)
 }
 
-// RIGHT 
+// RIGHT
 func updateDisplayedData() {
   let data = dataSource.getData()
   let massagedData = massageData(data)
