@@ -15,7 +15,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 1. [Naming](#1)
 2. [Style](#2)
-3. [Architecture](#3)
+3. [Patterns](#3)
 4. [File Organization](#4)
 5. [Objective-C Interoperability](#5)
 
@@ -397,7 +397,7 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
-## [3](#3) <a name='3'></a> Architecture
+## [3](#3) <a name='3'></a> Patterns
 
 * **[3.1](#3.1) <a name='3.1'></a> Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
 
