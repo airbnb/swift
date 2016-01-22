@@ -128,7 +128,7 @@ let titleLabel: UILabel
 let cancelButton: UIButton
 ```
 
-* **[1.8](#1.8) <a name='1.8'></a> Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. If these are target/action handlers, use the `@objc` keyword rather than making the method internal just for the purpose of exposing it to the Objective-C runtime.
+* **[1.8](#1.8) <a name='1.8'></a> Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
 
 ```swift
 // WRONG
@@ -136,11 +136,11 @@ class MyClass {
 
   // MARK: Private
 
-  private func _handleFooTap() {
+  private func _handleFooButtonTap() {
     // ...
   }
 
-  internal func _modelChanged() {
+  private func _modelChanged() {
     // ...
   }
 }
@@ -150,11 +150,11 @@ class MyClass {
 
   // MARK: Private
 
-  private func _didTapFoo() {
+  private func _didTapFooButton() {
     // ...
   }
 
-  @objc private func _modelDidChange() {
+  private func _modelDidChange() {
     // ...
   }
 }
@@ -758,3 +758,30 @@ private enum Formation {
 ## [5](#5) <a name='5'></a> Objective-C Interoperability
 
 * **[5.1](#5.1) <a name='5.1'></a> Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
+
+* **[5.2](#5.2) <a name='5.2'></a>Target-action handlers should use the `@objc` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime.
+
+```swift
+class MyClass {
+
+  // MARK: Private
+
+  let _fooButton = UIButton()
+
+  private func _setUpFooButton() {
+    _fooButton.addTarget(self,
+      action: "_didTapFooButton",
+      forControlEvents: .TouchUpInside)
+  }
+
+  // WRONG
+  func _didTapFooButton() {
+    // ...
+  }
+
+  // RIGHT
+  @objc private func _didTapFooButton() {
+    // ...
+  }
+}
+```
