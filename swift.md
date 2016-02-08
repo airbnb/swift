@@ -748,6 +748,8 @@ private enum Formation {
 }
 ```
 
+* **[4.8](#4.8) <a name='4.8'></a> Files should end in a newline**
+
 ## [5](#5) <a name='5'></a> Objective-C Interoperability
 
 * **[5.1](#5.1) <a name='5.1'></a> Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
