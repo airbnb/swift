@@ -42,7 +42,7 @@ class Greeter {
 }
 ```
 
-* **[1.3](#1.3) <a name='1.3'></a> Underscore-prefix private property and method names.** There are several benefits to this. It gives you at-a-glance understanding of access control. It reduces the likelihood of name collisions with other arguments, local variables, and inherited properties. Finally, it makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. Value types in Swift often make this behavior unnecessary but it is still required if you want to safely expose a copy of reference type that needs to be privately mutable.
+* **[1.3](#1.3) <a name='1.3'></a> Underscore-prefix private property names only if they are mutable private properties with a similarly named internal property.** This makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods.
 
 ```swift
 class Foo {
@@ -131,11 +131,11 @@ class MyClass {
 
   // MARK: Private
 
-  private func _handleFooButtonTap() {
+  private func handleFooButtonTap() {
     // ...
   }
 
-  private func _modelChanged() {
+  private func modelChanged() {
     // ...
   }
 }
@@ -145,11 +145,11 @@ class MyClass {
 
   // MARK: Private
 
-  private func _didTapFooButton() {
+  private func didTapFooButton() {
     // ...
   }
 
-  private func _modelDidChange() {
+  private func modelDidChange() {
     // ...
   }
 }
@@ -486,14 +486,14 @@ class MyClass {
 
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
-      self?._processResponse(response)
+      self?.processResponse(response)
       completion()
     }
   }
 
   // MARK: Private
 
-  func _processResponse(response) {
+  func processResponse(response) {
     // do actual processing here
   }
 }
@@ -697,31 +697,31 @@ public class Spacefleet {
   // MARK: Lifecycle
 
   public init(spaceships: [Spaceship], captain: Person) {
-    _spaceships = spaceships
-    _captain = captain
-    _changeFormation(.Launch)
+    self.spaceships = spaceships
+    self.captain = captain
+    changeFormation(.Launch)
   }
 
   // MARK: Public
 
   public func launch() {
     // ...
-    _changeFormation(.Default)
+    changeFormation(.Default)
   }
 
   // MARK: Internal
 
   func attack(enemy: Enemy) {
-    _changeFormation(.Attack)
+    changeFormation(.Attack)
     // ...
   }
 
   // MARK: Private
 
-  let _spaceships: [Spaceship]
-  let _captain: Person
+  let spaceships: [Spaceship]
+  let captain: Person
 
-  private func _changeFormation(formation: Formation) {
+  private func changeFormation(formation: Formation) {
     // ...
   }
 }
@@ -759,21 +759,21 @@ class MyClass {
 
   // MARK: Private
 
-  let _fooButton = UIButton()
+  let fooButton = UIButton()
 
-  private func _setUpFooButton() {
-    _fooButton.addTarget(self,
-      action: "_didTapFooButton",
+  private func setUpFooButton() {
+    fooButton.addTarget(self,
+      action: "didTapFooButton",
       forControlEvents: .TouchUpInside)
   }
 
   // WRONG
-  func _didTapFooButton() {
+  func didTapFooButton() {
     // ...
   }
 
   // RIGHT
-  @objc private func _didTapFooButton() {
+  @objc private func didTapFooButton() {
     // ...
   }
 }
