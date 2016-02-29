@@ -754,7 +754,7 @@ private enum Formation {
 
 * **[5.1](#5.1) <a name='5.1'></a> Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
 
-* **[5.2](#5.2) <a name='5.2'></a>Target-action handlers should use the `@objc` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime.
+* **[5.2](#5.2) <a name='5.2'></a>Target-action handlers should use the `dynamic` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime.
 
 ```swift
 class MyClass {
@@ -775,7 +775,7 @@ class MyClass {
   }
 
   // RIGHT
-  @objc private func didTapFooButton() {
+  dynamic private func didTapFooButton() {
     // ...
   }
 }
