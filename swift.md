@@ -11,6 +11,13 @@ Following this style guide should:
 
 Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
 
+## Environment Setup
+
+The default Xcode settings are fine, the only necessary changes are:
+
+- Tab width: 2 spaces
+- Indent width: 2 spaces
+
 ## Sections
 
 1. [Naming](#1)
