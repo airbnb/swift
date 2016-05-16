@@ -271,7 +271,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* **[2.4](#2.4) <a name='2.4'></a> Separate long function declarations with line breaks before each argument.** Also put the open curly brace on the next line so the body is indented correctly.
+* **[2.4](#2.4) <a name='2.4'></a> Separate long function declarations with line breaks before each argument.** If there are external parameter names, include them on the *previous* line to avoid problems with auto-indenting. Also put the open curly brace on the next line so the first executable line doesn't look like it's another parameter.
 
 ```swift
 class MyClass {
@@ -279,34 +279,56 @@ class MyClass {
   // MARK: Internal
 
   // WRONG
-  func doSomething(arg: Int, anotherArg: Int, yetAnotherArg: Int, andOneMoreArgForGoodMeasure: String) -> String {
+  func doSomething(arg arg1: Int, anotherArg arg2: Int, yetAnotherArg arg3: Int, andOneMoreArgForGoodMeasure arg4: String) -> String {
     // This is just too long and will probably auto-wrap in a weird way
   }
 
   // WRONG
-  func doSomething(arg: Int,
-    anotherArg: Int,
-    yetAnotherArg: Int,
-    andOneMoreArgForGoodMeasure: String) -> String {
-      // XCode will indent the body an extra level in
+  func doSomething(arg arg1: Int,
+                       anotherArg arg2: Int,
+                                  yetAnotherArg arg3: Int,
+                                                andOneMoreArgForGoodMeasure arg4: String) -> String
+  {
+    // Xcode makes a staircase out of the argument list
+  }
+  
+  // WRONG
+  func doSomething(arg
+    arg1: Int, anotherArg
+    arg2: Int, yetAnotherArg
+    arg3: Int, andOneMoreArgForGoodMeasure
+    arg4: String) -> String {
+    doSomethingElse() // this line blends in with the argument list
   }
 
+
   // RIGHT
+  func doSomething(arg 
+    arg1: Int, anotherArg
+    arg2: Int, yetAnotherArg
+    arg3: Int, andOneMoreArgForGoodMeasure
+    arg4: String) -> String
+  {
+    doSomethingElse()
+  }
+  
+  // RIGHT (example with no external arguments)
   func doSomething(
     arg: Int,
     anotherArg: Int,
     yetAnotherArg: Int,
     andOneMoreArgForGoodMeasure: String) -> String
   {
-    // Will cause correct level of indentation
+    doSomethingElse()
   }
 }
 ```
 
-* **[2.5](#2.5) <a name='2.5'></a> Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. If the first argument is a named argument, put it on the second line. Otherwise, leave it on the first line.
+* **[2.5](#2.5) <a name='2.5'></a> Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation.
 
 ```swift
-foo.doSomething(4,
+foo.doSomething(
+  4,
   anotherArg: 5,
   yetAnotherArg: 4,
   andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
