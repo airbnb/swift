@@ -658,6 +658,25 @@ func updateDisplayedData() {
 }
 ```
 
+* **[3.13](#3.13) <a name='3.13'></a> Use `assert` and `precondition` semantically.** Reserve using the `precondition` methods to check for conditions that, if untrue, would make it impossible for your app to continue executing. Use the `assert` methods otherwise. A good sign that you should use an `assert` method is if you could reasonably just avoid executing the the code that the `assert` is protecting. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
+
+```swift
+func doSomethingAbsolutelyEssential(atIndex index: Int, ofArray array: [String]) {
+  precondition(index >= 0 && index < array.count)
+  // It's impossible to keep running the app if the precondition has failed.
+  // ...
+}
+
+func didSubmit(text text: String) {
+  assert(text.characters.count > 0)
+  // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
+  // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
+  if text.characters.count > 0 {
+    // ...
+  }
+}
+```
+
 ## [4](#4) <a name='4'></a> File Organization
 
 * **[4.1](#4.1) <a name='4.1'></a> Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
