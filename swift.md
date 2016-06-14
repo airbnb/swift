@@ -658,7 +658,7 @@ func updateDisplayedData() {
 }
 ```
 
-* **[3.13](#3.13) <a name='3.13'></a> Use `assert` and `precondition` semantically.** Reserve using the `precondition` methods to check for conditions that, if untrue, would make it impossible for your app to continue executing. Use the `assert` methods otherwise. A good sign that you should use an `assert` method is if you could reasonably just avoid executing the the code that the `assert` is protecting. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
+* **[3.13](#3.13) <a name='3.13'></a> Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
 
 ```swift
 func doSomethingAbsolutelyEssential(atIndex index: Int, ofArray array: [String]) {
@@ -668,12 +668,15 @@ func doSomethingAbsolutelyEssential(atIndex index: Int, ofArray array: [String])
 }
 
 func didSubmit(text text: String) {
-  assert(text.characters.count > 0)
   // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
   // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
-  if text.characters.count > 0 {
-    // ...
+  guard (text.characters.count > 0) else {
+    let message = "Unexpected empty string"
+    log(message)
+    assertionFailure(message)
+    return
   }
+  // ...
 }
 ```
 
