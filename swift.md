@@ -658,6 +658,28 @@ func updateDisplayedData() {
 }
 ```
 
+* **[3.13](#3.13) <a name='3.13'></a> Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
+
+```swift
+func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
+  precondition(index >= 0 && index < array.count)
+  // It's impossible to continue executing if the precondition has failed.
+  // ...
+}
+
+func didSubmit(text text: String) {
+  // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
+  // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
+  guard (text.characters.count > 0) else {
+    let message = "Unexpected empty string"
+    log(message)
+    assertionFailure(message)
+    return
+  }
+  // ...
+}
+```
+
 ## [4](#4) <a name='4'></a> File Organization
 
 * **[4.1](#4.1) <a name='4.1'></a> Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
