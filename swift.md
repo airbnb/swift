@@ -661,9 +661,9 @@ func updateDisplayedData() {
 * **[3.13](#3.13) <a name='3.13'></a> Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
 
 ```swift
-func doSomethingAbsolutelyEssential(atIndex index: Int, ofArray array: [String]) {
+func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
   precondition(index >= 0 && index < array.count)
-  // It's impossible to keep running the app if the precondition has failed.
+  // It's impossible to continue executing if the precondition has failed.
   // ...
 }
 
