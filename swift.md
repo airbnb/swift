@@ -419,6 +419,18 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
+* **[2.11](#2.11) <a name='2.11'></a> Omit unnecessary parentheses.**
+
+```swift
+// WRONG
+if (userCount > 0) { ... }
+switch (someValue) { ... }
+
+// RIGHT
+if userCount > 0 { ... }
+switch someValue { ... }
+```
+
 ## [3](#3) <a name='3'></a> Patterns
 
 * **[3.1](#3.1) <a name='3.1'></a> Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
@@ -670,7 +682,7 @@ func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
 func didSubmit(text text: String) {
   // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
   // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
-  guard (text.characters.count > 0) else {
+  guard text.characters.count > 0 else {
     let message = "Unexpected empty string"
     log(message)
     assertionFailure(message)
