@@ -692,6 +692,20 @@ func didSubmit(text text: String) {
 }
 ```
 
+* **[3.14](#3.14) <a name='3.14'></a> Prefer making classes and functions non-overridable until there is a need to do otherwise.** Mark classes with `final`. Mark class-level functions (and properties) as `static` rather than `class`.
+
+```swift
+// WRONG
+class Fruit {
+  class func eatFruits(fruits: [Fruit]) { ... }
+}
+
+// RIGHT
+final class Fruit {
+  static func eatFruits(fruits: [Fruit]) { ... }
+}
+```
+
 ## [4](#4) <a name='4'></a> File Organization
 
 * **[4.1](#4.1) <a name='4.1'></a> Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
