@@ -11,6 +11,8 @@ Following this style guide should:
 
 Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
 
+The guidelines in the [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/) are highly recommended in addition to this document.
+
 ## Environment Setup
 
 The default Xcode settings are fine, the only necessary changes are:
