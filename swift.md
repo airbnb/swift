@@ -843,8 +843,9 @@ class MyClass {
   let fooButton = UIButton()
 
   private func setUpFooButton() {
-    fooButton.addTarget(self,
-      action: "didTapFooButton",
+    fooButton.addTarget(
+      self,
+      action: #selector(didTapFooButton),
       forControlEvents: .TouchUpInside)
   }
 
