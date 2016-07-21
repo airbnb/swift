@@ -536,7 +536,7 @@ class MyClass {
 
   // MARK: Private
 
-  func processResponse(response) {
+  private func processResponse(response) {
     // do actual processing here
   }
 }
@@ -797,8 +797,8 @@ public class Spacefleet {
 
   // MARK: Private
 
-  let spaceships: [Spaceship]
-  let captain: Person
+  private let spaceships: [Spaceship]
+  private let captain: Person
 
   private func changeFormation(formation: Formation) {
     // ...
