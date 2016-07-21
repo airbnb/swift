@@ -390,6 +390,18 @@ let rect = CGRectMake(10, 10, 10, 10)
 let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
 ```
 
+* <a id='use-modern-swift-extensions'></a>**Favor modern Swift extension methods over older Objective-C global methods.** (<a href='#use-modern-swift-extensions'>link</a>)
+
+```swift
+// WRONG
+var rect = CGRectZero
+var width = CGRectGetWidth(rect)
+
+// RIGHT
+var rect = CGRect.zero
+var width = rect.width
+```
+
 * <a id='colon-spacing'></a>**Place the colon immediately after an identifier, followed by a space.** (<a href='#colon-spacing'>link</a>)
 
 ```swift
