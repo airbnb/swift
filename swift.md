@@ -22,15 +22,15 @@ The default Xcode settings are fine, the only necessary changes are:
 
 ## Sections
 
-1. [Naming](#1)
-2. [Style](#2)
-3. [Patterns](#3)
-4. [File Organization](#4)
-5. [Objective-C Interoperability](#5)
+1. [Naming](#naming)
+2. [Style](#style)
+3. [Patterns](#patterns)
+4. [File Organization](#file-organization)
+5. [Objective-C Interoperability](#objective-c-interoperability)
 
-## [1](#1) <a name='1'></a> Naming
+## Naming
 
-* **[1.1](#1.1) <a name='1.1'></a> Use camelCase for property, method, and variable names.**
+* <a id='use-camel-case'></a>**Use camelCase for property, method, and variable names.**  (<a href='#use-camel-case'>link</a>)
 
 ```swift
 var greetingText = "hello"
@@ -40,7 +40,7 @@ func displayGreetingText(greetingText: String) {
 }
 ```
 
-* **[1.2](#1.2) <a name='1.2'></a> Use TitleCase for type names and constants.**
+* <a id='use-title-case'></a>**Use TitleCase for type names and constants.** (<a href='#use-title-case'>link</a>)
 
 ```swift
 class Greeter {
@@ -51,7 +51,7 @@ class Greeter {
 }
 ```
 
-* **[1.3](#1.3) <a name='1.3'></a> Underscore-prefix private property names only if they are mutable private properties with a similarly named internal property.** This makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods.
+* <a id='underscore-backing-properties'></a>**Underscore-prefix private property names only if they are mutable private properties with a similarly named internal property.** This makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods. (<a href='#underscore-backing-properties'>link</a>)
 
 ```swift
 class Foo {
@@ -74,9 +74,9 @@ class Foo {
 }
 ```
 
-* **[1.4](#1.4) <a name='1.4'></a> Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
+* <a id='bool-names'></a>**Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types. (<a href='#bool-names'>link</a>)
 
-* **[1.5](#1.5) <a name='1.5'></a> Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.**
+* <a id='capitalize-acronyms'></a>**Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.** (<a href='#capitalize-acronyms'>link</a>)
 
 ```swift
 // WRONG
@@ -104,7 +104,7 @@ class URLValidator {
 let urlValidator = URLValidator().isValidURL(/* some URL */)
 ```
 
-* **[1.6](#1.6) <a name='1.6'></a> Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
+* <a id='general-part-first'></a>**Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name. (<a href='#general-part-first'>link</a>)
 
 ```swift
 // WRONG
@@ -120,7 +120,7 @@ let bodyMarginRight: CGFloat
 let bodyMarginLeft: CGFloat
 ```
 
-* **[1.7](#1.7) <a name='1.7'></a> Include a hint about type in a name if it would otherwise be ambiguous.**
+* <a id='hint-at-types'></a>**Include a hint about type in a name if it would otherwise be ambiguous.** (<a href='#hint-at-types'>link</a>)
 
 ```swift
 // WRONG
@@ -132,7 +132,7 @@ let titleText: String
 let cancelButton: UIButton
 ```
 
-* **[1.8](#1.8) <a name='1.8'></a> Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
+* <a id='past-tense-events'></a>**Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity. (<a href='#past-tense-events'>link</a>)
 
 ```swift
 // WRONG
@@ -164,7 +164,7 @@ class MyClass {
 }
 ```
 
-* **[1.9](#1.9) <a name='1.9'></a> Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+* <a id='avoid-class-prefixes'></a>**Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift. (<a href='#avoid-class-prefixes'>link</a>)
 
 ```swift
 // WRONG
@@ -178,7 +178,7 @@ class AccountManager {
 }
 ```
 
-* **[1.10](#1.10) <a name='1.10'></a> Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
+* <a id='avoid-controller-suffix'></a>**Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead. (<a href='#avoid-controller-suffix'>link</a>)
 
 ```swift
 // WRONG
@@ -192,9 +192,9 @@ class AccountManager {
 }
 ```
 
-## [2](#2) <a name='2'></a> Style
+## Style
 
-* **[2.1](#2.1) <a name='2.1'></a> Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
+* <a id='use-implicit-types'></a>**Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`. (<a href='#use-implicit-types'>link</a>)
 
 ```swift
 // WRONG
@@ -227,7 +227,7 @@ func someDirection() -> Direction {
 }
 ```
 
-* **[2.2](#2.2) <a name='2.2'></a> Don't use `self` unless it's necessary for disambiguation or required by the language.**
+* <a id='omit-self'></a>**Don't use `self` unless it's necessary for disambiguation or required by the language.** (<a href='#omit-self'>link</a>)
 
 ```swift
 class MyClass {
@@ -259,7 +259,7 @@ class MyClass {
 }
 ```
 
-* **[2.3](#2.3) <a name='2.3'></a> Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.)
+* <a id='omit-void-return'></a>**Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.) (<a href='#omit-void-return'>link</a>)
 
 ```swift
 // WRONG
@@ -273,7 +273,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* **[2.4](#2.4) <a name='2.4'></a> Separate long function declarations with line breaks before each argument.** If there are external parameter names, include them on the *previous* line to avoid problems with auto-indenting. Also put the open curly brace on the next line so the first executable line doesn't look like it's another parameter.
+* <a id='long-function-declaration'></a>**Separate long function declarations with line breaks before each argument.** If there are external parameter names, include them on the *previous* line to avoid problems with auto-indenting. Also put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
 
 ```swift
 class MyClass {
@@ -326,7 +326,7 @@ class MyClass {
 }
 ```
 
-* **[2.5](#2.5) <a name='2.5'></a> Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation.
+* <a id='long-function-invocation'></a>**Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. (<a href='#long-function-invocation'>link</a>)
 
 ```swift
 foo.doSomething(
@@ -341,7 +341,7 @@ bar.doAnotherThing(
   goose: "quack")
 ```
 
-* **[2.6](#2.6) <a name='2.6'></a> When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body.
+* <a id='long-if-statement'></a>**When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
 
 ```swift
 if
@@ -353,7 +353,7 @@ if
 }
 ```
 
-* **[2.7](#2.7) <a name='2.7'></a> Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
+* <a id='name-tuple-elements'></a>**Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct. (<a href='#name-tuple-elements'>link</a>)
 
 ```swift
 // WRONG
@@ -380,7 +380,7 @@ coord.x
 coord.y
 ```
 
-* **[2.8](#2.8) <a name='2.10'></a> Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.**
+* <a id='favor-constructors'></a>**Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.** (<a href='#favor-constructors'>link</a>)
 
 ```swift
 // WRONG
@@ -390,7 +390,7 @@ let rect = CGRectMake(10, 10, 10, 10)
 let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
 ```
 
-* **[2.9](#2.9) <a name='2.9'></a> Place the colon immediately after an identifier, followed by a space.**
+* <a id='colon-spacing'></a>**Place the colon immediately after an identifier, followed by a space.** (<a href='#colon-spacing'>link</a>)
 
 ```swift
 // WRONG
@@ -421,7 +421,7 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
-* **[2.11](#2.11) <a name='2.11'></a> Omit unnecessary parentheses.**
+* <a id='unnecessary-parens'></a>**Omit unnecessary parentheses.** (<a href='#unnecessary-parens'>link</a>)
 
 ```swift
 // WRONG
@@ -433,9 +433,9 @@ if userCount > 0 { ... }
 switch someValue { ... }
 ```
 
-## [3](#3) <a name='3'></a> Patterns
+## Patterns
 
-* **[3.1](#3.1) <a name='3.1'></a> Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+* <a id='implicitly-unwrapped-optionals'></a>**Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. (<a href='#implicitly-unwrapped-optionals'>link</a>)
 
 ```swift
 // WRONG
@@ -469,9 +469,9 @@ class MyClass: NSObject {
 }
 ```
 
-* **[3.2](#3.2) <a name='3.2'></a> Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+* <a id='time-intensive-init'></a>**Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use. (<a href='#time-intensive-init'>link</a>)
 
-* **[3.3](#3.3) <a name='3.3'></a> Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason.
+* <a id='complex-property-accessor'></a>**Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason. (<a href='#complex-property-accessor'>link</a>)
 
 ```swift
 // WRONG
@@ -504,7 +504,7 @@ class MyClass {
 }
 ```
 
-* **[3.4](#3.4) <a name='3.4'></a> Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler.
+* <a id='complex-callback-block'></a>**Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. (<a href='#complex-callback-block'>link</a>)
 
 ```swift
 //WRONG
@@ -542,19 +542,19 @@ class MyClass {
 }
 ```
 
-* **[3.5](#3.5) <a name='3.5'></a> Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity.
+* <a id='guards-at-top'></a>**Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity. (<a href='#guards-at-top'>link</a>)
 
-* **[3.6](#3.6) <a name='3.6'></a> Use the following rules when deciding how to set up communication between objects.**
+* <a id='object-communication'></a>**Use the following rules when deciding how to set up communication between objects.** (<a href='#object-communication'>link</a>)
   * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
   * Use the callback pattern for communicating the status of some requested task (i.e. failure, progress, completion, etc.)
   * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
   * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
 
-* **[3.7](#3.7) <a name='3.7'></a> Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
+* <a id='single-responsibility-class'></a>**Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need. (<a href='#single-responsibility-class'>link</a>)
 
-* **[3.8](#3.8) <a name='3.8'></a> If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
+* <a id='module-by-default'></a>**If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later. (<a href='#module-by-default'>link</a>)
 
-* **[3.9](#3.9) <a name='3.9'></a> Avoid global functions whenever possible.** Prefer methods within type definitions.
+* <a id='avoid-global-functions'></a>**Avoid global functions whenever possible.** Prefer methods within type definitions. (<a href='#avoid-global-functions'>link</a>)
 
 ```swift
 // WRONG
@@ -581,7 +581,7 @@ class Person {
 }
 ```
 
-* **[3.10](#3.10) <a name='3.10'></a> Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
+* <a id='private-constants'></a>**Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes. (<a href='#private-constants'>link</a>)
 
 ```swift
 private let PrivateValue = "secret"
@@ -601,9 +601,9 @@ class MyClass {
 }
 ```
 
-* **[3.11](#3.11) <a name='3.11'></a> Avoid using optionals unless there’s a good semantic meaning.**
+* <a id='semantic-optionals'></a>**Avoid using optionals unless there’s a good semantic meaning.** (<a href='#semantic-optionals'>link</a>)
 
-* **[3.12](#3.12) <a name='3.12'></a> Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
+* <a id='prefer-immutable-values'></a>**Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible. (<a href='#prefer-immutable-values'>link</a>)
 
 ```swift
 // WRONG
@@ -672,7 +672,7 @@ func updateDisplayedData() {
 }
 ```
 
-* **[3.13](#3.13) <a name='3.13'></a> Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level.
+* <a id='preconditions-and-asserts'></a>**Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level. (<a href='#preconditions-and-asserts'>link</a>)
 
 ```swift
 func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
@@ -694,7 +694,7 @@ func didSubmit(text text: String) {
 }
 ```
 
-* **[3.14](#3.14) <a name='3.14'></a> Prefer making classes and functions non-overridable until there is a need to do otherwise.** Mark classes with `final`. Mark class-level functions (and properties) as `static` rather than `class`.
+* <a id='prefer-static-to-class'></a>**Prefer making classes and functions non-overridable until there is a need to do otherwise.** Mark classes with `final`. Mark class-level functions (and properties) as `static` rather than `class`. (<a href='#prefer-static-to-class'>link</a>)
 
 ```swift
 // WRONG
@@ -708,9 +708,9 @@ final class Fruit {
 }
 ```
 
-## [4](#4) <a name='4'></a> File Organization
+## File Organization
 
-* **[4.1](#4.1) <a name='4.1'></a> Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in.
+* <a id='organize-with-mark'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#organize-with-mark'>link</a>)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Public` for `public` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
@@ -720,11 +720,11 @@ final class Fruit {
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
   * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
-* **[4.2](#4.2) <a name='4.2'></a> Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above).
+* <a id='mark-private-types'></a>**Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above). (<a href='#mark-private-types'>link</a>)
 
-* **[4.3](#4.3) <a name='4.3'></a> Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
+* <a id='extensions-for-protocol-conformance'></a>**Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections. (<a href='#extensions-for-protocol-conformance'>link</a>)
 
-* **[4.4](#4.4) <a name='4.4'></a> Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
+* <a id='subsection-organization'></a>**Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for. (<a href='#subsection-organization'>link</a>)
   * Constants (e.g. `static let Gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Foo()`)
   * Instance properties
@@ -732,7 +732,7 @@ final class Fruit {
   * Class methods
   * Instance methods
 
-* **[4.5](#4.5) <a name='4.5'></a> There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
+* <a id='newline-between-subsections'></a>**There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.) (<a href='#newline-between-subsections'>link</a>)
 
 ```swift
 // WRONG
@@ -747,7 +747,7 @@ static let GravityMoon: CGFloat = 1.6
 var gravity: CGFloat
 ```
 
-* **[4.6](#4.6) <a name='4.6'></a> Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
+* <a id='computed-properties-at-end'></a>**Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) (<a href='#computed-properties-at-end'>link</a>)
 
 ```swift
 // WRONG
@@ -767,7 +767,7 @@ var atmosphere: Atmosphere {
 }
 ```
 
-* **[4.7](#4.7) <a name='4.7'></a> Example**
+* <a id='example'></a>**Example** (<a href='#example'>link</a>)
 
 ```swift
 public class Spacefleet {
@@ -827,13 +827,13 @@ private enum Formation {
 }
 ```
 
-* **[4.8](#4.8) <a name='4.8'></a> Files should end in a newline**
+* <a id='newline-at-eof'></a>**Files should end in a newline** (<a href='#newline-at-eof'>link</a>)
 
-## [5](#5) <a name='5'></a> Objective-C Interoperability
+## Objective-C Interoperability
 
-* **[5.1](#5.1) <a name='5.1'></a> Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality.
+* <a id='prefer-pure-swift-classes'></a>**Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. (<a href='#prefer-pure-swift-classes'>link</a>)
 
-* **[5.2](#5.2) <a name='5.2'></a>Target-action handlers should use the `dynamic` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime.
+* <a id='dynamic-action-handlers'></a>**Target-action handlers should use the `dynamic` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime. (<a href='#dynamic-action-handlers'>link</a>)
 
 ```swift
 class MyClass {
