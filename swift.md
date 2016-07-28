@@ -15,10 +15,15 @@ The guidelines in the [Swift API Design Guidelines](https://swift.org/documentat
 
 ## Environment Setup
 
-The default Xcode settings are fine, the only necessary changes are:
+Most of the default Xcode settings are okay. The only changes are below.
 
-- Tab width: 2 spaces
-- Indent width: 2 spaces
+##### Preferences > Text Editing > Editing:
+
+<img width="300" src="https://git.musta.ch/airbnb/ios-style/raw/oy/whitespace-only-lines/whitespace.png" />
+
+##### Preferences > Text Editing > Indentation:
+
+<img width="200" src="https://git.musta.ch/airbnb/ios-style/raw/oy/whitespace-only-lines/spaces.png" />
 
 ## Sections
 
