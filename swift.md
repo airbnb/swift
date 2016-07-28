@@ -19,11 +19,11 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 ##### Preferences > Text Editing > Editing:
 
-<img width="300" src="https://git.musta.ch/airbnb/ios-style/raw/oy/whitespace-only-lines/whitespace.png" />
+<img width="300" src="whitespace.png" />
 
 ##### Preferences > Text Editing > Indentation:
 
-<img width="200" src="https://git.musta.ch/airbnb/ios-style/raw/oy/whitespace-only-lines/spaces.png" />
+<img width="200" src="spaces.png" />
 
 ## Sections
 
