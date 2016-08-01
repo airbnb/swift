@@ -725,6 +725,25 @@ final class Fruit {
 }
 ```
 
+* <a id='semantically-meaningful-uiview-overrides'></a>**Prefer semantically meaningful overrides of `UIView` methods to `layoutSubviews()`.** (<a href='#semantically-meaningful-uiview-overrides'>link</a>)
+
+> Why? This better communicates intent and avoids unnecessary computation in `layoutSubview()`, which will likely invoke your code more frequently than is required.
+
+```swift
+// WRONG
+override public func layoutSubviews() {
+  super.layoutSubviews()
+  layer.cornerRadius = bounds.width / 2
+}
+
+// RIGHT
+override var bounds: CGRect {
+  didSet {
+    layer.cornerRadius = bounds.width / 2
+  }
+}
+```
+
 ## File Organization
 
 * <a id='organize-with-mark'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#organize-with-mark'>link</a>)
