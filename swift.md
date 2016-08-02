@@ -711,7 +711,9 @@ func didSubmit(text text: String) {
 }
 ```
 
-* <a id='prefer-static-to-class'></a>**Prefer making classes and functions non-overridable until there is a need to do otherwise.** Mark classes with `final`. Mark class-level functions (and properties) as `static` rather than `class`. (<a href='#prefer-static-to-class'>link</a>)
+* <a id='prefer-static-to-class'></a>**Default class-level functions to `static`.** (<a href='#prefer-static-to-class'>link</a>)
+
+> Why? `static` class-level functions cannot be overridden in a subclass. A class author should opt into this functionality.
 
 ```swift
 // WRONG
@@ -720,8 +722,24 @@ class Fruit {
 }
 
 // RIGHT
-final class Fruit {
+class Fruit {
   static func eatFruits(fruits: [Fruit]) { ... }
+}
+```
+
+* <a id='final-classes-by-default'></a>**Default classes to `final`.** (<a href='#final-classes-by-default'>link</a>)
+
+> Why? It should only be possible to subclass classes that were written with that possibility in mind.
+
+```swift
+// WRONG
+class SettingsDataManager {
+  // ...
+}
+
+// RIGHT
+final class SettingsDataManager {
+  // ...
 }
 ```
 
