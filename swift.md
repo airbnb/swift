@@ -92,6 +92,10 @@ class UrlValidator {
   func isValidUrl(URL: NSURL) -> Bool {
     // ...
   }
+  
+  func isUrlReachable(URL: NSURL) -> Bool {
+    // ...
+  }
 }
 
 let URLValidator = UrlValidator().isValidUrl(/* some URL */)
@@ -102,6 +106,10 @@ class URLValidator {
   // MARK: Internal
 
   func isValidURL(url: NSURL) -> Bool {
+    // ...
+  }
+  
+  func isURLReachable(url: NSURL) -> Bool {
     // ...
   }
 }
