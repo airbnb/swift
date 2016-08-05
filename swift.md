@@ -711,9 +711,9 @@ func didSubmit(text text: String) {
 }
 ```
 
-* <a id='prefer-static-to-class'></a>**Default class-level functions to `static`.** (<a href='#prefer-static-to-class'>link</a>)
+* <a id='static-type-methods-by-default'></a>**Default type methods to `static`.** (<a href='#static-type-methods-by-default'>link</a>)
 
-> Why? `static` class-level functions cannot be overridden in a subclass. A class author should opt into this functionality.
+> Why? `static` type methods cannot be overridden in a subclass. A class author should opt into this functionality.
 
 ```swift
 // WRONG
