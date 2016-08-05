@@ -713,7 +713,7 @@ func didSubmit(text text: String) {
 
 * <a id='static-type-methods-by-default'></a>**Default type methods to `static`.** (<a href='#static-type-methods-by-default'>link</a>)
 
-> Why? `static` type methods cannot be overridden in a subclass. A class author should opt into this functionality.
+> Why? If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
 
 ```swift
 // WRONG
@@ -729,7 +729,7 @@ class Fruit {
 
 * <a id='final-classes-by-default'></a>**Default classes to `final`.** (<a href='#final-classes-by-default'>link</a>)
 
-> Why? It should only be possible to subclass classes that were written with that possibility in mind.
+> Why? If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword. 
 
 ```swift
 // WRONG
