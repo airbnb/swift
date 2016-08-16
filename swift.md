@@ -719,7 +719,9 @@ func didSubmit(text text: String) {
 }
 ```
 
-* <a id='prefer-static-to-class'></a>**Prefer making classes and functions non-overridable until there is a need to do otherwise.** Mark classes with `final`. Mark class-level functions (and properties) as `static` rather than `class`. (<a href='#prefer-static-to-class'>link</a>)
+* <a id='static-type-methods-by-default'></a>**Default type methods to `static`.** (<a href='#static-type-methods-by-default'>link</a>)
+
+> Why? If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
 
 ```swift
 // WRONG
@@ -728,8 +730,24 @@ class Fruit {
 }
 
 // RIGHT
-final class Fruit {
+class Fruit {
   static func eatFruits(fruits: [Fruit]) { ... }
+}
+```
+
+* <a id='final-classes-by-default'></a>**Default classes to `final`.** (<a href='#final-classes-by-default'>link</a>)
+
+> Why? If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword. 
+
+```swift
+// WRONG
+class SettingsDataManager {
+  // ...
+}
+
+// RIGHT
+final class SettingsDataManager {
+  // ...
 }
 ```
 
