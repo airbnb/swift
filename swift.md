@@ -772,7 +772,9 @@ override var bounds: CGRect {
 
 ## File Organization
 
-* <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described below). (<a href='#marks-for-types'>link</a>)
+* <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
+
+> Why? The hyphen visually distinguishes types from sections within those types (described below).
 
 * <a id='marks-within-types'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#marks-within-types'>link</a>)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
