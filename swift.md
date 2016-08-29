@@ -834,6 +834,9 @@ var atmosphere: Atmosphere {
 * <a id='example'></a>**Example** (<a href='#example'>link</a>)
 
 ```swift
+
+// MARK: - Spacefleet
+
 public class Spacefleet {
   typealias Enemy = Spacefleet
 
@@ -880,6 +883,12 @@ extension Spacefleet: SpaceshipDelegate {
   func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
     // ...
   }
+}
+
+// MARK: - Spaceship
+
+public struct Spaceship {
+  let color: UIColor
 }
 
 // MARK: - Formation
