@@ -772,7 +772,9 @@ override var bounds: CGRect {
 
 ## File Organization
 
-* <a id='organize-with-mark'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#organize-with-mark'>link</a>)
+* <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described below). (<a href='#marks-for-types'>link</a>)
+
+* <a id='marks-within-types'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#marks-within-types'>link</a>)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Public` for `public` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
@@ -781,8 +783,6 @@ override var bounds: CGRect {
   * If there are typealiases, they should go above the first `// MARK:`.
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
   * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
-
-* <a id='mark-private-types'></a>**Private types in a file should be marked with `// MARK: - TypeName`.** The hyphen is important here, as it visually distinguishes it from sections within the main type in the file (described above). (<a href='#mark-private-types'>link</a>)
 
 * <a id='extensions-for-protocol-conformance'></a>**Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections. (<a href='#extensions-for-protocol-conformance'>link</a>)
 
