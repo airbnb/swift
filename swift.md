@@ -35,25 +35,31 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 ## Naming
 
-* <a id='use-camel-case'></a>**Use camelCase for property, method, and variable names.**  (<a href='#use-camel-case'>link</a>)
+* <a id='use-camel-case'></a>**Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.** (<a href='#use-camel-case'>link</a>)
 
 ```swift
-var greetingText = "hello"
-
-func displayGreetingText(greetingText: String) {
+protocol SpaceThing {
   // ...
 }
-```
 
-* <a id='use-title-case'></a>**Use TitleCase for type names and constants.** (<a href='#use-title-case'>link</a>)
+class Spacefleet: SpaceThing {
 
-```swift
-class Greeter {
+  enum Formation {
+    // ...
+  }
 
-  // MARK: Internal
+  class Spaceship {
+    // ...
+  }
 
-  static let MaxGreetings = 10
+  var ships: [Spaceship] = []
+
+  func add(ship: Spaceship) {
+    // ...
+  }
 }
+
+let myFleet = Spacefleet()
 ```
 
 * <a id='underscore-backing-properties'></a>**Underscore-prefix private property names only if they are mutable private properties with a similarly named internal property.** This makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods. (<a href='#underscore-backing-properties'>link</a>)
@@ -81,7 +87,7 @@ class Foo {
 
 * <a id='bool-names'></a>**Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types. (<a href='#bool-names'>link</a>)
 
-* <a id='capitalize-acronyms'></a>**Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be camelCase.** (<a href='#capitalize-acronyms'>link</a>)
+* <a id='capitalize-acronyms'></a>**Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase.** (<a href='#capitalize-acronyms'>link</a>)
 
 ```swift
 // WRONG
@@ -609,19 +615,36 @@ class Person {
 * <a id='private-constants'></a>**Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes. (<a href='#private-constants'>link</a>)
 
 ```swift
-private let PrivateValue = "secret"
+private let privateValue = "secret"
 
 class MyClass {
 
   // MARK: Public
 
-  public static let PublicValue = "something"
+  public static let publicValue = "something"
 
   // MARK: Internal
 
   func doSomething() {
-    print(PrivateValue)
-    print(MyClass.PublicValue)
+    print(privateValue)
+    print(MyClass.publicValue)
+  }
+}
+```
+
+* <a id='namespace-using-enums'></a>**Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity. (<a href='#namespace-using-enums'>link</a>)
+
+> Why caseless `enum`s? They work well as namespaces because they cannot be instantiated, which matches their intent.
+
+```swift
+enum Environment {
+
+  enum Earth {
+    static let gravity = 9.8
+  }
+
+  enum Moon {
+    static let gravity = 1.6
   }
 }
 ```
@@ -789,7 +812,7 @@ override var bounds: CGRect {
 * <a id='extensions-for-protocol-conformance'></a>**Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections. (<a href='#extensions-for-protocol-conformance'>link</a>)
 
 * <a id='subsection-organization'></a>**Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for. (<a href='#subsection-organization'>link</a>)
-  * Constants (e.g. `static let Gravity: CGFloat = 9.8`)
+  * Constants (e.g. `static let gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Foo()`)
   * Instance properties
   * Static methods
@@ -800,13 +823,13 @@ override var bounds: CGRect {
 
 ```swift
 // WRONG
-static let GravityEarth: CGFloat = 9.8
-static let GravityMoon: CGFloat = 1.6
+static let gravityEarth: CGFloat = 9.8
+static let gravityMoon: CGFloat = 1.6
 var gravity: CGFloat
 
 // RIGHT
-static let GravityEarth: CGFloat = 9.8
-static let GravityMoon: CGFloat = 1.6
+static let gravityEarth: CGFloat = 9.8
+static let gravityMoon: CGFloat = 1.6
 
 var gravity: CGFloat
 ```
