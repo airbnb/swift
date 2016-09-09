@@ -87,7 +87,7 @@ class Foo {
 
 * <a id='bool-names'></a>**Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types. (<a href='#bool-names'>link</a>)
 
-* <a id='capitalize-acronyms'></a>**Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase.** (<a href='#capitalize-acronyms'>link</a>)
+* <a id='capitalize-acronyms'></a>**Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.** (<a href='#capitalize-acronyms'>link</a>)
 
 ```swift
 // WRONG
