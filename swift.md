@@ -573,7 +573,9 @@ class MyClass {
 }
 ```
 
-* <a id='guards-at-top'></a>**Only add guard to top of functions.** The goal of guard is to reduce branch complexity and in some ways adding guard statements in the middle of a chunk of code increases complexity. (<a href='#guards-at-top'>link</a>)
+* <a id='guards-at-top'></a>**Prefer using `guard` at the beginning of a scope.** (<a href='#guards-at-top'>link</a>)
+
+> Why? It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
 
 * <a id='object-communication'></a>**Use the following rules when deciding how to set up communication between objects.** (<a href='#object-communication'>link</a>)
   * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
