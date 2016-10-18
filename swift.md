@@ -502,7 +502,31 @@ class MyClass: NSObject {
 
 * <a id='time-intensive-init'></a>**Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use. (<a href='#time-intensive-init'>link</a>)
 
-* <a id='complex-property-accessor'></a>**Use functions instead of computed properties if they get to be complicated.** Also avoid didSet and willSet for the same reason. (<a href='#complex-property-accessor'>link</a>)
+* <a id='complex-property-accessor'></a>**Use functions instead of computed properties if they get to be complicated.** 
+```swift
+class SomeClass {
+  // WRONG
+  // Too complicated, too many side effects
+  var someThing: String {
+    if let someProperty = someProperty {
+      someOtherProperty = doSomething(with: someProperty)
+      doSomethingElse()
+    } else {
+      someOtherProperty = doSomethingDifferent()
+    }
+
+    return someOtherProperty
+  }
+
+  // RIGHT
+  // Simple, no side effects
+  var someThing2: String {
+    return "\(theFirstThing) \(theSecondThing)"
+  }
+}
+```
+
+* Also avoid didSet and willSet for the same reason. (<a href='#complex-property-accessor'>link</a>)
 
 ```swift
 // WRONG
