@@ -819,6 +819,29 @@ override var bounds: CGRect {
 }
 ```
 
+* <a id='switch-with-where'></a>** Be careful when using `where` clauses when handling multiple cases in a `switch`. ** (<a href='#switch-with-where'>link</a>)
+> Why? The where clause only applies to the last case in line
+```swift
+// WRONG
+func doThing() {
+  switch anEnum {
+  //where x == y will only be evaluated if anEnum is .B
+  case .A, .B where x == y:
+    doDifferentThing()
+  }
+}
+
+// RIGHT
+func doThing() {
+  switch anEnum {
+  case .A  where x == y:
+  fallthrough
+  case .B  where x == y:
+    doDifferentThing()
+  }
+}
+```
+
 ## File Organization
 
 * <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
