@@ -834,9 +834,8 @@ func doThing() {
 // RIGHT
 func doThing() {
   switch anEnum {
-  case .A  where x == y:
-  fallthrough
-  case .B  where x == y:
+  case .A where x == y,
+       .B where x == y:
     doDifferentThing()
   }
 }
