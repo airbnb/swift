@@ -535,7 +535,7 @@ class MyClass {
 }
 ```
 
-* <a id='complex-callback-block'></a>**Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. (<a href='#complex-callback-block'>link</a>)
+* <a id='complex-callback-block'></a>**Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. One caveat is that sometimes you'll need to reference self in a method call, so making use of `guard` clauses helps make everything neat and readable. (<a href='#complex-callback-block'>link</a>)
 
 ```swift
 //WRONG
@@ -551,6 +551,18 @@ class MyClass {
       completion()
     }
   }
+
+  
+  func doRequest(completion: () -> Void) {
+    API.request() { [weak self] response in
+      self?.doSomething(self?.property) //if this parameter isn't optional, we have to unwrap anyways! This code will not compile
+      completion()
+    }
+  }
+
+  func doSomething(nonOptionalParameter: SomeClass) {
+    // do something here
+  }
 }
 
 // RIGHT
@@ -560,15 +572,16 @@ class MyClass {
 
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
-      self?.processResponse(response)
+      guard let `self` = self else { return }
+      self.doSomething(self.property) //can refer to self as usual, no sSelf or unwrapping
       completion()
     }
   }
 
   // MARK: Private
 
-  private func processResponse(response) {
-    // do actual processing here
+  func doSomething(nonOptionalParameter: SomeClass) {
+    // do something here
   }
 }
 ```
