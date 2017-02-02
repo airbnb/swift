@@ -53,6 +53,7 @@ class Spacefleet: SpaceThing {
   }
 
   var ships: [Spaceship] = []
+  static let worldName: String = "Earth"
 
   func add(ship: Spaceship) {
     // ...
