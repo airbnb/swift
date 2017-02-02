@@ -219,7 +219,7 @@ class AccountManager {
 // WRONG
 let something: MyClass = MyClass()
 
-// RIGHT:
+// RIGHT
 let something = MyClass()
 ```
 
@@ -238,11 +238,11 @@ enum Direction {
 }
 
 func someDirection() -> Direction {
-	// WRONG
-	return Direction.Left
+  // WRONG
+  return Direction.Left
 
-	// RIGHT
-	return .Left
+  // RIGHT
+  return .Left
 }
 ```
 
@@ -292,55 +292,44 @@ someAsyncThing() { argument in
 }
 ```
 
-* <a id='long-function-declaration'></a>**Separate long function declarations with line breaks before each argument.** If there are external parameter names, include them on the *previous* line to avoid problems with auto-indenting. Also put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
+* <a id='long-function-declaration'></a>**Separate long function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
 
 ```swift
-class MyClass {
+class Universe {
 
   // MARK: Internal
 
   // WRONG
-  func doSomething(arg arg1: Int, anotherArg arg2: Int, yetAnotherArg arg3: Int, andOneMoreArgForGoodMeasure arg4: String) -> String {
-    // This is just too long and will probably auto-wrap in a weird way
+  func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
+    // This is too long and will probably auto-wrap in a weird way
   }
 
   // WRONG
-  func doSomething(arg arg1: Int,
-                       anotherArg arg2: Int,
-                                  yetAnotherArg arg3: Int,
-                                                andOneMoreArgForGoodMeasure arg4: String) -> String
+  func generateStars(at location: Point, 
+                     count: Int, 
+                     color: StarColor, 
+                     withAverageDistance averageDistance: Float) -> String
   {
-    // Xcode makes a staircase out of the argument list
+    // Xcode indents all the arguments
   }
   
   // WRONG
-  func doSomething(arg
-    arg1: Int, anotherArg
-    arg2: Int, yetAnotherArg
-    arg3: Int, andOneMoreArgForGoodMeasure
-    arg4: String) -> String {
-    doSomethingElse() // this line blends in with the argument list
+  func generateStars(
+    at location: Point,
+    count: Int,
+    color: StarColor,
+    withAverageDistance averageDistance: Float) -> String {
+    populateUniverse() // this line blends in with the argument list
   }
-
 
   // RIGHT
-  func doSomething(arg 
-    arg1: Int, anotherArg
-    arg2: Int, yetAnotherArg
-    arg3: Int, andOneMoreArgForGoodMeasure
-    arg4: String) -> String
+  func generateStars(
+    at location: Point,
+    count: Int,
+    color: StarColor,
+    withAverageDistance averageDistance: Float) -> String
   {
-    doSomethingElse()
-  }
-  
-  // RIGHT (example with no external arguments)
-  func doSomething(
-    arg: Int,
-    anotherArg: Int,
-    yetAnotherArg: Int,
-    andOneMoreArgForGoodMeasure: String) -> String
-  {
-    doSomethingElse()
+    populateUniverse()
   }
 }
 ```
@@ -348,16 +337,16 @@ class MyClass {
 * <a id='long-function-invocation'></a>**Long function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. (<a href='#long-function-invocation'>link</a>)
 
 ```swift
-foo.doSomething(
-  4,
-  anotherArg: 5,
-  yetAnotherArg: 4,
-  andOneMoreArgForGoodMeasure: "oaiwjeifajwe")
+universe.generateStars(
+  at: location,
+  count: 5,
+  color: starColor,
+  withAverageDistance: 4)
 
-bar.doAnotherThing(
-  duck: 0,
-  anotherDuck: 100,
-  goose: "quack")
+universe.generate(
+  5,
+  .stars,
+  at: location)
 ```
 
 * <a id='long-if-statement'></a>**When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
@@ -462,6 +451,24 @@ switch (someValue) { ... }
 // RIGHT
 if userCount > 0 { ... }
 switch someValue { ... }
+```
+* <a id='attributes-on-prev-line'></a>**Place function/type attributes on the line above the declaration**. (<a href='#attributes-on-prev-line'>link</a>)
+
+```swift
+// WRONG
+@objc class Spaceship: NSObject {
+  @discardableResult func fly() {
+  }
+}
+
+// RIGHT
+
+@objc
+class Spaceship: NSObject {
+  @discardableResult 
+  func fly() {
+  }
+}
 ```
 
 ## Patterns
