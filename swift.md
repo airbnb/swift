@@ -622,6 +622,8 @@ class MyClass {
 
 * <a id='single-responsibility-class'></a>**Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need. (<a href='#single-responsibility-class'>link</a>)
 
+* <a id='limit-access-control'></a>**Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. (<a href='#limit-access-control'>link</a>)
+
 * <a id='module-by-default'></a>**If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later. (<a href='#module-by-default'>link</a>)
 
 * <a id='avoid-global-functions'></a>**Avoid global functions whenever possible.** Prefer methods within type definitions. (<a href='#avoid-global-functions'>link</a>)
@@ -862,8 +864,10 @@ func doThing() {
 
 * <a id='marks-within-types'></a>**Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. (<a href='#marks-within-types'>link</a>)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
+  * `// MARK: Open` for `open` properties and methods.
   * `// MARK: Public` for `public` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
+  * `// MARK: Fileprivate` for `fileprivate` properties and methods.
   * `// MARK: Private` for `private` properties and methods.
   * If the type in question is an enum, its cases should go above the first `// MARK:`.
   * If there are typealiases, they should go above the first `// MARK:`.
