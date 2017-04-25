@@ -842,7 +842,7 @@ override var bounds: CGRect {
 }
 ```
 
-* <a id='switch-with-where'></a>** Be careful when using `where` clauses when handling multiple cases in a `switch`. ** (<a href='#switch-with-where'>link</a>)
+* <a id='switch-with-where'></a>**Be careful when using `where` clauses when handling multiple cases in a `switch`.** (<a href='#switch-with-where'>link</a>)
 > Why? The where clause only applies to the last case in line
 ```swift
 // WRONG
@@ -861,6 +861,22 @@ func doThing() {
        .B where x == y:
     doDifferentThing()
   }
+}
+```
+
+* <a id='optional-nil-check'></a>**Check for nil rather than using optional binding if you don't need to use the value.** (<a href='#optional-nil-check'>link</a>)
+> Why? Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
+```swift
+var thing: Thing?
+
+// WRONG
+if let _ = thing {
+  doThing()
+}
+
+// RIGHT
+if thing != nil {
+  doThing()
 }
 ```
 
