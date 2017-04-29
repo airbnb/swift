@@ -25,6 +25,12 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 <img width="200" src="spaces.png" />
 
+##### Preferences > Text Editing > Editing:
+
+> Due to larger screen sizes, we have opted to choose a page guide greater than 80.
+
+<img width="200" src="page_guide.png" />
+
 ## Sections
 
 1. [Naming](#naming)
