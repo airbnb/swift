@@ -356,6 +356,28 @@ universe.generate(
   at: location)
 ```
 
+* <a id='multi-line-array'></a>**Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. (<a href='#multi-line-array'>link</a>)
+
+```swift
+// WRONG
+let rowContent = [listingUrgencyDatesRowContent(),
+                  listingUrgencyBookedRowContent(),
+                  listingUrgencyBookedShortRowContent()]
+
+let rowContent = [
+  listingUrgencyDatesRowContent(),
+  listingUrgencyBookedRowContent(),
+  listingUrgencyBookedShortRowContent()
+]
+
+// RIGHT
+let rowContent = [
+  listingUrgencyDatesRowContent(),
+  listingUrgencyBookedRowContent(),
+  listingUrgencyBookedShortRowContent(),
+]
+```
+
 * <a id='long-if-statement'></a>**When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
 
 ```swift
