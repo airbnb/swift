@@ -378,15 +378,20 @@ let rowContent = [
 ]
 ```
 
-* <a id='long-if-statement'></a>**When an `if` statement becomes too long, wrap it with a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
+* <a id='long-if-statement'></a>**When an if/guard statement has more than one condition, start the subsequent conditions in a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
 
 ```swift
-if
-  let val1 = val1,
-  let val2 = val2
-  where !val2.isEmpty
+if let val1 = val1,
+  let val2 = val2,
+  !val2.isEmpty 
 {
-  print(val2)
+    print(val2)
+}
+
+guard let value = some,
+  let value2 = someOther else 
+{
+    return
 }
 ```
 
