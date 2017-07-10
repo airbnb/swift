@@ -378,7 +378,7 @@ let rowContent = [
 ]
 ```
 
-* <a id='long-if-statement'></a>**When an if/guard statement becomes [too long](#environment-setup), start the subsequent conditions in a new line after each of its clauses.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
+* <a id='long-if-statement'></a>**When an `if`/`guard` statement becomes [too long](#environment-setup), start each condition with a newline, except for the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. (<a href='#long-if-statement'>link</a>)
 
 ```swift
 if let val1 = val1,
