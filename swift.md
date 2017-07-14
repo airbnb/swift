@@ -299,7 +299,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* <a id='long-function-declaration'></a>**Separate [long function](#environment-setup) declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
+* <a id='long-function-declaration'></a>**Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
 
 ```swift
 class Universe {
@@ -341,7 +341,7 @@ class Universe {
 }
 ```
 
-* <a id='long-function-invocation'></a>**[Long function](#environment-setup) invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. (<a href='#long-function-invocation'>link</a>)
+* <a id='long-function-invocation'></a>**[Long](#environment-setup) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. (<a href='#long-function-invocation'>link</a>)
 
 ```swift
 universe.generateStars(
@@ -385,13 +385,13 @@ if let val1 = val1,
   let val2 = val2,
   !val2.isEmpty 
 {
-    print(val2)
+  print(val2)
 }
 
 guard let value = some,
   let value2 = someOther else 
 {
-    return
+  return
 }
 ```
 
