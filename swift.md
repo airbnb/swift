@@ -81,7 +81,7 @@ class Foo {
   }
 
   // MARK: Internal
-  
+
   var text: String {
     return _text as String
   }
@@ -105,7 +105,7 @@ class UrlValidator {
   func isValidUrl(URL: NSURL) -> Bool {
     // ...
   }
-  
+
   func isUrlReachable(URL: NSURL) -> Bool {
     // ...
   }
@@ -121,7 +121,7 @@ class URLValidator {
   func isValidURL(url: NSURL) -> Bool {
     // ...
   }
-  
+
   func isURLReachable(url: NSURL) -> Bool {
     // ...
   }
@@ -312,14 +312,14 @@ class Universe {
   }
 
   // WRONG
-  func generateStars(at location: Point, 
-                     count: Int, 
-                     color: StarColor, 
+  func generateStars(at location: Point,
+                     count: Int,
+                     color: StarColor,
                      withAverageDistance averageDistance: Float) -> String
   {
     // Xcode indents all the arguments
   }
-  
+
   // WRONG
   func generateStars(
     at location: Point,
@@ -494,7 +494,7 @@ switch someValue { ... }
 
 @objc
 class Spaceship: NSObject {
-  @discardableResult 
+  @discardableResult
   func fly() {
   }
 }
@@ -538,7 +538,7 @@ class MyClass: NSObject {
 
 * <a id='time-intensive-init'></a>**Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use. (<a href='#time-intensive-init'>link</a>)
 
-* <a id='complex-property-accessor'></a>**Use functions instead of computed properties if they get to be complicated.** 
+* <a id='complex-property-accessor'></a>**Use functions instead of computed properties if they get to be complicated.**
 ```swift
 class SomeClass {
   // WRONG
@@ -612,7 +612,7 @@ class MyClass {
     }
   }
 
-  
+
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
       self?.doSomething(self?.property) //if this parameter isn't optional, we have to unwrap anyways! This code will not compile
@@ -837,7 +837,7 @@ class Fruit {
 
 * <a id='final-classes-by-default'></a>**Default classes to `final`.** (<a href='#final-classes-by-default'>link</a>)
 
-> Why? If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword. 
+> Why? If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
 
 ```swift
 // WRONG
@@ -848,25 +848,6 @@ class SettingsDataManager {
 // RIGHT
 final class SettingsDataManager {
   // ...
-}
-```
-
-* <a id='semantically-meaningful-uiview-overrides'></a>**Prefer semantically meaningful overrides of `UIView` methods to `layoutSubviews()`.** (<a href='#semantically-meaningful-uiview-overrides'>link</a>)
-
-> Why? This better communicates intent and avoids unnecessary computation in `layoutSubview()`, which will likely invoke your code more frequently than is required.
-
-```swift
-// WRONG
-override public func layoutSubviews() {
-  super.layoutSubviews()
-  layer.cornerRadius = bounds.width / 2
-}
-
-// RIGHT
-override var bounds: CGRect {
-  didSet {
-    layer.cornerRadius = bounds.width / 2
-  }
 }
 ```
 
