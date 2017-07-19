@@ -802,7 +802,7 @@ func updateDisplayedData() {
 }
 ```
 
-* <a id='preconditions-and-asserts'></a>**Handle an unexpected condition with an `assert` combined with appropriate logging in production when you can recover from it. Otherwise, use a `precondition` method to validate the input or `fatalError`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over `precondition` when the failure message is dynamic since `precondition` doesn't show the crash message in the crash report for Release builds. (<a href='#preconditions-and-asserts'>link</a>)
+* <a id='preconditions-and-asserts'></a>**Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. (<a href='#preconditions-and-asserts'>link</a>)
 
 ```swift
 func didSubmit(text text: String) {
@@ -826,7 +826,7 @@ func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
 func makeImage(name: String) -> UIImage {
   guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
     fatalError("Image named \(name) couldn't be loaded.")
-    // The error message is important to know what's the name of the image missing.
+    // We want the error message so we know the name of the missing image.
   }
   return image
 }
