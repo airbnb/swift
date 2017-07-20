@@ -802,15 +802,9 @@ func updateDisplayedData() {
 }
 ```
 
-* <a id='preconditions-and-asserts'></a>**Handle an unexpected condition with a `precondition` method when you cannot reasonably recover from it. Otherwise, use an `assert` method combined with appropriate logging in production.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. There is little reason to prefer the `fatalError` methods over the `precondition` methods, as we should not be building with the `-Ounchecked` optimization level. (<a href='#preconditions-and-asserts'>link</a>)
+* <a id='preconditions-and-asserts'></a>**Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. (<a href='#preconditions-and-asserts'>link</a>)
 
 ```swift
-func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
-  precondition(index >= 0 && index < array.count)
-  // It's impossible to continue executing if the precondition has failed.
-  // ...
-}
-
 func didSubmit(text text: String) {
   // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
   // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
@@ -821,6 +815,20 @@ func didSubmit(text text: String) {
     return
   }
   // ...
+}
+
+func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
+  precondition(index >= 0 && index < array.count)
+  // It's impossible to continue executing if the precondition has failed.
+  // ...
+}
+
+func makeImage(name: String) -> UIImage {
+  guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
+    fatalError("Image named \(name) couldn't be loaded.")
+    // We want the error message so we know the name of the missing image.
+  }
+  return image
 }
 ```
 
