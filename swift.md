@@ -905,8 +905,6 @@ if thing != nil {
 * <a id='beware-chars-nsrange'></a>**Beware using `characters` with NSRange and Objective-C APIs.** (<a href='#beware-chars-nsrange'>link</a>)
 > https://airbnb.quip.com/3ISKAJXBmlaj/Beware-characters-with-NSRanges-and-other-Objective-C-APIs
 ```swift
-var thing: Thing?
-
 // WRONG
 NSRange(location: 0, length: myString.characters.count)
 
