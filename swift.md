@@ -902,6 +902,18 @@ if thing != nil {
 }
 ```
 
+* <a id='beware-chars-nsrange'></a>**Beware using `characters` with NSRange and Objective-C APIs.** (<a href='#beware-chars-nsrange'>link</a>)
+> https://airbnb.quip.com/3ISKAJXBmlaj/Beware-characters-with-NSRanges-and-other-Objective-C-APIs
+```swift
+var thing: Thing?
+
+// WRONG
+NSRange(location: 0, length: myString.characters.count)
+
+// RIGHT
+myString.nsrange
+```
+
 ## File Organization
 
 * <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
