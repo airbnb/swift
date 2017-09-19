@@ -1067,3 +1067,17 @@ class MyClass {
   }
 }
 ```
+
+## Airbnb Internal
+
+* <a id='beware-chars-nsrange'></a>**Beware using `characters` with NSRange and Objective-C APIs.** (<a href='#beware-chars-nsrange'>link</a>)
+  * If you're using `NSRange`, always use `.utf16`. We created a helper on String to get an nsrange in `AirbnbSwiftExtensions`.
+  * If you're counting visible characters, use `.characters`, but realize that it's not 100% accurate. We've seen signs of Apple constantly improving this count, and hopefully they continue to do so (e.g. many Emojis are now counted correctly in iOS 11, but Hebrew characters are still not). Also realize that character counts might make sense in English but start to fall apart when we internationalize our product. E.g. in German, words are typically twice as long, and in Chinese they can be half as long.
+  * If you need to combine both `NSRange` and character count (e.g. in methods like `shouldReplaceTextRange`), first generate a string with the new text, then take its characters count.
+```swift
+// WRONG
+NSRange(location: 0, length: myString.characters.count)
+
+// RIGHT
+myString.nsrange
+```
