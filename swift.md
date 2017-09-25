@@ -1040,8 +1040,6 @@ private enum Formation {
 
 * <a id='prefer-pure-swift-classes'></a>**Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. (<a href='#prefer-pure-swift-classes'>link</a>)
 
-* <a id='dynamic-action-handlers'></a>**Target-action handlers should use the `dynamic` keyword.** Do not make a method `internal` just for the purpose of exposing it to the Objective-C runtime. (<a href='#dynamic-action-handlers'>link</a>)
-
 ```swift
 class MyClass {
 
