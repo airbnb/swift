@@ -637,8 +637,8 @@ class MyClass {
 
   func doRequest(completion: () -> Void) {
     API.request() { [weak self] response in
-      guard let `self` = self else { return }
-      self.doSomething(self.property) //can refer to self as usual, no sSelf or unwrapping
+      guard let strongSelf = self else { return }
+      strongSelf.doSomething(strongSelf.property)
       completion()
     }
   }
