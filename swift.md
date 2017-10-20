@@ -1038,7 +1038,7 @@ private enum Formation {
 
 ## Objective-C Interoperability
 
-* <a id='prefer-pure-swift-classes'></a>**Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. (<a href='#prefer-pure-swift-classes'>link</a>)
+* <a id='prefer-pure-swift-classes'></a>**Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`. (<a href='#prefer-pure-swift-classes'>link</a>)
 
 ```swift
 class MyClass {
@@ -1060,7 +1060,8 @@ class MyClass {
   }
 
   // RIGHT
-  dynamic private func didTapFooButton() {
+  @objc
+  private func didTapFooButton() {
     // ...
   }
 }
