@@ -906,6 +906,31 @@ if thing != nil {
 
 ## File Organization
 
+* <a id='alphabetize-imports'></a>**Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** (<a href='#alphabetize-imports'>link</a>)
+
+```swift
+// WRONG
+
+//  Copyright © 2017 Airbnb. All rights reserved.
+//
+import DLSPrimitives
+import ConstellationInfra
+import AirbnbPhrases
+
+import Foundation
+
+//RIGHT
+
+//  Copyright © 2017 Airbnb. All rights reserved.
+//
+
+import AirbnbPhrases
+import ConstellationInfra
+import DLSPrimitives
+import Foundation
+```
+
+
 * <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
 
 > Why? The hyphen visually distinguishes types from sections within those types (described below).
