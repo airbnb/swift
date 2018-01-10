@@ -908,6 +908,8 @@ if thing != nil {
 
 * <a id='alphabetize-imports'></a>**Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** (<a href='#alphabetize-imports'>link</a>)
 
+> Why? A standard organization method helps engineers more quickly determine which modules a file depends on.
+
 ```swift
 // WRONG
 
