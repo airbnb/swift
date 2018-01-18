@@ -913,7 +913,7 @@ if thing != nil {
 ```swift
 // WRONG
 
-//  Copyright © 2017 Airbnb. All rights reserved.
+//  Copyright © 2018 Airbnb. All rights reserved.
 //
 import DLSPrimitives
 import ConstellationInfra
@@ -923,13 +923,38 @@ import Foundation
 
 //RIGHT
 
-//  Copyright © 2017 Airbnb. All rights reserved.
+//  Copyright © 2018 Airbnb. All rights reserved.
 //
 
 import AirbnbPhrases
 import ConstellationInfra
 import DLSPrimitives
 import Foundation
+```
+
+_Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
+
+```swift
+// WRONG
+
+//  Copyright © 2018 Airbnb. All rights reserved.
+//
+
+import AirbnbHomes
+@testable import AirbnbPayments
+import Nimble
+import Quick
+
+//RIGHT
+
+//  Copyright © 2018 Airbnb. All rights reserved.
+//
+
+import AirbnbHomes
+import Nimble
+import Quick
+
+@testable import AirbnbPayments
 ```
 
 
