@@ -888,6 +888,26 @@ func doThing() {
 }
 ```
 
+* <a id='switch-never-default'></a>**Never use the `default` case when `switch`ing over an enum.** (<a href='#switch-never-default'>link</a>)
+> Why? Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+```swift
+// WRONG
+switch anEnum {
+case .a:
+  // Do something
+default:
+  // Do something else.
+}
+
+// RIGHT
+switch anEnum {
+case .a:
+  // Do something
+case .b, .c:
+  // Do something else.
+}
+```
+
 * <a id='optional-nil-check'></a>**Check for nil rather than using optional binding if you don't need to use the value.** (<a href='#optional-nil-check'>link</a>)
 > Why? Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
 ```swift
