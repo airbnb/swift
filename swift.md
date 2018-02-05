@@ -240,16 +240,16 @@ let someMargin: CGFloat = 5
 
 ```swift
 enum Direction {
-  case Left
-  case Right
+  case left
+  case right
 }
 
 func someDirection() -> Direction {
   // WRONG
-  return Direction.Left
+  return Direction.left
 
   // RIGHT
-  return .Left
+  return .left
 }
 ```
 
@@ -873,7 +873,7 @@ final class SettingsDataManager {
 func doThing() {
   switch anEnum {
   //where x == y will only be evaluated if anEnum is .B
-  case .A, .B where x == y:
+  case .a, .b where x == y:
     doDifferentThing()
   }
 }
@@ -881,10 +881,30 @@ func doThing() {
 // RIGHT
 func doThing() {
   switch anEnum {
-  case .A where x == y,
-       .B where x == y:
+  case .a where x == y,
+       .b where x == y:
     doDifferentThing()
   }
+}
+```
+
+* <a id='switch-never-default'></a>**Never use the `default` case when `switch`ing over an enum.** (<a href='#switch-never-default'>link</a>)
+> Why? Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+```swift
+// WRONG
+switch anEnum {
+case .a:
+  // Do something
+default:
+  // Do something else.
+}
+
+// RIGHT
+switch anEnum {
+case .a:
+  // Do something
+case .b, .c:
+  // Do something else.
 }
 ```
 
@@ -1033,20 +1053,20 @@ public class Spacefleet {
   public init(spaceships: [Spaceship], captain: Person) {
     self.spaceships = spaceships
     self.captain = captain
-    changeFormation(.Launch)
+    changeFormation(to: .launch)
   }
 
   // MARK: Public
 
   public func launch() {
     // ...
-    changeFormation(.Default)
+    changeFormation(to: .patrol)
   }
 
   // MARK: Internal
 
   func attack(enemy: Enemy) {
-    changeFormation(.Attack)
+    changeFormation(to: .attack)
     // ...
   }
 
@@ -1055,7 +1075,7 @@ public class Spacefleet {
   private let spaceships: [Spaceship]
   private let captain: Person
 
-  private func changeFormation(formation: Formation) {
+  private func changeFormation(to formation: Formation) {
     // ...
   }
 }
@@ -1082,9 +1102,9 @@ public struct Spaceship {
 // MARK: - Formation
 
 private enum Formation {
-  case Launch
-  case Default
-  case Attack
+  case launch
+  case patrol
+  case attack
 }
 ```
 
