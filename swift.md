@@ -299,6 +299,20 @@ someAsyncThing() { argument in
 }
 ```
 
+* <a id='favor-void-return'></a>**Favor `Void` return types over `()`.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-return'>link</a>)
+
+```swift
+// WRONG
+func method(completion: () -> ()) {
+  ...
+}
+
+// RIGHT
+func method(completion: () -> Void) {
+  ...
+}
+```
+
 * <a id='long-function-declaration'></a>**Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
 
 ```swift
