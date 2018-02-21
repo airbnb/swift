@@ -521,6 +521,50 @@ class Spaceship: NSObject {
 }
 ```
 
+### Closures
+
+* <a id='omit-void-return'></a>**Don’t include return type Void in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-void-return'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { argument -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument in
+  ...
+}
+```
+
+* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.** (<a href='#omit-closure-parameters-unnecessary-typess'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument, arugment2 in
+  ...
+}
+```
+
+* <a id='omit-closure-parameters-parentheses'></a>**Don’t include unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-parentheses'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { (argument, argument 2) -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument, arugment2 in
+  ...
+}
+```
+
 ## Patterns
 
 * <a id='implicitly-unwrapped-optionals'></a>**Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. (<a href='#implicitly-unwrapped-optionals'>link</a>)
