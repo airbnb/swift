@@ -285,20 +285,6 @@ class MyClass {
 }
 ```
 
-* <a id='omit-void-return'></a>**Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.) (<a href='#omit-void-return'>link</a>)
-
-```swift
-// WRONG
-someAsyncThing() { argument -> Void in
-  ...
-}
-
-// RIGHT
-someAsyncThing() { argument in
-  ...
-}
-```
-
 * <a id='favor-void-return'></a>**Favor `Void` return types over `()`.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-return'>link</a>)
 
 ```swift
