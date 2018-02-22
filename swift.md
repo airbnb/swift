@@ -509,7 +509,7 @@ class Spaceship: NSObject {
 
 ### Closures
 
-* <a id='omit-void-return'></a>**Don’t include return type Void in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-void-return'>link</a>)
+* <a id='omit-closure-void-return'></a>**Don’t include return type Void in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
 
 ```swift
 // WRONG
@@ -523,7 +523,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.** (<a href='#omit-closure-parameters-unnecessary-typess'>link</a>)
+* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.** (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
 
 ```swift
 // WRONG
