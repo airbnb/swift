@@ -523,7 +523,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.** (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
+* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.**  A notable case of when closure parameter type specifiers are necessary is when using PromiseKit. (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
 
 ```swift
 // WRONG
@@ -537,11 +537,11 @@ someAsyncThing() { argument, arugment2 in
 }
 ```
 
-* <a id='omit-closure-parameters-parentheses'></a>**Don’t include unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-parentheses'>link</a>)
+* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Don’t include unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
 
 ```swift
 // WRONG
-someAsyncThing() { (argument, argument 2) -> Void in
+someAsyncThing() { (argument, argument2) -> Void in
   ...
 }
 
