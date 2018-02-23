@@ -285,34 +285,6 @@ class MyClass {
 }
 ```
 
-* <a id='omit-void-return'></a>**Don’t include return type Void in blocks.** (Even though that’s what autocomplete does.) (<a href='#omit-void-return'>link</a>)
-
-```swift
-// WRONG
-someAsyncThing() { argument -> Void in
-  ...
-}
-
-// RIGHT
-someAsyncThing() { argument in
-  ...
-}
-```
-
-* <a id='favor-void-return'></a>**Favor `Void` return types over `()`.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-return'>link</a>)
-
-```swift
-// WRONG
-func method(completion: () -> ()) {
-  ...
-}
-
-// RIGHT
-func method(completion: () -> Void) {
-  ...
-}
-```
-
 * <a id='long-function-declaration'></a>**Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. (<a href='#long-function-declaration'>link</a>)
 
 ```swift
@@ -518,6 +490,64 @@ class Spaceship: NSObject {
   @discardableResult
   func fly() {
   }
+}
+```
+
+### Closures
+
+* <a id='omit-closure-void-return'></a>**Don’t include return type `Void` in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { argument -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument in
+  ...
+}
+```
+
+* <a id='favor-void-closure-return'></a>**Favor `Void` return types over `()`.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-closure-return'>link</a>)
+
+```swift
+// WRONG
+func method(completion: () -> ()) {
+  ...
+}
+
+// RIGHT
+func method(completion: () -> Void) {
+  ...
+}
+```
+
+* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.**  A notable case of when closure parameter type specifiers are necessary is when using PromiseKit. (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument, argument2 in
+  ...
+}
+```
+
+* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Don’t include unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
+
+```swift
+// WRONG
+someAsyncThing() { (argument, argument2) -> Void in
+  ...
+}
+
+// RIGHT
+someAsyncThing() { argument, argument2 in
+  ...
 }
 ```
 
