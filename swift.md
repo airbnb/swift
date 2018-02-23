@@ -495,7 +495,7 @@ class Spaceship: NSObject {
 
 ### Closures
 
-* <a id='omit-closure-void-return'></a>**Don’t include return type Void in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
+* <a id='omit-closure-void-return'></a>**Don’t include return type `Void` in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
 
 ```swift
 // WRONG
@@ -532,7 +532,7 @@ someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
 }
 
 // RIGHT
-someAsyncThing() { argument, arugment2 in
+someAsyncThing() { argument, argument2 in
   ...
 }
 ```
@@ -546,7 +546,7 @@ someAsyncThing() { (argument, argument2) -> Void in
 }
 
 // RIGHT
-someAsyncThing() { argument, arugment2 in
+someAsyncThing() { argument, argument2 in
   ...
 }
 ```
