@@ -495,7 +495,7 @@ class Spaceship: NSObject {
 
 ### Closures
 
-* <a id='omit-closure-void-return'></a>**Don’t include return type `Void` in closures.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
+* <a id='omit-closure-void-return'></a>**Don’t include return type `Void` in closures definitions.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
 
 ```swift
 // WRONG
@@ -509,7 +509,7 @@ someAsyncThing() { argument in
 }
 ```
 
-* <a id='favor-void-closure-return'></a>**Favor `Void` return types over `()`.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-closure-return'>link</a>)
+* <a id='favor-void-closure-return'></a>**Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. (<a href='#favor-void-closure-return'>link</a>)
 
 ```swift
 // WRONG
@@ -523,7 +523,7 @@ func method(completion: () -> Void) {
 }
 ```
 
-* <a id='omit-closure-parameters-unnecessary-types'></a>**Don’t include unnecessary type specifiers for closure parameters.**  A notable case of when closure parameter type specifiers are necessary is when using PromiseKit. (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
+* <a id='omit-closure-parameters-unnecessary-types'></a>**Omit unnecessary type specifiers for closure parameters.** (<a href='#omit-closure-parameters-unnecessary-types'>link</a>)
 
 ```swift
 // WRONG
@@ -537,7 +537,7 @@ someAsyncThing() { argument, argument2 in
 }
 ```
 
-* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Don’t include unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
+* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Omit unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
 
 ```swift
 // WRONG
