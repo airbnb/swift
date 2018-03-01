@@ -463,6 +463,32 @@ var dict = [KeyType : ValueType]()
 var dict = [KeyType: ValueType]()
 ```
 
+* <a id='return-arrow-spacing'></a>**Place a space on either side of a return arrow for readability.** (<a href='#return-arrow-spacing'>link</a>)
+
+```swift
+// WRONG
+func doSomething()->String {
+  // ...
+}
+
+// RIGHT
+func doSomething() -> String {
+  // ...
+}
+```
+
+```swift
+// WRONG
+func doSomething(completion: ()->Void) {
+  // ...
+}
+
+// RIGHT
+func doSomething(completion: () -> Void) {
+  // ...
+}
+```
+
 * <a id='unnecessary-parens'></a>**Omit unnecessary parentheses.** (<a href='#unnecessary-parens'>link</a>)
 
 ```swift
