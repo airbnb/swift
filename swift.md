@@ -69,7 +69,7 @@ class Spacefleet: SpaceThing {
 let myFleet = Spacefleet()
 ```
 
-* <a id='underscore-backing-properties'></a>**Underscore-prefix private property names only if they are mutable private properties with a similarly named internal property.** This makes it possible to mimic the behavior of the `copying` attribute of Objective-C properties. In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods. (<a href='#underscore-backing-properties'>link</a>)
+* <a id='underscore-backing-properties'></a>**Underscore-prefix `private` property names only if they are backing an identically named `internal` or `public` property that does not have an underscore prefix.** An example of this in practice would be to mimic the behavior of the `copying` attribute of Objective-C properties (see below). In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods. (<a href='#underscore-backing-properties'>link</a>)
 
 ```swift
 class Foo {
