@@ -601,16 +601,10 @@ match(pattern: pattern)
   .flatMap { command in
     return command.expand()
   }
-  
-// Either:
 
 values.forEach { value in
   print(value)
 }
-
-// or:
-
-values.forEach { value in print(value) }
 ```
 
 ## Patterns
