@@ -581,6 +581,7 @@ someAsyncThing() { argument, argument2 in
 
 ```swift
 // WRONG
+
 match(pattern: pattern).flatMap { range in
   return Command(string: contents, range: range)
   }.flatMap { command in
@@ -593,13 +594,15 @@ values.forEach { value in
 
 // RIGHT
 
+// Either:
+
 match(pattern: pattern).flatMap { range in
    return Command(string: contents, range: range)
 }.flatMap { command in
    return command.expand()
 }
 
-// OR
+// or:
 
 match(pattern: pattern)
   .flatMap { range in
@@ -608,12 +611,14 @@ match(pattern: pattern)
   .flatMap { command in
     return command.expand()
   }
+  
+// Either:
 
 values.forEach { value in
   print(value)
 }
 
-// OR
+// or:
 
 values.forEach { value in print(value) }
 ```
