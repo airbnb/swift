@@ -594,16 +594,6 @@ values.forEach { value in
 
 // RIGHT
 
-// Either:
-
-match(pattern: pattern).flatMap { range in
-   return Command(string: contents, range: range)
-}.flatMap { command in
-   return command.expand()
-}
-
-// or:
-
 match(pattern: pattern)
   .flatMap { range in
     return Command(string: contents, range: range)
