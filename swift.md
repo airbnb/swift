@@ -577,6 +577,36 @@ someAsyncThing() { argument, argument2 in
 }
 ```
 
+* <a id='closure-end-brace-indentation'></a>**Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. (<a href='#closure-end-brace-indentation'>link</a>)
+
+```swift
+// WRONG
+
+match(pattern: pattern).flatMap { range in
+  return Command(string: contents, range: range)
+  }.flatMap { command in
+  return command.expand()
+}
+
+values.forEach { value in
+    print(value)
+  }
+
+// RIGHT
+
+match(pattern: pattern)
+  .flatMap { range in
+    return Command(string: contents, range: range)
+  }
+  .flatMap { command in
+    return command.expand()
+  }
+
+values.forEach { value in
+  print(value)
+}
+```
+
 ## Patterns
 
 * <a id='implicitly-unwrapped-optionals'></a>**Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. (<a href='#implicitly-unwrapped-optionals'>link</a>)
