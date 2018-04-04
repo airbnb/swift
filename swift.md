@@ -1119,6 +1119,8 @@ static let gravityMoon: CGFloat = 1.6
 var gravity: CGFloat
 ```
 
+* <a id='limit-vertical-whitespace'></a>**Limit empty vertical whitespace to one line.** Favor `// MARK:`s over vertical whitespace of varying heights to divide files into logical groupings. (<a href='#limit-vertical-whitespace'>link</a>)
+
 * <a id='computed-properties-at-end'></a>**Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) (<a href='#computed-properties-at-end'>link</a>)
 
 ```swift
