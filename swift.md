@@ -1077,6 +1077,7 @@ import Quick
 @testable import AirbnbPayments
 ```
 
+* <a id='limit-vertical-whitespace'></a>**Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. (<a href='#limit-vertical-whitespace'>link</a>)
 
 * <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
 
@@ -1118,8 +1119,6 @@ static let gravityMoon: CGFloat = 1.6
 
 var gravity: CGFloat
 ```
-
-* <a id='limit-vertical-whitespace'></a>**Limit empty vertical whitespace to one line.** Favor `// MARK:`s over vertical whitespace of varying heights to divide files into logical groupings. (<a href='#limit-vertical-whitespace'>link</a>)
 
 * <a id='computed-properties-at-end'></a>**Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) (<a href='#computed-properties-at-end'>link</a>)
 
