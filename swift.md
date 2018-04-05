@@ -1077,6 +1077,7 @@ import Quick
 @testable import AirbnbPayments
 ```
 
+* <a id='limit-vertical-whitespace'></a>**Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. (<a href='#limit-vertical-whitespace'>link</a>)
 
 * <a id='marks-for-types'></a>**Each type in a file should be preceded by `// MARK: - TypeName`.**  (<a href='#marks-for-types'>link</a>)
 
