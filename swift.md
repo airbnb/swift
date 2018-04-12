@@ -13,6 +13,10 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 The guidelines in the [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/) are highly recommended in addition to this document.
 
+## Guiding Tenets
+
+* Don't fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior
+
 ## Environment Setup
 
 Most of the default Xcode settings are okay. The only changes are below.
@@ -35,6 +39,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 1. [Naming](#naming)
 2. [Style](#style)
+    1. [Closures](#closures)
 3. [Patterns](#patterns)
 4. [File Organization](#file-organization)
 5. [Objective-C Interoperability](#objective-c-interoperability)
