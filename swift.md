@@ -1202,7 +1202,7 @@ extension Spacefleet: SpaceshipDelegate {
 // MARK: - Spaceship
 
 public struct Spaceship {
-  let color: UIColor
+  public let color: UIColor
 }
 
 // MARK: - Formation
