@@ -375,14 +375,14 @@ let rowContent = [
 if
   let val1 = val1,
   let val2 = val2,
-  !val2.isEmpty 
+  !val2.isEmpty
 {
   print(val2)
 }
 
 guard
   let value = some,
-  let value2 = someOther else 
+  let value2 = someOther else
 {
   return
 }
