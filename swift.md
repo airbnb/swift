@@ -1225,7 +1225,7 @@ class MyClass {
 
   // MARK: Private
 
-  let fooButton = UIButton()
+  private let fooButton = UIButton()
 
   private func setUpFooButton() {
     fooButton.addTarget(
