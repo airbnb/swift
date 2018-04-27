@@ -1234,12 +1234,6 @@ class MyClass {
       forControlEvents: .TouchUpInside)
   }
 
-  // WRONG
-  func didTapFooButton() {
-    // ...
-  }
-
-  // RIGHT
   @objc
   private func didTapFooButton() {
     // ...
