@@ -806,7 +806,7 @@ class Person {
 ```swift
 private let privateValue = "secret"
 
-class MyClass {
+public class MyClass {
 
   // MARK: Public
 
@@ -1190,11 +1190,11 @@ public class Spacefleet {
 
 extension Spacefleet: SpaceshipDelegate {
 
-  func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
+  public func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
     // ...
   }
 
-  func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
+  public func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
     // ...
   }
 }
