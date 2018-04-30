@@ -375,14 +375,14 @@ let rowContent = [
 if
   let val1 = val1,
   let val2 = val2,
-  !val2.isEmpty 
+  !val2.isEmpty
 {
   print(val2)
 }
 
 guard
   let value = some,
-  let value2 = someOther else 
+  let value2 = someOther else
 {
   return
 }
@@ -806,7 +806,7 @@ class Person {
 ```swift
 private let privateValue = "secret"
 
-class MyClass {
+public class MyClass {
 
   // MARK: Public
 
@@ -1190,11 +1190,11 @@ public class Spacefleet {
 
 extension Spacefleet: SpaceshipDelegate {
 
-  func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
+  public func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
     // ...
   }
 
-  func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
+  public func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
     // ...
   }
 }
@@ -1202,7 +1202,7 @@ extension Spacefleet: SpaceshipDelegate {
 // MARK: - Spaceship
 
 public struct Spaceship {
-  let color: UIColor
+  public let color: UIColor
 }
 
 // MARK: - Formation
@@ -1225,7 +1225,7 @@ class MyClass {
 
   // MARK: Private
 
-  let fooButton = UIButton()
+  private let fooButton = UIButton()
 
   private func setUpFooButton() {
     fooButton.addTarget(
