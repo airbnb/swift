@@ -38,11 +38,12 @@ Most of the default Xcode settings are okay. The only changes are below.
 ## Sections
 
 1. [Naming](#naming)
-2. [Style](#style)
+1. [Style](#style)
     1. [Closures](#closures)
-3. [Patterns](#patterns)
-4. [File Organization](#file-organization)
-5. [Objective-C Interoperability](#objective-c-interoperability)
+    1. [Operators](#operators)
+1. [Patterns](#patterns)
+1. [File Organization](#file-organization)
+1. [Objective-C Interoperability](#objective-c-interoperability)
 
 ## Naming
 
@@ -610,6 +611,27 @@ match(pattern: pattern)
 values.forEach { value in
   print(value)
 }
+```
+
+### Operators
+
+* <a id='infix-operator-spacing'></a>**Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `foo?` or `-1`). (<a href='#infix-operator-spacing'>link</a>)
+
+```swift
+// WRONG
+let foo = 1+2
+let foo = bar   ?? 0
+let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
+let bar=foo
+let sw_lat = region.center.latitude - region.span.latitudeDelta/2.0
+
+// RIGHT
+```swift
+let foo = 1 + 2
+let foo = bar ?? 0
+let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
+let bar = foo
+let sw_lat = region.center.latitude - (region.span.latitudeDelta / 2.0)
 ```
 
 ## Patterns
