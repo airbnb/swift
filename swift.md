@@ -626,7 +626,6 @@ let bar=foo
 let sw_lat = region.center.latitude - region.span.latitudeDelta/2.0
 
 // RIGHT
-```swift
 let foo = 1 + 2
 let foo = bar ?? 0
 let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
