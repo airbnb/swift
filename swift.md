@@ -623,14 +623,14 @@ let foo = 1+2
 let baz = bar   ?? 0
 let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
 let bar=foo
-let sw_lat = region.center.latitude - region.span.latitudeDelta/2.0
+let latitude = region.center.latitude - region.span.latitudeDelta/2.0
 
 // RIGHT
 let foo = 1 + 2
 let baz = bar ?? 0
 let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
 let bar = foo
-let sw_lat = region.center.latitude - (region.span.latitudeDelta / 2.0)
+let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
 ```
 
 ## Patterns
