@@ -39,6 +39,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 1. [Naming](#naming)
 1. [Style](#style)
+    1. [Functions](#functions)
     1. [Closures](#closures)
     1. [Operators](#operators)
 1. [Patterns](#patterns)
@@ -525,9 +526,25 @@ class Spaceship: NSObject {
 }
 ```
 
+### Functions
+
+* <a id='omit-function-void-return'></a>**Omit `Void` return types from function definitions.** (<a href='#omit-function-void-return'>link</a>)
+
+```swift
+// WRONG
+func doSomething() -> Void {
+  ...
+}
+
+// RIGHT
+func doSomething() {
+  ...
+}
+```
+
 ### Closures
 
-* <a id='omit-closure-void-return'></a>**Don’t include return type `Void` in closures definitions.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
+* <a id='omit-closure-void-return'></a>**Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
 
 ```swift
 // WRONG
