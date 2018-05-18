@@ -502,10 +502,12 @@ func doSomething(completion: () -> Void) {
 // WRONG
 if (userCount > 0) { ... }
 switch (someValue) { ... }
+let evens = userCounts.filter { (number) in number % 2 == 0 } 
 
 // RIGHT
 if userCount > 0 { ... }
 switch someValue { ... }
+let evens = userCounts.filter { number in number % 2 == 0 } 
 ```
 * <a id='attributes-on-prev-line'></a>**Place function/type attributes on the line above the declaration**. (<a href='#attributes-on-prev-line'>link</a>)
 
@@ -577,20 +579,6 @@ func method(completion: () -> Void) {
 ```swift
 // WRONG
 someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
-  ...
-}
-
-// RIGHT
-someAsyncThing() { argument, argument2 in
-  ...
-}
-```
-
-* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Omit unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
-
-```swift
-// WRONG
-someAsyncThing() { (argument, argument2) -> Void in
   ...
 }
 
