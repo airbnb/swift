@@ -502,10 +502,12 @@ func doSomething(completion: () -> Void) {
 // WRONG
 if (userCount > 0) { ... }
 switch (someValue) { ... }
+let evens = userCounts.filter { (number) in number % 2 == 0 } 
 
 // RIGHT
 if userCount > 0 { ... }
 switch someValue { ... }
+let evens = userCounts.filter { number in number % 2 == 0 } 
 ```
 * <a id='attributes-on-prev-line'></a>**Place function/type attributes on the line above the declaration**. (<a href='#attributes-on-prev-line'>link</a>)
 
