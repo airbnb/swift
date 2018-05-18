@@ -588,20 +588,6 @@ someAsyncThing() { argument, argument2 in
 }
 ```
 
-* <a id='omit-closure-parameters-unnecessary-parentheses'></a>**Omit unnecessary parentheses around closure parameters.** (<a href='#omit-closure-parameters-unnecessary-parentheses'>link</a>)
-
-```swift
-// WRONG
-someAsyncThing() { (argument, argument2) -> Void in
-  ...
-}
-
-// RIGHT
-someAsyncThing() { argument, argument2 in
-  ...
-}
-```
-
 * <a id='closure-end-brace-indentation'></a>**Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. (<a href='#closure-end-brace-indentation'>link</a>)
 
 ```swift
