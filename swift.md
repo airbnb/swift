@@ -542,6 +542,33 @@ func doSomething() {
 }
 ```
 
+* <a id='long-function-chains'></a>**Separate [long](#environment-setup) function chains with line breaks before each dot.** (<a href='#long-function-chains'>link</a>)
+
+> Why? It's easier to follow control flow through long function chains when each call has the same indentation.
+
+```swift
+/// WRONG
+
+match(pattern: pattern).flatMap { range in
+    return Command(string: contents, range: range)
+  }.flatMap { command in
+    return command.expand()
+}
+
+/// RIGHT
+
+match(pattern: pattern)
+  .flatMap { range in
+    return Command(string: contents, range: range)
+  }
+  .flatMap { command in
+    return command.expand()
+}
+
+// Short function chains can still be on one line:
+let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
+```
+
 ### Closures
 
 * <a id='omit-closure-void-return'></a>**Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.) (<a href='#omit-closure-void-return'>link</a>)
