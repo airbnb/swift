@@ -1,14 +1,14 @@
 # Contributing
 
-To contribute to this repository, please open a PR to propose a new style guide. Every new guideline should be done through a PR.
+To contribute to this repository, please open a PR to propose a new style rule. Every new rule should be done through a PR.
 
 If you have an idea that's not completely fleshed out, please open an issue to discuss.
 
 After a PR is approved and merged please remember to send a PSA to ios@airbnb.com with the new merged approved style.
 
-## Structure of a new addition:
+## Structure of a new rule:
 
-A new guideline should contain:
+Every rule should contain:
 
 1. A link to reference easily.
 1. A short description.
