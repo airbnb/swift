@@ -1,9 +1,32 @@
 # Contributing
 
-To contribute to this repository, please open an issue to propose your change first.
-After that has been discussed and approved by the community, open a PR to modify the style guide.
+To contribute to this repository, please open a PR to propose a new style guide. Every new guideline should be done through a PR.
 
-After the PR is merged please remember to send a PSA to ios@airbnb.com with the new merged approved style.
+If you have an idea that's not completely fleshed out, please open an issue to discuss.
+
+After a PR is approved and merged please remember to send a PSA to ios@airbnb.com with the new merged approved style.
+
+## Structure of a new addition:
+
+A new guideline should contain:
+
+1. A link to reference easily.
+1. A short description.
+1. A link to the appropiate SwiftLint rule.
+1. A code example describing the incorrect and correct behaviours.
+
+#### Example:
+
+* <a id='an-id'></a> <a href='#an-id'>(link)</a>
+**This is the description of the rule.** swiftlint: <a href='https://github.com/realm/SwiftLint/blob/master/Rules.md#some-rule'>some-rule</a>
+
+```swift
+// WRONG
+func someIncorrectCode {}
+
+// GOOD
+func someGoodCode {}
+```
 
 ## Things that will not be considered:
 - A change that goes against the [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/).
