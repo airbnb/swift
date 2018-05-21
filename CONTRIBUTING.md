@@ -27,7 +27,3 @@ func someIncorrectCode {}
 // GOOD
 func someGoodCode {}
 ```
-
-## Things that will not be considered:
-- A change that goes against the [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/).
-- A change that goes against Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
