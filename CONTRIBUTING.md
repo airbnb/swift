@@ -8,11 +8,11 @@ After a PR is approved and merged please remember to send a PSA to ios@airbnb.co
 
 ## Structure of a new rule:
 
-Every rule should contain:
+At minimum every rule should contain:
 
-1. A link to reference easily.
+1. A permalink to reference easily.
 1. A short description.
-1. If the rule is lintable, add a link to the appropriate SwiftLint rule.
+1. If the rule is lintable, a link to the appropriate SwiftLint rule.
 1. A code example describing the incorrect and correct behaviours.
 
 #### Example:
