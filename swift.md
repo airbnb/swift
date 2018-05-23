@@ -511,6 +511,27 @@ switch someValue { ... }
 let evens = userCounts.filter { number in number % 2 == 0 } 
 let squares = userCounts.map { $0 * $0 }
 ```
+
+* <a id='unnecessary-enum-arguments'></a>**Omit enum associated values from case statements when all arguments are unlabeled.** (<a href='#unnecessary-enum-arguments'>link</a>)
+
+```
+// WRONG
+if case .done(_) = result { ... }
+
+switch barType {
+case .sheet(_, _, _):
+  ...
+}
+
+// RIGHT
+if case .done = result { ... }
+
+switch barType {
+case .sheet: 
+  ...
+}
+```
+
 * <a id='attributes-on-prev-line'></a>**Place function/type attributes on the line above the declaration**. (<a href='#attributes-on-prev-line'>link</a>)
 
 ```swift
