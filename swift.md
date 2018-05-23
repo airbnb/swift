@@ -514,7 +514,7 @@ let squares = userCounts.map { $0 * $0 }
 
 * <a id='unnecessary-enum-arguments'></a>**Omit enum associated values from case statements when all arguments are unlabeled.** (<a href='#unnecessary-enum-arguments'>link</a>)
 
-```
+```swift
 // WRONG
 if case .done(_) = result { ... }
 
