@@ -512,7 +512,7 @@ let evens = userCounts.filter { number in number % 2 == 0 }
 let squares = userCounts.map { $0 * $0 }
 ```
 
-* <a id='unnecessary-enum-arguments'></a>**Omit enum associated values from case statements when all arguments are unlabeled.** (<a href='#unnecessary-enum-arguments'>link</a>)
+* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** SwiftLint: [`empty_enum_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
 ```swift
 // WRONG
