@@ -292,7 +292,7 @@ class MyClass {
 }
 ```
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. SwiftLint: [`multiline_parameters`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. SwiftLint: [`multiline_parameters`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters), [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
 ```swift
 class Universe {
@@ -371,7 +371,7 @@ let rowContent = [
 ]
 ```
 
-* <a id='long-if-statement'></a>(<a href='#long-if-statement'>link</a>) **When an `if`/`guard` statement becomes [too long](#environment-setup), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions. SwiftLint: [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
+* <a id='long-if-statement'></a>(<a href='#long-if-statement'>link</a>) **When an `if`/`guard` statement becomes [too long](#environment-setup), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions.
 
 ```swift
 if
@@ -496,7 +496,7 @@ func doSomething(completion: () -> Void) {
 }
 ```
 
-* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** SwiftLint: [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure)
+* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** SwiftLint: [`control_statement`](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement), [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure), [`unneeded_parentheses_in_closure_argument`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument), 
 
 ```swift
 // WRONG
@@ -638,7 +638,7 @@ someAsyncThing() { argument, argument2 in
 }
 ```
 
-* <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/fca6fd0bd9744327925acd70eaa9d7115a9b3330/Rules.md#closure-end-indentation)
+* <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
 
 ```swift
 // WRONG
@@ -1295,7 +1295,7 @@ private enum Formation {
 }
 ```
 
-* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** SwiftLint: [`trailing_newline `](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** SwiftLint: [`trailing_newline`](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
 ## Objective-C Interoperability
 
