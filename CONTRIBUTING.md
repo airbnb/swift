@@ -17,8 +17,8 @@ At minimum every rule should contain:
 
 #### Example:
 
-* <a id='an-id'></a> <a href='#an-id'>(link)</a>
-**This is the description of the rule.** SwiftLint: <a href='https://github.com/realm/SwiftLint/blob/master/Rules.md#some-rule'>some-rule</a>
+* <a id='an-id'></a><a href='#an-id'>(link)</a>
+**This is the description of the rule.** SwiftLint: [`some_rule`](https://github.com/realm/SwiftLint/blob/master/Rules.md#some-rule)
 
 ```swift
 // WRONG
