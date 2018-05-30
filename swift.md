@@ -417,7 +417,7 @@ coord.x
 coord.y
 ```
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
+* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
 ```swift
 // WRONG
