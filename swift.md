@@ -48,7 +48,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 ## Naming
 
-* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.**
+* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.** SwiftLint: [`type_name`](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
 ```swift
 protocol SpaceThing {
@@ -334,7 +334,7 @@ class Universe {
 }
 ```
 
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#environment-setup) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments)
+* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#environment-setup) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
 ```swift
 universe.generateStars(
@@ -417,7 +417,7 @@ coord.x
 coord.y
 ```
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of *Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
 ```swift
 // WRONG
@@ -690,7 +690,7 @@ let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
 
 ## Patterns
 
-* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property.
+* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. SwiftLint: [`implicitly_unwrapped_optional`](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
 ```swift
 // WRONG
@@ -986,7 +986,7 @@ func updateDisplayedData() {
 }
 ```
 
-* <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report.
+* <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. SwiftLint: [`fatal_error_message`](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message), [`force_cast`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast), [`force_try`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try), [`force_unwrapping`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
 ```swift
 func didSubmit(text text: String) {
