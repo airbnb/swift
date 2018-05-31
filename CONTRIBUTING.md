@@ -20,14 +20,14 @@ At minimum every rule should contain:
 * <a id='an-id'></a><a href='#an-id'>(link)</a>
 **This is the description of the rule.** SwiftLint: [`some_rule`](https://github.com/realm/SwiftLint/blob/master/Rules.md#some-rule)
 
-<details>
+  <details>
 
-```swift
-// WRONG
-func someIncorrectCode {}
+  ```swift
+  // WRONG
+  func someIncorrectCode {}
 
-// GOOD
-func someGoodCode {}
-```
+  // GOOD
+  func someGoodCode {}
+  ```
 
-</details>
+  </details>
