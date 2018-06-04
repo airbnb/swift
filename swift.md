@@ -49,794 +49,931 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 * <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.** SwiftLint: [`type_name`](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
-```swift
-protocol SpaceThing {
-  // ...
-}
+  <details>
 
-class Spacefleet: SpaceThing {
-
-  enum Formation {
+  ```swift
+  protocol SpaceThing {
     // ...
   }
 
-  class Spaceship {
-    // ...
+  class Spacefleet: SpaceThing {
+
+    enum Formation {
+      // ...
+    }
+
+    class Spaceship {
+      // ...
+    }
+
+    var ships: [Spaceship] = []
+    static let worldName: String = "Earth"
+
+    func add(ship: Spaceship) {
+      // ...
+    }
   }
 
-  var ships: [Spaceship] = []
-  static let worldName: String = "Earth"
+  let myFleet = Spacefleet()
+  ```
 
-  func add(ship: Spaceship) {
-    // ...
-  }
-}
-
-let myFleet = Spacefleet()
-```
+  </details>
 
 * <a id='underscore-backing-properties'></a>(<a href='#underscore-backing-properties'>link</a>) **Underscore-prefix `private` property names only if they are backing an identically named `internal` or `public` property that does not have an underscore prefix.** An example of this in practice would be to mimic the behavior of the `copying` attribute of Objective-C properties (see below). In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods.
 
-```swift
-class Foo {
+  <details>
 
-  // MARK: Lifecycle
+  ```swift
+  class Foo {
 
-  init() {
-    _text = NSMutableString(string: "Hello")
+    // MARK: Lifecycle
+
+    init() {
+      _text = NSMutableString(string: "Hello")
+    }
+
+    // MARK: Internal
+
+    var text: String {
+      return _text as String
+    }
+
+    // MARK: Private
+
+    private var _text: NSMutableString
   }
+  ```
 
-  // MARK: Internal
-
-  var text: String {
-    return _text as String
-  }
-
-  // MARK: Private
-
-  private var _text: NSMutableString
-}
-```
+  </details>
 
 * <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
 * <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
-```swift
-// WRONG
-class UrlValidator {
+  <details>
 
-  // MARK: Internal
+  ```swift
+  // WRONG
+  class UrlValidator {
 
-  func isValidUrl(URL: NSURL) -> Bool {
-    // ...
+    // MARK: Internal
+
+    func isValidUrl(URL: NSURL) -> Bool {
+      // ...
+    }
+
+    func isUrlReachable(URL: NSURL) -> Bool {
+      // ...
+    }
   }
 
-  func isUrlReachable(URL: NSURL) -> Bool {
-    // ...
+  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+
+  // RIGHT
+  class URLValidator {
+
+    // MARK: Internal
+
+    func isValidURL(url: NSURL) -> Bool {
+      // ...
+    }
+
+    func isURLReachable(url: NSURL) -> Bool {
+      // ...
+    }
   }
-}
 
-let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+  let urlValidator = URLValidator().isValidURL(/* some URL */)
+  ```
 
-// RIGHT
-class URLValidator {
-
-  // MARK: Internal
-
-  func isValidURL(url: NSURL) -> Bool {
-    // ...
-  }
-
-  func isURLReachable(url: NSURL) -> Bool {
-    // ...
-  }
-}
-
-let urlValidator = URLValidator().isValidURL(/* some URL */)
-```
+  </details>
 
 * <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
 
-```swift
-// WRONG
-let rightTitleMargin: CGFloat
-let leftTitleMargin: CGFloat
-let bodyRightMargin: CGFloat
-let bodyLeftMargin: CGFloat
+  <details>
 
-// RIGHT
-let titleMarginRight: CGFloat
-let titleMarginLeft: CGFloat
-let bodyMarginRight: CGFloat
-let bodyMarginLeft: CGFloat
-```
+  ```swift
+  // WRONG
+  let rightTitleMargin: CGFloat
+  let leftTitleMargin: CGFloat
+  let bodyRightMargin: CGFloat
+  let bodyLeftMargin: CGFloat
+
+  // RIGHT
+  let titleMarginRight: CGFloat
+  let titleMarginLeft: CGFloat
+  let bodyMarginRight: CGFloat
+  let bodyMarginLeft: CGFloat
+  ```
+
+  </details>
 
 * <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Include a hint about type in a name if it would otherwise be ambiguous.**
 
-```swift
-// WRONG
-let title: String
-let cancel: UIButton
+  <details>
 
-// RIGHT
-let titleText: String
-let cancelButton: UIButton
-```
+  ```swift
+  // WRONG
+  let title: String
+  let cancel: UIButton
+
+  // RIGHT
+  let titleText: String
+  let cancelButton: UIButton
+  ```
+
+  </details>
 
 * <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
 
-```swift
-// WRONG
-class MyClass {
+  <details>
 
-  // MARK: Private
+  ```swift
+  // WRONG
+  class MyClass {
 
-  private func handleFooButtonTap() {
-    // ...
+    // MARK: Private
+
+    private func handleFooButtonTap() {
+      // ...
+    }
+
+    private func modelChanged() {
+      // ...
+    }
   }
 
-  private func modelChanged() {
-    // ...
+  // RIGHT
+  class MyClass {
+
+    // MARK: Private
+
+    private func didTapFooButton() {
+      // ...
+    }
+
+    private func modelDidChange() {
+      // ...
+    }
   }
-}
+  ```
 
-// RIGHT
-class MyClass {
-
-  // MARK: Private
-
-  private func didTapFooButton() {
-    // ...
-  }
-
-  private func modelDidChange() {
-    // ...
-  }
-}
-```
+  </details>
 
 * <a id='avoid-class-prefixes'></a>(<a href='#avoid-class-prefixes'>link</a>) **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
-```swift
-// WRONG
-class AIRAccountManager {
-  // ...
-}
+  <details>
 
-// RIGHT
-class AccountManager {
-  // ...
-}
-```
+  ```swift
+  // WRONG
+  class AIRAccountManager {
+    // ...
+  }
+
+  // RIGHT
+  class AccountManager {
+    // ...
+  }
+  ```
+
+  </details>
 
 * <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
 
-```swift
-// WRONG
-class AccountController {
-  // ...
-}
+  <details>
 
-// RIGHT
-class AccountManager {
-  // ...
-}
-```
+  ```swift
+  // WRONG
+  class AccountController {
+    // ...
+  }
+
+  // RIGHT
+  class AccountManager {
+    // ...
+  }
+  ```
+
+  </details>
 
 ## Style
 
 * <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
 
-```swift
-// WRONG
-let something: MyClass = MyClass()
+  <details>
 
-// RIGHT
-let something = MyClass()
-```
-
-```swift
-// WRONG
-let someMargin = CGFloat(5)
-
-// RIGHT
-let someMargin: CGFloat = 5
-```
-
-```swift
-enum Direction {
-  case left
-  case right
-}
-
-func someDirection() -> Direction {
+  ```swift
   // WRONG
-  return Direction.left
+  let something: MyClass = MyClass()
 
   // RIGHT
-  return .left
-}
-```
+  let something = MyClass()
+  ```
+
+  ```swift
+  // WRONG
+  let someMargin = CGFloat(5)
+
+  // RIGHT
+  let someMargin: CGFloat = 5
+  ```
+
+  ```swift
+  enum Direction {
+    case left
+    case right
+  }
+
+  func someDirection() -> Direction {
+    // WRONG
+    return Direction.left
+
+    // RIGHT
+    return .left
+  }
+  ```
+
+  </details>
 
 * <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.**
 
-```swift
-class MyClass {
+  <details>
 
-  // MARK: Lifecycle
+  ```swift
+  class MyClass {
 
-  init(aProp: Int) {
-	// Okay to use self here
-    self.aProp = aProp
+    // MARK: Lifecycle
+
+    init(aProp: Int) {
+    // Okay to use self here
+      self.aProp = aProp
+    }
+
+    // MARK: Internal
+
+    var aProp: Int
+
+    func doSomething() {
+      // WRONG
+      self.aProp = 4
+
+      // RIGHT
+      aProp = 4
+
+      // WRONG
+      self.otherMethod()
+
+      // RIGHT
+      otherMethod()
+    }
   }
+  ```
 
-  // MARK: Internal
-
-  var aProp: Int
-
-  func doSomething() {
-    // WRONG
-    self.aProp = 4
-
-    // RIGHT
-    aProp = 4
-
-    // WRONG
-    self.otherMethod()
-
-    // RIGHT
-    otherMethod()
-  }
-}
-```
+  </details>
 
 * <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#environment-setup) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. SwiftLint: [`multiline_parameters`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters), [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
-```swift
-class Universe {
+  <details>
 
-  // MARK: Internal
+  ```swift
+  class Universe {
 
-  // WRONG
-  func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
-    // This is too long and will probably auto-wrap in a weird way
+    // MARK: Internal
+
+    // WRONG
+    func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
+      // This is too long and will probably auto-wrap in a weird way
+    }
+
+    // WRONG
+    func generateStars(at location: Point,
+                       count: Int,
+                       color: StarColor,
+                       withAverageDistance averageDistance: Float) -> String
+    {
+      // Xcode indents all the arguments
+    }
+
+    // WRONG
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) -> String {
+      populateUniverse() // this line blends in with the argument list
+    }
+
+    // RIGHT
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) -> String
+    {
+      populateUniverse()
+    }
   }
+  ```
 
-  // WRONG
-  func generateStars(at location: Point,
-                     count: Int,
-                     color: StarColor,
-                     withAverageDistance averageDistance: Float) -> String
-  {
-    // Xcode indents all the arguments
-  }
-
-  // WRONG
-  func generateStars(
-    at location: Point,
-    count: Int,
-    color: StarColor,
-    withAverageDistance averageDistance: Float) -> String {
-    populateUniverse() // this line blends in with the argument list
-  }
-
-  // RIGHT
-  func generateStars(
-    at location: Point,
-    count: Int,
-    color: StarColor,
-    withAverageDistance averageDistance: Float) -> String
-  {
-    populateUniverse()
-  }
-}
-```
+  </details>
 
 * <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#environment-setup) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
-```swift
-universe.generateStars(
-  at: location,
-  count: 5,
-  color: starColor,
-  withAverageDistance: 4)
+  <details>
 
-universe.generate(
-  5,
-  .stars,
-  at: location)
-```
+  ```swift
+  universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+
+  universe.generate(
+    5,
+    .stars,
+    at: location)
+  ```
+
+  </details>
 
 * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
 
-```swift
-// WRONG
-let rowContent = [listingUrgencyDatesRowContent(),
-                  listingUrgencyBookedRowContent(),
-                  listingUrgencyBookedShortRowContent()]
+  <details>
 
-let rowContent = [
-  listingUrgencyDatesRowContent(),
-  listingUrgencyBookedRowContent(),
-  listingUrgencyBookedShortRowContent()
-]
+  ```swift
+  // WRONG
+  let rowContent = [listingUrgencyDatesRowContent(),
+                    listingUrgencyBookedRowContent(),
+                    listingUrgencyBookedShortRowContent()]
 
-// RIGHT
-let rowContent = [
-  listingUrgencyDatesRowContent(),
-  listingUrgencyBookedRowContent(),
-  listingUrgencyBookedShortRowContent(),
-]
-```
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent()
+  ]
+
+  // RIGHT
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent(),
+  ]
+  ```
+
+  </details>
 
 * <a id='long-if-statement'></a>(<a href='#long-if-statement'>link</a>) **When an `if`/`guard` statement becomes [too long](#environment-setup), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions.
 
-```swift
-if
-  let val1 = val1,
-  let val2 = val2,
-  !val2.isEmpty
-{
-  print(val2)
-}
+  <details>
 
-guard
-  let value = some,
-  let value2 = someOther else
-{
-  return
-}
-```
+  ```swift
+  if
+    let val1 = val1,
+    let val2 = val2,
+    !val2.isEmpty
+  {
+    print(val2)
+  }
+
+  guard
+    let value = some,
+    let value2 = someOther else
+  {
+    return
+  }
+  ```
+
+  </details>
 
 * <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
-```swift
-// WRONG
-func whatever() -> (Int, Int) {
-  return (4, 4)
-}
-let thing = whatever()
-print(thing.0)
+  <details>
 
-// RIGHT
-func whatever() -> (x: Int, y: Int) {
-  return (x: 4, y: 4)
-}
+  ```swift
+  // WRONG
+  func whatever() -> (Int, Int) {
+    return (4, 4)
+  }
+  let thing = whatever()
+  print(thing.0)
 
-// THIS IS ALSO OKAY
-func whatever2() -> (x: Int, y: Int) {
-  let x = 4
-  let y = 4
-  return (x, y)
-}
+  // RIGHT
+  func whatever() -> (x: Int, y: Int) {
+    return (x: 4, y: 4)
+  }
 
-let coord = whatever()
-coord.x
-coord.y
-```
+  // THIS IS ALSO OKAY
+  func whatever2() -> (x: Int, y: Int) {
+    let x = 4
+    let y = 4
+    return (x, y)
+  }
+
+  let coord = whatever()
+  coord.x
+  coord.y
+  ```
+
+  </details>
 
 * <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
-```swift
-// WRONG
-let rect = CGRectMake(10, 10, 10, 10)
+  <details>
 
-// RIGHT
-let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
-```
+  ```swift
+  // WRONG
+  let rect = CGRectMake(10, 10, 10, 10)
+
+  // RIGHT
+  let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
+  ```
+
+  </details>
 
 * <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Favor modern Swift extension methods over older Objective-C global methods.**
 
-```swift
-// WRONG
-var rect = CGRectZero
-var width = CGRectGetWidth(rect)
+  <details>
 
-// RIGHT
-var rect = CGRect.zero
-var width = rect.width
-```
+  ```swift
+  // WRONG
+  var rect = CGRectZero
+  var width = CGRectGetWidth(rect)
+
+  // RIGHT
+  var rect = CGRect.zero
+  var width = rect.width
+  ```
+
+  </details>
 
 * <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** SwiftLint: [`colon`](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
-```swift
-// WRONG
-var something : Int = 0
+  <details>
 
-// RIGHT
-var something: Int = 0
-```
+  ```swift
+  // WRONG
+  var something : Int = 0
 
-```swift
-// WRONG
-class MyClass : SuperClass {
-	// ...
-}
+  // RIGHT
+  var something: Int = 0
+  ```
 
-// RIGHT
-class MyClass: SuperClass {
-	// ...
-}
-```
+  ```swift
+  // WRONG
+  class MyClass : SuperClass {
+    // ...
+  }
 
-```swift
-// WRONG
-var dict = [KeyType:ValueType]()
-var dict = [KeyType : ValueType]()
+  // RIGHT
+  class MyClass: SuperClass {
+    // ...
+  }
+  ```
 
-// RIGHT
-var dict = [KeyType: ValueType]()
-```
+  ```swift
+  // WRONG
+  var dict = [KeyType:ValueType]()
+  var dict = [KeyType : ValueType]()
+
+  // RIGHT
+  var dict = [KeyType: ValueType]()
+  ```
+
+  </details>
 
 * <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Place a space on either side of a return arrow for readability.** SwiftLint: [`return_arrow_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
 
-```swift
-// WRONG
-func doSomething()->String {
-  // ...
-}
+  <details>
 
-// RIGHT
-func doSomething() -> String {
-  // ...
-}
-```
+  ```swift
+  // WRONG
+  func doSomething()->String {
+    // ...
+  }
 
-```swift
-// WRONG
-func doSomething(completion: ()->Void) {
-  // ...
-}
+  // RIGHT
+  func doSomething() -> String {
+    // ...
+  }
+  ```
 
-// RIGHT
-func doSomething(completion: () -> Void) {
-  // ...
-}
-```
+  ```swift
+  // WRONG
+  func doSomething(completion: ()->Void) {
+    // ...
+  }
 
-* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** SwiftLint: [`control_statement`](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement), [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure), [`unneeded_parentheses_in_closure_argument`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument), 
+  // RIGHT
+  func doSomething(completion: () -> Void) {
+    // ...
+  }
+  ```
 
-```swift
-// WRONG
-if (userCount > 0) { ... }
-switch (someValue) { ... }
-let evens = userCounts.filter { (number) in number % 2 == 0 } 
-let squares = userCounts.map() { $0 * $0 }
+  </details>
 
-// RIGHT
-if userCount > 0 { ... }
-switch someValue { ... }
-let evens = userCounts.filter { number in number % 2 == 0 } 
-let squares = userCounts.map { $0 * $0 }
-```
+* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** SwiftLint: [`control_statement`](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement), [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure), [`unneeded_parentheses_in_closure_argument`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument),
+
+  <details>
+
+  ```swift
+  // WRONG
+  if (userCount > 0) { ... }
+  switch (someValue) { ... }
+  let evens = userCounts.filter { (number) in number % 2 == 0 }
+  let squares = userCounts.map() { $0 * $0 }
+
+  // RIGHT
+  if userCount > 0 { ... }
+  switch someValue { ... }
+  let evens = userCounts.filter { number in number % 2 == 0 }
+  let squares = userCounts.map { $0 * $0 }
+  ```
+
+  </details>
 
 * <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** SwiftLint: [`empty_enum_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
-```swift
-// WRONG
-if case .done(_) = result { ... }
+  <details>
 
-switch barType {
-case .sheet(_, _, _):
-  ...
-}
+  ```swift
+  // WRONG
+  if case .done(_) = result { ... }
 
-// RIGHT
-if case .done = result { ... }
+  switch barType {
+  case .sheet(_, _, _):
+    ...
+  }
 
-switch barType {
-case .sheet: 
-  ...
-}
-```
+  // RIGHT
+  if case .done = result { ... }
+
+  switch barType {
+  case .sheet:
+    ...
+  }
+  ```
+
+  </details>
 
 * <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**.
 
-```swift
-// WRONG
-@objc class Spaceship: NSObject {
-  @discardableResult func fly() {
-  }
-}
+  <details>
 
-// RIGHT
-
-@objc
-class Spaceship: NSObject {
-  @discardableResult
-  func fly() {
+  ```swift
+  // WRONG
+  @objc class Spaceship: NSObject {
+    @discardableResult func fly() {
+    }
   }
-}
-```
+
+  // RIGHT
+
+  @objc
+  class Spaceship: NSObject {
+    @discardableResult
+    func fly() {
+    }
+  }
+  ```
+
+  </details>
 
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** SwiftLint: [`redundant_void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
-```swift
-// WRONG
-func doSomething() -> Void {
-  ...
-}
+  <details>
 
-// RIGHT
-func doSomething() {
-  ...
-}
-```
+  ```swift
+  // WRONG
+  func doSomething() -> Void {
+    ...
+  }
+
+  // RIGHT
+  func doSomething() {
+    ...
+  }
+  ```
+
+  </details>
 
 * <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) **Separate [long](#environment-setup) function chains with line breaks before each dot.**
 
-> Why? It's easier to follow control flow through long function chains when each call has the same indentation.
+  <details>
 
-```swift
-/// WRONG
+  #### Why?
+  It's easier to follow control flow through long function chains when each call has the same indentation.
 
-match(pattern: pattern).flatMap { range in
-    return Command(string: contents, range: range)
-  }.flatMap { command in
-    return command.expand()
-}
+  ```swift
+  /// WRONG
 
-/// RIGHT
-
-match(pattern: pattern)
-  .flatMap { range in
-    return Command(string: contents, range: range)
+  match(pattern: pattern).flatMap { range in
+      return Command(string: contents, range: range)
+    }.flatMap { command in
+      return command.expand()
   }
-  .flatMap { command in
-    return command.expand()
-}
 
-// Short function chains can still be on one line:
-let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
-```
+  /// RIGHT
+
+  match(pattern: pattern)
+    .flatMap { range in
+      return Command(string: contents, range: range)
+    }
+    .flatMap { command in
+      return command.expand()
+  }
+
+  // Short function chains can still be on one line:
+  let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
+  ```
+
+  </details>
 
 ### Closures
 
 * <a id='omit-closure-void-return'></a>(<a href='#omit-closure-void-return'>link</a>) **Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.)
 
-```swift
-// WRONG
-someAsyncThing() { argument -> Void in
-  ...
-}
+  <details>
 
-// RIGHT
-someAsyncThing() { argument in
-  ...
-}
-```
+  ```swift
+  // WRONG
+  someAsyncThing() { argument -> Void in
+    ...
+  }
+
+  // RIGHT
+  someAsyncThing() { argument in
+    ...
+  }
+  ```
+
+  </details>
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. SwiftLint: [`void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
-```swift
-// WRONG
-func method(completion: () -> ()) {
-  ...
-}
+  <details>
 
-// RIGHT
-func method(completion: () -> Void) {
-  ...
-}
-```
+  ```swift
+  // WRONG
+  func method(completion: () -> ()) {
+    ...
+  }
+
+  // RIGHT
+  func method(completion: () -> Void) {
+    ...
+  }
+  ```
+
+  </details>
 
 * <a id='omit-closure-parameters-unnecessary-types'></a>(<a href='#omit-closure-parameters-unnecessary-types'>link</a>) **Omit unnecessary type specifiers for closure parameters.**
 
-```swift
-// WRONG
-someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
-  ...
-}
+  <details>
 
-// RIGHT
-someAsyncThing() { argument, argument2 in
-  ...
-}
-```
+  ```swift
+  // WRONG
+  someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
+    ...
+  }
+
+  // RIGHT
+  someAsyncThing() { argument, argument2 in
+    ...
+  }
+  ```
+
+  </details>
 
 * <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
 
-```swift
-// WRONG
+  <details>
 
-match(pattern: pattern).flatMap { range in
-  return Command(string: contents, range: range)
-  }.flatMap { command in
-  return command.expand()
-}
+  ```swift
+  // WRONG
 
-values.forEach { value in
-    print(value)
-  }
-
-// RIGHT
-
-match(pattern: pattern)
-  .flatMap { range in
+  match(pattern: pattern).flatMap { range in
     return Command(string: contents, range: range)
-  }
-  .flatMap { command in
+    }.flatMap { command in
     return command.expand()
   }
 
-values.forEach { value in
-  print(value)
-}
-```
+  values.forEach { value in
+      print(value)
+    }
+
+  // RIGHT
+
+  match(pattern: pattern)
+    .flatMap { range in
+      return Command(string: contents, range: range)
+    }
+    .flatMap { command in
+      return command.expand()
+    }
+
+  values.forEach { value in
+    print(value)
+  }
+  ```
+
+  </details>
 
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `foo?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
-```swift
-// WRONG
-let foo = 1+2
-let baz = bar   ?? 0
-let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
-let bar=foo
-let latitude = region.center.latitude - region.span.latitudeDelta/2.0
+  <details>
 
-// RIGHT
-let foo = 1 + 2
-let baz = bar ?? 0
-let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
-let bar = foo
-let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
-```
+  ```swift
+  // WRONG
+  let foo = 1+2
+  let baz = bar   ?? 0
+  let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
+  let bar=foo
+  let latitude = region.center.latitude - region.span.latitudeDelta/2.0
+
+  // RIGHT
+  let foo = 1 + 2
+  let baz = bar ?? 0
+  let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
+  let bar = foo
+  let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
+  ```
+
+  </details>
 
 ## Patterns
 
 * <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. SwiftLint: [`implicitly_unwrapped_optional`](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
-```swift
-// WRONG
-class MyClass: NSObject {
+  <details>
 
-  // MARK: Lifecycle
+  ```swift
+  // WRONG
+  class MyClass: NSObject {
 
-  init() {
-    super.init()
-    someValue = 5
+    // MARK: Lifecycle
+
+    init() {
+      super.init()
+      someValue = 5
+    }
+
+    // MARK: Internal
+
+    var someValue: Int!
   }
 
-  // MARK: Internal
+  // RIGHT
+  class MyClass: NSObject {
 
-  var someValue: Int!
-}
+    // MARK: Lifecycle
 
-// RIGHT
-class MyClass: NSObject {
+    init() {
+      someValue = 0
+      super.init()
+    }
 
-  // MARK: Lifecycle
+    // MARK: Internal
 
-  init() {
-    someValue = 0
-    super.init()
+    var someValue: Int
   }
+  ```
 
-  // MARK: Internal
-
-  var someValue: Int
-}
-```
+  </details>
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
 * <a id='complex-property-accessor'></a>(<a href='#complex-property-accessor'>link</a>) **Use functions instead of computed properties if they get to be complicated.**
 
-```swift
-class SomeClass {
-  // WRONG
-  // Too complicated, too many side effects
-  var someThing: String {
-    if let someProperty = someProperty {
-      someOtherProperty = doSomething(with: someProperty)
-      doSomethingElse()
-    } else {
-      someOtherProperty = doSomethingDifferent()
+  <details>
+
+  ```swift
+  class SomeClass {
+    // WRONG
+    // Too complicated, too many side effects
+    var someThing: String {
+      if let someProperty = someProperty {
+        someOtherProperty = doSomething(with: someProperty)
+        doSomethingElse()
+      } else {
+        someOtherProperty = doSomethingDifferent()
+      }
+
+      return someOtherProperty
     }
 
-    return someOtherProperty
+    // RIGHT
+    // Simple, no side effects
+    var someThing2: String {
+      return "\(theFirstThing) \(theSecondThing)"
+    }
   }
-
-  // RIGHT
-  // Simple, no side effects
-  var someThing2: String {
-    return "\(theFirstThing) \(theSecondThing)"
-  }
-}
-```
+  ```
+  </details>
 
 * Also avoid didSet and willSet for the same reason.
 
-```swift
-// WRONG
-// Less readable
-class MyClass {
+  <details>
 
-  // MARK: Internal
+  ```swift
+  // WRONG
+  // Less readable
+  class MyClass {
 
-  var someValue: Int {
-    get {
-      // return something computed
+    // MARK: Internal
+
+    var someValue: Int {
+      get {
+        // return something computed
+      }
+      set(newValue) {
+        // set a bunch of other values
+      }
     }
-    set(newValue) {
-      // set a bunch of other values
+  }
+
+  // RIGHT
+  // More readable and clearer that there are side effects or nontrivial computation
+  class MyClass {
+
+    // MARK: Internal
+
+    func someValue() -> Int {
+    }
+
+    func setSomeValue(newValue: Int) {
     }
   }
-}
+  ```
 
-// RIGHT
-// More readable and clearer that there are side effects or nontrivial computation
-class MyClass {
-
-  // MARK: Internal
-
-  func someValue() -> Int {
-  }
-
-  func setSomeValue(newValue: Int) {
-  }
-}
-```
+  </details>
 
 * <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. One caveat is that sometimes you'll need to reference self in a method call, so making use of `guard` clauses helps make everything neat and readable.
 
-```swift
-//WRONG
-class MyClass {
+  <details>
 
-  // MARK: Internal
+  ```swift
+  //WRONG
+  class MyClass {
 
-  func doRequest(completion: () -> Void) {
-    API.request() { [weak self] response in
-      if let sSelf = self {
-        // lots of processing and side effects and whatever
+    // MARK: Internal
+
+    func doRequest(completion: () -> Void) {
+      API.request() { [weak self] response in
+        if let sSelf = self {
+          // lots of processing and side effects and whatever
+        }
+        completion()
       }
-      completion()
+    }
+
+
+    func doRequest(completion: () -> Void) {
+      API.request() { [weak self] response in
+        self?.doSomething(self?.property) //if this parameter isn't optional, we have to unwrap anyways! This code will not compile
+        completion()
+      }
+    }
+
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // do something here
     }
   }
 
+  // RIGHT
+  class MyClass {
 
-  func doRequest(completion: () -> Void) {
-    API.request() { [weak self] response in
-      self?.doSomething(self?.property) //if this parameter isn't optional, we have to unwrap anyways! This code will not compile
-      completion()
+    // MARK: Internal
+
+    func doRequest(completion: () -> Void) {
+      API.request() { [weak self] response in
+        guard let strongSelf = self else { return }
+        strongSelf.doSomething(strongSelf.property)
+        completion()
+      }
+    }
+
+    // MARK: Private
+
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // do something here
     }
   }
+  ```
 
-  func doSomething(nonOptionalParameter: SomeClass) {
-    // do something here
-  }
-}
-
-// RIGHT
-class MyClass {
-
-  // MARK: Internal
-
-  func doRequest(completion: () -> Void) {
-    API.request() { [weak self] response in
-      guard let strongSelf = self else { return }
-      strongSelf.doSomething(strongSelf.property)
-      completion()
-    }
-  }
-
-  // MARK: Private
-
-  func doSomething(nonOptionalParameter: SomeClass) {
-    // do something here
-  }
-}
-```
+  </details>
 
 * <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
 
-> Why? It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
+  <details>
+
+  #### Why?
+  It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
+
+  </details>
 
 * <a id='object-communication'></a>(<a href='#object-communication'>link</a>) **Use the following rules when deciding how to set up communication between objects.**
   * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
@@ -852,320 +989,383 @@ class MyClass {
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
-```swift
-// WRONG
-func jump(person: Person) {
-  // ...
-}
+  <details>
 
-func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
-  // ...
-}
-
-// RIGHT
-class Person {
-
-  // MARK: Internal
-
-  static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
+  ```swift
+  // WRONG
+  func jump(person: Person) {
     // ...
   }
 
-  func jump() {
+  func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
     // ...
   }
-}
-```
+
+  // RIGHT
+  class Person {
+
+    // MARK: Internal
+
+    static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
+      // ...
+    }
+
+    func jump() {
+      // ...
+    }
+  }
+  ```
+
+  </details>
 
 * <a id='private-constants'></a>(<a href='#private-constants'>link</a>) **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
 
-```swift
-private let privateValue = "secret"
+  <details>
 
-public class MyClass {
+  ```swift
+  private let privateValue = "secret"
 
-  // MARK: Public
+  public class MyClass {
 
-  public static let publicValue = "something"
+    // MARK: Public
 
-  // MARK: Internal
+    public static let publicValue = "something"
 
-  func doSomething() {
-    print(privateValue)
-    print(MyClass.publicValue)
+    // MARK: Internal
+
+    func doSomething() {
+      print(privateValue)
+      print(MyClass.publicValue)
+    }
   }
-}
-```
+  ```
+
+  </details>
 
 * <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
 
-> Why caseless `enum`s? They work well as namespaces because they cannot be instantiated, which matches their intent.
+  <details>
 
-```swift
-enum Environment {
+  #### Why?
+  Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
 
-  enum Earth {
-    static let gravity = 9.8
+  ```swift
+  enum Environment {
+
+    enum Earth {
+      static let gravity = 9.8
+    }
+
+    enum Moon {
+      static let gravity = 1.6
+    }
   }
+  ```
 
-  enum Moon {
-    static let gravity = 1.6
-  }
-}
-```
+  </details>
 
 * <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Avoid using optionals unless there’s a good semantic meaning.**
 
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
-```swift
-// WRONG
-func computeResults(input: [String]) -> [SomeType] {
-  var results = [SomeType]()
-  for element in input {
-    let result = transform(element)
-    results.append(result)
-  }
-  return results
-}
+  <details>
 
-// RIGHT
-func computeResults(input: [String]) -> [SomeType] {
-  return input.map(transform)
-}
-
-func computeMoreResults(input: [String]) -> [SomeType] {
-  return input.map { $0.something }
-}
-```
-
-```swift
-// WRONG
-func computeResults(input: [String]) -> [SomeType] {
-  var results = [SomeType]()
-  for element in input {
-    if let result = transformThatReturnsAnOptional(element) {
+  ```swift
+  // WRONG
+  func computeResults(input: [String]) -> [SomeType] {
+    var results = [SomeType]()
+    for element in input {
+      let result = transform(element)
       results.append(result)
     }
-  }
-  return results
-}
-
-// RIGHT
-func computeResults(input: [String]) -> [SomeType] {
-  return input.flatMap(transformThatReturnsAnOptional)
-}
-```
-
-```swift
-// WRONG
-func updateDisplayedData() {
-  var data = dataSource.getData()
-
-  // Apply first transformation to data
-  for key in data.keys {
-    data[key] = massageValue(data[key])
+    return results
   }
 
-  // Apply second transformation to data
-  for key in data.keys {
-    data[key] = manipulateValue(data[key])
+  // RIGHT
+  func computeResults(input: [String]) -> [SomeType] {
+    return input.map(transform)
   }
 
-  // Display transformed data
-  display(someHash)
-}
+  func computeMoreResults(input: [String]) -> [SomeType] {
+    return input.map { $0.something }
+  }
+  ```
 
-// RIGHT
-func updateDisplayedData() {
-  let data = dataSource.getData()
-  let massagedData = massageData(data)
-  let manipulatedData = manipulateData(massagedData)
-  display(manipulatedData)
-}
-```
+  ```swift
+  // WRONG
+  func computeResults(input: [String]) -> [SomeType] {
+    var results = [SomeType]()
+    for element in input {
+      if let result = transformThatReturnsAnOptional(element) {
+        results.append(result)
+      }
+    }
+    return results
+  }
+
+  // RIGHT
+  func computeResults(input: [String]) -> [SomeType] {
+    return input.flatMap(transformThatReturnsAnOptional)
+  }
+  ```
+
+  ```swift
+  // WRONG
+  func updateDisplayedData() {
+    var data = dataSource.getData()
+
+    // Apply first transformation to data
+    for key in data.keys {
+      data[key] = massageValue(data[key])
+    }
+
+    // Apply second transformation to data
+    for key in data.keys {
+      data[key] = manipulateValue(data[key])
+    }
+
+    // Display transformed data
+    display(someHash)
+  }
+
+  // RIGHT
+  func updateDisplayedData() {
+    let data = dataSource.getData()
+    let massagedData = massageData(data)
+    let manipulatedData = manipulateData(massagedData)
+    display(manipulatedData)
+  }
+  ```
+
+  </details>
 
 * <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. SwiftLint: [`fatal_error_message`](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message), [`force_cast`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast), [`force_try`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try), [`force_unwrapping`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
-```swift
-func didSubmit(text text: String) {
-  // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
-  // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
-  guard text.characters.count > 0 else {
-    let message = "Unexpected empty string"
-    log(message)
-    assertionFailure(message)
-    return
-  }
-  // ...
-}
+  <details>
 
-func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
-  precondition(index >= 0 && index < array.count)
-  // It's impossible to continue executing if the precondition has failed.
-  // ...
-}
-
-func makeImage(name: String) -> UIImage {
-  guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
-    fatalError("Image named \(name) couldn't be loaded.")
-    // We want the error message so we know the name of the missing image.
+  ```swift
+  func didSubmit(text text: String) {
+    // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
+    // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
+    guard text.characters.count > 0 else {
+      let message = "Unexpected empty string"
+      log(message)
+      assertionFailure(message)
+      return
+    }
+    // ...
   }
-  return image
-}
-```
+
+  func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
+    precondition(index >= 0 && index < array.count)
+    // It's impossible to continue executing if the precondition has failed.
+    // ...
+  }
+
+  func makeImage(name: String) -> UIImage {
+    guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
+      fatalError("Image named \(name) couldn't be loaded.")
+      // We want the error message so we know the name of the missing image.
+    }
+    return image
+  }
+  ```
+
+  </details>
 
 * <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **Default type methods to `static`.**
 
-> Why? If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
+  <details>
 
-```swift
-// WRONG
-class Fruit {
-  class func eatFruits(fruits: [Fruit]) { ... }
-}
+  #### Why?
+  If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
 
-// RIGHT
-class Fruit {
-  static func eatFruits(fruits: [Fruit]) { ... }
-}
-```
+  ```swift
+  // WRONG
+  class Fruit {
+    class func eatFruits(fruits: [Fruit]) { ... }
+  }
+
+  // RIGHT
+  class Fruit {
+    static func eatFruits(fruits: [Fruit]) { ... }
+  }
+  ```
+
+  </details>
 
 * <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
 
-> Why? If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
+  <details>
 
-```swift
-// WRONG
-class SettingsDataManager {
-  // ...
-}
+  #### Why?
+  If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
 
-// RIGHT
-final class SettingsDataManager {
-  // ...
-}
-```
+  ```swift
+  // WRONG
+  class SettingsDataManager {
+    // ...
+  }
+
+  // RIGHT
+  final class SettingsDataManager {
+    // ...
+  }
+  ```
+
+  </details>
 
 * <a id='switch-with-where'></a>(<a href='#switch-with-where'>link</a>) **Be careful when using `where` clauses when handling multiple cases in a `switch`.**
-> Why? The where clause only applies to the last case in line
 
-```swift
-// WRONG
-func doThing() {
-  switch anEnum {
-  //where x == y will only be evaluated if anEnum is .B
-  case .a, .b where x == y:
-    doDifferentThing()
-  }
-}
+  <details>
 
-// RIGHT
-func doThing() {
-  switch anEnum {
-  case .a where x == y,
-       .b where x == y:
-    doDifferentThing()
+  #### Why?
+  The where clause only applies to the last case in line.
+
+  ```swift
+  // WRONG
+  func doThing() {
+    switch anEnum {
+    //where x == y will only be evaluated if anEnum is .B
+    case .a, .b where x == y:
+      doDifferentThing()
+    }
   }
-}
-```
+
+  // RIGHT
+  func doThing() {
+    switch anEnum {
+    case .a where x == y,
+         .b where x == y:
+      doDifferentThing()
+    }
+  }
+  ```
+
+  </details>
 
 * <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
-> Why? Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
 
-```swift
-// WRONG
-switch anEnum {
-case .a:
-  // Do something
-default:
-  // Do something else.
-}
+  <details>
 
-// RIGHT
-switch anEnum {
-case .a:
-  // Do something
-case .b, .c:
-  // Do something else.
-}
-```
+  #### Why?
+  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+
+  ```swift
+  // WRONG
+  switch anEnum {
+  case .a:
+    // Do something
+  default:
+    // Do something else.
+  }
+
+  // RIGHT
+  switch anEnum {
+  case .a:
+    // Do something
+  case .b, .c:
+    // Do something else.
+  }
+  ```
+
+  </details>
 
 * <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Check for nil rather than using optional binding if you don't need to use the value.**
-> Why? Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
 
-```swift
-var thing: Thing?
+  <details>
 
-// WRONG
-if let _ = thing {
-  doThing()
-}
+  #### Why?
+  Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
 
-// RIGHT
-if thing != nil {
-  doThing()
-}
-```
+  ```swift
+  var thing: Thing?
+
+  // WRONG
+  if let _ = thing {
+    doThing()
+  }
+
+  // RIGHT
+  if thing != nil {
+    doThing()
+  }
+  ```
+
+  </details>
 
 ## File Organization
 
 * <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.**
 
-> Why? A standard organization method helps engineers more quickly determine which modules a file depends on.
+  <details>
 
-```swift
-// WRONG
+  #### Why?
+  A standard organization method helps engineers more quickly determine which modules a file depends on.
 
-//  Copyright © 2018 Airbnb. All rights reserved.
-//
-import DLSPrimitives
-import ConstellationInfra
-import AirbnbPhrases
+  ```swift
+  // WRONG
 
-import Foundation
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+  import DLSPrimitives
+  import ConstellationInfra
+  import AirbnbPhrases
 
-//RIGHT
+  import Foundation
 
-//  Copyright © 2018 Airbnb. All rights reserved.
-//
+  //RIGHT
 
-import AirbnbPhrases
-import ConstellationInfra
-import DLSPrimitives
-import Foundation
-```
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+
+  import AirbnbPhrases
+  import ConstellationInfra
+  import DLSPrimitives
+  import Foundation
+  ```
+
+  </details>
 
 _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
-```swift
-// WRONG
+  <details>
 
-//  Copyright © 2018 Airbnb. All rights reserved.
-//
+  ```swift
+  // WRONG
 
-import AirbnbHomes
-@testable import AirbnbPayments
-import Nimble
-import Quick
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
 
-//RIGHT
+  import AirbnbHomes
+  @testable import AirbnbPayments
+  import Nimble
+  import Quick
 
-//  Copyright © 2018 Airbnb. All rights reserved.
-//
+  //RIGHT
 
-import AirbnbHomes
-import Nimble
-import Quick
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
 
-@testable import AirbnbPayments
-```
+  import AirbnbHomes
+  import Nimble
+  import Quick
+
+  @testable import AirbnbPayments
+  ```
+
+  </details>
 
 * <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. SwiftLint: [`vertical_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
 * <a id='marks-for-types'></a>(<a href='#marks-for-types'>link</a>) **Each type in a file should be preceded by `// MARK: - TypeName`.** SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
 
-> Why? The hyphen visually distinguishes types from sections within those types (described below).
+  <details>
+
+  #### Why?
+  The hyphen visually distinguishes types from sections within those types (described below).
+
+  </details>
 
 * <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
@@ -1192,107 +1392,118 @@ import Quick
 
 * <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
 
-```swift
-// WRONG
-static let gravityEarth: CGFloat = 9.8
-static let gravityMoon: CGFloat = 1.6
-var gravity: CGFloat
+  <details>
 
-// RIGHT
-static let gravityEarth: CGFloat = 9.8
-static let gravityMoon: CGFloat = 1.6
+  ```swift
+  // WRONG
+  static let gravityEarth: CGFloat = 9.8
+  static let gravityMoon: CGFloat = 1.6
+  var gravity: CGFloat
 
-var gravity: CGFloat
-```
+  // RIGHT
+  static let gravityEarth: CGFloat = 9.8
+  static let gravityMoon: CGFloat = 1.6
+
+  var gravity: CGFloat
+  ```
+
+  </details>
 
 * <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
 
-```swift
-// WRONG
-var atmosphere: Atmosphere {
-  didSet {
-    print("oh my god, the atmosphere changed")
-  }
-}
-var gravity: CGFloat
+  <details>
 
-// RIGHT
-var gravity: CGFloat
-var atmosphere: Atmosphere {
-  didSet {
-    print("oh my god, the atmosphere changed")
+  ```swift
+  // WRONG
+  var atmosphere: Atmosphere {
+    didSet {
+      print("oh my god, the atmosphere changed")
+    }
   }
-}
-```
+  var gravity: CGFloat
+
+  // RIGHT
+  var gravity: CGFloat
+  var atmosphere: Atmosphere {
+    didSet {
+      print("oh my god, the atmosphere changed")
+    }
+  }
+  ```
+
+  </details>
 
 * <a id='example'></a>(<a href='#example'>link</a>) **Example**
 
-```swift
+  <details>
 
-// MARK: - Spacefleet
+  ```swift
+  // MARK: - Spacefleet
 
-public class Spacefleet {
-  typealias Enemy = Spacefleet
+  public class Spacefleet {
+    typealias Enemy = Spacefleet
 
-  // MARK: Lifecycle
+    // MARK: Lifecycle
 
-  public init(spaceships: [Spaceship], captain: Person) {
-    self.spaceships = spaceships
-    self.captain = captain
-    changeFormation(to: .launch)
+    public init(spaceships: [Spaceship], captain: Person) {
+      self.spaceships = spaceships
+      self.captain = captain
+      changeFormation(to: .launch)
+    }
+
+    // MARK: Public
+
+    public func launch() {
+      // ...
+      changeFormation(to: .patrol)
+    }
+
+    // MARK: Internal
+
+    func attack(enemy: Enemy) {
+      changeFormation(to: .attack)
+      // ...
+    }
+
+    // MARK: Private
+
+    private let spaceships: [Spaceship]
+    private let captain: Person
+
+    private func changeFormation(to formation: Formation) {
+      // ...
+    }
   }
 
-  // MARK: Public
+  // MARK: SpaceshipDelegate
 
-  public func launch() {
-    // ...
-    changeFormation(to: .patrol)
+  extension Spacefleet: SpaceshipDelegate {
+
+    public func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
+      // ...
+    }
+
+    public func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
+      // ...
+    }
   }
 
-  // MARK: Internal
+  // MARK: - Spaceship
 
-  func attack(enemy: Enemy) {
-    changeFormation(to: .attack)
-    // ...
+  public struct Spaceship {
+    public let color: UIColor
   }
 
-  // MARK: Private
+  // MARK: - Formation
 
-  private let spaceships: [Spaceship]
-  private let captain: Person
-
-  private func changeFormation(to formation: Formation) {
-    // ...
+  private enum Formation {
+    case launch
+    case patrol
+    case attack
   }
-}
+  ```
 
-// MARK: SpaceshipDelegate
-
-extension Spacefleet: SpaceshipDelegate {
-
-  public func spaceship(spaceship: Spaceship, shieldLevelDidChange shieldLevel: CGFloat) {
-    // ...
-  }
-
-  public func spaceship(spaceship: Spaceship, fuelLevelDidChange fuelLevel: CGFloat) {
-    // ...
-  }
-}
-
-// MARK: - Spaceship
-
-public struct Spaceship {
-  public let color: UIColor
-}
-
-// MARK: - Formation
-
-private enum Formation {
-  case launch
-  case patrol
-  case attack
-}
-```
+  </details>
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** SwiftLint: [`trailing_newline`](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
@@ -1300,26 +1511,30 @@ private enum Formation {
 
 * <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
 
-```swift
-class MyClass {
+  <details>
 
-  // MARK: Private
+  ```swift
+  class MyClass {
 
-  private let fooButton = UIButton()
+    // MARK: Private
 
-  private func setUpFooButton() {
-    fooButton.addTarget(
-      self,
-      action: #selector(didTapFooButton),
-      forControlEvents: .TouchUpInside)
+    private let fooButton = UIButton()
+
+    private func setUpFooButton() {
+      fooButton.addTarget(
+        self,
+        action: #selector(didTapFooButton),
+        forControlEvents: .TouchUpInside)
+    }
+
+    @objc
+    private func didTapFooButton() {
+      // ...
+    }
   }
+  ```
 
-  @objc
-  private func didTapFooButton() {
-    // ...
-  }
-}
-```
+  </details>
 
 ## Airbnb Internal
 
@@ -1328,10 +1543,14 @@ class MyClass {
   * If you're counting visible characters, use `.characters`, but realize that it's not 100% accurate. We've seen signs of Apple constantly improving this count, and hopefully they continue to do so (e.g. many Emojis are now counted correctly in iOS 11, but Hebrew characters are still not). Also realize that character counts might make sense in English but start to fall apart when we internationalize our product. E.g. in German, words are typically twice as long, and in Chinese they can be half as long.
   * If you need to combine both `NSRange` and character count (e.g. in methods like `shouldReplaceTextRange`), first generate a string with the new text, then take its characters count.
 
-```swift
-// WRONG
-NSRange(location: 0, length: myString.characters.count)
+  <details>
 
-// RIGHT
-myString.nsrange
-```
+  ```swift
+  // WRONG
+  NSRange(location: 0, length: myString.characters.count)
+
+  // RIGHT
+  myString.nsrange
+  ```
+
+  </details>
