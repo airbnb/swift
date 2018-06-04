@@ -13,6 +13,7 @@ At minimum every rule should contain:
 1. A permalink to reference easily.
 1. A short description.
 1. If the rule is lintable, a link to the appropriate SwiftLint rule.
+1. _(optional)_ A "Why?" section describing the reasoning behind the rule.
 1. A code example describing the incorrect and correct behaviours.
 
 #### Example:
@@ -21,6 +22,9 @@ At minimum every rule should contain:
 **This is the description of the rule.** SwiftLint: [`some_rule`](https://github.com/realm/SwiftLint/blob/master/Rules.md#some-rule)
 
   <details>
+
+  #### Why?
+  This is an explanation of why this rule is needed.
 
   ```swift
   // WRONG
