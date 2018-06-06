@@ -746,6 +746,28 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
+* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** SwiftLint: [`unused_closure_parameter`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
+
+    <details>
+
+    #### Why?
+    Naming unused closure parameters as underscores reduces the cognitive overhead required to read
+    closures by making it obvious which parameters are used and which are unused.
+
+    ```swift
+    // WRONG
+    someAsyncThing() { argument1, argument2, argument3 in
+      print(argument3)
+    }
+
+    // RIGHT
+    someAsyncThing() { _, _, argument3 in
+      print(argument3)
+    }
+    ```
+
+    </details>
+
 * <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
 
   <details>
