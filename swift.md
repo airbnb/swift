@@ -746,7 +746,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** SwiftLint: [`unused_closure_parameter`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused_closure_parameter)
+* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** SwiftLint: [`unused_closure_parameter`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
     <details>
 
