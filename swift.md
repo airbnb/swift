@@ -802,6 +802,20 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** SwiftLint: [`closure_spacing`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+
+  // RIGHT
+  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+  ```
+
+  </details>
+
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `foo?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
