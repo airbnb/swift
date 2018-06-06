@@ -802,7 +802,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.**. SwiftLint: [`closure_spacing`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** SwiftLint: [`closure_spacing`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
   <details>
 
