@@ -658,7 +658,7 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) **Separate [long](#environment-setup) function chains with line breaks before each dot.**
+* <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) **Separate [long](#environment-setup) function chains with line breaks before each dot.** SwiftLint: [`multiline_function_chains`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-function-chains)
 
   <details>
 
