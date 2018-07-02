@@ -238,21 +238,11 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
-
+* <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.**
   <details>
 
-  ```swift
-  // WRONG
-  class AccountController {
-    // ...
-  }
-
-  // RIGHT
-  class AccountManager {
-    // ...
-  }
-  ```
+  #### Why?
+  Controller is an overloaded suffix that doesn't provide information about the responsabilities of the class.
 
   </details>
 
