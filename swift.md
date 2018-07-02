@@ -1007,8 +1007,6 @@ Most of the default Xcode settings are okay. The only changes are below.
   * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
   * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
 
-* <a id='single-responsibility-class'></a>(<a href='#single-responsibility-class'>link</a>) **Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
-
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
 * <a id='module-by-default'></a>(<a href='#module-by-default'>link</a>) **If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
