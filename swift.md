@@ -900,7 +900,7 @@ Most of the default Xcode settings are okay. The only changes are below.
   ```
   </details>
 
-* Also avoid didSet and willSet for the same reason.
+* Also avoid `didSet` and `willSet` for the same reason.
 
   <details>
 
