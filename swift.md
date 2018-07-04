@@ -238,21 +238,11 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.** This helps reduce confusion about the purpose of a class. Consider `*Manager` instead.
-
+* <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.**
   <details>
 
-  ```swift
-  // WRONG
-  class AccountController {
-    // ...
-  }
-
-  // RIGHT
-  class AccountManager {
-    // ...
-  }
-  ```
+  #### Why?
+  Controller is an overloaded suffix that doesn't provide information about the responsabilities of the class.
 
   </details>
 
@@ -910,7 +900,7 @@ Most of the default Xcode settings are okay. The only changes are below.
   ```
   </details>
 
-* Also avoid didSet and willSet for the same reason.
+* Also avoid `didSet` and `willSet` for the same reason.
 
   <details>
 
@@ -1016,8 +1006,6 @@ Most of the default Xcode settings are okay. The only changes are below.
   * Use the callback pattern for communicating the status of some requested task (i.e. failure, progress, completion, etc.)
   * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
   * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
-
-* <a id='single-responsibility-class'></a>(<a href='#single-responsibility-class'>link</a>) **Classes should have a single, well-defined responsibility.** Keeping the number of classes down is a non-goal; don't shy away from declaring as many classes as you need.
 
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
