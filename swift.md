@@ -18,7 +18,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 ## Sections
 
-1. [Formatting](#formatting)
+1. [Xcode Formatting](#xcode-formatting)
 1. [Naming](#naming)
 1. [Style](#style)
     1. [Functions](#functions)
@@ -28,9 +28,9 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 1. [File Organization](#file-organization)
 1. [Objective-C Interoperability](#objective-c-interoperability)
 
-## Formatting
+## Xcode Formatting
 
-_All these settings can be automatically set in Xcode by adding [this script](resources/xcode_settings.sh) to a "Run Script" build phase._
+_You can enable the following settings in Xcode by running [this script](resources/xcode_settings.sh), e.g. as part of a "Run Script" build phase._
 
 * <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
 
