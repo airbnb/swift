@@ -79,33 +79,6 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='underscore-backing-properties'></a>(<a href='#underscore-backing-properties'>link</a>) **Underscore-prefix `private` property names only if they are backing an identically named `internal` or `public` property that does not have an underscore prefix.** An example of this in practice would be to mimic the behavior of the `copying` attribute of Objective-C properties (see below). In all other cases we can rely on our file organization and access control designations to differentiate between private and public properties and methods.
-
-  <details>
-
-  ```swift
-  class Foo {
-
-    // MARK: Lifecycle
-
-    init() {
-      _text = NSMutableString(string: "Hello")
-    }
-
-    // MARK: Internal
-
-    var text: String {
-      return _text as String
-    }
-
-    // MARK: Private
-
-    private var _text: NSMutableString
-  }
-  ```
-
-  </details>
-
 * <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
 * <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
