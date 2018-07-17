@@ -974,12 +974,6 @@ Most of the default Xcode settings are okay. The only changes are below.
 
   </details>
 
-* <a id='object-communication'></a>(<a href='#object-communication'>link</a>) **Use the following rules when deciding how to set up communication between objects.**
-  * Use the delegate pattern for announcing events about an object that originate at that object (e.g. a user gesture on a view, or a timer-based event.)
-  * Use the callback pattern for communicating the status of some requested task (i.e. failure, progress, completion, etc.)
-  * Use a multicast delegate pattern when you would use the delegate pattern but need to handle multiple listeners. Though there is no built-in Cocoa Touch mechanism for this, prefer this to KVO whenever feasible. Prefer this to NSNotificationCenter, when the event is about a particular object.
-  * Use NSNotificationCenter for truly global events (note: this should be fairly uncommon.)
-
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
