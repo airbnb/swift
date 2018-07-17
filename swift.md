@@ -1009,8 +1009,6 @@ Most of the default Xcode settings are okay. The only changes are below.
 
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
-* <a id='module-by-default'></a>(<a href='#module-by-default'>link</a>) **If you're undecided about whether to make a set of code into a module, make it into a module.** It's easier to de-modularize code than to go the other way later.
-
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
   <details>
