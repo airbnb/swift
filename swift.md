@@ -4,38 +4,21 @@
 
 Following this style guide should:
 
-* Make it easier to read and begin understanding unfamiliar code
-* Make code easier to maintain
-* Reduce simple programmer errors
-* Reduce cognitive load while coding
+* Make it easier to read and begin understanding unfamiliar code.
+* Make code easier to maintain.
+* Reduce simple programmer errors.
+* Reduce cognitive load while coding.
 
 Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
 
 ## Guiding Tenets
 
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
-* These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior
-
-## Environment Setup
-
-Most of the default Xcode settings are okay. The only changes are below.
-
-##### Preferences > Text Editing > Editing:
-
-<img width="300" src="whitespace.png" />
-
-##### Preferences > Text Editing > Indentation:
-
-<img width="200" src="spaces.png" />
-
-##### Preferences > Text Editing > Editing:
-
-> Due to larger screen sizes, we have opted to choose a page guide greater than 80.
-
-<img width="200" src="page_guide.png" />
+* These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 
 ## Sections
 
+1. [Formatting](#formatting)
 1. [Naming](#naming)
 1. [Style](#style)
     1. [Functions](#functions)
@@ -44,6 +27,23 @@ Most of the default Xcode settings are okay. The only changes are below.
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
 1. [Objective-C Interoperability](#objective-c-interoperability)
+
+## Formatting
+
+_All these settings can be automatically set in Xcode by adding [this script](resources/xcode_settings.sh) to a "Run Script" build phase._
+
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
+
+  <details>
+
+  #### Why?
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80
+
+  </details>
+  
+* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.**
+  
+* <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.**
 
 ## Naming
 
