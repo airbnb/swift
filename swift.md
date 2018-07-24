@@ -191,12 +191,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  class AIRAccountManager {
+  class AIRAccount {
     // ...
   }
 
   // RIGHT
-  class AccountManager {
+  class Account {
     // ...
   }
   ```
@@ -257,19 +257,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   class MyClass {
 
-    init(aProp: Int) {
+    init(foo: Int) {
     // Okay to use self here
-      self.aProp = aProp
+      self.foo = foo
     }
 
-    var aProp: Int
+    var foo: Int
 
     func doSomething() {
       // WRONG
-      self.aProp = 4
+      self.foo = 4
 
       // RIGHT
-      aProp = 4
+      foo = 4
 
       // WRONG
       self.otherMethod()
@@ -461,10 +461,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  var something : Int = 0
+  var something : Double = 0
 
   // RIGHT
-  var something: Int = 0
+  var something: Double = 0
   ```
 
   ```swift
@@ -548,7 +548,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   if case .done(_) = result { ... }
 
-  switch barType {
+  switch bar {
   case .sheet(_, _, _):
     ...
   }
@@ -556,7 +556,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   if case .done = result { ... }
 
-  switch barType {
+  switch bar {
   case .sheet:
     ...
   }
@@ -631,7 +631,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     .flatMap { command in
       return command.expand()
-  }
+    }
 
   // Short function chains can still be on one line:
   let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
@@ -724,14 +724,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
 
-  match(pattern: pattern).flatMap { range in
-    return Command(string: contents, range: range)
-    }.flatMap { command in
-    return command.expand()
+  match(pattern: pattern)
+    .flatMap { range in
+      return Command(string: contents, range: range)
+  }
+    .flatMap { command in
+      return command.expand()
   }
 
   values.forEach { value in
-      print(value)
+    print(value)
     }
 
   // RIGHT
@@ -895,19 +897,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func doRequest(completion: () -> Void) {
       API.request() { [weak self] response in
         if let sSelf = self {
-          // lots of processing and side effects and whatever
+          // Processing and side effects
         }
         completion()
       }
     }
 
-
-    func doRequest(completion: () -> Void) {
-      API.request() { [weak self] response in
-        self?.doSomething(self?.property) //if this parameter isn't optional, we have to unwrap anyways! This code will not compile
-        completion()
-      }
-    }
 
     func doSomething(nonOptionalParameter: SomeClass) {
       // do something here
@@ -926,7 +921,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
     func doSomething(nonOptionalParameter: SomeClass) {
-      // do something here
+      // Processing and side effects
     }
   }
   ```
@@ -954,18 +949,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // ...
   }
 
-  func personAgeStringFromTimeInterval(timeInterval: NSTimeInterval) {
+  func age(of person: Person, from timeInterval: TimeInterval) -> Int {
     // ...
   }
 
   // RIGHT
   class Person {
 
-    static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
+    func jump() {
       // ...
     }
 
-    func jump() {
+    func age(from timeInterval: TimeInterval) -> Int {
       // ...
     }
   }
@@ -1017,13 +1012,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Avoid using optionals unless there’s a good semantic meaning.**
 
-* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection. Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
+* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
   <details>
+  
+  #### Why?
+  Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
   ```swift
   // WRONG
-  func computeResults(input: [String]) -> [SomeType] {
+  func computeResults(_ input: [String]) -> [SomeType] {
     var results = [SomeType]()
     for element in input {
       let result = transform(element)
@@ -1033,18 +1031,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  func computeResults(input: [String]) -> [SomeType] {
+  func computeResults(_ input: [String]) -> [SomeType] {
     return input.map(transform)
   }
 
-  func computeMoreResults(input: [String]) -> [SomeType] {
+  func computeMoreResults(_ input: [String]) -> [SomeType] {
     return input.map { $0.something }
   }
   ```
 
   ```swift
   // WRONG
-  func computeResults(input: [String]) -> [SomeType] {
+  func computeResults(_ input: [String]) -> [SomeType] {
     var results = [SomeType]()
     for element in input {
       if let result = transformThatReturnsAnOptional(element) {
@@ -1055,36 +1053,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  func computeResults(input: [String]) -> [SomeType] {
+  func computeResults(_ input: [String]) -> [SomeType] {
     return input.flatMap(transformThatReturnsAnOptional)
-  }
-  ```
-
-  ```swift
-  // WRONG
-  func updateDisplayedData() {
-    var data = dataSource.getData()
-
-    // Apply first transformation to data
-    for key in data.keys {
-      data[key] = massageValue(data[key])
-    }
-
-    // Apply second transformation to data
-    for key in data.keys {
-      data[key] = manipulateValue(data[key])
-    }
-
-    // Display transformed data
-    display(someHash)
-  }
-
-  // RIGHT
-  func updateDisplayedData() {
-    let data = dataSource.getData()
-    let massagedData = massageData(data)
-    let manipulatedData = manipulateData(massagedData)
-    display(manipulatedData)
   }
   ```
 
@@ -1134,12 +1104,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class Fruit {
-    class func eatFruits(fruits: [Fruit]) { ... }
+    class func eatFruits(_ fruits: [Fruit]) { ... }
   }
 
   // RIGHT
   class Fruit {
-    static func eatFruits(fruits: [Fruit]) { ... }
+    static func eatFruits(_ fruits: [Fruit]) { ... }
   }
   ```
 
