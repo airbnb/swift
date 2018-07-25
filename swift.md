@@ -940,22 +940,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  func jump(person: Person) {
+  func age(of person, bornAt timeInterval) -> Int {
     // ...
   }
-
-  func age(of person: Person, from timeInterval: TimeInterval) -> Int {
+  
+  func jump(person: Person) {
     // ...
   }
 
   // RIGHT
   class Person {
-
-    func jump() {
+    var bornAt: TimeInterval
+    
+    var age: Int {
       // ...
     }
 
-    func age(from timeInterval: TimeInterval) -> Int {
+    func jump() {
       // ...
     }
   }
