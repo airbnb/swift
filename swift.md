@@ -902,11 +902,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
-
-
-    func doSomething(nonOptionalParameter: SomeClass) {
-      // do something here
-    }
   }
 
   // RIGHT
