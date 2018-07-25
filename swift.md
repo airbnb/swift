@@ -617,19 +617,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   /// WRONG
 
-  match(pattern: pattern).flatMap { range in
+  match(pattern: pattern).compactMap { range in
       return Command(string: contents, range: range)
-    }.flatMap { command in
+    }.compactMap { command in
       return command.expand()
   }
 
   /// RIGHT
 
   match(pattern: pattern)
-    .flatMap { range in
+    .compactMap { range in
       return Command(string: contents, range: range)
     }
-    .flatMap { command in
+    .compactMap { command in
       return command.expand()
     }
 
@@ -725,10 +725,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
 
   match(pattern: pattern)
-    .flatMap { range in
+    .compactMap { range in
       return Command(string: contents, range: range)
   }
-    .flatMap { command in
+    .compactMap { command in
       return command.expand()
   }
 
@@ -739,10 +739,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
 
   match(pattern: pattern)
-    .flatMap { range in
+    .compactMap { range in
       return Command(string: contents, range: range)
     }
-    .flatMap { command in
+    .compactMap { command in
       return command.expand()
     }
 
@@ -1012,7 +1012,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Avoid using optionals unless there’s a good semantic meaning.**
 
-* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `flatMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
+* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
   <details>
   
@@ -1054,7 +1054,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   func computeResults(_ input: [String]) -> [SomeType] {
-    return input.flatMap(transformThatReturnsAnOptional)
+    return input.compactMap(transformThatReturnsAnOptional)
   }
   ```
 
