@@ -631,7 +631,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     .compactMap { command in
       return command.expand()
-    }
+  }
 
   // Short function chains can still be on one line:
   let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
