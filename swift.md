@@ -548,16 +548,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   if case .done(_) = result { ... }
 
-  switch bar {
-  case .sheet(_, _, _):
+  switch animal {
+  case .dog(_, _, _):
     ...
   }
 
   // RIGHT
   if case .done = result { ... }
 
-  switch bar {
-  case .sheet:
+  switch animal {
+  case .dog:
     ...
   }
   ```
