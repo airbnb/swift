@@ -89,8 +89,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   class UrlValidator {
 
-    // MARK: Internal
-
     func isValidUrl(URL: NSURL) -> Bool {
       // ...
     }
@@ -104,8 +102,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   class URLValidator {
-
-    // MARK: Internal
 
     func isValidURL(url: NSURL) -> Bool {
       // ...
@@ -165,8 +161,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   class MyClass {
 
-    // MARK: Private
-
     private func handleFooButtonTap() {
       // ...
     }
@@ -178,8 +172,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   class MyClass {
-
-    // MARK: Private
 
     private func didTapFooButton() {
       // ...
@@ -265,14 +257,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   class MyClass {
 
-    // MARK: Lifecycle
-
     init(aProp: Int) {
     // Okay to use self here
       self.aProp = aProp
     }
-
-    // MARK: Internal
 
     var aProp: Int
 
@@ -300,8 +288,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   class Universe {
-
-    // MARK: Internal
 
     // WRONG
     func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
@@ -813,14 +799,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   class MyClass: NSObject {
 
-    // MARK: Lifecycle
-
     init() {
       super.init()
       someValue = 5
     }
-
-    // MARK: Internal
 
     var someValue: Int!
   }
@@ -828,14 +810,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class MyClass: NSObject {
 
-    // MARK: Lifecycle
-
     init() {
       someValue = 0
       super.init()
     }
-
-    // MARK: Internal
 
     var someValue: Int
   }
@@ -882,8 +860,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // Less readable
   class MyClass {
 
-    // MARK: Internal
-
     var someValue: Int {
       get {
         // return something computed
@@ -897,8 +873,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   // More readable and clearer that there are side effects or nontrivial computation
   class MyClass {
-
-    // MARK: Internal
 
     func someValue() -> Int {
     }
@@ -917,8 +891,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   //WRONG
   class MyClass {
-
-    // MARK: Internal
 
     func doRequest(completion: () -> Void) {
       API.request() { [weak self] response in
@@ -945,8 +917,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class MyClass {
 
-    // MARK: Internal
-
     func doRequest(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
@@ -954,8 +924,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
-
-    // MARK: Private
 
     func doSomething(nonOptionalParameter: SomeClass) {
       // do something here
@@ -993,8 +961,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class Person {
 
-    // MARK: Internal
-
     static func ageStringFromTimeInterval(timeInterval: NSTimeInterval) {
       // ...
     }
@@ -1016,11 +982,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   public class MyClass {
 
-    // MARK: Public
-
     public static let publicValue = "something"
-
-    // MARK: Internal
 
     func doSomething() {
       print(privateValue)
@@ -1432,8 +1394,6 @@ _Exception: `@testable import` should be grouped after the regular import and se
 
   ```swift
   class MyClass {
-
-    // MARK: Private
 
     private let fooButton = UIButton()
 
