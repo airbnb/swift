@@ -159,9 +159,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  class MyClass {
+  class ExperiencesViewController {
 
-    private func handleFooButtonTap() {
+    private func handleBookButtonTap() {
       // ...
     }
 
@@ -171,9 +171,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  class MyClass {
+  class ExperiencesViewController {
 
-    private func didTapFooButton() {
+    private func didTapBookButton() {
       // ...
     }
 
@@ -255,27 +255,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  class MyClass {
+  class Listing {
 
-    init(foo: Int) {
-    // Okay to use self here
-      self.foo = foo
+    init(capacity: Int) {
+      // Okay to use self here
+      self.capacity = capacity
     }
 
-    var foo: Int
+    private var capacity: Int
 
-    func doSomething() {
+    func increaseCapacity(by amount: Int) {
       // WRONG
-      self.foo = 4
+      self.capacity += amount
 
       // RIGHT
-      foo = 4
+      capacity += amount
 
       // WRONG
-      self.otherMethod()
+      self.save()
 
       // RIGHT
-      otherMethod()
+      save()
     }
   }
   ```
@@ -769,23 +769,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Operators
 
-* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `foo?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
+* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
   <details>
 
   ```swift
   // WRONG
-  let foo = 1+2
-  let baz = bar   ?? 0
+  let capacity = 1+2
+  let capacity = currentCapacity   ?? 0
   let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
-  let bar=foo
+  let capacity=newCapacity
   let latitude = region.center.latitude - region.span.latitudeDelta/2.0
 
   // RIGHT
-  let foo = 1 + 2
-  let baz = bar ?? 0
+  let capacity = 1 + 2
+  let capacity = currentCapacity ?? 0
   let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
-  let bar = foo
+  let capacity = newCapacity
   let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
   ```
 
@@ -1301,7 +1301,7 @@ _Exception: `@testable import` should be grouped after the regular import and se
 
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let gravity: CGFloat = 9.8`)
-  * Static properties (e.g. `static let sharedInstance = Foo()`)
+  * Static properties (e.g. `static let sharedInstance = Account()`)
   * Instance properties
   * Static methods
   * Class methods
@@ -1359,19 +1359,19 @@ _Exception: `@testable import` should be grouped after the regular import and se
   <details>
 
   ```swift
-  class MyClass {
+  class PriceBreakdownViewController {
 
-    private let fooButton = UIButton()
+    private let acceptButton = UIButton()
 
-    private func setUpFooButton() {
-      fooButton.addTarget(
+    private func setUpAcceptButton() {
+      acceptButton.addTarget(
         self,
-        action: #selector(didTapFooButton),
+        action: #selector(didTapAcceptButton),
         forControlEvents: .TouchUpInside)
     }
 
     @objc
-    private func didTapFooButton() {
+    private func didTapAcceptButton() {
       // ...
     }
   }
