@@ -69,7 +69,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var ships: [Spaceship] = []
     static let worldName: String = "Earth"
 
-    func add(ship: Spaceship) {
+    func addShip(_ ship: Spaceship) {
       // ...
     }
   }
@@ -89,11 +89,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   class UrlValidator {
 
-    func isValidUrl(URL: NSURL) -> Bool {
+    func isValidUrl(_ URL: URL) -> Bool {
       // ...
     }
 
-    func isUrlReachable(URL: NSURL) -> Bool {
+    func isUrlReachable(_ URL: URL) -> Bool {
       // ...
     }
   }
@@ -103,11 +103,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class URLValidator {
 
-    func isValidURL(url: NSURL) -> Bool {
+    func isValidURL(_ url: URL) -> Bool {
       // ...
     }
 
-    func isURLReachable(url: NSURL) -> Bool {
+    func isURLReachable(_ url: URL) -> Bool {
       // ...
     }
   }
@@ -1017,41 +1017,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  func computeResults(_ input: [String]) -> [SomeType] {
-    var results = [SomeType]()
-    for element in input {
-      let result = transform(element)
-      results.append(result)
-    }
-    return results
+  var results = [SomeType]()
+  for element in input {
+    let result = transform(element)
+    results.append(result)
   }
 
   // RIGHT
-  func computeResults(_ input: [String]) -> [SomeType] {
-    return input.map(transform)
-  }
-
-  func computeMoreResults(_ input: [String]) -> [SomeType] {
-    return input.map { $0.something }
-  }
+  let results = input.map { transform($0) }
   ```
 
   ```swift
   // WRONG
-  func computeResults(_ input: [String]) -> [SomeType] {
-    var results = [SomeType]()
-    for element in input {
-      if let result = transformThatReturnsAnOptional(element) {
-        results.append(result)
-      }
+  var results = [SomeType]()
+  for element in input {
+    if let result = transformThatReturnsAnOptional(element) {
+      results.append(result)
     }
-    return results
   }
 
   // RIGHT
-  func computeResults(_ input: [String]) -> [SomeType] {
-    return input.compactMap(transformThatReturnsAnOptional)
-  }
+  let results = input.compactMap { transformThatReturnsAnOptional($0) }
   ```
 
   </details>
@@ -1061,13 +1047,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  func didSubmit(text text: String) {
+  func didSubmitText(_ text: String) {
     // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
     // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
-    guard text.characters.count > 0 else {
-      let message = "Unexpected empty string"
-      log(message)
-      assertionFailure(message)
+    guard text.isEmpty else {
+      assertionFailure("Unexpected empty string")
       return
     }
     // ...
@@ -1120,12 +1104,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  class SettingsDataManager {
+  class SettingsRepository {
     // ...
   }
 
   // RIGHT
-  final class SettingsDataManager {
+  final class SettingsRepository {
     // ...
   }
   ```
@@ -1226,8 +1210,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
   import DLSPrimitives
-  import ConstellationInfra
-  import AirbnbPhrases
+  import Constellation
+  import Epoxy
 
   import Foundation
 
@@ -1236,15 +1220,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
 
-  import AirbnbPhrases
-  import ConstellationInfra
+  import Constellation
   import DLSPrimitives
+  import Epoxy
   import Foundation
   ```
 
   </details>
 
-_Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
+  _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
   <details>
 
@@ -1254,8 +1238,9 @@ _Exception: `@testable import` should be grouped after the regular import and se
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
 
-  import AirbnbHomes
-  @testable import AirbnbPayments
+  import DLSPrimitives
+  @testable import Epoxy
+  import Foundation
   import Nimble
   import Quick
 
@@ -1264,11 +1249,12 @@ _Exception: `@testable import` should be grouped after the regular import and se
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
 
-  import AirbnbHomes
+  import DLSPrimitives
+  import Foundation
   import Nimble
   import Quick
 
-  @testable import AirbnbPayments
+  @testable import Epoxy
   ```
 
   </details>
