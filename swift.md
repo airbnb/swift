@@ -213,24 +213,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Style
 
-* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.** One exception is for `CGFloat`s because they don't auto-bridge with `Double` or `Int`.
+* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.**
 
   <details>
 
   ```swift
   // WRONG
-  let something: MyClass = MyClass()
+  let host: Host = Host()
 
   // RIGHT
-  let something = MyClass()
-  ```
-
-  ```swift
-  // WRONG
-  let someMargin = CGFloat(5)
-
-  // RIGHT
-  let someMargin: CGFloat = 5
+  let host = Host()
   ```
 
   ```swift
@@ -1057,8 +1049,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // ...
   }
 
-  func transformItem(atIndex index: Int, ofArray array: [Item]) -> Item {
-    precondition(index >= 0 && index < array.count)
+  func transformItem(atIndex index: Int, from items: [Item]) -> Item {
+    precondition(index >= 0 && index < items.count)
     // It's impossible to continue executing if the precondition has failed.
     // ...
   }
