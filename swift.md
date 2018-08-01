@@ -1049,7 +1049,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // ...
   }
 
-  func transformItem(atIndex index: Int, from items: [Item]) -> Item {
+  func transformedItem(atIndex index: Int, from items: [Item]) -> Item {
     precondition(index >= 0 && index < items.count)
     // It's impossible to continue executing if the precondition has failed.
     // ...
