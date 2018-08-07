@@ -888,7 +888,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func doRequest(completion: () -> Void) {
       API.request() { [weak self] response in
-        if let sSelf = self {
+        if let strongSelf = self {
           // Processing and side effects
         }
         completion()
