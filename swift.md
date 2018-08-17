@@ -78,6 +78,54 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+  _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
+    
+  <details>
+  
+  #### Why?
+  There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
+
+  - Type erasure
+  
+  ```swift
+  public final class AnyRequester<ModelType>: Requester {
+  
+    public init<T: Requester>(_ requester: T) where T.ModelType == ModelType {
+      _executeRequest = requester.executeRequest
+    }
+
+    @discardableResult 
+    public func executeRequest(
+      _ request: URLRequest,
+      onSuccess: @escaping (ModelType, Bool) -> Void,
+      onFailure: @escaping (Error) -> Void) -> URLSessionCancellable
+    {
+      return _executeRequest(request, session, parser, onSuccess, onFailure)
+    }
+
+    private let _executeRequest: (
+      URLRequest,
+      @escaping (ModelType, Bool) -> Void,
+      @escaping (NSError) -> Void) -> URLSessionCancellable
+  
+  }
+  ```
+  
+  - Backing a less specific type with a more specific type
+  
+  ```swift
+  final class ExperiencesViewController: UIViewController {
+    // We can't name this view since UIViewController has a view: UIView property.
+    private lazy var _view = CustomView()
+  
+    loadView() {
+      self.view = _view
+    }
+  }
+  ```
+
+  </details>
 
 * <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
