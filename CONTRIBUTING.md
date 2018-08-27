@@ -4,8 +4,6 @@ To contribute to this repository, please open a PR to propose a new style rule. 
 
 If you have an idea that's not completely fleshed out, please open an issue to discuss.
 
-After a PR is approved and merged please remember to send a PSA to ios@airbnb.com with the new merged approved style.
-
 ## Structure of a new rule:
 
 At minimum every rule should contain:
