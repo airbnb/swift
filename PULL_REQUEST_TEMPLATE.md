@@ -7,4 +7,4 @@
 <!--- required --->
 
 #### Reviewers
-cc @airbnb/style-ios
+cc @airbnb/swift-styleguide-maintainers
