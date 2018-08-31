@@ -34,7 +34,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
+* <a id='column-width'></a><a href='#column-width'>1.1</a> **Each line should have a maximum column width of 100 characters.**
 
   <details>
 
@@ -43,15 +43,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
   
-* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.**
+* <a id='spaces-over-tabs'></a><a href='#spaces-over-tabs'>1.2</a> **Use 2 spaces to indent lines.**
   
-* <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.**
+* <a id='trailing-whitespace'></a><a href='#trailing-whitespace'>1.3</a> **Trim trailing whitespace in all lines.**
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Naming
 
-* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.** SwiftLint: [`type_name`](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
+* <a id='use-camel-case'></a><a href='#use-camel-case'>2.1</a> **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.** SwiftLint: [`type_name`](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
   <details>
 
@@ -131,9 +131,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
+* <a id='bool-names'></a><a href='#bool-names'>2.2</a> **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
-* <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
+* <a id='capitalize-acronyms'></a><a href='#capitalize-acronyms'>2.3</a> **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
   <details>
 
@@ -169,7 +169,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
+* <a id='general-part-first'></a><a href='#general-part-first'>2.4</a> **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
 
   <details>
 
@@ -189,7 +189,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Include a hint about type in a name if it would otherwise be ambiguous.**
+* <a id='hint-at-types'></a><a href='#hint-at-types'>2.5</a> **Include a hint about type in a name if it would otherwise be ambiguous.**
 
   <details>
 
@@ -205,7 +205,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
+* <a id='past-tense-events'></a><a href='#past-tense-events'>2.6</a> **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
 
   <details>
 
@@ -237,7 +237,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='avoid-class-prefixes'></a>(<a href='#avoid-class-prefixes'>link</a>) **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+* <a id='avoid-class-prefixes'></a><a href='#avoid-class-prefixes'>2.7</a> **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
   <details>
 
@@ -255,7 +255,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.**
+* <a id='avoid-controller-suffix'></a><a href='#avoid-controller-suffix'>2.8</a> **Avoid `*Controller` in names of classes that aren't view controllers.**
   <details>
 
   #### Why?
@@ -267,7 +267,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Style
 
-* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.**
+* <a id='use-implicit-types'></a><a href='#use-implicit-types'>3.1</a> **Don't include types where they can be easily inferred.**
 
   <details>
 
@@ -296,7 +296,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.**
+* <a id='omit-self'></a><a href='#omit-self'>3.2</a> **Don't use `self` unless it's necessary for disambiguation or required by the language.**
 
   <details>
 
@@ -328,7 +328,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#column-width) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. SwiftLint: [`multiline_parameters`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters), [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
+* <a id='long-function-declaration'></a><a href='#long-function-declaration'>3.3</a> **Separate [long](#column-width) function declarations with line breaks before each argument label.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. SwiftLint: [`multiline_parameters`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters), [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
   <details>
 
@@ -372,7 +372,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
+* <a id='long-function-invocation'></a><a href='#long-function-invocation'>3.4</a> **[Long](#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
   <details>
 
@@ -391,7 +391,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
+* <a id='multi-line-array'></a><a href='#multi-line-array'>3.5</a> **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
 
   <details>
 
@@ -417,7 +417,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-if-statement'></a>(<a href='#long-if-statement'>link</a>) **When an `if`/`guard` statement becomes [too long](#column-width), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions.
+* <a id='long-if-statement'></a><a href='#long-if-statement'>3.6</a> **When an `if`/`guard` statement becomes [too long](#column-width), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions.
 
   <details>
 
@@ -440,7 +440,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
+* <a id='name-tuple-elements'></a><a href='#name-tuple-elements'>3.7</a> **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
   <details>
 
@@ -471,7 +471,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+* <a id='favor-constructors'></a><a href='#favor-constructors'>3.8</a> **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** SwiftLint: [`legacy_constructor`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
   <details>
 
@@ -485,7 +485,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Favor modern Swift extension methods over older Objective-C global methods.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
+* <a id='use-modern-swift-extensions'></a><a href='#use-modern-swift-extensions'>3.9</a> **Favor modern Swift extension methods over older Objective-C global methods.** SwiftLint: [`legacy_cggeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions), [`legacy_constant`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant), [`legacy_nsgeometry_functions`](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
   <details>
 
@@ -501,7 +501,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** SwiftLint: [`colon`](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
+* <a id='colon-spacing'></a><a href='#colon-spacing'>3.10</a> **Place the colon immediately after an identifier, followed by a space.** SwiftLint: [`colon`](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
   <details>
 
@@ -536,7 +536,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Place a space on either side of a return arrow for readability.** SwiftLint: [`return_arrow_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
+* <a id='return-arrow-spacing'></a><a href='#return-arrow-spacing'>3.11</a> **Place a space on either side of a return arrow for readability.** SwiftLint: [`return_arrow_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
 
   <details>
 
@@ -566,7 +566,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** SwiftLint: [`control_statement`](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement), [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure), [`unneeded_parentheses_in_closure_argument`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument),
+* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>3.12</a> **Omit unnecessary parentheses.** SwiftLint: [`control_statement`](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement), [`empty_parentheses_with_trailing_closure`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure), [`unneeded_parentheses_in_closure_argument`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument),
 
   <details>
 
@@ -586,7 +586,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** SwiftLint: [`empty_enum_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
+* <a id='unnecessary-enum-arguments'></a> <a href='#unnecessary-enum-arguments'>3.13</a> **Omit enum associated values from case statements when all arguments are unlabeled.** SwiftLint: [`empty_enum_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
   <details>
 
@@ -610,7 +610,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**.
+* <a id='attributes-on-prev-line'></a><a href='#attributes-on-prev-line'>3.14</a> **Place function/type attributes on the line above the declaration**.
 
   <details>
 
@@ -635,7 +635,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Functions
 
-* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** SwiftLint: [`redundant_void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+* <a id='omit-function-void-return'></a><a href='#omit-function-void-return'>3.i.1</a> **Omit `Void` return types from function definitions.** SwiftLint: [`redundant_void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
   <details>
 
@@ -653,7 +653,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) **Separate [long](#column-width) function chains with line breaks before each dot.** SwiftLint: [`multiline_function_chains`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-function-chains)
+* <a id='long-function-chains'></a><a href='#long-function-chains'>3.i.2</a> **Separate [long](#column-width) function chains with line breaks before each dot.** SwiftLint: [`multiline_function_chains`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-function-chains)
 
   <details>
 
@@ -687,7 +687,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Closures
 
-* <a id='omit-closure-void-return'></a>(<a href='#omit-closure-void-return'>link</a>) **Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.)
+* <a id='omit-closure-void-return'></a><a href='#omit-closure-void-return'>3.ii.1</a> **Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.)
 
   <details>
 
@@ -705,7 +705,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. SwiftLint: [`void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
+* <a id='favor-void-closure-return'></a><a href='#favor-void-closure-return'>3.ii.2</a> **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. SwiftLint: [`void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
   <details>
 
@@ -723,7 +723,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-closure-parameters-unnecessary-types'></a>(<a href='#omit-closure-parameters-unnecessary-types'>link</a>) **Omit unnecessary type specifiers for closure parameters.**
+* <a id='omit-closure-parameters-unnecessary-types'></a><a href='#omit-closure-parameters-unnecessary-types'>3.ii.3</a> **Omit unnecessary type specifiers for closure parameters.**
 
   <details>
 
@@ -741,7 +741,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** SwiftLint: [`unused_closure_parameter`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
+* <a id='unused-closure-parameter-naming'></a><a href='#unused-closure-parameter-naming'>3.ii.4</a> **Name unused closure parameters as underscores (`_`).** SwiftLint: [`unused_closure_parameter`](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
     <details>
 
@@ -763,7 +763,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
+* <a id='closure-end-brace-indentation'></a><a href='#closure-end-brace-indentation'>3.ii.5</a> **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. SwiftLint: [`closure_end_indentation`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
 
   <details>
 
@@ -799,7 +799,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** SwiftLint: [`closure_spacing`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+* <a id='closure-brace-spacing'></a><a href='#closure-brace-spacing'>3.ii.6</a> **Single-line closures should have a space inside each brace.** SwiftLint: [`closure_spacing`](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
   <details>
 
@@ -815,7 +815,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Operators
 
-* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
+* <a id='infix-operator-spacing'></a><a href='#infix-operator-spacing'>3.iii.1</a> **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). SwiftLint: [`operator_usage_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
   <details>
 
@@ -841,7 +841,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Patterns
 
-* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. SwiftLint: [`implicitly_unwrapped_optional`](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
+* <a id='implicitly-unwrapped-optionals'></a><a href='#implicitly-unwrapped-optionals'>4.1</a> **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. SwiftLint: [`implicitly_unwrapped_optional`](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
   <details>
 
@@ -871,7 +871,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+* <a id='time-intensive-init'></a><a href='#time-intensive-init'>4.2</a> **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
 * <a id='complex-property-accessor'></a>(<a href='#complex-property-accessor'>link</a>) **Use functions instead of computed properties if they get to be complicated.**
 
@@ -934,7 +934,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. One caveat is that sometimes you'll need to reference self in a method call, so making use of `guard` clauses helps make everything neat and readable.
+* <a id='complex-callback-block'></a><a href='#complex-callback-block'>4.3</a> **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. One caveat is that sometimes you'll need to reference self in a method call, so making use of `guard` clauses helps make everything neat and readable.
 
   <details>
 
@@ -971,7 +971,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
+* <a id='guards-at-top'></a><a href='#guards-at-top'>4.4</a> **Prefer using `guard` at the beginning of a scope.**
 
   <details>
 
@@ -980,9 +980,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+* <a id='limit-access-control'></a><a href='#limit-access-control'>4.5</a> **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
-* <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
+* <a id='avoid-global-functions'></a><a href='#avoid-global-functions'>4.6</a> **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
   <details>
 
@@ -1012,7 +1012,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='private-constants'></a>(<a href='#private-constants'>link</a>) **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
+* <a id='private-constants'></a><a href='#private-constants'>4.7</a> **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
 
   <details>
 
@@ -1032,7 +1032,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
+* <a id='namespace-using-enums'></a><a href='#namespace-using-enums'>4.8</a> **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
 
   <details>
 
@@ -1054,7 +1054,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Avoid using optionals unless there’s a good semantic meaning.**
+* <a id='semantic-optionals'></a><a href='#semantic-optionals'>4.9</a> **Avoid using optionals unless there’s a good semantic meaning.**
 
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
@@ -1090,7 +1090,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. SwiftLint: [`fatal_error_message`](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message), [`force_cast`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast), [`force_try`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try), [`force_unwrapping`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
+* <a id='preconditions-and-asserts'></a><a href='#preconditions-and-asserts'>4.10</a> **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. SwiftLint: [`fatal_error_message`](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message), [`force_cast`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast), [`force_try`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try), [`force_unwrapping`](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
   <details>
 
@@ -1122,7 +1122,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **Default type methods to `static`.**
+* <a id='static-type-methods-by-default'></a><a href='#static-type-methods-by-default'>4.11</a> **Default type methods to `static`.**
 
   <details>
 
@@ -1143,7 +1143,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
+* <a id='final-classes-by-default'></a><a href='#final-classes-by-default'>4.12</a> **Default classes to `final`.**
 
   <details>
 
@@ -1164,7 +1164,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-with-where'></a>(<a href='#switch-with-where'>link</a>) **Be careful when using `where` clauses when handling multiple cases in a `switch`.**
+* <a id='switch-with-where'></a><a href='#switch-with-where'>4.13</a> **Be careful when using `where` clauses when handling multiple cases in a `switch`.**
 
   <details>
 
@@ -1193,7 +1193,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
+* <a id='switch-never-default'></a><a href='#switch-never-default'>4.14</a> **Never use the `default` case when `switch`ing over an enum.**
 
   <details>
 
@@ -1220,7 +1220,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Check for nil rather than using optional binding if you don't need to use the value.**
+* <a id='optional-nil-check'></a><a href='#optional-nil-check'>4.15</a> **Check for nil rather than using optional binding if you don't need to use the value.**
 
   <details>
 
@@ -1247,7 +1247,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## File Organization
 
-* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.**
+* <a id='alphabetize-imports'></a><a href='#alphabetize-imports'>5.1</a> **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.**
 
   <details>
 
@@ -1309,9 +1309,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. SwiftLint: [`vertical_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
+* <a id='limit-vertical-whitespace'></a><a href='#limit-vertical-whitespace'>5.2</a> **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. SwiftLint: [`vertical_whitespace`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
-* <a id='marks-for-types'></a>(<a href='#marks-for-types'>link</a>) **Each type in a file should be preceded by `// MARK: - TypeName`.** SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
+* <a id='marks-for-types'></a><a href='#marks-for-types'>5.3</a> **Each type in a file should be preceded by `// MARK: - TypeName`.** SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
 
   <details>
 
@@ -1320,7 +1320,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
+* <a id='marks-within-types'></a><a href='#marks-within-types'>5.4</a> **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. SwiftLint: [`mark`](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Open` for `open` properties and methods.
   * `// MARK: Public` for `public` properties and methods.
@@ -1332,10 +1332,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
   * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
-* <a id='extensions-for-protocol-conformance'></a>(<a href='#extensions-for-protocol-conformance'>link</a>)
+* <a id='extensions-for-protocol-conformance'></a><a href='#extensions-for-protocol-conformance'>5.5</a>
  **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
 
-* <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
+* <a id='subsection-organization'></a><a href='#subsection-organization'>5.6</a> **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Account()`)
   * Instance properties
@@ -1343,7 +1343,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Class methods
   * Instance methods
 
-* <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
+* <a id='newline-between-subsections'></a><a href='#newline-between-subsections'>5.7</a> **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
 
   <details>
 
@@ -1362,7 +1362,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
+* <a id='computed-properties-at-end'></a><a href='#computed-properties-at-end'>5.8</a> **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
 
   <details>
 
@@ -1386,13 +1386,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** SwiftLint: [`trailing_newline`](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+* <a id='newline-at-eof'></a><a href='#newline-at-eof'>5.9</a> **Files should end in a newline.** SwiftLint: [`trailing_newline`](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Objective-C Interoperability
 
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+* <a id='prefer-pure-swift-classes'></a><a href='#prefer-pure-swift-classes'>6.1</a> **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
 
   <details>
 
