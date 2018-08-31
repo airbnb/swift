@@ -1421,7 +1421,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Contributors
 
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
+  - [View Contributors](https://github.com/airbnb/swift/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
 
