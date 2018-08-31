@@ -16,7 +16,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 
-## Sections
+## Table of Contents
 
 1. [Xcode Formatting](#xcode-formatting)
 1. [Naming](#naming)
@@ -44,6 +44,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.**
   
 * <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.**
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Naming
 
@@ -258,6 +260,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Controller is an overloaded suffix that doesn't provide information about the responsabilities of the class.
 
   </details>
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Style
 
@@ -831,6 +835,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Patterns
 
 * <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. SwiftLint: [`implicitly_unwrapped_optional`](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
@@ -1235,6 +1241,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+**[⬆ back to top](#table-of-contents)**
+
 ## File Organization
 
 * <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.**
@@ -1378,6 +1386,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** SwiftLint: [`trailing_newline`](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Objective-C Interoperability
 
 * <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
@@ -1404,3 +1414,5 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+  **[⬆ back to top](#table-of-contents)**
