@@ -303,12 +303,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   class Listing {
 
-    init(capacity: Int) {
-      // Okay to use self here
+    init(capacity: Int, allowsPets: Bool) {
+      // Right
       self.capacity = capacity
+      isFamilyFriendly = !allowsPets
+      
+      // WRONG
+      self.capacity = capacity
+      self.isFamilyFriendly = !allowsPets // `self.` not required here
     }
 
     private var capacity: Int
+    private var isFamilyFriendly: Bool
 
     func increaseCapacity(by amount: Int) {
       // WRONG
