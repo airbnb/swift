@@ -27,6 +27,8 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
 1. [Objective-C Interoperability](#objective-c-interoperability)
+1. [Contributors](#contributors)
+1. [Amendments](#amendments)
 
 ## Xcode Formatting
 
@@ -1415,4 +1417,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-  **[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
+
+## Contributors
+
+  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
+
+**[⬆ back to top](#table-of-contents)**
+
+## Amendments
+
+We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
+
+**[⬆ back to top](#table-of-contents)**
