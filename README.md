@@ -21,6 +21,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 1. [Xcode Formatting](#xcode-formatting)
 1. [Naming](#naming)
 1. [Style](#style)
+    1. [Types](#types)
     1. [Functions](#functions)
     1. [Closures](#closures)
     1. [Operators](#operators)
@@ -640,6 +641,69 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+### Types
+
+* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum vales unless they map to an external source.** Add a comment explaining why explicit values are defined.
+
+  <details>
+    
+  #### Why?
+  To write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's persisted to disk, or coming from a network request), however, define the values explicity, and document what these values are mapping to.
+  
+  This will ensure that if someone comes along and adds a new value before `notEnoughMemory` in the example below, they won't accidentally break things.
+
+  ```swift
+  // WRONG
+  enum Type: String {
+    case error = "error"
+    case warning = "warning"
+  }
+
+  enum Planet: Int {
+    case mercury = 0
+    case venus = 1
+    case earth = 2
+    case mars = 3
+    case jupiter = 4
+    case saturn = 5
+    case uranus = 6
+    case neptune = 7
+  }
+  
+  enum ErrorCode: Int {
+    case notEnoughMemory
+    case invalidResource
+    case timeOut
+  }
+
+  // RIGHT
+  enum Type: String {
+    case error
+    case warning
+  }
+
+  enum Planet: Int {
+    case mercury
+    case venus
+    case earth
+    case mars
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
+  }
+  
+  /// These values come from the server, so we set them here explicitly to match those values.
+  enum ErrorCode: Int {
+    case notEnoughMemory = 0
+    case invalidResource = 1
+    case timeOut = 2
+  }
+  ```
+
+  </details>
+
 
 ### Functions
 
