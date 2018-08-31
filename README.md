@@ -301,22 +301,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  class Listing {
+  final class Listing {
+  
+    // MARK: Lifestyle
 
-    init(capacity: Int, allowsPets: Bool) {
-      // Right
-      self.capacity = capacity
-      isFamilyFriendly = !allowsPets
-      
+    init(capacity: Int, allowsPets: Bool) {      
       // WRONG
       self.capacity = capacity
       self.isFamilyFriendly = !allowsPets // `self.` not required here
+      
+      // RIGHT
+      self.capacity = capacity
+      isFamilyFriendly = !allowsPets
     }
+    
+    // MARK: Private
 
+    private let isFamilyFriendly: Bool
+    
     private var capacity: Int
-    private var isFamilyFriendly: Bool
-
-    func increaseCapacity(by amount: Int) {
+    
+    private func increaseCapacity(by amount: Int) {
       // WRONG
       self.capacity += amount
 
