@@ -8,6 +8,7 @@ Following this style guide should:
 * Make code easier to maintain.
 * Reduce simple programmer errors.
 * Reduce cognitive load while coding.
+* Keep discussions on Pull Requests focused on the code's logic rather than its style.
 
 Note that brevity is not a primary goal. Code should be made more concise only if other good code qualities (such as readability, simplicity, and clarity) remain equal or are improved.
 
