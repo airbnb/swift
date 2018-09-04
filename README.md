@@ -635,55 +635,55 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Functions
 
-* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** SwiftLint: [`redundant_void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+#### <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) Omit `Void` return types from function definitions. SwiftLint: [`redundant_void_return`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
-  <details>
+<details>
 
-  ```swift
-  // WRONG
-  func doSomething() -> Void {
-    ...
+```swift
+// WRONG
+func doSomething() -> Void {
+  ...
+}
+
+// RIGHT
+func doSomething() {
+  ...
+}
+```
+
+</details>
+
+#### <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) Separate [long](#column-width) function chains with line breaks before each dot. SwiftLint: [`multiline_function_chains`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-function-chains)
+
+<details>
+
+##### Why?
+It's easier to follow control flow through long function chains when each call has the same indentation.
+
+```swift
+/// WRONG
+
+match(pattern: pattern).compactMap { range in
+    return Command(string: contents, range: range)
+  }.compactMap { command in
+    return command.expand()
+}
+
+/// RIGHT
+
+match(pattern: pattern)
+  .compactMap { range in
+    return Command(string: contents, range: range)
   }
+  .compactMap { command in
+    return command.expand()
+}
 
-  // RIGHT
-  func doSomething() {
-    ...
-  }
-  ```
+// Short function chains can still be on one line:
+let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
+```
 
-  </details>
-
-* <a id='long-function-chains'></a>(<a href='#long-function-chains'>link</a>) **Separate [long](#column-width) function chains with line breaks before each dot.** SwiftLint: [`multiline_function_chains`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-function-chains)
-
-  <details>
-
-  #### Why?
-  It's easier to follow control flow through long function chains when each call has the same indentation.
-
-  ```swift
-  /// WRONG
-
-  match(pattern: pattern).compactMap { range in
-      return Command(string: contents, range: range)
-    }.compactMap { command in
-      return command.expand()
-  }
-
-  /// RIGHT
-
-  match(pattern: pattern)
-    .compactMap { range in
-      return Command(string: contents, range: range)
-    }
-    .compactMap { command in
-      return command.expand()
-  }
-
-  // Short function chains can still be on one line:
-  let evenSquares = [20, 17, 35, 4].filter { $0 % 2 == 0 }.map { $0 * $0 }
-  ```
-
-  </details>
+</details>
 
 ### Closures
 
