@@ -43,9 +43,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Due to larger screen sizes, we have opted to choose a page guide greater than 80
 
   </details>
-  
+
 * <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.**
-  
+
 * <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.**
 
 **[⬆ back to top](#table-of-contents)**
@@ -83,24 +83,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-  
+
   _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
-    
+
   <details>
-  
+
   #### Why?
   There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
 
   - Type erasure
-  
+
   ```swift
   public final class AnyRequester<ModelType>: Requester {
-  
+
     public init<T: Requester>(_ requester: T) where T.ModelType == ModelType {
       _executeRequest = requester.executeRequest
     }
 
-    @discardableResult 
+    @discardableResult
     public func executeRequest(
       _ request: URLRequest,
       onSuccess: @escaping (ModelType, Bool) -> Void,
@@ -113,17 +113,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
       @escaping (NSError) -> Void) -> URLSessionCancellable
-  
+
   }
   ```
-  
+
   - Backing a less specific type with a more specific type
-  
+
   ```swift
   final class ExperiencesViewController: UIViewController {
     // We can't name this view since UIViewController has a view: UIView property.
     private lazy var _view = CustomView()
-  
+
     loadView() {
       self.view = _view
     }
@@ -304,7 +304,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   final class Listing {
 
-    init(capacity: Int, allowsPets: Bool) {      
+    init(capacity: Int, allowsPets: Bool) {
       // WRONG
       self.capacity = capacity
       self.isFamilyFriendly = !allowsPets // `self.` not required here
@@ -1000,7 +1000,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func age(of person, bornAt timeInterval) -> Int {
     // ...
   }
-  
+
   func jump(person: Person) {
     // ...
   }
@@ -1008,7 +1008,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class Person {
     var bornAt: TimeInterval
-    
+
     var age: Int {
       // ...
     }
@@ -1143,7 +1143,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
   <details>
-  
+
   #### Why?
   Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
