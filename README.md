@@ -378,6 +378,41 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+ * <a id='long-function-declaration-return-line'></a>(<a href='#long-function-declaration-return-line'>link</a>) **Separate the last [long](#column-width) line of a function declaration or definition by putting a line break before the return type.** The line break should be after the closing parenthesis of the function signature and before the return arrow.
+
+  <details>
+
+  ```swift
+  class Universe {
+
+    // WRONG
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float,
+      delegateWrapper: WeakVariableWrapper<ConstellationSearchResultsContentPresenterDelegate>) -> EpoxyableModel
+    {
+      // The last line is too long and will probably auto-wrap in a weird way
+      populateUniverse()
+    }
+
+    // RIGHT
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float,
+      delegateWrapper: WeakVariableWrapper<ConstellationSearchResultsContentPresenterDelegate>) 
+      -> EpoxyableModel
+    {
+      populateUniverse()
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. SwiftLint: [`multiline_arguments`](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [`vertical_parameter_alignment_on_call`](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
   <details>
