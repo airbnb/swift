@@ -259,7 +259,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  Controller is an overloaded suffix that doesn't provide information about the responsabilities of the class.
+  Controller is an overloaded suffix that doesn't provide information about the responsibilities of the class.
 
   </details>
 
@@ -940,7 +940,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Avoid large callback blocks - instead, organize them into methods**. This makes weak-self in blocks much simpler. One caveat is that sometimes you'll need to reference self in a method call, so making use of `guard` clauses helps make everything neat and readable.
+* <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
 
   <details>
 
@@ -948,7 +948,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   //WRONG
   class MyClass {
 
-    func doRequest(completion: () -> Void) {
+    func request(completion: () -> Void) {
       API.request() { [weak self] response in
         if let strongSelf = self {
           // Processing and side effects
@@ -961,7 +961,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class MyClass {
 
-    func doRequest(completion: () -> Void) {
+    func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
         strongSelf.doSomething(strongSelf.property)
@@ -1060,7 +1060,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Avoid using optionals unless there’s a good semantic meaning.**
+* <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Use optionals only when they have semantic meaning.**
 
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
@@ -1335,13 +1335,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * `// MARK: Private` for `private` properties and methods.
   * If the type in question is an enum, its cases should go above the first `// MARK:`.
   * If there are typealiases, they should go above the first `// MARK:`.
-  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there gets to be so many methods that sub-sections start to seem necessary, that may be a sign that your code should be refactored into multiple types.
+  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there are enough methods that sub-sections seem necessary, consider refactoring your code into multiple types.
   * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
 * <a id='extensions-for-protocol-conformance'></a>(<a href='#extensions-for-protocol-conformance'>link</a>)
  **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
 
-* <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place things in the order listed below.** Again, this allows a new reader of your code to more easily find what he or she is looking for.
+* <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Account()`)
   * Instance properties
@@ -1349,7 +1349,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Class methods
   * Instance methods
 
-* <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **There should always be an empty line between property declarations of different kinds.** (e.g. between static properties and instance properties.)
+* <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.)
 
   <details>
 
@@ -1398,7 +1398,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Objective-C Interoperability
 
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer creating pure Swift classes rather than subclassing from NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
 
   <details>
 
