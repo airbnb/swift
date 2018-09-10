@@ -378,7 +378,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
- * <a id='long-function-declaration-return-line'></a>(<a href='#long-function-declaration-return-line'>link</a>) **Separate the last [long](#column-width) line of a function declaration by putting a line break before the return type.** The line break Should be before the close parenthesis of the function.
+ * <a id='long-function-declaration-return-line'></a>(<a href='#long-function-declaration-return-line'>link</a>) **Separate the last [long](#column-width) line of a function declaration or definition by putting a line break before the return type.** The line break should be after the closing parenthesis of the function signature and before the return arrow.
 
   <details>
 
@@ -403,8 +403,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       count: Int,
       color: StarColor,
       withAverageDistance averageDistance: Float,
-      delegateWrapper: WeakVariableWrapper<ConstellationSearchResultsContentPresenterDelegate>
-      ) -> EpoxyableModel
+      delegateWrapper: WeakVariableWrapper<ConstellationSearchResultsContentPresenterDelegate>) 
+      -> EpoxyableModel
     {
       populateUniverse()
     }
