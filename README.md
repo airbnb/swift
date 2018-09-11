@@ -623,7 +623,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   @objc class Spaceship: NSObject {
-    @discardableResult func fly() {
+  
+    @discardableResult func fly() -> Bool {
     }
   }
 
@@ -631,8 +632,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   @objc
   class Spaceship: NSObject {
+  
     @discardableResult
-    func fly() {
+    func fly() -> Bool {
     }
   }
   ```
