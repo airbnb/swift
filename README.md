@@ -1067,13 +1067,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  To write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's persisted to disk, or coming from a network request), however, define the values explicity, and document what these values are mapping to.
+  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
 
-  This will ensure that if someone comes along and adds a new value before `notEnoughMemory` in the example below, they won't accidentally break things.
+  This ensures that if someone adds a new value in the middle, they won't accidentally break things.
 
   ```swift
   // WRONG
-  enum Type: String {
+  enum ErrorType: String {
     case error = "error"
     case warning = "warning"
   }
@@ -1096,7 +1096,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  enum Type: String {
+  enum ErrorType: String {
     case error
     case warning
   }
