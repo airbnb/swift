@@ -1062,6 +1062,81 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum vales unless they map to an external source.** Add a comment explaining why explicit values are defined. SwiftLint: [`redundant_string_enum_value`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
+
+  <details>
+
+  #### Why?
+  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
+
+  This ensures that if someone adds a new value in the middle, they won't accidentally break things.
+
+  ```swift
+  // WRONG
+  enum ErrorType: String {
+    case error = "error"
+    case warning = "warning"
+  }
+  
+  enum UserType: String {
+    case owner
+    case manager
+    case member
+  }
+
+  enum Planet: Int {
+    case mercury = 0
+    case venus = 1
+    case earth = 2
+    case mars = 3
+    case jupiter = 4
+    case saturn = 5
+    case uranus = 6
+    case neptune = 7
+  }
+
+  enum ErrorCode: Int {
+    case notEnoughMemory
+    case invalidResource
+    case timeOut
+  }
+
+  // RIGHT
+  enum ErrorType: String {
+    case error
+    case warning
+  }
+  
+  /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
+  // swiftlint:disable redundant_string_enum_value
+  enum UserType: String {
+    case owner = "owner"
+    case manager = "manager"
+    case member = "member"
+  }
+  // swiftlint:enable redundant_string_enum_value
+
+  enum Planet: Int {
+    case mercury
+    case venus
+    case earth
+    case mars
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
+  }
+
+  /// These values come from the server, so we set them here explicitly to match those values.
+  enum ErrorCode: Int {
+    case notEnoughMemory = 0
+    case invalidResource = 1
+    case timeOut = 2
+  }
+  ```
+
+  </details>
+
 * <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Use optionals only when they have semantic meaning.**
 
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
