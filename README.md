@@ -1063,7 +1063,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. SwiftLint: [`redundant_string_enum_value`](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
+* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
 
   <details>
 
