@@ -1,8 +1,8 @@
 # Contributing
 
-To contribute to this repository, please open a PR to propose a new style rule. Every new rule should be done through a PR.
+To contribute a new style rule first fork the repo and create your branch from `master`. Then open a PR and propose the rule following the structure below.
 
-If you have an idea that's not completely fleshed out, please open an issue to discuss.
+If you have an idea that's not completely fleshed out, please [open an issue](https://github.com/airbnb/swift/issues/new) to discuss.
 
 ## Structure of a new rule:
 
