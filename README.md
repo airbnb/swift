@@ -16,6 +16,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
+* Rules that go directly against the way Apple, or the vast Swift community, does things should be minimized. These kinds of rules will need even more justification to be approved. This makes it easier for others to adopt the style guide; especially new people contributing to code bases that already adopt this style guide.
 
 ## Table of Contents
 
