@@ -45,3 +45,9 @@ custom_rules:
     regex: "@objcMembers"
     message: "Explicitly use @objc on each member you want to expose to Objective-C"
     severity: error
+
+  long_function_return_arrow_newline:
+    name: "long_function_return_arrow_newline"
+    regex: (\bfunc [^(]+\(\n[^)]+?\)) *(throws\b|->)
+    message: "Return arrow in long function declarations should be on the newline just like the arguments."
+    severity: error
