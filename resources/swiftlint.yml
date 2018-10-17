@@ -49,5 +49,5 @@ custom_rules:
   long_function_return_arrow_newline:
     name: "long_function_return_arrow_newline"
     regex: (\bfunc [^(]+\(\n[^)]+?\)) *(throws\b|->)
-    message: "Return arrow in long function declarations should be on the newline just like the arguments."
+    message: "Return arrow in long function declarations should be on the newline just like the arguments. For more details on the regex visit this link: https://regex101.com/r/h7qzfy/3"
     severity: error
