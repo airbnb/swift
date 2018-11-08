@@ -335,7 +335,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftLint: multiline_parameters](https://img.shields.io/badge/SwiftLint-multiline__parameters-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters), [![SwiftLint: vertical_parameter_alignment_on_call](https://img.shields.io/badge/SwiftLint-vertical__parameter__alignment__on__call-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftLint: multiline_parameters](https://img.shields.io/badge/SwiftLint-multiline__parameters-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-parameters) [![SwiftLint: vertical_parameter_alignment_on_call](https://img.shields.io/badge/SwiftLint-vertical__parameter__alignment__on__call-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
 
   <details>
 
