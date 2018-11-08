@@ -1063,28 +1063,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
-
-  <details>
-
-  #### Why?
-  Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
-
-  ```swift
-  enum Environment {
-
-    enum Earth {
-      static let gravity = 9.8
-    }
-
-    enum Moon {
-      static let gravity = 1.6
-    }
-  }
-  ```
-
-  </details>
-
 * <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
 
   <details>
