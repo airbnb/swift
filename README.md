@@ -1417,30 +1417,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
-* <a id='marks-for-types'></a>(<a href='#marks-for-types'>link</a>) **Each type in a file should be preceded by `// MARK: - TypeName`.** [![SwiftLint: mark](https://img.shields.io/badge/SwiftLint-mark-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
-
-  <details>
-
-  #### Why?
-  The hyphen visually distinguishes types from sections within those types (described below).
-
-  </details>
-
-* <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what he or she is interested in. [![SwiftLint: mark](https://img.shields.io/badge/SwiftLint-mark-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#mark)
-  * `// MARK: Lifecycle` for `init` and `deinit` methods.
-  * `// MARK: Open` for `open` properties and methods.
-  * `// MARK: Public` for `public` properties and methods.
-  * `// MARK: Internal` for `internal` properties and methods.
-  * `// MARK: Fileprivate` for `fileprivate` properties and methods.
-  * `// MARK: Private` for `private` properties and methods.
-  * If the type in question is an enum, its cases should go above the first `// MARK:`.
-  * If there are typealiases, they should go above the first `// MARK:`.
-  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there are enough methods that sub-sections seem necessary, consider refactoring your code into multiple types.
-  * If the type in question is a simple value type, it is OK to omit the `// MARK:`s, as it would hurt legibility.
-
-* <a id='extensions-for-protocol-conformance'></a>(<a href='#extensions-for-protocol-conformance'>link</a>)
- **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
-
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Account()`)
