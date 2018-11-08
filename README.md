@@ -1449,25 +1449,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Class methods
   * Instance methods
 
-* <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.)
-
-  <details>
-
-  ```swift
-  // WRONG
-  static let gravityEarth: CGFloat = 9.8
-  static let gravityMoon: CGFloat = 1.6
-  var gravity: CGFloat
-
-  // RIGHT
-  static let gravityEarth: CGFloat = 9.8
-  static let gravityMoon: CGFloat = 1.6
-
-  var gravity: CGFloat
-  ```
-
-  </details>
-
 * <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
 
   <details>
