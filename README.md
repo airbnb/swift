@@ -1468,30 +1468,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.)
-
-  <details>
-
-  ```swift
-  // WRONG
-  var atmosphere: Atmosphere {
-    didSet {
-      print("oh my god, the atmosphere changed")
-    }
-  }
-  var gravity: CGFloat
-
-  // RIGHT
-  var gravity: CGFloat
-  var atmosphere: Atmosphere {
-    didSet {
-      print("oh my god, the atmosphere changed")
-    }
-  }
-  ```
-
-  </details>
-
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
 **[⬆ back to top](#table-of-contents)**
