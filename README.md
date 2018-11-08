@@ -1441,14 +1441,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='extensions-for-protocol-conformance'></a>(<a href='#extensions-for-protocol-conformance'>link</a>)
  **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
 
-* <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what he or she is looking for.
-  * Constants (e.g. `static let gravity: CGFloat = 9.8`)
-  * Static properties (e.g. `static let sharedInstance = Account()`)
-  * Instance properties
-  * Static methods
-  * Class methods
-  * Instance methods
-
 * <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.)
 
   <details>
