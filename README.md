@@ -1353,7 +1353,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## File Organization
 
-* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.**
+* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** [![SwiftLint: sorted_imports](https://img.shields.io/badge/SwiftLint-sorted__imports-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#sorted-imports)
 
   <details>
 
