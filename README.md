@@ -16,6 +16,9 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
+* Every rule needs to be lintable.
+  * If the rule is changing the format of the code, it needs to be able to be reformatted automatically (either using [SwiftLint](https://github.com/realm/SwiftLint) autocorrect or [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)).
+  * If it's not, then it should be able to produce a warning.
 
 ## Table of Contents
 
