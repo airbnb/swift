@@ -10,7 +10,7 @@ At minimum every rule should contain:
 
 1. A permalink to reference easily.
 1. A short description.
-1. If the rule is lintable, a link to the appropriate SwiftLint rule.
+1. A link to the appropriate [SwiftLint](https://github.com/realm/SwiftLint) / [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) rule.
 1. _(optional)_ A "Why?" section describing the reasoning behind the rule.
 1. A code example describing the incorrect and correct behaviours.
 
