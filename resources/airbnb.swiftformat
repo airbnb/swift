@@ -1,0 +1,6 @@
+# options
+--importgrouping testable-bottom
+--trimwhitespace always
+
+# rules
+--rules sortedImports,trailingSpace
