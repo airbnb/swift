@@ -138,38 +138,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
-* <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
+* <a id='camel-case-acronyms'></a>(<a href='camel-case-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should follow the standard rules of CamelCase.**
 
   <details>
 
   ```swift
   // WRONG
-  class UrlValidator {
-
-    func isValidUrl(_ URL: URL) -> Bool {
-      // ...
-    }
-
-    func isUrlReachable(_ URL: URL) -> Bool {
-      // ...
-    }
-  }
-
-  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
-
-  // RIGHT
   class URLValidator {
 
-    func isValidURL(_ url: URL) -> Bool {
+    func isValidURL(_ URL: URL) -> Bool {
       // ...
     }
 
-    func isURLReachable(_ url: URL) -> Bool {
+    func isURLReachable(_ URL: URL) -> Bool {
       // ...
     }
   }
 
-  let urlValidator = URLValidator().isValidURL(/* some URL */)
+  let URLValidator = URLValidator().isValidURL(/* some URL */)
+
+  // RIGHT
+  class UrlValidator {
+
+    func isValidUrl(_ url: url) -> Bool {
+      // ...
+    }
+
+    func isUrlReachable(_ url: url) -> Bool {
+      // ...
+    }
+  }
+
+  let urlValidator = UrlValidator().isValidUrl(/* some URL */)
   ```
 
   </details>
