@@ -509,31 +509,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**.
-
-  <details>
-
-  ```swift
-  // WRONG
-  @objc class Spaceship: NSObject {
-  
-    @discardableResult func fly() -> Bool {
-    }
-  }
-
-  // RIGHT
-
-  @objc
-  class Spaceship: NSObject {
-  
-    @discardableResult
-    func fly() -> Bool {
-    }
-  }
-  ```
-
-  </details>
-
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
