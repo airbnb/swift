@@ -588,24 +588,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Closures
 
-* <a id='omit-closure-void-return'></a>(<a href='#omit-closure-void-return'>link</a>) **Omit `Void` return types from closure definitions.** (Even though that’s what autocomplete does.)
-
-  <details>
-
-  ```swift
-  // WRONG
-  someAsyncThing() { argument -> Void in
-    ...
-  }
-
-  // RIGHT
-  someAsyncThing() { argument in
-    ...
-  }
-  ```
-
-  </details>
-
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
   <details>
