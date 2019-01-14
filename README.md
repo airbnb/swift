@@ -624,24 +624,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-closure-parameters-unnecessary-types'></a>(<a href='#omit-closure-parameters-unnecessary-types'>link</a>) **Omit unnecessary type specifiers for closure parameters.**
-
-  <details>
-
-  ```swift
-  // WRONG
-  someAsyncThing() { (argument: Bool, argument2: Bool) -> Void in
-    ...
-  }
-
-  // RIGHT
-  someAsyncThing() { argument, argument2 in
-    ...
-  }
-  ```
-
-  </details>
-
 * <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
     <details>
