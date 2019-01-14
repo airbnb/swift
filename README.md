@@ -1194,9 +1194,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
-* <a id='extensions-for-protocol-conformance'></a>(<a href='#extensions-for-protocol-conformance'>link</a>)
- **Each protocol conformance implementation should occur in dedicated type extension within the same file as the type.** This extension should be marked with `// MARK: ProtocolName`, and should contain nothing more than the methods or properties required to conform to the protocol. As a result, no `// MARK:`s are needed for defining subsections.
-
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what he or she is looking for.
   * Constants (e.g. `static let gravity: CGFloat = 9.8`)
   * Static properties (e.g. `static let sharedInstance = Account()`)
