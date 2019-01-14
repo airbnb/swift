@@ -339,25 +339,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftLint: multiline_arguments](https://img.shields.io/badge/SwiftLint-multiline__arguments-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#multiline-arguments) [![SwiftLint: vertical_parameter_alignment_on_call](https://img.shields.io/badge/SwiftLint-vertical__parameter__alignment__on__call-008489.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-parameter-alignment-on-call)
-
-  <details>
-
-  ```swift
-  universe.generateStars(
-    at: location,
-    count: 5,
-    color: starColor,
-    withAverageDistance: 4)
-
-  universe.generate(
-    5,
-    .stars,
-    at: location)
-  ```
-
-  </details>
-
 * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
 
   <details>
