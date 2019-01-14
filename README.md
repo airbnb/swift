@@ -339,29 +339,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-if-statement'></a>(<a href='#long-if-statement'>link</a>) **When an `if`/`guard` statement becomes [too long](#column-width), start each condition with a newline, including the first.** This includes the last clause: put the opening curly brace on a new line to ensure proper indentation of the statement body. The first condition is also indented to vertically align all conditions.
-
-  <details>
-
-  ```swift
-  if
-    let val1 = val1,
-    let val2 = val2,
-    !val2.isEmpty
-  {
-    print(val2)
-  }
-
-  guard
-    let value = some,
-    let value2 = someOther else
-  {
-    return
-  }
-  ```
-
-  </details>
-
 * <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
   <details>
