@@ -1,6 +1,7 @@
 # options
---importgrouping testable-bottom
---trimwhitespace always
+--importgrouping testable-bottom # sortedImports
+--commas always # trailingCommas
+--trimwhitespace always # trailingSpace
 
 # rules
---rules sortedImports,trailingSpace
+--rules sortedImports,trailingCommas,trailingSpace
