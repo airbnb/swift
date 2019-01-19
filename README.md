@@ -703,61 +703,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-* <a id='complex-property-accessor'></a>(<a href='#complex-property-accessor'>link</a>) **Use functions instead of computed properties if they get to be complicated.**
+* <a id='complex-property-observers'></a>(<a href='#complex-computed-properties-and-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
   <details>
-
-  ```swift
-  class SomeClass {
-    // WRONG
-    // Too complicated, too many side effects
-    var someThing: String {
-      if let someProperty = someProperty {
-        someOtherProperty = doSomething(with: someProperty)
-        doSomethingElse()
-      } else {
-        someOtherProperty = doSomethingDifferent()
-      }
-
-      return someOtherProperty
-    }
-
-    // RIGHT
-    // Simple, no side effects
-    var someThing2: String {
-      return "\(theFirstThing) \(theSecondThing)"
-    }
-  }
-  ```
-  </details>
-
-* Also avoid `didSet` and `willSet` for the same reason.
-
-  <details>
-
   ```swift
   // WRONG
-  // Less readable
-  class MyClass {
+  class TextField {
+    var text: String? {
+      didSet {
+        guard oldValue != text else {
+          return
+        }
 
-    var someValue: Int {
-      get {
-        // return something computed
-      }
-      set(newValue) {
-        // set a bunch of other values
+        // Do a bunch of text-related side-effects.
       }
     }
   }
 
   // RIGHT
-  // More readable and clearer that there are side effects or nontrivial computation
-  class MyClass {
-
-    func someValue() -> Int {
+  class TextField {
+    var text: String? {
+      didSet { updateText(from: oldValue) }
     }
 
-    func setSomeValue(newValue: Int) {
+    private func updateText(from oldValue: String?) {
+      guard oldValue != text else {
+        return
+      }
+
+      // Do a bunch of text-related side-effects.
     }
   }
   ```
@@ -899,7 +873,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case error = "error"
     case warning = "warning"
   }
-  
+
   enum UserType: String {
     case owner
     case manager
@@ -928,7 +902,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case error
     case warning
   }
-  
+
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
   // swiftlint:disable redundant_string_enum_value
   enum UserType: String {
