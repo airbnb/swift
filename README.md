@@ -706,6 +706,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='complex-property-observers'></a>(<a href='#complex-computed-properties-and-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
   <details>
+
   ```swift
   // WRONG
   class TextField {
