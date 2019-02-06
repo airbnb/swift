@@ -22,6 +22,7 @@ whitelist_rules:
   - type_name
   - unneeded_parentheses_in_closure_argument
   - unused_closure_parameter
+  - unused_optional_binding
   - vertical_whitespace
   - void_return
 
