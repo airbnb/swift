@@ -1,5 +1,4 @@
 whitelist_rules:
-  - closure_end_indentation
   - closure_spacing
   - colon
   - control_statement
