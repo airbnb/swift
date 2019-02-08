@@ -487,7 +487,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** [![SwiftLint: control_statement](https://img.shields.io/badge/SwiftLint-control__statement-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#control-statement) [![SwiftLint: empty_parentheses_with_trailing_closure](https://img.shields.io/badge/SwiftLint-empty__parentheses__with__trailing__closure-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure) [![SwiftLint: unneeded_parentheses_in_closure_argument](https://img.shields.io/badge/SwiftLint-unneeded__parentheses__in__closure__argument-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unneeded-parentheses-in-closure-argument)
+* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
 
   <details>
 
