@@ -4,4 +4,4 @@
 --trimwhitespace always # trailingSpace
 
 # rules
---rules sortedImports,trailingCommas,trailingSpace
+--rules redundantParens,sortedImports,trailingCommas,trailingSpace
