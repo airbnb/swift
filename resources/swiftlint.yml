@@ -2,9 +2,7 @@ whitelist_rules:
   - closure_end_indentation
   - closure_spacing
   - colon
-  - control_statement
   - empty_enum_arguments
-  - empty_parentheses_with_trailing_closure
   - fatal_error_message
   - force_cast
   - force_try
@@ -20,7 +18,6 @@ whitelist_rules:
   - return_arrow_whitespace
   - trailing_newline
   - type_name
-  - unneeded_parentheses_in_closure_argument
   - unused_closure_parameter
   - unused_optional_binding
   - vertical_whitespace
