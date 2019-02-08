@@ -1044,35 +1044,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-with-where'></a>(<a href='#switch-with-where'>link</a>) **Be careful when using `where` clauses when handling multiple cases in a `switch`.**
-
-  <details>
-
-  #### Why?
-  The where clause only applies to the last case in line.
-
-  ```swift
-  // WRONG
-  func doThing() {
-    switch anEnum {
-    //where x == y will only be evaluated if anEnum is .B
-    case .a, .b where x == y:
-      doDifferentThing()
-    }
-  }
-
-  // RIGHT
-  func doThing() {
-    switch anEnum {
-    case .a where x == y,
-         .b where x == y:
-      doDifferentThing()
-    }
-  }
-  ```
-
-  </details>
-
 * <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
 
   <details>
