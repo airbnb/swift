@@ -593,42 +593,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='closure-end-brace-indentation'></a>(<a href='#closure-end-brace-indentation'>link</a>) **Closure end braces should have the same indentation as the line with their opening brace.** This makes it easier to follow control flow through closures. [![SwiftLint: closure_end_indentation](https://img.shields.io/badge/SwiftLint-closure__end__indentation-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-end-indentation)
-
-  <details>
-
-  ```swift
-  // WRONG
-
-  match(pattern: pattern)
-    .compactMap { range in
-      return Command(string: contents, range: range)
-  }
-    .compactMap { command in
-      return command.expand()
-  }
-
-  values.forEach { value in
-    print(value)
-    }
-
-  // RIGHT
-
-  match(pattern: pattern)
-    .compactMap { range in
-      return Command(string: contents, range: range)
-    }
-    .compactMap { command in
-      return command.expand()
-    }
-
-  values.forEach { value in
-    print(value)
-  }
-  ```
-
-  </details>
-
 * <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
   <details>
