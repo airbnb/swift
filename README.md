@@ -65,7 +65,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // ...
   }
 
-  class Spacefleet: SpaceThing {
+  class SpaceFleet: SpaceThing {
 
     enum Formation {
       // ...
@@ -83,7 +83,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
-  let myFleet = Spacefleet()
+  let myFleet = SpaceFleet()
   ```
 
   </details>
