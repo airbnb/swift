@@ -688,10 +688,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   class TextField {
     var text: String? {
-      didSet { updateText(from: oldValue) }
+      didSet { textDidUpdate(from: oldValue) }
     }
 
-    private func updateText(from oldValue: String?) {
+    private func textDidUpdate(from oldValue: String?) {
       guard oldValue != text else {
         return
       }
