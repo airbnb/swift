@@ -942,7 +942,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func didSubmitText(_ text: String) {
     // It's unclear how this was called with an empty string; our custom text field shouldn't allow this.
     // This assert is useful for debugging but it's OK if we simply ignore this scenario in production.
-    guard text.isEmpty else {
+    guard !text.isEmpty else {
       assertionFailure("Unexpected empty string")
       return
     }
