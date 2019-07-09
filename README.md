@@ -41,12 +41,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
 
-  <details>
 
   #### Why?
   Due to larger screen sizes, we have opted to choose a page guide greater than 80
 
-  </details>
 
 * <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.**
 
@@ -58,7 +56,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
-  <details>
 
   ```swift
   protocol SpaceThing {
@@ -86,11 +83,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let myFleet = SpaceFleet()
   ```
 
-  </details>
 
   _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
 
-  <details>
 
   #### Why?
   There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
@@ -134,13 +129,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
 * <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
-  <details>
 
   ```swift
   // WRONG
@@ -172,11 +165,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let urlValidator = URLValidator().isValidURL(/* some URL */)
   ```
 
-  </details>
 
 * <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
 
-  <details>
 
   ```swift
   // WRONG
@@ -192,11 +183,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let bodyMarginLeft: CGFloat
   ```
 
-  </details>
 
 * <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Include a hint about type in a name if it would otherwise be ambiguous.**
 
-  <details>
 
   ```swift
   // WRONG
@@ -208,11 +197,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let cancelButton: UIButton
   ```
 
-  </details>
 
 * <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
 
-  <details>
 
   ```swift
   // WRONG
@@ -240,11 +227,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='avoid-class-prefixes'></a>(<a href='#avoid-class-prefixes'>link</a>) **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
-  <details>
 
   ```swift
   // WRONG
@@ -258,15 +243,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.**
-  <details>
 
   #### Why?
   Controller is an overloaded suffix that doesn't provide information about the responsibilities of the class.
 
-  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -274,7 +256,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.**
 
-  <details>
 
   ```swift
   // WRONG
@@ -299,11 +280,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
-  <details>
 
   ```swift
   final class Listing {
@@ -337,11 +316,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingCommas)
 
-  <details>
 
   ```swift
   // WRONG
@@ -359,11 +336,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
-  </details>
 
 * <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
-  <details>
 
   ```swift
   // WRONG
@@ -390,11 +365,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   coord.y
   ```
 
-  </details>
 
 * <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
-  <details>
 
   ```swift
   // WRONG
@@ -404,11 +377,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
   ```
 
-  </details>
 
 * <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Favor modern Swift extension methods over older Objective-C global methods.** [![SwiftLint: legacy_cggeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__cggeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions) [![SwiftLint: legacy_constant](https://img.shields.io/badge/SwiftLint-legacy__constant-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant) [![SwiftLint: legacy_nsgeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__nsgeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
-  <details>
 
   ```swift
   // WRONG
@@ -420,11 +391,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   var width = rect.width
   ```
 
-  </details>
 
 * <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
-  <details>
 
   ```swift
   // WRONG
@@ -455,11 +424,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   var dict = [KeyType: ValueType]()
   ```
 
-  </details>
 
 * <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Place a space on either side of a return arrow for readability.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
 
-  <details>
 
   ```swift
   // WRONG
@@ -485,11 +452,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Omit unnecessary parentheses.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
 
-  <details>
 
   ```swift
   // WRONG
@@ -505,11 +470,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let squares = userCounts.map { $0 * $0 }
   ```
 
-  </details>
 
 * <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
-  <details>
 
   ```swift
   // WRONG
@@ -529,13 +492,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
-  <details>
 
   ```swift
   // WRONG
@@ -549,13 +510,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
-  <details>
 
   ```swift
   // WRONG
@@ -569,11 +528,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
-    <details>
+
 
     #### Why?
     Naming unused closure parameters as underscores reduces the cognitive overhead required to read
@@ -591,11 +549,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     ```
 
-    </details>
+
 
 * <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
-  <details>
 
   ```swift
   // WRONG
@@ -605,13 +562,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
   ```
 
-  </details>
 
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
-  <details>
 
   ```swift
   // WRONG
@@ -629,7 +584,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
   ```
 
-  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -637,7 +591,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
-  <details>
 
   ```swift
   // WRONG
@@ -663,13 +616,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
 * <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
-  <details>
 
   ```swift
   // WRONG
@@ -701,11 +652,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
 
-  <details>
 
   ```swift
   //WRONG
@@ -738,22 +687,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
 
-  <details>
 
   #### Why?
   It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
 
-  </details>
 
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
-  <details>
 
   ```swift
   // WRONG
@@ -779,11 +724,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='private-constants'></a>(<a href='#private-constants'>link</a>) **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
 
-  <details>
 
   ```swift
   private let privateValue = "secret"
@@ -799,11 +742,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
 
-  <details>
 
   #### Why?
   Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
@@ -821,11 +762,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
 
-  <details>
 
   #### Why?
   To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
@@ -896,13 +835,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Use optionals only when they have semantic meaning.**
 
 * <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
-  <details>
 
   #### Why?
   Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
@@ -932,11 +869,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let results = input.compactMap { transformThatReturnsAnOptional($0) }
   ```
 
-  </details>
 
 * <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
-  <details>
 
   ```swift
   func didSubmitText(_ text: String) {
@@ -964,11 +899,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **Default type methods to `static`.**
 
-  <details>
 
   #### Why?
   If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
@@ -985,11 +918,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
 
-  <details>
 
   #### Why?
   If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
@@ -1006,11 +937,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
 
-  <details>
 
   #### Why?
   Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
@@ -1033,11 +962,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 * <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Check for nil rather than using optional binding if you don't need to use the value.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
 
-  <details>
 
   #### Why?
   Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
@@ -1056,7 +983,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -1064,7 +990,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
 
-  <details>
 
   #### Why?
   A standard organization method helps engineers more quickly determine which modules a file depends on.
@@ -1091,11 +1016,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import Foundation
   ```
 
-  </details>
 
   _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
-  <details>
 
   ```swift
   // WRONG
@@ -1122,7 +1045,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   @testable import Epoxy
   ```
 
-  </details>
 
 * <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
@@ -1134,7 +1056,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
 
-  <details>
 
   ```swift
   class PriceBreakdownViewController {
@@ -1155,7 +1076,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
