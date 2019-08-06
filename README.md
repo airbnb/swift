@@ -351,6 +351,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
         // Do work
+        completion()
       }
     }
   }
@@ -362,6 +363,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       API.request() { [weak self] response in
         guard let self = self else { return }
         // Do work
+        completion()
       }
     }
   }
