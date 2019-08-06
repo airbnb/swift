@@ -350,13 +350,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
-        strongSelf.doSomething(strongSelf.property)
-        completion()
+        // Do work
       }
-    }
-    
-    func doSomething(nonOptionalParameter: SomeClass) {
-      // Processing and side effects
     }
   }
 
@@ -366,13 +361,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let self = self else { return }
-        self.doSomething(self.property)
-        completion()
+        // Do work
       }
-    }
-
-    func doSomething(nonOptionalParameter: SomeClass) {
-      // Processing and side effects
     }
   }
   ```
