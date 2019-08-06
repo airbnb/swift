@@ -339,6 +339,46 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='upgrade-self'></a>(<a href='#upgrade-self'>link</a>) **Bind to `self` when upgrading from a weak reference.** 
+
+  <details>
+
+  ```swift
+  //WRONG
+  class MyClass {
+
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        guard let strongSelf = self else { return }
+        strongSelf.doSomething(strongSelf.property)
+        completion()
+      }
+    }
+    
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // Processing and side effects
+    }
+  }
+
+  // RIGHT
+  class MyClass {
+
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        guard let self = self else { return }
+        self.doSomething(self.property)
+        completion()
+      }
+    }
+
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // Processing and side effects
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingCommas)
 
   <details>
@@ -713,7 +753,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        if let strongSelf = self {
+        if let self = self {
           // Processing and side effects
         }
         completion()
@@ -726,8 +766,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        guard let strongSelf = self else { return }
-        strongSelf.doSomething(strongSelf.property)
+        guard let self = self else { return }
+        self.doSomething(self.property)
         completion()
       }
     }
