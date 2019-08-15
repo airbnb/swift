@@ -392,36 +392,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for CGRect, CGPoint, NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
-
-  <details>
-
-  ```swift
-  // WRONG
-  let rect = CGRectMake(10, 10, 10, 10)
-
-  // RIGHT
-  let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
-  ```
-
-  </details>
-
-* <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Favor modern Swift extension methods over older Objective-C global methods.** [![SwiftLint: legacy_cggeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__cggeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions) [![SwiftLint: legacy_constant](https://img.shields.io/badge/SwiftLint-legacy__constant-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant) [![SwiftLint: legacy_nsgeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__nsgeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
-
-  <details>
-
-  ```swift
-  // WRONG
-  var rect = CGRectZero
-  var width = CGRectGetWidth(rect)
-
-  // RIGHT
-  var rect = CGRect.zero
-  var width = rect.width
-  ```
-
-  </details>
-
 * <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
   <details>
@@ -527,6 +497,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
   case .dog:
     ...
   }
+  ```
+
+  </details>
+  
+* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let range = NSMakeRange(10, 5)
+
+  // RIGHT
+  let range = NSRange(location: 10, length: 5)
   ```
 
   </details>
