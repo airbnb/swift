@@ -155,6 +155,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
+  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+
   // RIGHT
   class URLValidator {
 
@@ -166,6 +168,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       // ...
     }
   }
+
+  let urlValidator = URLValidator().isValidURL(/* some URL */)
   ```
 
   </details>
