@@ -150,12 +150,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
       // ...
     }
 
-    func isUrlReachable(_ URL: URL) -> Bool {
+    func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
       // ...
     }
   }
-
-  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
 
   // RIGHT
   class URLValidator {
@@ -164,12 +162,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
       // ...
     }
 
-    func isURLReachable(_ url: URL) -> Bool {
+    func isProfileURL(_ url: URL, for userID: String) -> Bool {
       // ...
     }
   }
-
-  let urlValidator = URLValidator().isValidURL(/* some URL */)
   ```
 
   </details>
@@ -500,7 +496,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-  
+
 * <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
   <details>
