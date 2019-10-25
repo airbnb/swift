@@ -170,7 +170,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
-  let urlValidator = urlValidator()
+  let urlValidator = URLValidator()
   let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
   ```
 
