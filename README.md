@@ -155,7 +155,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
-  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+  let URLValidator = UrlValidator()
+  let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
 
   // RIGHT
   class URLValidator {
@@ -169,7 +170,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
-  let urlValidator = URLValidator().isValidURL(/* some URL */)
+  let urlValidator = urlValidator()
+  let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
   ```
 
   </details>
