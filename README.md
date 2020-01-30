@@ -1076,6 +1076,46 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='omit-single-expression-return'></a>(<a href='#omit-single-expression-return'>link</a>) **Omit the `return` keyword from single-expression functions, accessors, and closures.** [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantReturn)
+
+  <details>
+  
+  ```swift
+  // WRONG
+  ["1", "2", "3"].compactMap { return Int($0) }
+  
+  var size: CGSize {
+    return CGSize(
+      width: 100.0,
+      height: 100.0)
+  }
+  
+  func makeInfoAlert(message: String) -> UIAlertController {
+    return UIAlertController(
+      title: "ℹ️ Info",
+      message: message,
+      preferredStyle: .alert)
+  }
+  
+  // RIGHT
+  ["1", "2", "3"].compactMap { Int($0) }
+  
+  var size: CGSize {
+    CGSize(
+      width: 100.0,
+      height: 100.0)
+  }
+  
+  func makeInfoAlert(message: String) -> UIAlertController {
+    UIAlertController(
+      title: "ℹ️ Info",
+      message: message,
+      preferredStyle: .alert)
+  }
+  ```
+  
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
