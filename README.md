@@ -1076,7 +1076,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-single-expression-return'></a>(<a href='#omit-single-expression-return'>link</a>) **Omit the `return` keyword from single-expression functions, accessors, and closures.** [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantReturn)
+* <a id='omit-single-expression-return'></a>(<a href='#omit-single-expression-return'>link</a>) **Omit the `return` keyword when not required by the language.** [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantReturn)
 
   <details>
   
