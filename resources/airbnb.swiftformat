@@ -3,7 +3,7 @@
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
 --trimwhitespace always # trailingSpace
---swiftversion 5
+--swiftversion 5.1
 
 # rules
---rules redundantParens,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace
+--rules redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace
