@@ -745,12 +745,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let self = self else { return }
-        self.doSomething(self.property)
+        self.doSomething(with: self.property, response: response)
         completion()
       }
     }
 
-    func doSomething(nonOptionalParameter: SomeClass) {
+    func doSomething(with nonOptionalParameter: SomeClass, response: SomeResponseClass) {
       // Processing and side effects
     }
   }
