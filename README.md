@@ -1116,6 +1116,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
   </details>
 
+* <a id='use-anyobject'></a>(<a href='#use-anyobject'>link</a>) **Use `AnyObject` instead of `class` in protocol definitions.** [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#anyobjectprotocol)
+
+  <details>
+  
+  ```swift
+  // WRONG
+  protocol Foo: class {}
+  
+  // RIGHT
+  protocol Foo: AnyObject {}
+  ```
+  
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
