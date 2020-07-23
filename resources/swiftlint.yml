@@ -1,4 +1,5 @@
 whitelist_rules:
+  - anyobject_protocol
   - closure_spacing
   - colon
   - empty_enum_arguments
