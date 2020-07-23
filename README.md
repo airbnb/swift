@@ -1116,6 +1116,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
   </details>
 
+* <a id='use-anyobject'></a>(<a href='#use-anyobject'>link</a>) **Use `AnyObject` instead of `class` in protocol definitions.** [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#anyobjectprotocol)
+
+  <details>
+  ### Why?
+  
+  [SE-0156](https://github.com/apple/swift-evolution/blob/master/proposals/0156-subclass-existentials.md]), which introduced support for using the `AnyObject` keyword as a protocol constraint, recommends preferring `AnyObject` over `class`:
+  
+  > This proposal merges the concepts of `class` and `AnyObject`, which now have the same meaning: they represent an existential for classes. To get rid of the duplication, we suggest only keeping `AnyObject` around. To reduce source-breakage to a minimum, `class` could be redefined as `typealias class = AnyObject` and give a deprecation warning on class for the first version of Swift this proposal is implemented in. Later, `class` could be removed in a subsequent version of Swift.
+  
+  ```swift
+  // WRONG
+  protocol Foo: class {}
+  
+  // RIGHT
+  protocol Foo: AnyObject {}
+  ```
+  
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
