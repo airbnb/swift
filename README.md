@@ -1119,7 +1119,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='use-anyobject'></a>(<a href='#use-anyobject'>link</a>) **Use `AnyObject` instead of `class` in protocol definitions.** [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#anyobjectprotocol)
 
   <details>
-  ### Why?
+
+  #### Why?
   
   [SE-0156](https://github.com/apple/swift-evolution/blob/master/proposals/0156-subclass-existentials.md]), which introduced support for using the `AnyObject` keyword as a protocol constraint, recommends preferring `AnyObject` over `class`:
   
