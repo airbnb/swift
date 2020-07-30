@@ -303,117 +303,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineStatementBraces)
-
-  <details>
-
-  ```swift
-  class Universe {
-
-    // WRONG
-    func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
-      // This is too long and will probably auto-wrap in a weird way
-    }
-
-    // WRONG
-    func generateStars(at location: Point,
-                       count: Int,
-                       color: StarColor,
-                       withAverageDistance averageDistance: Float) -> String
-    {
-      // Xcode indents all the arguments
-    }
-
-    // WRONG
-    func generateStars(
-      at location: Point,
-      count: Int,
-      color: StarColor,
-      withAverageDistance averageDistance: Float) -> String {
-      populateUniverse() // this line blends in with the argument list
-    }
-
-    // WRONG
-    func generateStars(
-      at location: Point,
-      count: Int,
-      color: StarColor,
-      withAverageDistance averageDistance: Float) throws
-      -> String {
-      populateUniverse() // this line blends in with the argument list
-    }
-
-    // RIGHT
-    func generateStars(
-      at location: Point,
-      count: Int,
-      color: StarColor,
-      withAverageDistance averageDistance: Float) 
-      -> String
-    {
-      populateUniverse()
-    }
-
-    // RIGHT
-    func generateStars(
-      at location: Point,
-      count: Int,
-      color: StarColor,
-      withAverageDistance averageDistance: Float) 
-      throws -> String
-    {
-      populateUniverse()
-    }
-  }
-  ```
-
-  </details>
-
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
-
-  <details>
-
-  ```swift
-  universe.generateStars(
-    at: location,
-    count: 5,
-    color: starColor,
-    withAverageDistance: 4)
-
-  universe.generate(
-    5,
-    .stars,
-    at: location)
-  ```
-
-  </details>
-  
-  * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
-
-  <details>
-
-  ```swift
-  // WRONG
-  let rowContent = [listingUrgencyDatesRowContent(),
-                    listingUrgencyBookedRowContent(),
-                    listingUrgencyBookedShortRowContent()]
-
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent()
-  ]
-
-  // RIGHT
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent(),
-  ]
-  ```
-
-  </details>
-
 * <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
   <details>
@@ -670,6 +559,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+* <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let rowContent = [listingUrgencyDatesRowContent(),
+                    listingUrgencyBookedRowContent(),
+                    listingUrgencyBookedShortRowContent()]
+
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent()
+  ]
+
+  // RIGHT
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent(),
+  ]
+  ```
+
+  </details>
 
 * <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
@@ -757,6 +672,91 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+  ```
+
+  </details>
+  
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineStatementBraces)
+
+  <details>
+
+  ```swift
+  class Universe {
+
+    // WRONG
+    func generateStars(at location: Point, count: Int, color: StarColor, withAverageDistance averageDistance: Float) -> String {
+      // This is too long and will probably auto-wrap in a weird way
+    }
+
+    // WRONG
+    func generateStars(at location: Point,
+                       count: Int,
+                       color: StarColor,
+                       withAverageDistance averageDistance: Float) -> String
+    {
+      // Xcode indents all the arguments
+    }
+
+    // WRONG
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) -> String {
+      populateUniverse() // this line blends in with the argument list
+    }
+
+    // WRONG
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) throws
+      -> String {
+      populateUniverse() // this line blends in with the argument list
+    }
+
+    // RIGHT
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) 
+      -> String
+    {
+      populateUniverse()
+    }
+
+    // RIGHT
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) 
+      throws -> String
+    {
+      populateUniverse()
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+
+  universe.generate(
+    5,
+    .stars,
+    at: location)
   ```
 
   </details>
