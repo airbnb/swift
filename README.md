@@ -303,6 +303,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+
+  universe.generate(
+    5,
+    .stars,
+    at: location)
+  ```
+
+  </details>
+
 * <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
   <details>
