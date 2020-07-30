@@ -387,6 +387,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+  * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
+
+  <details>
+
+  ```swift
+  // WRONG
+  let rowContent = [listingUrgencyDatesRowContent(),
+                    listingUrgencyBookedRowContent(),
+                    listingUrgencyBookedShortRowContent()]
+
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent()
+  ]
+
+  // RIGHT
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent(),
+  ]
+  ```
+
+  </details>
 
 * <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
