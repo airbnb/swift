@@ -388,7 +388,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
   
-  * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element.
+  * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 
@@ -641,6 +641,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
   switch animal {
   case .dog:
     ...
+  }
+  ```
+
+  </details>
+  
+* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG
+  @objc class Spaceship: NSObject {
+  
+    @discardableResult func fly() -> Bool {
+    }
+  }
+
+  // RIGHT
+
+  @objc
+  class Spaceship: NSObject {
+  
+    @discardableResult
+    func fly() -> Bool {
+    }
   }
   ```
 
