@@ -541,7 +541,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  @objc class Spaceship: NSObject {
+  @objc class Spaceship {
   
     @discardableResult func fly() -> Bool {
     }
@@ -550,7 +550,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
 
   @objc
-  class Spaceship: NSObject {
+  class Spaceship {
   
     @discardableResult
     func fly() -> Bool {
@@ -691,12 +691,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
+  // WRONG
+  universe.generateStars(at: location, count: 5, color: starColor, withAverageDistance: 4)
+
+  // WRONG
+  universe.generateStars(at: location,
+                         count: 5,
+                         color: starColor,
+                         withAverageDistance: 4)
+
+  // WRONG
+  universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4
+  )
+
+  // WRONG
+  universe.generate(5,
+    .stars,
+    at: location)
+
+  // RIGHT
   universe.generateStars(
     at: location,
     count: 5,
     color: starColor,
     withAverageDistance: 4)
 
+  // RIGHT
   universe.generate(
     5,
     .stars,
@@ -795,7 +819,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  class MyClass: NSObject {
+  class MyClass {
 
     init() {
       super.init()
@@ -806,7 +830,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  class MyClass: NSObject {
+  class MyClass {
 
     init() {
       someValue = 0
