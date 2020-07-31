@@ -619,62 +619,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-
-### Closures
-
-* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
-
-  <details>
-
-  ```swift
-  // WRONG
-  func method(completion: () -> ()) {
-    ...
-  }
-
-  // RIGHT
-  func method(completion: () -> Void) {
-    ...
-  }
-  ```
-
-  </details>
-
-* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
-
-    <details>
-
-    #### Why?
-    Naming unused closure parameters as underscores reduces the cognitive overhead required to read
-    closures by making it obvious which parameters are used and which are unused.
-
-    ```swift
-    // WRONG
-    someAsyncThing() { argument1, argument2, argument3 in
-      print(argument3)
-    }
-
-    // RIGHT
-    someAsyncThing() { _, _, argument3 in
-      print(argument3)
-    }
-    ```
-
-    </details>
-
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
-
-  <details>
-
-  ```swift
-  // WRONG
-  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
-
-  // RIGHT
-  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
-  ```
-
-  </details>
   
 * <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineStatementBraces)
 
@@ -757,6 +701,62 @@ _You can enable the following settings in Xcode by running [this script](resourc
     5,
     .stars,
     at: location)
+  ```
+
+  </details>
+
+### Closures
+
+* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
+
+  <details>
+
+  ```swift
+  // WRONG
+  func method(completion: () -> ()) {
+    ...
+  }
+
+  // RIGHT
+  func method(completion: () -> Void) {
+    ...
+  }
+  ```
+
+  </details>
+
+* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
+
+    <details>
+
+    #### Why?
+    Naming unused closure parameters as underscores reduces the cognitive overhead required to read
+    closures by making it obvious which parameters are used and which are unused.
+
+    ```swift
+    // WRONG
+    someAsyncThing() { argument1, argument2, argument3 in
+      print(argument3)
+    }
+
+    // RIGHT
+    someAsyncThing() { _, _, argument3 in
+      print(argument3)
+    }
+    ```
+
+    </details>
+
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+
+  // RIGHT
+  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
   ```
 
   </details>
