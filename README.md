@@ -1366,6 +1366,70 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
+* <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what they are interested in. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+  * `// MARK: Lifecycle` for `init` and `deinit` methods.
+  * `// MARK: Open` for `open` properties and methods.
+  * `// MARK: Public` for `public` properties and methods.
+  * `// MARK: Internal` for `internal` properties and methods.
+  * `// MARK: Fileprivate` for `fileprivate` properties and methods.
+  * `// MARK: Private` for `private` properties and methods.
+  * If the type in question is an enum, its cases should go above the first `// MARK:`.
+  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there are enough methods that sub-sections seem necessary, consider refactoring your code into multiple types.
+  * If all of a type's definitions belong to the same category (e.g. the type only consists of `internal` properties), it is OK to omit the `// MARK:`s.
+  * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK:`s, as it would hurt legibility.
+
+* <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+  * Nested types
+  * Static properties
+  * Class properties
+  * Instance properties
+  * Static methods
+  * Class methods
+  * Instance methods
+  
+* <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+
+  <details>
+
+  ```swift
+  // WRONG
+  static let gravityEarth: CGFloat = 9.8
+  static let gravityMoon: CGFloat = 1.6
+  var gravity: CGFloat
+
+  // RIGHT
+  static let gravityEarth: CGFloat = 9.8
+  static let gravityMoon: CGFloat = 1.6
+
+  var gravity: CGFloat
+  ```
+
+  </details>
+
+* <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+
+  <details>
+
+  ```swift
+  // WRONG
+  var atmosphere: Atmosphere {
+    didSet {
+      print("oh my god, the atmosphere changed")
+    }
+  }
+  var gravity: CGFloat
+
+  // RIGHT
+  var gravity: CGFloat
+  var atmosphere: Atmosphere {
+    didSet {
+      print("oh my god, the atmosphere changed")
+    }
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Objective-C Interoperability
