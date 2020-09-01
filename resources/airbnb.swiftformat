@@ -1,3 +1,5 @@
+# Current version of SwiftFormat used at Airbnb: 0.46.1
+
 # options
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
