@@ -1346,30 +1346,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  public extension Foo {
+  public extension Universe {
     // This declaration doesn't have an explicit access control level.
     // In all other scopes, this would be an internal function,
     // but because this is in a public extension, it's actually a public function.
-    func bar() {}
+    func generateGalaxy() { }
   }
 
   // WRONG
-  private extension Foo {
-    func bar() {}
+  private extension Spaceship {
+    func enableHyperdrive() { }
   }
 
   // RIGHT
-  extension Foo {
+  extension Universe {
     // It is immediately obvious that this is a public function,
-    // even if the start of the `extension Foo` scope is off-screen.
-    public func bar() {}
+    // even if the start of the `extension Universe` scope is off-screen.
+    public func generateGalaxy() { }
   }
 
   // RIGHT
-  extension Foo {
+  extension Spaceship {
     // Recall that a private extension actually has fileprivate semantics,
     // so a declaration in a private extension is fileprivate by default.
-    fileprivate func bar() {}
+    fileprivate func enableHyperdrive() { }
   }
   ```
 
