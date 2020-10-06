@@ -1349,6 +1349,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
+* <a id='mark-types-and-extensions'></a>(<a href='#mark-types-and-extensions'>link</a>) **Each type and extension should be preceded by a `MARK` comment.** [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#markTypes)
+  * Types should be preceded by a `// MARK: - TypeName` comment.
+  * Extensions that add a conformance should be preceded by a `// MARK: TypeName + ProtocolName` comment.
+  * Extensions that follow the type being extended should omit that type's name and instead use `// MARK: ProtocolName`.
+  * If there is only one type or extension in a file, the `MARK` comment can be omitted.
+  * For extensions that do not add new conformances, consider adding a `// MARK:` with a descriptive comment.
+
+  <details>
+
+  ```swift
+  // MARK: - GalaxyView
+
+  final class GalaxyView: UIView { }
+
+  // MARK: ContentConfigurableView
+
+  extension GalaxyView: ContentConfigurableView { }
+
+  // MARK: Galaxy + SpaceThing
+
+  extension Galaxy: SpaceThing { }
+  ```
+
+  </details>
+
 * <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of a type definition into the sections listed below, in order.** All type definitions should be divided up in this consistent way, allowing a new reader of your code to easily jump to what they are interested in. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Open` for `open` properties and methods.
