@@ -1361,15 +1361,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // MARK: - GalaxyView
 
-  final class GalaxyView: UIView { }
+  final class GalaxyView: UIView { … }
 
   // MARK: ContentConfigurableView
 
-  extension GalaxyView: ContentConfigurableView { }
+  extension GalaxyView: ContentConfigurableView { … }
 
   // MARK: Galaxy + SpaceThing
 
-  extension Galaxy: SpaceThing { }
+  extension Galaxy: SpaceThing { … }
   ```
 
   </details>
