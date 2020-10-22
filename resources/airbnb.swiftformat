@@ -1,4 +1,4 @@
-# Current version of SwiftFormat used at Airbnb: 0.46.1
+# Current version of SwiftFormat used at Airbnb: 0.47.1
 
 # options
 --self remove # redundantSelf
@@ -18,4 +18,4 @@
 --swiftversion 5.1
 
 # rules
---rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations
+--rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes
