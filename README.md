@@ -1354,7 +1354,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Extensions that add a conformance should be preceded by a `// MARK: - TypeName + ProtocolName` comment.
   * Extensions that follow the type being extended should omit that type's name and instead use `// MARK: ProtocolName`.
   * If there is only one type or extension in a file, the `MARK` comment can be omitted.
-  * If the extension in question is empty (e.g. has no delcarations in its body), the `MARK` comment can be omitted.
+  * If the extension in question is empty (e.g. has no declarations in its body), the `MARK` comment can be omitted.
   * For extensions that do not add new conformances, consider adding a `MARK` with a descriptive comment.
 
   <details>
