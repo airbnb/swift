@@ -611,16 +611,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   
   // WRONG
-  guard let earth = unvierse.find(
-         .planet,
-         named: "Earth") // Variable width indentation (7 spaces)
-  else { … }
-  
-  // WRONG
   guard 
     let galaxy = galaxy,
     galaxy.name == "Milky Way" else // The else keyword should sit on the same line as the open brace
   { … }
+
+  // WRONG
+  guard let earth = unvierse.find(
+    .planet,
+    named: "Earth"),
+    earth.isHabitable // Blends in with previous condition's method arguments
+  else { … }
   
   // RIGHT
   if 
@@ -638,7 +639,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   guard 
     let earth = unvierse.find(
       .planet,
-      named: "Earth")
+      named: "Earth"),
+    earth.isHabitable
   else { … }
   ```
 
