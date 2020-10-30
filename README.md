@@ -583,6 +583,63 @@ _You can enable the following settings in Xcode by running [this script](resourc
     listingUrgencyBookedShortRowContent(),
   ]
   ```
+  
+* <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+    
+  #### Why?
+  Breaking after the leading keyword resets indentation to the standard [2-space grid](https://github.com/airbnb/swift#spaces-over-tabs),
+  which helps avoid fighting Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
+
+  ```swift
+  // WRONG
+  if let galaxy = galaxy,
+    galaxy.name == "Milky Way" // Indenting by two spaces fights Xcode's ^+I indentation behavior
+  { … }
+  
+  // WRONG
+  guard let galaxy = galaxy,
+        galaxy.name == "Milky Way" // Variable width indentation (6 spaces)
+  else { … }
+
+  // WRONG
+  guard let earth = unvierse.find(
+    .planet,
+    named: "Earth"),
+    earth.isHabitable // Blends in with previous condition's method arguments
+  else { … }
+  
+  // RIGHT
+  if 
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way" 
+  { … }
+  
+  // RIGHT
+  guard 
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+  
+  // RIGHT
+  guard 
+    let earth = unvierse.find(
+      .planet,
+      named: "Earth"),
+    earth.isHabitable
+  else { … }
+
+  // RIGHT
+  if let galaxy = galaxy {
+    …
+  }
+
+  // RIGHT
+  guard let galaxy = galaxy else {
+    …
+  }
+  ```
 
   </details>
 
