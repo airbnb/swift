@@ -1379,12 +1379,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## File Organization
 
-* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
+* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Alphabetize and deduplicate module imports within a file. Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#duplicateImports)
+
 
   <details>
 
   #### Why?
-  A standard organization method helps engineers more quickly determine which modules a file depends on.
+  - A standard organization method helps engineers more quickly determine which modules a file depends on.
+  - Duplicated import statements have no effect and should be removed for clarity.
 
   ```swift
   // WRONG
@@ -1392,6 +1394,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
   import DLSPrimitives
+  import Constellation
   import Constellation
   import Epoxy
 
@@ -1437,26 +1440,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import Quick
 
   @testable import Epoxy
-  ```
-
-  </details>
-
-* <a id='deduplicate-imports'></a>(<a href='#deduplicate-imports'>link</a>) **Remove redundant import statements within a file.** [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#duplicateImports)
-
-  <details>
-
-  #### Why?
-  Duplicated import statements have no effect and should be removed for clarity.
-
-  ```swift
-  //WRONG
-
-  import Foundation
-  import Foundation
-
-  //RIGHT
-
-  import Foundation
   ```
 
   </details>
