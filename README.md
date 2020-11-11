@@ -534,7 +534,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-  
+
 * <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
@@ -542,7 +542,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   @objc class Spaceship {
-  
+
     @discardableResult func fly() -> Bool {
     }
   }
@@ -551,7 +551,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   @objc
   class Spaceship {
-  
+
     @discardableResult
     func fly() -> Bool {
     }
@@ -559,7 +559,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-  
+
 * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
@@ -583,11 +583,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     listingUrgencyBookedShortRowContent(),
   ]
   ```
-  
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
-    
+
   #### Why?
   Breaking after the leading keyword resets indentation to the standard [2-space grid](https://github.com/airbnb/swift#spaces-over-tabs),
   which helps avoid fighting Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
@@ -597,7 +597,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   if let galaxy = galaxy,
     galaxy.name == "Milky Way" // Indenting by two spaces fights Xcode's ^+I indentation behavior
   { … }
-  
+
   // WRONG
   guard let galaxy = galaxy,
         galaxy.name == "Milky Way" // Variable width indentation (6 spaces)
@@ -609,21 +609,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
     named: "Earth"),
     earth.isHabitable // Blends in with previous condition's method arguments
   else { … }
-  
+
   // RIGHT
-  if 
+  if
     let galaxy = galaxy,
-    galaxy.name == "Milky Way" 
+    galaxy.name == "Milky Way"
   { … }
-  
+
   // RIGHT
-  guard 
+  guard
     let galaxy = galaxy,
     galaxy.name == "Milky Way"
   else { … }
-  
+
   // RIGHT
-  guard 
+  guard
     let earth = unvierse.find(
       .planet,
       named: "Earth"),
@@ -676,7 +676,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-  
+
 * <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineStatementBraces)
 
   <details>
@@ -722,7 +722,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float) 
+      withAverageDistance averageDistance: Float)
       -> String
     {
       populateUniverse()
@@ -733,7 +733,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float) 
+      withAverageDistance averageDistance: Float)
       throws -> String
     {
       populateUniverse()
@@ -1279,33 +1279,33 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='omit-return'></a>(<a href='#omit-return'>link</a>) **Omit the `return` keyword when not required by the language.** [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantReturn)
 
   <details>
-  
+
   ```swift
   // WRONG
   ["1", "2", "3"].compactMap { return Int($0) }
-  
+
   var size: CGSize {
     return CGSize(
       width: 100.0,
       height: 100.0)
   }
-  
+
   func makeInfoAlert(message: String) -> UIAlertController {
     return UIAlertController(
       title: "ℹ️ Info",
       message: message,
       preferredStyle: .alert)
   }
-  
+
   // RIGHT
   ["1", "2", "3"].compactMap { Int($0) }
-  
+
   var size: CGSize {
     CGSize(
       width: 100.0,
       height: 100.0)
   }
-  
+
   func makeInfoAlert(message: String) -> UIAlertController {
     UIAlertController(
       title: "ℹ️ Info",
@@ -1313,7 +1313,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       preferredStyle: .alert)
   }
   ```
-  
+
   </details>
 
 * <a id='use-anyobject'></a>(<a href='#use-anyobject'>link</a>) **Use `AnyObject` instead of `class` in protocol definitions.** [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#anyobjectprotocol)
@@ -1321,19 +1321,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  
+
   [SE-0156](https://github.com/apple/swift-evolution/blob/master/proposals/0156-subclass-existentials.md]), which introduced support for using the `AnyObject` keyword as a protocol constraint, recommends preferring `AnyObject` over `class`:
-  
+
   > This proposal merges the concepts of `class` and `AnyObject`, which now have the same meaning: they represent an existential for classes. To get rid of the duplication, we suggest only keeping `AnyObject` around. To reduce source-breakage to a minimum, `class` could be redefined as `typealias class = AnyObject` and give a deprecation warning on class for the first version of Swift this proposal is implemented in. Later, `class` could be removed in a subsequent version of Swift.
-  
+
   ```swift
   // WRONG
   protocol Foo: class {}
-  
+
   // RIGHT
   protocol Foo: AnyObject {}
   ```
-  
+
   </details>
 
 * <a id='extension-access-control'></a>(<a href='#extension-access-control'>link</a>) **Specify the access control for each declaration in an extension individually.** [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#extensionaccesscontrol)
@@ -1441,6 +1441,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='deduplicate-imports'></a>(<a href='#deduplicate-imports'>link</a>) **Remove redundant import statements within a file.** [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#duplicateImports)
+
+  <details>
+
+  #### Why?
+  Duplicated import statements have no effect and should be removed for clarity.
+
+  ```swift
+  //WRONG
+
+  import Foundation
+  import Foundation
+
+  //RIGHT
+
+  import Foundation
+  ```
+
+  </details>
+
 * <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
@@ -1491,7 +1511,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Static methods
   * Class methods
   * Instance methods
-  
+
 * <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
 
   <details>
