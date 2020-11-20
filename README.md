@@ -1554,7 +1554,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       acceptButton.addTarget(
         self,
         action: #selector(didTapAcceptButton),
-        forControlEvents: .TouchUpInside)
+        forControlEvents: .touchUpInside)
     }
 
     @objc
