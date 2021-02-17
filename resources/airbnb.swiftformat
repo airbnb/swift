@@ -11,6 +11,7 @@
 --wrapparameters before-first # wrapArguments
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
+--wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
