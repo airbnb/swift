@@ -20,3 +20,7 @@
 
 # rules
 --rules todos,anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,void
+
+--exclude **/*.generated.swift
+--exclude ./Pods
+--exclude **/API.swift
