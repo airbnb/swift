@@ -3,13 +3,10 @@
 # options
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
---commas always # trailingCommas
 --trimwhitespace always # trailingSpace
 --indent 2 #indent
 --ifdef no-indent #indent
---wraparguments before-first # wrapArguments
 --wrapparameters before-first # wrapArguments
---wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
@@ -22,4 +19,4 @@
 --swiftversion 5.1
 
 # rules
---rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports
+--rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports
