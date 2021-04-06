@@ -108,7 +108,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     public func executeRequest(
       _ request: URLRequest,
       onSuccess: @escaping (ModelType, Bool) -> Void,
-      onFailure: @escaping (Error) -> Void) -> URLSessionCancellable)
+      onFailure: @escaping (Error) -> Void)
+      -> URLSessionCancellable
     {
       return _executeRequest(request, session, parser, onSuccess, onFailure)
     }
@@ -116,7 +117,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     private let _executeRequest: (
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
-      @escaping (NSError) -> Void) -> URLSessionCancellable)
+      @escaping (NSError) -> Void)
+      -> URLSessionCancellable
 
   }
   ```
