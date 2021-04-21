@@ -1382,7 +1382,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  All log messages should flow into intermediary logging systems that can direct them to the correct destination(s) based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
+  All log messages should flow into intermediate logging systems that can direct them to the correct destination(s) based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
 
   </details>
 
