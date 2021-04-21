@@ -1377,6 +1377,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no_direct_standard_out'></a>(<a href='#no_direct_standard_out'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing logs directly to standard out using `print(…)`, `logDebug(…)`, or `dump(…)`.**
+
+  <details>
+
+  #### Why?
+  All log messages should flow into intermediary logging systems that can direct them to the correct destination(s) based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
