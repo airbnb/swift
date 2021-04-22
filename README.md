@@ -1176,18 +1176,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   struct FeatureState {
-    var count = 1
+    var count: Int
 
-    static var initial = FeatureState()
+    static var initial = FeatureState(count: 0)
   }
 
   // Right
   struct FeatureState {
-    var count = 1
+    var count: Int
 
     static var initial: FeatureState {
       // Vend static properties that are cheap to compute
-      FeatureState()
+      FeatureState(count: 0)
     }
   }
   ```
