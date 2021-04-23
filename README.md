@@ -1377,7 +1377,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='no_direct_standard_out'></a>(<a href='#no_direct_standard_out'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `logDebug(…)`, or `dump(…)`.**
+* <a id='no-direct-standard-out-logs'></a>(<a href='#no-direct-standard-out-logs'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `logDebug(…)`, or `dump(…)`.**
 
   <details>
 
