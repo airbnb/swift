@@ -39,7 +39,7 @@ custom_rules:
     message: "Explicitly use @objc on each member you want to expose to Objective-C"
     severity: error
   no_direct_standard_out_logs:
-    name: "Writing directly to standard out disallowed"
+    name: "Writing log messages directly to standard out is disallowed"
     regex: "(\\bprint|\\bdebugPrint|\\bdump|Swift\\.print|Swift\\.debugPrint|Swift\\.dump)\\s*\\("
     match_kinds:
     - identifier
