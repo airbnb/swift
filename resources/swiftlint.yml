@@ -1,4 +1,4 @@
-whitelist_rules:
+only_rules:
   - closure_spacing
   - colon
   - empty_enum_arguments
