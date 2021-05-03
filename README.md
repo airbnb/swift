@@ -1154,6 +1154,46 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='prefer-immutable-statics'></a>(<a href='#prefer-immutable-statics'>link</a>) **Prefer immutable or computed static properties over mutable ones whenever possible.** Use stored `static let` properties or computed `static var` properties over stored `static var`s properties whenever possible, as stored `static var` properties are global mutable state.
+
+  <details>
+
+  #### Why?
+  Global mutable state increases complexity and makes it harder to reason about the behavior of applications. It should be avoided when possible.
+
+  ```swift
+  // WRONG
+  enum Fonts {
+    static var title = UIFont(…)
+  }
+
+  // RIGHT
+  enum Fonts {
+    static let title = UIFont(…)
+  }
+  ```
+
+  ```swift
+  // WRONG
+  struct FeatureState {
+    var count: Int
+
+    static var initial = FeatureState(count: 0)
+  }
+
+  // RIGHT
+  struct FeatureState {
+    var count: Int
+
+    static var initial: FeatureState {
+      // Vend static properties that are cheap to compute
+      FeatureState(count: 0)
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
   <details>
