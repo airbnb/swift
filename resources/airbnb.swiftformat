@@ -1,4 +1,4 @@
-# Current version of SwiftFormat used at Airbnb: 0.47.12
+# Current version of SwiftFormat used at Airbnb: 0.48.0
 
 # options
 --self remove # redundantSelf
