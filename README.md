@@ -537,6 +537,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='destructure-inline-let'></a> (<a href='#destructure-inline-let'>link</a>) **When destructuring an enum case or a tuple, place the `let` keyword inline, adjacent to each individual property assignment.** [![SwiftFormat: hoistPatternLet](https://img.shields.io/badge/SwiftFormat-hoistPatternLet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#hoistPatternLet)
+
+  <details>
+
+  ```swift
+  // WRONG
+  switch result {
+    case let .value(value):
+      // ...
+    case let .error(errorCode, errorReason):
+      // ...
+  }
+
+  // RIGHT
+  switch result {
+    case .value(let value):
+      // ...
+    case .error(let errorCode, let errorReason):
+      // ...
+  }
+  ```
+
+  </details>
+
 * <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
