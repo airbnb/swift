@@ -659,6 +659,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+  * <a id='standard-library-type-shorthand'></a>(<a href='#standard-library-type-sugar'>link</a>) **For standard library types with a canonical shorthand form (`Optional`, `Array`, `Dictionary`), prefer using the shorthand form over the full generic form. [![SwiftFormat: typeSugar](https://img.shields.io/badge/SwiftFormat-typeSugar-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#typeSugar)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let optional: Optional<String> = nil
+  let array: Array<String> = []
+  let dictionary: Dictionary<String, Any> = [:]
+
+  // RIGHT
+  let optional: String? = nil
+  let array: [String] = []
+  let dictionary: [String: Any] = [:]
+  ```
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
