@@ -1494,7 +1494,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-consecutive-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
+* <a id='limit-consecutive-whitespace'></a><a id='limit-vertical-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
 
   <details>
 
@@ -1502,8 +1502,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   struct Planet {
 
-    let mass:       Double
-    let satellites: [Planet]
+    let mass:          Double
+    let hasAtmosphere: Bool
 
 
     func distance(to: Planet) { }
@@ -1514,7 +1514,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct Planet {
 
     let mass: Double
-    let satellites: [Planet]
+    let hasAtmosphere: Bool
 
     func distance(to: Planet) { }
 
