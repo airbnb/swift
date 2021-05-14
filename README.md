@@ -541,23 +541,52 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  ```swift
-  // WRONG
-  switch result {
-    case let .value(value):
+    ```swift
+    // WRONG
+    switch result {
+    case let .success(value):
       // ...
     case let .error(errorCode, errorReason):
       // ...
-  }
+    }
 
-  // RIGHT
-  switch result {
-    case .value(let value):
+    // WRONG
+    guard let case .success(value) else { 
+      return 
+    }
+
+    // RIGHT
+    switch result {
+    case .success(let value):
       // ...
     case .error(let errorCode, let errorReason):
       // ...
-  }
-  ```
+    }
+
+    // RIGHT
+    guard case .success(let value) else {
+      return
+    }
+    ```
+    
+    ### Why?
+    
+    1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
+    
+    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier. 
+    
+    ```swift
+    // `let` is adjacent to the variable identifier, so it is immediately obvious 
+    // at a glance that these identifiers represent new variable bindings
+    case .enumCaseWithSingleAssociatedValue(let string):
+    case .enumCaseWithMultipleAssociatedValues(let string, let int):
+
+    // The `let` keyword is quite far from the variable identifiers, 
+    // so its less obvious that they represent new variable bindings
+    case let .enumCaseWithSingleAssociatedValue(string):
+    case let .enumCaseWithMultipleAssociatedValues(string, int):
+
+    ```
 
   </details>
 
