@@ -1547,7 +1547,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
+* <a id='limit-consecutive-whitespace'></a><a id='limit-vertical-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct Planet {
+
+    let mass:          Double
+    let hasAtmosphere: Bool
+
+
+    func distance(to: Planet) { }
+
+  }
+
+  // RIGHT
+  struct Planet {
+
+    let mass: Double
+    let hasAtmosphere: Bool
+
+    func distance(to: Planet) { }
+
+  }
+  ```
+
+  </details>
+
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
