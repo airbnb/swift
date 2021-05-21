@@ -23,4 +23,4 @@
 --swiftversion 5.1
 
 # rules
---rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,redundantType,hoistPatternLet,consecutiveSpaces
+--rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,redundantType,hoistPatternLet,consecutiveSpaces,typeSugar
