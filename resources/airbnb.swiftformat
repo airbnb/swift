@@ -1,4 +1,4 @@
-# Current version of SwiftFormat used at Airbnb: 0.47.12
+# Current version of SwiftFormat used at Airbnb: 0.48.4
 
 # options
 --self remove # redundantSelf
@@ -19,7 +19,8 @@
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
+--patternlet inline # hoistPatternLet
 --swiftversion 5.1
 
 # rules
---rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports
+--rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,redundantType,hoistPatternLet,consecutiveSpaces,typeSugar
