@@ -276,7 +276,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Style
 
-* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.**
+* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Don't include types where they can be easily inferred.** [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantType)
 
   <details>
 
@@ -537,6 +537,59 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='inline-let-when-destructuring'></a> (<a href='#inline-let-when-destructuring'>link</a>) **When destructuring an enum case or a tuple, place the `let` keyword inline, adjacent to each individual property assignment.** [![SwiftFormat: hoistPatternLet](https://img.shields.io/badge/SwiftFormat-hoistPatternLet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#hoistPatternLet)
+
+  <details>
+
+    ```swift
+    // WRONG
+    switch result {
+    case let .success(value):
+      // ...
+    case let .error(errorCode, errorReason):
+      // ...
+    }
+
+    // WRONG
+    guard let case .success(value) else { 
+      return 
+    }
+
+    // RIGHT
+    switch result {
+    case .success(let value):
+      // ...
+    case .error(let errorCode, let errorReason):
+      // ...
+    }
+
+    // RIGHT
+    guard case .success(let value) else {
+      return
+    }
+    ```
+    
+    #### Why?
+    
+    1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
+    
+    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier. 
+    
+    ```swift
+    // `let` is adjacent to the variable identifier, so it is immediately obvious 
+    // at a glance that these identifiers represent new variable bindings
+    case .enumCaseWithSingleAssociatedValue(let string):
+    case .enumCaseWithMultipleAssociatedValues(let string, let int):
+
+    // The `let` keyword is quite far from the variable identifiers, 
+    // so its less obvious that they represent new variable bindings
+    case let .enumCaseWithSingleAssociatedValue(string):
+    case let .enumCaseWithMultipleAssociatedValues(string, int):
+
+    ```
+
+  </details>
+
 * <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
@@ -658,6 +711,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+* <a id='standard-library-type-shorthand'></a>(<a href='#standard-library-type-sugar'>link</a>) **For standard library types with a canonical shorthand form (`Optional`, `Array`, `Dictionary`), prefer using the shorthand form over the full generic form.** [![SwiftFormat: typeSugar](https://img.shields.io/badge/SwiftFormat-typeSugar-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#typeSugar)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let optional: Optional<String> = nil
+  let array: Array<String> = []
+  let dictionary: Dictionary<String, Any> = [:]
+
+  // RIGHT
+  let optional: String? = nil
+  let array: [String] = []
+  let dictionary: [String: Any] = [:]
+  ```
 
 ### Functions
 
@@ -1154,6 +1223,46 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='prefer-immutable-statics'></a>(<a href='#prefer-immutable-statics'>link</a>) **Prefer immutable or computed static properties over mutable ones whenever possible.** Use stored `static let` properties or computed `static var` properties over stored `static var`s properties whenever possible, as stored `static var` properties are global mutable state.
+
+  <details>
+
+  #### Why?
+  Global mutable state increases complexity and makes it harder to reason about the behavior of applications. It should be avoided when possible.
+
+  ```swift
+  // WRONG
+  enum Fonts {
+    static var title = UIFont(…)
+  }
+
+  // RIGHT
+  enum Fonts {
+    static let title = UIFont(…)
+  }
+  ```
+
+  ```swift
+  // WRONG
+  struct FeatureState {
+    var count: Int
+
+    static var initial = FeatureState(count: 0)
+  }
+
+  // RIGHT
+  struct FeatureState {
+    var count: Int
+
+    static var initial: FeatureState {
+      // Vend static properties that are cheap to compute
+      FeatureState(count: 0)
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
   <details>
@@ -1377,6 +1486,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no-direct-standard-out-logs'></a>(<a href='#no-direct-standard-out-logs'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `debugPrint(…)`, or `dump(…)`.**
+
+  <details>
+
+  #### Why?
+  All log messages should flow into intermediate logging systems that can direct messages to the correct destination(s) and potentially filter messages based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write all messages directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
@@ -1445,7 +1563,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
+* <a id='limit-consecutive-whitespace'></a><a id='limit-vertical-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct Planet {
+
+    let mass:          Double
+    let hasAtmosphere: Bool
+
+
+    func distance(to: Planet) { }
+
+  }
+
+  // RIGHT
+  struct Planet {
+
+    let mass: Double
+    let hasAtmosphere: Bool
+
+    func distance(to: Planet) { }
+
+  }
+  ```
+
+  </details>
+
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
