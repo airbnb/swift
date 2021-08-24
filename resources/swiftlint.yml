@@ -34,7 +34,7 @@ excluded:
 colon:
   apply_to_dictionaries: false
 
-indentation: 2
+indentation: 4
 
 custom_rules:
   no_objcMembers:
@@ -54,7 +54,7 @@ custom_rules:
     apply_to_dictionaries: false
 
   line_length:
-    warning: 400
+    warning: 121
     error: 500
     ignores_function_declarations: true
     ignores_comments: true
