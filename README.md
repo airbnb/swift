@@ -1730,7 +1730,7 @@ We encourage you to fork this guide and change the rules to fit your team’s st
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings_slumber_group.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 120 characters.**
+* <a id='120-column-width'></a>(<a href='#120-column-width'>link</a>) **Each line should have a maximum column width of 120 characters.**
 
   <details>
 
@@ -1739,7 +1739,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 4 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+* <a id='4-spaces-over-tabs'></a>(<a href='#4-spaces-over-tabs'>link</a>) **Use 4 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
 
 
 **[⬆ back to top](#table-of-contents)**
