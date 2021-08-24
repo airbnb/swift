@@ -1725,5 +1725,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
 ## Amendments
 
 We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
+     
+## Xcode Formatting
+
+_You can enable the following settings in Xcode by running [this script](resources/xcode_settings_slumber_group.bash), e.g. as part of a "Run Script" build phase._
+
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 120 characters.**
+
+  <details>
+
+  #### Why?
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80
+
+  </details>
+
+* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 4 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+
 
 **[⬆ back to top](#table-of-contents)**
