@@ -20,7 +20,8 @@
 --organizetypes class,struct,enum,extension # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
+--maxwidth 130 # wrap
 --swiftversion 5.1
 
 # rules
---rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,redundantType,hoistPatternLet,consecutiveSpaces,typeSugar
+--rules anyObjectProtocol,redundantParens,redundantReturn,redundantSelf,sortedImports,strongifiedSelf,trailingCommas,trailingSpace,wrapArguments,wrapMultilineStatementBraces,indent,wrapAttributes,organizeDeclarations,markTypes,extensionAccessControl,duplicateImports,redundantType,hoistPatternLet,consecutiveSpaces,typeSugar,wrap
