@@ -55,7 +55,7 @@ custom_rules:
     apply_to_dictionaries: false
 
   line_length:
-    warning: 121
+    warning: 120
     error: 500
     ignores_function_declarations: true
     ignores_comments: true
