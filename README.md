@@ -46,7 +46,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   #### Why?
   Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
   
-  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters.
+  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
 
