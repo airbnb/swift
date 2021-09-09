@@ -1597,13 +1597,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
-* <a id='newline-between-sibling-scopes'></a>(<a href='#newline-between-sibling-scopes'>link</a>) **Sibling scopes should be separated by a newline.** Insert a single blank line between type, extension, protocol or function declarations at the same indentation level. [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesBetweenScopes)
+* <a id='newline-dividing-scoped-decl-siblings'></a>(<a href='#newline-dividing-scoped-decl-siblings'>link</a>) **Declarations that include scopes spanning multiple lines should be separated from adjacent declarations in the same scope by a newline.** Insert a single blank line between multi-line scoped declarations (e.g. types, extensions, functions, computed properties, etc.) and other declarations at the same indentation level. [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesBetweenScopes)
 
   <details>
+
+  #### Why?
+  Dividing scoped declarations from other declarations at the same scope visually separates them, making adjacent declarations easier to differentiate from the scoped declaration.
 
   ```swift
   // WRONG
   struct SolarSystem {
+    var numberOfPlanets: Int {
+      …
+    }
     func distance(to: SolarSystem) -> AstronomicalUnit {
       …
     }
@@ -1619,6 +1625,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   struct SolarSystem {
+    var numberOfPlanets: Int {
+      …
+    }
+
     func distance(to: SolarSystem) -> AstronomicalUnit {
       …
     }
