@@ -553,8 +553,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
     // WRONG
-    guard let case .success(value) else { 
-      return 
+    guard let case .success(value) else {
+      return
     }
 
     // RIGHT
@@ -570,20 +570,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
       return
     }
     ```
-    
+
     #### Why?
-    
+
     1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
-    
-    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier. 
-    
+
+    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier.
+
     ```swift
-    // `let` is adjacent to the variable identifier, so it is immediately obvious 
+    // `let` is adjacent to the variable identifier, so it is immediately obvious
     // at a glance that these identifiers represent new variable bindings
     case .enumCaseWithSingleAssociatedValue(let string):
     case .enumCaseWithMultipleAssociatedValues(let string, let int):
 
-    // The `let` keyword is quite far from the variable identifiers, 
+    // The `let` keyword is quite far from the variable identifiers,
     // so its less obvious that they represent new variable bindings
     case let .enumCaseWithSingleAssociatedValue(string):
     case let .enumCaseWithMultipleAssociatedValues(string, int):
@@ -1596,6 +1596,47 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+
+* <a id='newline-between-sibling-scopes'></a>(<a href='#newline-between-sibling-scopes'>link</a>) **Sibling scopes should be separated by a newline.** Insert a single blank line between type, extension, protocol or function declarations at the same indentation level. [SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-008489.svg)]
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct SolarSystem {
+    func distance(to: SolarSystem) -> AstronomicalUnit {
+      …
+    }
+  }
+  struct Galaxy {
+    func distance(to: Galaxy) -> AstronomicalUnit {
+      …
+    }
+    func numberOfPlanets(in: SolarSystem) -> Int {
+      …
+    }
+  }
+
+  // RIGHT
+  struct SolarSystem {
+    func distance(to: SolarSystem) -> AstronomicalUnit {
+      …
+    }
+  }
+
+  struct Galaxy {
+    func distance(to: Galaxy) -> AstronomicalUnit {
+      …
+    }
+
+    func numberOfPlanets(in: SolarSystem) -> Int {
+      …
+    }
+  }
+  ```
+
+  </details>
+
 
 * <a id='mark-types-and-extensions'></a>(<a href='#mark-types-and-extensions'>link</a>) **Each type and extension which implements a conformance should be preceded by a `MARK` comment.** [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#markTypes)
   * Types should be preceded by a `// MARK: - TypeName` comment.
