@@ -39,12 +39,14 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.** [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
 
   <details>
 
   #### Why?
-  Due to larger screen sizes, we have opted to choose a page guide greater than 80
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
+  
+  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
 
