@@ -39,12 +39,14 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.** [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
 
   <details>
 
   #### Why?
-  Due to larger screen sizes, we have opted to choose a page guide greater than 80
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
+  
+  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
 
@@ -551,8 +553,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
     // WRONG
-    guard let case .success(value) else { 
-      return 
+    guard let case .success(value) else {
+      return
     }
 
     // RIGHT
@@ -568,20 +570,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
       return
     }
     ```
-    
+
     #### Why?
-    
+
     1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
-    
-    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier. 
-    
+
+    2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier.
+
     ```swift
-    // `let` is adjacent to the variable identifier, so it is immediately obvious 
+    // `let` is adjacent to the variable identifier, so it is immediately obvious
     // at a glance that these identifiers represent new variable bindings
     case .enumCaseWithSingleAssociatedValue(let string):
     case .enumCaseWithMultipleAssociatedValues(let string, let int):
 
-    // The `let` keyword is quite far from the variable identifiers, 
+    // The `let` keyword is quite far from the variable identifiers,
     // so its less obvious that they represent new variable bindings
     case let .enumCaseWithSingleAssociatedValue(string):
     case let .enumCaseWithMultipleAssociatedValues(string, int):
@@ -1594,6 +1596,57 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 
 * <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+
+* <a id='newline-between-scope-siblings'></a>(<a href='#newline-between-scope-siblings'>link</a>) **Declarations that include scopes spanning multiple lines should be separated from adjacent declarations in the same scope by a newline.** Insert a single blank line between multi-line scoped declarations (e.g. types, extensions, functions, computed properties, etc.) and other declarations at the same indentation level. [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesBetweenScopes)
+
+  <details>
+
+  #### Why?
+  Dividing scoped declarations from other declarations at the same scope visually separates them, making adjacent declarations easier to differentiate from the scoped declaration.
+
+  ```swift
+  // WRONG
+  struct SolarSystem {
+    var numberOfPlanets: Int {
+      …
+    }
+    func distance(to: SolarSystem) -> AstronomicalUnit {
+      …
+    }
+  }
+  struct Galaxy {
+    func distance(to: Galaxy) -> AstronomicalUnit {
+      …
+    }
+    func contains(_ solarSystem: SolarSystem) -> Bool {
+      …
+    }
+  }
+
+  // RIGHT
+  struct SolarSystem {
+    var numberOfPlanets: Int {
+      …
+    }
+
+    func distance(to: SolarSystem) -> AstronomicalUnit {
+      …
+    }
+  }
+
+  struct Galaxy {
+    func distance(to: Galaxy) -> AstronomicalUnit {
+      …
+    }
+
+    func contains(_ solarSystem: SolarSystem) -> Bool {
+      …
+    }
+  }
+  ```
+
+  </details>
+
 
 * <a id='mark-types-and-extensions'></a>(<a href='#mark-types-and-extensions'>link</a>) **Each type and extension which implements a conformance should be preceded by a `MARK` comment.** [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#markTypes)
   * Types should be preceded by a `// MARK: - TypeName` comment.
