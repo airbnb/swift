@@ -908,7 +908,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
     // The underscore makes it more clear that the `color` parameter is unused.
-    // This method argument can either be removed, to simplify the API for consumers,
+    // This method argument can either be removed if truly unnecessary,
     // or passed through to `universe.generateStars` to correct the logical error.
     func generateUniverseWithStars(
       at location: Point,
