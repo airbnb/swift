@@ -1,4 +1,4 @@
-# Current version of SwiftFormat used at Airbnb: 0.48.4
+# Current version of SwiftFormat used at Airbnb: 0.48.16
 
 # options
 --self remove # redundantSelf
@@ -49,3 +49,4 @@
 --rules wrapAttributes
 --rules wrapMultilineStatementBraces
 --rules redundantInit
+--rules unusedArguments

@@ -17,7 +17,6 @@ only_rules:
   - return_arrow_whitespace
   - trailing_newline
   - type_name
-  - unused_closure_parameter
   - unused_optional_binding
   - vertical_whitespace
   - void_return
