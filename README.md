@@ -730,6 +730,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let dictionary: [String: Any] = [:]
   ```
 
+* <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not reqired.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let universe = Universe.init()
+
+  // RIGHT
+  let universe = Universe()
+  ```
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
