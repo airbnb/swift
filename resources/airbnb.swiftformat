@@ -48,3 +48,4 @@
 --rules wrapArguments
 --rules wrapAttributes
 --rules wrapMultilineStatementBraces
+--rules unusedArguments
