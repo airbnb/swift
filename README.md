@@ -641,6 +641,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) typealiases should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  // WRONG (too long)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding & PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (naive wrapping)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding &
+    PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (unbalanced)
+  public typealias Dependencies = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+
+  // RIGHT
+  public typealias Dependencies
+    = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>

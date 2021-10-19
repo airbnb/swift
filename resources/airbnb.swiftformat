@@ -1,4 +1,4 @@
-# Current version of SwiftFormat used at Airbnb: 0.48.16
+# Current version of SwiftFormat used at Airbnb: 0.49.0
 
 # options
 --self remove # redundantSelf
@@ -13,6 +13,7 @@
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
+--wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --structthreshold 20 # organizeDeclarations
