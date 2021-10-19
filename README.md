@@ -698,6 +698,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='indent-multiline-string-literals'></a>(<a href='#indent-multiline-string-literals'>link</a>) **Indent the body of multi-line string literals**, unless the string literal begins on its own line. [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+
+  <details>
+
+  ```swift
+  // WRONG
+  var spaceQuote = """
+  “Space,” it says, “is big. Really big. You just won’t believe how vastly, hugely, mindbogglingly big it is.
+  I mean, you may think it’s a long way down the road to the chemist’s, but that’s just peanuts to space.”
+  """
+
+  // RIGHT
+  var spaceQuote = """
+    “Space,” it says, “is big. Really big. You just won’t believe how vastly, hugely, mindbogglingly big it is.
+    I mean, you may think it’s a long way down the road to the chemist’s, but that’s just peanuts to space.”
+    """
+
+  // WRONG
+  var universeQuote: String {
+    """
+      In the beginning the Universe was created.
+      This has made a lot of people very angry and been widely regarded as a bad move.
+      """
+  }
+
+  // RIGHT
+  var universeQuote: String {
+    """
+    In the beginning the Universe was created.
+    This has made a lot of people very angry and been widely regarded as a bad move.
+    """
+  }
+  ```
+
   </details>
 
 * <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
