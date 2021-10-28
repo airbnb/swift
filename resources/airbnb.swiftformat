@@ -14,6 +14,7 @@
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
+--wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --structthreshold 20 # organizeDeclarations
