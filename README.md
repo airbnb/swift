@@ -641,6 +641,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) typealiases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  // WRONG (too long)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding & PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (naive wrapping)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding &
+    PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (unbalanced)
+  public typealias Dependencies = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+
+  // RIGHT
+  public typealias Dependencies
+    = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
@@ -1598,6 +1626,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
   All log messages should flow into intermediate logging systems that can direct messages to the correct destination(s) and potentially filter messages based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write all messages directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
+
+  </details>
+
+* <a id='avoid-redundant-closures'></a>(<a href='#avoid-redundant-closures'>link</a>) **Avoid single-expression closures that are always called immediately**. Instead, prefer inlining the expression. [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantClosure)
+
+  <details>
+
+  ```swift
+  // WRONG
+  lazy var universe: Universe = { 
+    Universe() 
+  }()
+
+  lazy var stars = {
+    universe.generateStars(
+      at: location,
+      count: 5,
+      color: starColor,
+      withAverageDistance: 4)
+  }()
+
+  // RIGHT
+  lazy var universe = Universe() 
+
+  lazy var stars = universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+  ```
 
   </details>
 
