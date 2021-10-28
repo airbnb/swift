@@ -50,5 +50,6 @@
 --rules wrapArguments
 --rules wrapAttributes
 --rules wrapMultilineStatementBraces
+--rules redundantClosure
 --rules redundantInit
 --rules unusedArguments
