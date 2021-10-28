@@ -1604,6 +1604,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='avoid-redundant-closures'></a>(<a href='#avoid-redundant-closures'>link</a>) **Avoid single-expression closures that are always called immediately**. Instead, prefer inlining the expression. [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantClosure)
+
+  <details>
+
+  ```swift
+  // WRONG
+  lazy var universe: Universe = { 
+    Universe() 
+  }()
+
+  lazy var stars = {
+    universe.generateStars(
+      at: location,
+      count: 5,
+      color: starColor,
+      withAverageDistance: 4)
+  }()
+
+  // RIGHT
+  lazy var universe = Universe() 
+
+  lazy var stars = universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
