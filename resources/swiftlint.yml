@@ -18,7 +18,6 @@ only_rules:
   - trailing_newline
   - trailing_whitespace
   - type_name
-  - unused_closure_parameter
   - unused_optional_binding
   - vertical_whitespace
   - void_return

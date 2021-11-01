@@ -1,4 +1,5 @@
-# Current version of SwiftFormat used at Airbnb: 0.48.4
+# Current version of SwiftFormat used at Airbnb: 
+# https://github.com/calda/SwiftFormat/releases/tag/0.49-beta-1
 
 # options
 --self remove # redundantSelf
@@ -13,6 +14,7 @@
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
+--wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --structthreshold 20 # organizeDeclarations
@@ -20,6 +22,7 @@
 --organizetypes class,struct,enum,extension # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
+--redundanttype inferred # redundantType
 --swiftversion 5.1
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
@@ -48,3 +51,6 @@
 --rules wrapArguments
 --rules wrapAttributes
 --rules wrapMultilineStatementBraces
+--rules redundantClosure
+--rules redundantInit
+--rules unusedArguments

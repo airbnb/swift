@@ -641,6 +641,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) typealiases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+
+  <details>
+
+  ```swift
+  // WRONG (too long)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding & PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (naive wrapping)
+  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding &
+    PlanetBuilderProviding & CivilizationServiceProviding
+
+  // WRONG (unbalanced)
+  public typealias Dependencies = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+
+  // RIGHT
+  public typealias Dependencies
+    = UniverseBuilderProviding
+    & LawsOfPhysicsProviding
+    & UniverseSimulatorServiceProviding
+    & PlanetBuilderProviding
+    & CivilizationServiceProviding
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
@@ -728,6 +756,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let optional: String? = nil
   let array: [String] = []
   let dictionary: [String: Any] = [:]
+  ```
+
+* <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not reqired.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let universe = Universe.init()
+
+  // RIGHT
+  let universe = Universe()
   ```
 
 ### Functions
@@ -859,6 +899,73 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='unused-function-parameter-naming'></a>(<a href='#unused-function-parameter-naming'>link</a>) **Name unused function parameters as underscores (`_`).** [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedArguments)
+
+    <details>
+
+    #### Why?
+    Naming unused function parameters as underscores makes it more clear when the parameter is unused within the function body.
+    This can make it easier to catch subtle logical errors, and can highlight opportunities to simplify method signatures.
+
+    ```swift
+    // WRONG
+
+    // In this method, the `newContext` parameter is unused.
+    // This is actually a logical error, and is easy to miss, but compiles without warning.
+    func withContext(_ newContext: Context) {
+      var updatedValue = self
+      updatedValue.context = context
+      return updatedValue  
+    }
+
+    // In this method, the `color` parameter is unused.
+    // Is this a logical error (e.g. should it be passed through to the `universe.generateStars` method call),
+    // or is this an unused argument that should be removed from the method signature?
+    func generateUniverseWithStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float)
+    {
+      let universe = generateUniverse()
+      universe.generateStars(
+        at: location,
+        count: count,
+        withAverageDistance: averageDistance)
+    }
+    ```
+
+    ```swift
+    // RIGHT
+
+    // Automatically reformatting the unused parameter to be an underscore
+    // makes it more clear that the parameter is unused, which makes it
+    // easier to spot the logical error.
+    func withContext(_: Context) {
+      var updatedValue = self
+      updatedValue.context = context
+      return updatedValue  
+    }
+
+    // The underscore makes it more clear that the `color` parameter is unused.
+    // This method argument can either be removed if truly unnecessary,
+    // or passed through to `universe.generateStars` to correct the logical error.
+    func generateUniverseWithStars(
+      at location: Point,
+      count: Int,
+      color _: StarColor,
+      withAverageDistance averageDistance: Float)
+    {
+      let universe = generateUniverse()
+      universe.generateStars(
+        at: location,
+        count: count,
+        withAverageDistance: averageDistance)
+    }
+    ```
+
+    </details>
+
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
@@ -879,7 +986,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
+* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).** [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedArguments)
 
     <details>
 
@@ -1494,6 +1601,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
   All log messages should flow into intermediate logging systems that can direct messages to the correct destination(s) and potentially filter messages based on the app's environment or configuration. `print(…)`, `debugPrint(…)`, or `dump(…)` will write all messages directly to standard out in all app configurations and can potentially leak personally identifiable information (PII).
+
+  </details>
+
+* <a id='avoid-redundant-closures'></a>(<a href='#avoid-redundant-closures'>link</a>) **Avoid single-expression closures that are always called immediately**. Instead, prefer inlining the expression. [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantClosure)
+
+  <details>
+
+  ```swift
+  // WRONG
+  lazy var universe: Universe = { 
+    Universe() 
+  }()
+
+  lazy var stars = {
+    universe.generateStars(
+      at: location,
+      count: 5,
+      color: starColor,
+      withAverageDistance: 4)
+  }()
+
+  // RIGHT
+  lazy var universe = Universe() 
+
+  lazy var stars = universe.generateStars(
+    at: location,
+    count: 5,
+    color: starColor,
+    withAverageDistance: 4)
+  ```
 
   </details>
 
