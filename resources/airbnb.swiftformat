@@ -1,5 +1,5 @@
 # Current version of SwiftFormat used at Airbnb: 
-# https://github.com/calda/SwiftFormat/releases/tag/0.49-beta-1
+# https://github.com/calda/SwiftFormat/releases/tag/0.49-beta-2
 
 # options
 --self remove # redundantSelf
@@ -17,6 +17,7 @@
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
+--wrapternary before-operators # wrap
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension # organizeDeclarations
