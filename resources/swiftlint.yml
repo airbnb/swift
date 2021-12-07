@@ -1,5 +1,4 @@
 only_rules:
-  - closure_spacing
   - colon
   - fatal_error_message
   - force_cast
