@@ -55,4 +55,5 @@
 --rules wrapMultilineStatementBraces
 --rules redundantClosure
 --rules redundantInit
+--rules redundantVoidReturnType
 --rules unusedArguments
