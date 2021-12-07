@@ -1,7 +1,6 @@
 only_rules:
   - closure_spacing
   - colon
-  - empty_enum_arguments
   - fatal_error_message
   - force_cast
   - force_try
