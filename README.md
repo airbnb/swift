@@ -883,7 +883,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Functions
 
-* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
 
   <details>
 
@@ -1132,6 +1132,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+* <a id='omit-closure-void-return'></a>(<a href='#omit-closure-void-return'>link</a>) **Omit `Void` return types from closure expressions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
+
+  <details>
+
+  ```swift
+  // WRONG
+  someAsyncThing() { argument -> Void in
+    ...
+  }
+
+  // RIGHT
+  someAsyncThing() { argument in
+    ...
+  }
+  ```
 
 ### Operators
 

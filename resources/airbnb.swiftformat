@@ -57,4 +57,5 @@
 --rules braces
 --rules redundantClosure
 --rules redundantInit
+--rules redundantVoidReturnType
 --rules unusedArguments
