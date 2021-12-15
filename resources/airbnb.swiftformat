@@ -59,3 +59,5 @@
 --rules redundantInit
 --rules redundantVoidReturnType
 --rules unusedArguments
+--rules spaceInsideBraces
+--rules spaceAroundBraces

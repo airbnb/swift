@@ -503,13 +503,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   if (userCount > 0) { ... }
   switch (someValue) { ... }
-  let evens = userCounts.filter { (number) in number % 2 == 0 }
+  let evens = userCounts.filter { (number) in number.isMultiple(of: 2) }
   let squares = userCounts.map() { $0 * $0 }
 
   // RIGHT
   if userCount > 0 { ... }
   switch someValue { ... }
-  let evens = userCounts.filter { number in number % 2 == 0 }
+  let evens = userCounts.filter { number in number.isMultiple(of: 2) }
   let squares = userCounts.map { $0 * $0 }
   ```
 
@@ -792,6 +792,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let dictionary: [String: Any] = [:]
   ```
 
+  </details>
+
 * <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not reqired.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
 
   <details>
@@ -803,6 +805,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   let universe = Universe()
   ```
+
+  </details>
 
 * <a id='single-line-expression-braces'></a>(<a href='#single-line-expression-braces'>link</a>) The opening brace following a single-line expression should be on the same line as the rest of the statement. [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
 
@@ -876,6 +880,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
     }
+  }
+  ```
+
+  </details>
+
+* <a id='whitespace-around-braces'></a>(<a href='#whitespace-around-braces'>link</a>) **Braces should be surrounded by a single whitespace character (either a space, or a newline) on each side.** [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundBraces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct Planet{
+    …
+  }
+
+  // WRONG
+  if condition{
+    …
+  }else{
+    …
+  }
+
+  // RIGHT
+  struct Planet {
+    …
+  }
+
+  // RIGHT
+  if condition {
+    …
+  } else {
+    …
   }
   ```
 
@@ -1119,16 +1155,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Closures should have a single space or newline inside each brace.** Trailing closures should additionally have a single space or newline outside each brace. [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundBraces)
 
   <details>
 
   ```swift
   // WRONG
-  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+  let evenSquares = numbers.filter{$0.isMultiple(of: 2)}.map{  $0 * $0  }
 
   // RIGHT
-  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+  let evenSquares = numbers.filter { $0.isMultiple(of: 2) }.map { $0 * $0 }
+
+  // WRONG
+  let evenSquares = numbers.filter( { $0.isMultiple(of: 2) } ).map( { $0 * $0 } )
+
+  // RIGHT
+  let evenSquares = numbers.filter({ $0.isMultiple(of: 2) }).map({ $0 * $0 })
+
+  // WRONG
+  let evenSquares = numbers
+    .filter{ 
+      $0.isMultiple(of: 2) 
+    }
+    .map{ 
+      $0 * $0 
+    }
+
+  // RIGHT
+  let evenSquares = numbers
+    .filter {
+      $0.isMultiple(of: 2) 
+    }
+    .map {
+      $0 * $0 
+    }
   ```
 
   </details>
