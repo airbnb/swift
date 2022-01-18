@@ -2087,6 +2087,42 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='redundant-fileprivate'></a>(<a href='#redundant-fileprivate'>link</a>) **Prefer using `private` over `fileprivate`,** when `fileprivate` is not necessary. [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantFileprivate)
+
+  <details>
+
+  ```swift
+  struct Spaceship {
+    // WRONG: `engine` is used in `extension Spaceship` below,
+    // but extensions in the same file can access `private` members.
+    // This should be `private` instead.
+    fileprivate let engine: AntimatterEngine
+
+    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
+    // This should be `private` instead.
+    fileprivate let hull: Hull
+
+    // RIGHT: `navigation` is used in `extension Pilot` below,
+    // so `fileprivate` is necessary here.
+    fileprivate let navigation: SpecialRelativityNavigationService
+  }
+
+  extension Spaceship {
+    func blastOff() {
+      engine.start()
+    }
+  }
+
+  extension Pilot {
+    func chartCourse() {
+      spaceship.navigation.course = .andromedaGalaxy
+      spaceship.blastOff()
+    }
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Objective-C Interoperability
