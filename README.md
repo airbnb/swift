@@ -1376,7 +1376,60 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantFileprivate)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct Spaceship {
+    // WRONG: `engine` is used in `extension Spaceship` below,
+    // but extensions in the same file can access `private` members.
+    fileprivate let engine: AntimatterEngine
+
+    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
+    fileprivate let hull: Hull
+
+    // RIGHT: `navigation` is used in `extension Pilot` below,
+    // so `fileprivate` is necessary here.
+    fileprivate let navigation: SpecialRelativityNavigationService
+  }
+
+  extension Spaceship {
+    func blastOff() {
+      engine.start()
+    }
+  }
+
+  extension Pilot {
+    func chartCourse() {
+      spaceship.navigation.course = .andromedaGalaxy
+      spaceship.blastOff()
+    }
+  }
+  ```
+
+  ```swift
+  // RIGHT
+  struct Spaceship {
+    fileprivate let navigation: SpecialRelativityNavigationService
+    private let engine: AntimatterEngine
+    private let hull: Hull
+  }
+
+  extension Spaceship {
+    func blastOff() {
+      engine.start()
+    }
+  }
+  
+  extension Pilot {
+    func chartCourse() {
+      spaceship.navigation.course = .andromedaGalaxy
+      spaceship.blastOff()
+    }
+  }
+  ```
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
@@ -2081,42 +2134,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   var atmosphere: Atmosphere {
     didSet {
       print("oh my god, the atmosphere changed")
-    }
-  }
-  ```
-
-  </details>
-
-* <a id='redundant-fileprivate'></a>(<a href='#redundant-fileprivate'>link</a>) **Prefer using `private` over `fileprivate`,** when `fileprivate` is not necessary. [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantFileprivate)
-
-  <details>
-
-  ```swift
-  struct Spaceship {
-    // WRONG: `engine` is used in `extension Spaceship` below,
-    // but extensions in the same file can access `private` members.
-    // This should be `private` instead.
-    fileprivate let engine: AntimatterEngine
-
-    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
-    // This should be `private` instead.
-    fileprivate let hull: Hull
-
-    // RIGHT: `navigation` is used in `extension Pilot` below,
-    // so `fileprivate` is necessary here.
-    fileprivate let navigation: SpecialRelativityNavigationService
-  }
-
-  extension Spaceship {
-    func blastOff() {
-      engine.start()
-    }
-  }
-
-  extension Pilot {
-    func chartCourse() {
-      spaceship.navigation.course = .andromedaGalaxy
-      spaceship.blastOff()
     }
   }
   ```
