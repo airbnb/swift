@@ -1113,6 +1113,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='redundant-get'></a>(<a href='#redundant-get'>link</a>) **Omit the `get` clause from a variable declaration that doesn't also have a `set`, `willSet`, or `didSet` clause.** [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantGet)
+
+    <details>
+
+    ```
+    // WRONG
+    var universe: Universe {
+      get {
+        Universe()
+      }
+    }
+
+    // RIGHT
+    var universe: Universe {
+      Universe()
+    }
+
+    // RIGHT
+    var universe: Universe {
+      get { multiverseService.current }
+      set { multiverseService.current = newValue }
+    }
+    ```
+
+    </details>
+
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
