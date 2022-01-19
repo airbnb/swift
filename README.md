@@ -1117,7 +1117,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     <details>
 
-    ```
+    ```swift
     // WRONG
     var universe: Universe {
       get {
