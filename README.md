@@ -1382,7 +1382,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  struct Spaceship {
+  public struct Spaceship {
     // WRONG: `engine` is used in `extension Spaceship` below,
     // but extensions in the same file can access `private` members.
     fileprivate let engine: AntimatterEngine
@@ -1396,13 +1396,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   extension Spaceship {
-    func blastOff() {
+    public func blastOff() {
       engine.start()
     }
   }
 
   extension Pilot {
-    func chartCourse() {
+    public func chartCourse() {
       spaceship.navigation.course = .andromedaGalaxy
       spaceship.blastOff()
     }
@@ -1411,20 +1411,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // RIGHT
-  struct Spaceship {
+  public struct Spaceship {
     fileprivate let navigation: SpecialRelativityNavigationService
     private let engine: AntimatterEngine
     private let hull: Hull
   }
 
   extension Spaceship {
-    func blastOff() {
+    public func blastOff() {
       engine.start()
     }
   }
   
   extension Pilot {
-    func chartCourse() {
+    public func chartCourse() {
       spaceship.navigation.course = .andromedaGalaxy
       spaceship.blastOff()
     }
