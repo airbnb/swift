@@ -1113,7 +1113,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='redundant-get'></a>(<a href='#redundant-get'>link</a>) **Omit the `get` clause from a computed variable declaration that doesn't also have a `set`, `willSet`, or `didSet` clause.** [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantGet)
+* <a id='redundant-get'></a>(<a href='#redundant-get'>link</a>) **Omit the `get` clause from a computed property declaration that doesn't also have a `set`, `willSet`, or `didSet` clause.** [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantGet)
 
     <details>
 
