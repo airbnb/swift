@@ -13,7 +13,6 @@ only_rules:
   - redundant_string_enum_value
   - return_arrow_whitespace
   - trailing_newline
-  - type_name
   - unused_optional_binding
   - vertical_whitespace
   - void_return
