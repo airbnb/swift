@@ -1486,7 +1486,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-007A87.svg)](https://realm.github.io/SwiftLint/redundant_string_enum_value)
+* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftFormat: redundantRawValues](https://img.shields.io/badge/SwiftFormat-redundantRawValues-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantRawValues)
 
   <details>
 
@@ -1532,13 +1532,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
-  // swiftlint:disable redundant_string_enum_value
+  // swiftformat:disable redundantEnumValues
   enum UserType: String {
     case owner = "owner"
     case manager = "manager"
     case member = "member"
   }
-  // swiftlint:enable redundant_string_enum_value
+  // swiftformat:enable redundantEnumValues
 
   enum Planet: Int {
     case mercury

@@ -46,6 +46,7 @@
 --rules redundantType
 --rules redundantPattern
 --rules redundantFileprivate
+--rules redundantRawValues
 --rules sortedImports
 --rules sortDeclarations
 --rules strongifiedSelf
