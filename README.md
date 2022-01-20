@@ -58,7 +58,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Naming
 
-* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://realm.github.io/SwiftLint/type_name)
+* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.**
 
   <details>
 
