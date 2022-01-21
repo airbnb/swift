@@ -7,7 +7,6 @@ only_rules:
   - legacy_constructor
   - legacy_nsgeometry_functions
   - operator_usage_whitespace
-  - redundant_string_enum_value
   - return_arrow_whitespace
   - trailing_newline
   - unused_optional_binding
