@@ -64,3 +64,4 @@
 --rules unusedArguments
 --rules spaceInsideBraces
 --rules spaceAroundBraces
+--rules enumNamespaces
