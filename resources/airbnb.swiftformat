@@ -1,5 +1,5 @@
 # Current version of SwiftFormat used at Airbnb: 
-# https://github.com/calda/SwiftFormat/releases/tag/0.49-beta-4
+# https://github.com/calda/SwiftFormat/releases/tag/0.50-beta-1
 
 # options
 --self remove # redundantSelf
