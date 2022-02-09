@@ -925,7 +925,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
 
   /**
-  * A planet that exists somnewhere in the universe.
+  * A planet that exists somewhere in the universe.
   *
   * Planets have many properties. For example, the best planets
   * have atmospheres and bodies of water to support life.
@@ -951,7 +951,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
 
-  /// A planet that exists somnewhere in the universe.
+  /// A planet that exists somewhere in the universe.
   ///
   /// Planets have many properties. For example, the best planets
   /// have atmospheres and bodies of water to support life.
