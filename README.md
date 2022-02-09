@@ -917,6 +917,62 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='comments'></a>(<a href='#comments'>link</a>) **Comment blocks should use single-line comments (`//` and `///`)**, rather than multi-line comments (`/* ... */` and `/** ... */`). [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blockComments)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  /**
+  * A planet that exists somnewhere in the universe.
+  *
+  * Planets have many properties. For example, the best planets
+  * have atmospheres and bodies of water to support life.
+  */
+  class Planet {
+    /**
+      Terraforms the planet, by adding an atmosphere and ocean
+      that is hospitable for life.
+      - Precondition: the planet does not already have an atmosphere.
+        Adding another atmosphere to a planet that already has one is a very bad idea.
+    */
+    func terraform() {
+      /* 
+      Generate the atmosphere first, before generating the ocean.
+      Otherwise, the water will just boil off immediately.
+      */
+      generateAtmosphere()
+
+      /* Now that we have an atmosphere, it's safe to generate the ocean */
+      generateOceans()
+    }
+  }
+
+  // RIGHT
+
+  /// A planet that exists somnewhere in the universe.
+  ///
+  /// Planets have many properties. For example, the best planets
+  /// have atmospheres and bodies of water to support life.
+  class Planet {
+    /// Terraforms the planet, by adding an atmosphere and ocean
+    /// that is hospitable for life.
+    ///  - Precondition: the planet does not already have an atmosphere.
+    ///    Adding another atmosphere to a planet that already has one is a very bad idea.
+    func terraform() {
+      // Generate the atmosphere first, before generating the ocean.
+      // Otherwise, the water will just boil off immediately.
+      generateAtmosphere()
+
+      // Now that we have an atmosphere, it's safe to generate the ocean
+      generateOceans()
+    }
+  }
+  ```
+
+  </details>
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
