@@ -58,7 +58,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Naming
 
-* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
+* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.**
 
   <details>
 
@@ -430,7 +430,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
+* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://realm.github.io/SwiftLint/colon)
 
   <details>
 
@@ -465,7 +465,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Place a space on either side of a return arrow for readability.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
+* <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Place a space on either side of a return arrow for readability.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/return_arrow_whitespace)
 
   <details>
 
@@ -503,19 +503,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   if (userCount > 0) { ... }
   switch (someValue) { ... }
-  let evens = userCounts.filter { (number) in number % 2 == 0 }
+  let evens = userCounts.filter { (number) in number.isMultiple(of: 2) }
   let squares = userCounts.map() { $0 * $0 }
 
   // RIGHT
   if userCount > 0 { ... }
   switch someValue { ... }
-  let evens = userCounts.filter { number in number % 2 == 0 }
+  let evens = userCounts.filter { number in number.isMultiple(of: 2) }
   let squares = userCounts.map { $0 * $0 }
   ```
 
   </details>
 
-* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
+* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.** [![SwiftFormat: redundantPattern](https://img.shields.io/badge/SwiftFormat-redundantPattern-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantPattern)
 
   <details>
 
@@ -726,9 +726,43 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='indent-multiline-string-literals'></a>(<a href='#indent-multiline-string-literals'>link</a>) **Indent the body and closing triple-quote of multiline string literals**, unless the string literal begins on its own line in which case the string literal contents and closing triple-quote should have the same indentation as the opening triple-quote. [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+
+  <details>
+
+  ```swift
+  // WRONG
+  var spaceQuote = """
+  “Space,” it says, “is big. Really big. You just won’t believe how vastly, hugely, mindbogglingly big it is.
+  I mean, you may think it’s a long way down the road to the chemist’s, but that’s just peanuts to space.”
+  """
+
+  // RIGHT
+  var spaceQuote = """
+    “Space,” it says, “is big. Really big. You just won’t believe how vastly, hugely, mindbogglingly big it is.
+    I mean, you may think it’s a long way down the road to the chemist’s, but that’s just peanuts to space.”
+    """
+
+  // WRONG
+  var universeQuote: String {
+    """
+      In the beginning the Universe was created.
+      This has made a lot of people very angry and been widely regarded as a bad move.
+      """
+  }
+
+  // RIGHT
+  var universeQuote: String {
+    """
+    In the beginning the Universe was created.
+    This has made a lot of people very angry and been widely regarded as a bad move.
+    """
+  }
+  ```
+
   </details>
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://realm.github.io/SwiftLint/legacy_constructor)
 
   <details>
 
@@ -758,6 +792,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let dictionary: [String: Any] = [:]
   ```
 
+  </details>
+
 * <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not reqired.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
 
   <details>
@@ -770,9 +806,120 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let universe = Universe()
   ```
 
+  </details>
+
+* <a id='single-line-expression-braces'></a>(<a href='#single-line-expression-braces'>link</a>) The opening brace following a single-line expression should be on the same line as the rest of the statement. [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if !planet.isHabitable
+  {
+    planet.terraform()
+  }
+
+  class Planet
+  {
+    func terraform()
+    {
+      generateAtmosphere()
+      generateOceans()
+    }
+  }
+
+  // RIGHT
+  if !planet.isHabitable {
+    planet.terraform()
+  }
+
+  class Planet {
+    func terraform() {
+      generateAtmosphere()
+      generateOceans()
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='multi-line-expression-braces'></a>(<a href='#multi-line-expression-braces'>link</a>) The opening brace following a multi-line expression should wrap to a new line. [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if
+    let star = planet.nearestStar(),
+    planet.isInHabitableZone(of: star) {
+    planet.terraform()
+  }
+
+  class Planet {
+    func terraform(
+      atmosphereOptions: AtmosphereOptions = .default,
+      oceanOptions: OceanOptions = .default) {
+      generateAtmosphere(atmosphereOptions)
+      generateOceans(oceanOptions)
+    }
+  }
+
+  // RIGHT
+  if
+    let star = planet.nearestStar(),
+    planet.isInHabitableZone(of: star)
+  {
+    planet.terraform()
+  }
+
+  class Planet {
+    func terraform(
+      atmosphereOptions: AtmosphereOptions = .default,
+      oceanOptions: OceanOptions = .default) 
+    {
+      generateAtmosphere(atmosphereOptions)
+      generateOceans(oceanOptions)
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='whitespace-around-braces'></a>(<a href='#whitespace-around-braces'>link</a>) **Braces should be surrounded by a single whitespace character (either a space, or a newline) on each side.** [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundBraces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct Planet{
+    …
+  }
+
+  // WRONG
+  if condition{
+    …
+  }else{
+    …
+  }
+
+  // RIGHT
+  struct Planet {
+    …
+  }
+
+  // RIGHT
+  if condition {
+    …
+  } else {
+    …
+  }
+  ```
+
+  </details>
+
 ### Functions
 
-* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
 
   <details>
 
@@ -790,7 +937,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineStatementBraces)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
 
   <details>
 
@@ -968,7 +1115,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Closures
 
-* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
+* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://realm.github.io/SwiftLint/void_return)
 
   <details>
 
@@ -1008,23 +1155,63 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Closures should have a single space or newline inside each brace.** Trailing closures should additionally have a single space or newline outside each brace. [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundBraces)
 
   <details>
 
   ```swift
   // WRONG
-  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+  let evenSquares = numbers.filter{$0.isMultiple(of: 2)}.map{  $0 * $0  }
 
   // RIGHT
-  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+  let evenSquares = numbers.filter { $0.isMultiple(of: 2) }.map { $0 * $0 }
+
+  // WRONG
+  let evenSquares = numbers.filter( { $0.isMultiple(of: 2) } ).map( { $0 * $0 } )
+
+  // RIGHT
+  let evenSquares = numbers.filter({ $0.isMultiple(of: 2) }).map({ $0 * $0 })
+
+  // WRONG
+  let evenSquares = numbers
+    .filter{ 
+      $0.isMultiple(of: 2) 
+    }
+    .map{ 
+      $0 * $0 
+    }
+
+  // RIGHT
+  let evenSquares = numbers
+    .filter {
+      $0.isMultiple(of: 2) 
+    }
+    .map {
+      $0 * $0 
+    }
   ```
 
   </details>
 
+* <a id='omit-closure-void-return'></a>(<a href='#omit-closure-void-return'>link</a>) **Omit `Void` return types from closure expressions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
+
+  <details>
+
+  ```swift
+  // WRONG
+  someAsyncThing() { argument -> Void in
+    ...
+  }
+
+  // RIGHT
+  someAsyncThing() { argument in
+    ...
+  }
+  ```
+
 ### Operators
 
-* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
+* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
 
   <details>
 
@@ -1046,11 +1233,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='long-ternary-operator-expressions'></a>(<a href='#long-ternary-operator-expressions'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) ternary operator expressions should wrap before the `?` and before the `:`**, putting each conditional branch on a separate line. [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
+
+  <details>
+
+  ```swift
+  // WRONG (too long)
+  let destinationPlanet = solarSystem.hasPlanetsInHabitableZone ? solarSystem.planetsInHabitableZone.first : solarSystem.uninhabitablePlanets.first
+
+  // WRONG (naive wrapping)
+  let destinationPlanet = solarSystem.hasPlanetsInHabitableZone ? solarSystem.planetsInHabitableZone.first :
+    solarSystem.uninhabitablePlanets.first
+
+  // WRONG (unbalanced operators)
+  let destinationPlanet = solarSystem.hasPlanetsInHabitableZone ?
+    solarSystem.planetsInHabitableZone.first :
+    solarSystem.uninhabitablePlanets.first
+
+  // RIGHT
+  let destinationPlanet = solarSystem.hasPlanetsInHabitableZone
+    ? solarSystem.planetsInHabitableZone.first
+    : solarSystem.uninhabitablePlanets.first
+   ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Patterns
 
-* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
+* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://realm.github.io/SwiftLint/implicitly_unwrapped_optional)
 
   <details>
 
@@ -1164,7 +1376,60 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantFileprivate)
+
+  <details>
+
+  ```swift
+  // WRONG
+  public struct Spaceship {
+    // WRONG: `engine` is used in `extension Spaceship` below,
+    // but extensions in the same file can access `private` members.
+    fileprivate let engine: AntimatterEngine
+
+    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
+    fileprivate let hull: Hull
+
+    // RIGHT: `navigation` is used in `extension Pilot` below,
+    // so `fileprivate` is necessary here.
+    fileprivate let navigation: SpecialRelativityNavigationService
+  }
+
+  extension Spaceship {
+    public func blastOff() {
+      engine.start()
+    }
+  }
+
+  extension Pilot {
+    public func chartCourse() {
+      spaceship.navigation.course = .andromedaGalaxy
+      spaceship.blastOff()
+    }
+  }
+  ```
+
+  ```swift
+  // RIGHT
+  public struct Spaceship {
+    fileprivate let navigation: SpecialRelativityNavigationService
+    private let engine: AntimatterEngine
+    private let hull: Hull
+  }
+
+  extension Spaceship {
+    public func blastOff() {
+      engine.start()
+    }
+  }
+  
+  extension Pilot {
+    public func chartCourse() {
+      spaceship.navigation.course = .andromedaGalaxy
+      spaceship.blastOff()
+    }
+  }
+  ```
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
@@ -1196,7 +1461,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.**
+* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** [![SwiftFormat: enumNamespaces](https://img.shields.io/badge/SwiftFormat-enumNamespaces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#enumNamespaces)
   * Avoid creating non-namespaced global constants and functions.
   * Feel free to nest namespaces where it adds clarity.
   * `private` globals are permitted, since they are scoped to a single file and do not pollute the global namespace. Consider placing private globals in an `enum` namespace to match the guidelines for other declaration types.
@@ -1221,7 +1486,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
+* <a id='auto-enum-values'></a>(<a href='#auto-enum-values'>link</a>) **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftFormat: redundantRawValues](https://img.shields.io/badge/SwiftFormat-redundantRawValues-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantRawValues)
 
   <details>
 
@@ -1267,13 +1532,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
-  // swiftlint:disable redundant_string_enum_value
+  // swiftformat:disable redundantEnumValues
   enum UserType: String {
     case owner = "owner"
     case manager = "manager"
     case member = "member"
   }
-  // swiftlint:enable redundant_string_enum_value
+  // swiftformat:enable redundantEnumValues
 
   enum Planet: Int {
     case mercury
@@ -1372,7 +1637,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
+* <a id='preconditions-and-asserts'></a>(<a href='#preconditions-and-asserts'>link</a>) **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://realm.github.io/SwiftLint/fatal_error_message)
 
   <details>
 
@@ -1473,7 +1738,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Check for nil rather than using optional binding if you don't need to use the value.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
+* <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Check for nil rather than using optional binding if you don't need to use the value.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://realm.github.io/SwiftLint/unused_optional_binding)
 
   <details>
 
@@ -1634,6 +1899,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='redundant-get'></a>(<a href='#redundant-get'>link</a>) **Omit the `get` clause from a computed property declaration that doesn't also have a `set`, `willSet`, or `didSet` clause.** [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantGet)
+
+    <details>
+
+    ```swift
+    // WRONG
+    var universe: Universe {
+      get {
+        Universe()
+      }
+    }
+
+    // RIGHT
+    var universe: Universe {
+      Universe()
+    }
+
+    // RIGHT
+    var universe: Universe {
+      get { multiverseService.current }
+      set { multiverseService.current = newValue }
+    }
+    ```
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
@@ -1702,7 +1993,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='limit-consecutive-whitespace'></a><a id='limit-vertical-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
+* <a id='limit-consecutive-whitespace'></a><a id='limit-vertical-whitespace'></a>(<a href='#limit-consecutive-whitespace'>link</a>) **Limit consecutive whitespace to one blank line or space (excluding indentation).** Favor the following formatting guidelines over whitespace of varying heights or widths. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/vertical_whitespace) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consecutiveSpaces)
 
   <details>
 
@@ -1732,7 +2023,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   </details>
 
 
-* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://realm.github.io/SwiftLint/trailing_newline)
 
 * <a id='newline-between-scope-siblings'></a>(<a href='#newline-between-scope-siblings'>link</a>) **Declarations that include scopes spanning multiple lines should be separated from adjacent declarations in the same scope by a newline.** Insert a single blank line between multi-line scoped declarations (e.g. types, extensions, functions, computed properties, etc.) and other declarations at the same indentation level. [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesBetweenScopes)
 
