@@ -19,7 +19,6 @@ only_rules:
   # Slumber Group Rules
   - trailing_whitespace
   - attributes
-  - colon
   - cyclomatic_complexity
   - file_length
   - function_body_length
@@ -30,6 +29,9 @@ only_rules:
 excluded:
   - Carthage
   - Pods
+  
+colon:
+  apply_to_dictionaries: false
 
 indentation: 4
 
@@ -49,9 +51,6 @@ custom_rules:
 
   attributes:
     always_on_line_above: ["@testable", "@available", "@discardableResult", "@objc", "@IBAction", "@IBDesignable"]
-    
-  colon:
-    apply_to_dictionaries: false
     
   cyclomatic_complexity:
     warning: 25
