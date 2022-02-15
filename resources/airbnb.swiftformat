@@ -65,3 +65,4 @@
 --rules spaceInsideBraces
 --rules spaceAroundBraces
 --rules enumNamespaces
+--rules blockComments
