@@ -16,10 +16,6 @@ only_rules:
   - void_return
   - custom_rules
 
-disabled_rules:
-  - for_where
-  - shorthand_operator
-
 excluded:
   - Carthage
   - Pods
