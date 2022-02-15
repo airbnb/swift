@@ -1,6 +1,5 @@
 only_rules:
-  - trailing_whitespace
-  - type_name
+  # AirBnB rules
   - colon
   - fatal_error_message
   - implicitly_unwrapped_optional
@@ -15,6 +14,18 @@ only_rules:
   - vertical_whitespace
   - void_return
   - custom_rules
+  - no_objcMembers
+  - no_direct_standard_out_logs
+  # Slumber Group Rules
+  - trailing_whitespace
+  - attributes
+  - colon
+  - cyclomatic_complexity
+  - file_length
+  - function_body_length
+  - function_parameter_count
+  - type_body_length
+  - type_name
 
 excluded:
   - Carthage
@@ -39,8 +50,18 @@ custom_rules:
     message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
     severity: warning
 
+  attributes:
+    always_on_line_above: ["@testable", "@available", "@discardableResult", "@objc", "@IBAction", "@IBDesignable"]
+    
   colon:
     apply_to_dictionaries: false
+    
+  cyclomatic_complexity:
+    warning: 25
+    
+  file_length:
+    warning: 1000
+    ignore_comment_only_lines: true
 
   function_body_length:
     warning: 300
@@ -51,16 +72,8 @@ custom_rules:
   type_body_length:
     warning: 300
 
-  file_length:
-    warning: 1000
-    ignore_comment_only_lines: true
-
-  cyclomatic_complexity:
-    warning: 25
-
   type_name:
     max_length:
       warning: 60
 
-  attributes:
-    always_on_line_above: ["@testable", "@available", "@discardableResult", "@objc", "@IBAction", "@IBDesignable"]
+
