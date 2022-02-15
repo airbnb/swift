@@ -917,7 +917,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='comments'></a>(<a href='#comments'>link</a>) **Comment blocks should use single-line comments (`//` for code comments and `///` for documentation comments)**, rather than multi-line comments (`/* ... */` and `/** ... */`). [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blockComments)
+* <a id='single-line-comments'></a>(<a href='#single-line-comments'>link</a>) **Comment blocks should use single-line comments (`//` for code comments and `///` for documentation comments)**, rather than multi-line comments (`/* ... */` and `/** ... */`). [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blockComments)
 
   <details>
 
@@ -932,10 +932,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   */
   class Planet {
     /**
-      Terraforms the planet, by adding an atmosphere and ocean
-      that is hospitable for life.
-      - Precondition: the planet does not already have an atmosphere.
-        Adding another atmosphere to a planet that already has one is a very bad idea.
+      Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     */
     func terraform() {
       /* 
@@ -956,10 +953,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   /// Planets have many properties. For example, the best planets
   /// have atmospheres and bodies of water to support life.
   class Planet {
-    /// Terraforms the planet, by adding an atmosphere and ocean
-    /// that is hospitable for life.
-    ///  - Precondition: the planet does not already have an atmosphere.
-    ///    Adding another atmosphere to a planet that already has one is a very bad idea.
+    /// Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     func terraform() {
       // Generate the atmosphere first, before generating the ocean.
       // Otherwise, the water will just boil off immediately.
