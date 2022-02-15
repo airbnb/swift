@@ -31,9 +31,6 @@ excluded:
   - Carthage
   - Pods
 
-colon:
-  apply_to_dictionaries: false
-
 indentation: 4
 
 custom_rules:
