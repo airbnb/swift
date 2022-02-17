@@ -14,8 +14,6 @@ only_rules:
   - vertical_whitespace
   - void_return
   - custom_rules
-  - no_objcMembers
-  - no_direct_standard_out_logs
   # Slumber Group Rules
   - trailing_whitespace
   - attributes
