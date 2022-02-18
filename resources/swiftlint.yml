@@ -15,7 +15,6 @@ only_rules:
   - void_return
   - custom_rules
   # Slumber Group Rules
-  - trailing_whitespace
   - attributes
   - cyclomatic_complexity
   - file_length
