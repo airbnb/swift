@@ -59,6 +59,10 @@
 --rules wrap
 --rules wrapArguments
 --rules wrapAttributes
+--rules wrapConditionalBodies
+--rules wrapEnumCases
+--rules wrapMultilineStatementBraces
+--rules wrapSwitchCases
 --rules braces
 --rules redundantClosure
 --rules redundantInit
