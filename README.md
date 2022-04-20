@@ -2255,8 +2255,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Amendments
 
-We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
-     
+- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapconditionalbodies))`--rules wrapConditionalBodies`[![SwiftFormat: wrapConditionalBodies](https://img.shields.io/badge/SwiftFormat-wrapConditionalBodies-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapconditionalbodies)
+
+- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapenumcases))`--rules wrapEnumCases`[![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapenumcases)
+
+- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapmultilinestatementbraces))`--rules wrapMultilineStatementBraces`[![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapmultilinestatementbraces)
+
+- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapswitchcases))`--rules wrapSwitchCases`[![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapswitchcases)
+
 ## Xcode Formatting
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings_slumber_group.bash), e.g. as part of a "Run Script" build phase._
