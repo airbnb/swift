@@ -2254,8 +2254,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 **[⬆ back to top](#table-of-contents)**
 
 ## Amendments
+* <a id='wrap-conditional-bodies'></a>(<a href='#wrap-conditional-bodies'>link</a>) **Wrap the bodies of inline conditional statements onto a new line.** This increasses clarity.[![SwiftFormat: wrapConditionalBodies](https://img.shields.io/badge/SwiftFormat-wrapConditionalBodies-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapconditionalbodies)
 
-- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapconditionalbodies))`--rules wrapConditionalBodies`[![SwiftFormat: wrapConditionalBodies](https://img.shields.io/badge/SwiftFormat-wrapConditionalBodies-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapconditionalbodies)
   <details>
 
   ```swift
@@ -2270,7 +2270,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapenumcases))`--rules wrapEnumCases`[![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapenumcases)
+* <a id='wrap-enum-cases'></a>(<a href='#wrap-enum-cases'>link</a>) **Write one enum case per line.** This increasses clarity.[![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapenumcases)
+
   <details>
 
   ```swift
@@ -2288,54 +2289,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapmultilinestatementbraces))`--rules wrapMultilineStatementBraces`[![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapmultilinestatementbraces)
+* <a id='wrap-switch-cases'></a>(<a href='#wrap-switch-cases'>link</a>) **Write one switch case per line.** This increasses clarity.[![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapswitchcases)
+
   <details>
 
-    ```swift
-    // WRONG
-    if 
-      foo, 
-      bar { 
-      // ...
-    }
+  ```swift
+  // WRONG
+  enum Foo { 
+    case bar, baz
+  }
 
-    // RIGHT
-    if 
-      foo, 
-      bar
-    {
-      // ...
-    }
-    ```
+  // RIGHT
+  enum Foo {
+    case bar
+    case baz
+  }
+  ```
 
   </details>
-
-- ([link](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapswitchcases))`--rules wrapSwitchCases`[![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapswitchcases)
-  <details>
-
-    ```swift
-    // WRONG
-    switch foo { 
-    case .bar, .baz:
-      break
-    }
-
-    // RIGHT
-    switch foo {
-    case .bar,
-         .baz:
-      break
-    }
-    ```
-
-    </details>
-
 
 ## Xcode Formatting
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings_slumber_group.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='120-column-width'></a>(<a href='#120-column-width'>link</a>) **Each line should have a maximum column width of 120 characters.**
+* <a id='130-column-width'></a>(<a href='#130-column-width'>link</a>) **Each line should have a maximum column width of 130 characters.**
 
   <details>
 
