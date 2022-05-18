@@ -1582,13 +1582,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
-  // swiftformat:disable redundantEnumValues
+  // swiftformat:disable redundantRawValues
   enum UserType: String {
     case owner = "owner"
     case manager = "manager"
     case member = "member"
   }
-  // swiftformat:enable redundantEnumValues
+  // swiftformat:enable redundantRawValues
 
   enum Planet: Int {
     case mercury
