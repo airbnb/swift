@@ -967,6 +967,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+  * <a id='spaces-in-and-around-comments'></a>(<a href='#spaces-in-and-around-comments'>link</a>) Include spaces before and after comments [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideComments)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  ///A spacecraft with incredible performance characteristics
+  struct Spaceship {
+
+    func travelFasterThanLight() {/*unimplemented*/}
+
+    func travelBackInTime() { }//TODO: research whether or not this is possible
+
+  }
+
+  // RIGHT
+
+  /// A spacecraft with incredible performance characteristics
+  struct Spaceship {
+
+    func travelFasterThanLight() { /* unimplemented */ }
+
+    func travelBackInTime() { } // TODO: research whether or not this is possible
+
+  }
+  ```
+
+  </details>
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
