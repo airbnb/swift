@@ -397,6 +397,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
+* <a id='no-space-inside-brackets'></a>(<a href='#no-space-inside-brackets'>link</a>) **There should be no spaces inside the brackets of collection literals.** [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBrackets)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let innerPlanets = [ mercury, venus, earth, mars ]
+  let largestObjects = [ .star: sun, .planet: jupiter  ]
+
+  // RIGHT
+  let innerPlanets = [mercury, venus, earth, mars]
+  let largestObjects = [.star: sun, .planet: jupiter]
+  ```
+
   </details>
 
 * <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
