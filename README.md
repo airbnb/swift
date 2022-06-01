@@ -923,12 +923,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   func install ( _ engine: Engine ) { }
 
-  install ( AnimatterDrive( ) )
+  install ( AntimatterDrive( ) )
 
   // RIGHT
   func install(_ engine: Engine) { }
 
-  install(AnimatterDrive())
+  install(AntimatterDrive())
   ```
 
   </details>
