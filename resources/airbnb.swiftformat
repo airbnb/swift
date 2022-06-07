@@ -63,6 +63,7 @@
 --rules redundantInit
 --rules redundantVoidReturnType
 --rules unusedArguments
+--rules spaceInsideBrackets
 --rules spaceInsideBraces
 --rules spaceAroundBraces
 --rules spaceInsideParens
