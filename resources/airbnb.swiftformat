@@ -65,6 +65,8 @@
 --rules unusedArguments
 --rules spaceInsideBraces
 --rules spaceAroundBraces
+--rules spaceInsideParens
+--rules spaceAroundParens
 --rules enumNamespaces
 --rules blockComments
 --rules spaceAroundComments
