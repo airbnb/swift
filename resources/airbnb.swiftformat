@@ -67,3 +67,5 @@
 --rules spaceAroundBraces
 --rules enumNamespaces
 --rules blockComments
+--rules spaceAroundComments
+--rules spaceInsideComments
