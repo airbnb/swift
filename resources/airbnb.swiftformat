@@ -25,6 +25,7 @@
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType
+--typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --swiftversion 5.5
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
@@ -72,3 +73,5 @@
 --rules blockComments
 --rules spaceAroundComments
 --rules spaceInsideComments
+--rules blankLinesAtStartOfScope
+--rules blankLinesAtEndOfScope
