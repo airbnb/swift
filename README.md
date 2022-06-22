@@ -2192,32 +2192,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class Planet {
-
     func terraform() {
 
       generateAtmosphere()
       generateOceans()
 
     }
-
   }
 
   // RIGHT
   class Planet {
-
     func terraform() {
       generateAtmosphere()
       generateOceans()
-    }
-    
+    } 
   }
 
   // Also fine!
   class Planet {
+
     func terraform() {
       generateAtmosphere()
       generateOceans()
     }
+
   }
   ```
 
