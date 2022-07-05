@@ -2185,6 +2185,42 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no-blank-lines-at-start-or-end-of-non-type-scopes'></a>(<a href='#no-blank-lines-at-start-or-end-of-non-type-scopes'>link</a>) **Remove blank lines at the top and bottom of scopes**, excluding type bodies which can optionally include blank lines. [![SwiftFormat: blankLinesAtStartOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtStartOfScope-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesAtStartOfScope) [![SwiftFormat: blankLinesAtEndOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtEndOfScope-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesAtEndOfScope)
+
+  <details>
+
+  ```swift
+  // WRONG
+  class Planet {
+    func terraform() {
+
+      generateAtmosphere()
+      generateOceans()
+
+    }
+  }
+
+  // RIGHT
+  class Planet {
+    func terraform() {
+      generateAtmosphere()
+      generateOceans()
+    } 
+  }
+
+  // Also fine!
+  class Planet {
+
+    func terraform() {
+      generateAtmosphere()
+      generateOceans()
+    }
+
+  }
+  ```
+
+  </details>
+
 
 * <a id='mark-types-and-extensions'></a>(<a href='#mark-types-and-extensions'>link</a>) **Each type and extension which implements a conformance should be preceded by a `MARK` comment.** [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#markTypes)
   * Types should be preceded by a `// MARK: - TypeName` comment.
