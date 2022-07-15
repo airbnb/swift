@@ -1951,10 +1951,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  protocol Foo: class {}
+  protocol Foo: class { }
 
   // RIGHT
-  protocol Foo: AnyObject {}
+  protocol Foo: AnyObject { }
   ```
 
   </details>
