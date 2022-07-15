@@ -1368,7 +1368,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='and-conditions'></a>(<a href='#and-conditions'>link</a>) In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#andOperator)
+* <a id='use-commas-in-and-conditions'></a>(<a href='#use-commas-in-and-conditions'>link</a>) In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#andOperator)
 
   <details>
 
