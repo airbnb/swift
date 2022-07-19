@@ -1027,6 +1027,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='space-in-empty-braces'></a>(<a href='#space-in-empty-braces'>link</a>) Include a single space in an empty set of braces (`{ }`). [![SwiftFormat: emptyBraces](https://img.shields.io/badge/SwiftFormat-emptyBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyBraces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  extension Spaceship: Trackable {}
+
+  extension SpaceshipView {
+    var accessibilityIdentifier: String {
+      get { spaceship.name }
+      set {}
+    }
+  }
+
+  // RIGHT
+  extension Spaceship: Trackable { }
+
+  extension SpaceshipView {
+    var accessibilityIdentifier: String {
+      get { spaceship.name }
+      set { }
+    }
+  }
+  ```
+
+  </details>
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
@@ -1957,10 +1985,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  protocol Foo: class {}
+  protocol Foo: class { }
 
   // RIGHT
-  protocol Foo: AnyObject {}
+  protocol Foo: AnyObject { }
   ```
 
   </details>
