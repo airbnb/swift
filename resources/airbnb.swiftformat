@@ -75,3 +75,4 @@
 --rules spaceInsideComments
 --rules blankLinesAtStartOfScope
 --rules blankLinesAtEndOfScope
+--rules andOperator
