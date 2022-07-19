@@ -77,3 +77,4 @@
 --rules blankLinesAtStartOfScope
 --rules blankLinesAtEndOfScope
 --rules emptyBraces
+--rules andOperator

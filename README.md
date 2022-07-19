@@ -1396,6 +1396,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='use-commas-in-and-conditions'></a>(<a href='#use-commas-in-and-conditions'>link</a>) In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#andOperator)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if let star = planet.star, !planet.isHabitable && planet.isInHabitableZone(of: star) {
+    planet.terraform()
+  }
+
+  if
+    let star = planet.star, 
+    !planet.isHabitable 
+    && planet.isInHabitableZone(of: star)
+  {
+    planet.terraform()
+  }
+
+  // RIGHT
+  if let star = planet.star, !planet.isHabitable, planet.isInHabitableZone(of: star) {
+    planet.terraform()
+  }
+
+  if
+    let star = planet.star,
+    !planet.isHabitable,
+    planet.isInHabitableZone(of: star)
+  {
+    planet.terraform()
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Patterns
