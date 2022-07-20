@@ -1,6 +1,8 @@
 import ArgumentParser
 import Foundation
 
+// MARK: - AirbnbSwiftFormatTool
+
 /// A command line tool that formats the given directories using SwiftFormat and SwiftLint,
 /// based on the Airbnb Swift Style Guide
 @main
@@ -11,16 +13,16 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Argument(help: "The directories to format")
   var directories: [String]
 
-  @Option(help: "The abosolute path to a SwiftFormat binary")
+  @Option(help: "The absolute path to a SwiftFormat binary")
   var swiftFormatPath: String
 
-  @Option(help: "The path to use for SwiftFormat's cache")
+  @Option(help: "The absolute path to use for SwiftFormat's cache")
   var swiftFormatCachePath: String?
 
-  @Option(help: "The abosolute path to a SwiftLint binary")
+  @Option(help: "The absolute path to a SwiftLint binary")
   var swiftLintPath: String
 
-  @Option(help: "The path to use for SwiftLint's cache")
+  @Option(help: "The absolute path to use for SwiftLint's cache")
   var swiftLintCachePath: String?
 
   @Flag(help: "When true, source files are not reformatted")
@@ -38,6 +40,13 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
 
     try swiftLint.run()
     swiftLint.waitUntilExit()
+
+    guard
+      swiftFormat.terminationStatus == 0,
+      swiftLint.terminationStatus == 0
+    else {
+      throw LintError.lintFailure
+    }
   }
 
   // MARK: Private
@@ -64,6 +73,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   private lazy var swiftLint: Process = {
     var arguments = directories + [
       "--config", swiftLintConfig,
+      // Required for SwiftLint to emit a non-zero exit code on lint failure
+      "--strict",
       // This flag is required when invoking SwiftLint from an SPM plugin, due to sandboxing
       "--in-process-sourcekit",
     ]
@@ -82,4 +93,10 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     return swiftLint
   }()
 
+}
+
+// MARK: - LintError
+
+enum LintError: Error {
+  case lintFailure
 }

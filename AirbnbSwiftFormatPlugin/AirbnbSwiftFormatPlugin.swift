@@ -1,6 +1,8 @@
 import Foundation
 import PackagePlugin
 
+// MARK: - AirbnbSwiftFormatPlugin
+
 /// A Swift Package Manager `CommandPlugin` that executes `AirbnbSwiftFormatTool`
 /// to format source code in Swift package targets according to the Airbnb Swift Style Guide.
 @main
@@ -31,6 +33,16 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
     process.arguments = processArguments
     try process.run()
     process.waitUntilExit()
+
+    guard process.terminationStatus == 0 else {
+      throw LintError.lintFailure
+    }
   }
 
+}
+
+// MARK: - LintError
+
+enum LintError: Error {
+  case lintFailure
 }
