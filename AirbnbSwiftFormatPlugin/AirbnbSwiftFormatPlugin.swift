@@ -1,14 +1,10 @@
 import Foundation
 import PackagePlugin
 
-// MARK: - AirbnbSwiftFormatPlugin
-
 /// A Swift Package Manager `CommandPlugin` that executes `AirbnbSwiftFormatTool`
 /// to format source code in Swift package targets according to the Airbnb Swift Style Guide.
 @main
 struct AirbnbSwiftFormatPlugin: CommandPlugin {
-
-  // MARK: Internal
 
   func performCommand(context: PluginContext, arguments: [String]) async throws {
     let process = Process()
@@ -41,8 +37,6 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
     }
   }
 
-  // MARK: Private
-
   /// Retrieves the list of paths that should be formatted / linted
   ///
   /// By default this tool runs on all subdirectories of the package's root directory,
@@ -65,8 +59,6 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
   }
 
 }
-
-// MARK: - LintError
 
 enum LintError: Error {
   case lintFailure
