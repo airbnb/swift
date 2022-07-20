@@ -1,6 +1,3 @@
-# Current version of SwiftFormat used at Airbnb: 
-# https://github.com/calda/SwiftFormat/releases/tag/0.49.11-beta-2
-
 # options
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
