@@ -64,6 +64,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   private lazy var swiftLint: Process = {
     var arguments = directories + [
       "--config", swiftLintConfig,
+      // This flag is required when invoking SwiftLint from an SPM plugin, due to sandboxing
       "--in-process-sourcekit",
     ]
 
@@ -72,7 +73,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     }
 
     if !lint {
-      arguments += ["--autocorrect"]
+      arguments += ["--fix"]
     }
 
     let swiftLint = Process()

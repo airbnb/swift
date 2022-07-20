@@ -1,13 +1,11 @@
 name: CI
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+
+on: [push, pull_request]
+
 jobs:
   test-plugin:
     name: "Test Plugin"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: Test Plugin

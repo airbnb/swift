@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "AirbnbSwiftFormatTool",
+  name: "AirbnbSwift",
   platforms: [.macOS(.v10_13)],
   products: [
     .executable(name: "AirbnbSwiftFormatTool", targets: ["AirbnbSwiftFormatTool"]),
