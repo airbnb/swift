@@ -24,7 +24,7 @@ let package = Package(
           verb: "format",
           description: "Formats Swift source files according to the Airbnb Swift Style Guide"),
         permissions: [
-          .writeToPackageDirectory(reason: "Format Swift source files")
+          .writeToPackageDirectory(reason: "Format Swift source files"),
         ]),
       dependencies: [
         "AirbnbSwiftFormatTool",
@@ -32,15 +32,14 @@ let package = Package(
         .product(name: "swiftlint", package: "SwiftLint"),
       ],
       path: "AirbnbSwiftFormatPlugin"),
-    
     .executableTarget(
       name: "AirbnbSwiftFormatTool",
       dependencies: [
-        .product(name: "ArgumentParser", package: "swift-argument-parser")
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
       path: "AirbnbSwiftFormatTool",
       resources: [
         .process("airbnb.swiftformat"),
         .process("swiftlint.yml"),
-      ])
+      ]),
   ])
