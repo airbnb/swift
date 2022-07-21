@@ -21,7 +21,7 @@ let package = Package(
       name: "FormatSwift",
       capability: .command(
         intent: .custom(
-          verb: "airbnb-format-swift",
+          verb: "format",
           description: "Formats Swift source files according to the Airbnb Swift Style Guide"),
         permissions: [
           .writeToPackageDirectory(reason: "Format Swift source files"),
