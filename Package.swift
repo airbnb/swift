@@ -6,7 +6,7 @@ let package = Package(
   platforms: [.macOS(.v10_13)],
   products: [
     .executable(name: "AirbnbSwiftFormatTool", targets: ["AirbnbSwiftFormatTool"]),
-    .plugin(name: "AirbnbSwiftFormatPlugin", targets: ["AirbnbSwiftFormatPlugin"]),
+    .plugin(name: "AirbnbSwiftFormat", targets: ["AirbnbSwiftFormat"]),
   ],
   dependencies: [
     .package(url: "https://github.com/calda/SwiftFormat", exact: "0.49.11-beta-2"),
@@ -18,10 +18,10 @@ let package = Package(
   ],
   targets: [
     .plugin(
-      name: "AirbnbSwiftFormatPlugin",
+      name: "AirbnbSwiftFormat",
       capability: .command(
         intent: .custom(
-          verb: "format",
+          verb: "airbnb-swift-format",
           description: "Formats Swift source files according to the Airbnb Swift Style Guide"),
         permissions: [
           .writeToPackageDirectory(reason: "Format Swift source files"),
@@ -30,14 +30,12 @@ let package = Package(
         "AirbnbSwiftFormatTool",
         .product(name: "swiftformat", package: "SwiftFormat"),
         .product(name: "swiftlint", package: "SwiftLint"),
-      ],
-      path: "AirbnbSwiftFormatPlugin"),
+      ]),
     .executableTarget(
       name: "AirbnbSwiftFormatTool",
       dependencies: [
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
-      path: "AirbnbSwiftFormatTool",
       resources: [
         .process("airbnb.swiftformat"),
         .process("swiftlint.yml"),
