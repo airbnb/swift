@@ -14,7 +14,14 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
     let process = Process()
     process.launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
 
-    var processArguments = try inputPaths(context: context) + [
+    var argumentExtractor = ArgumentExtractor(arguments)
+
+    let inputPaths = try inputPaths(
+      context: context,
+      // Consumers can exclude additional subdirectories with an `--exclude` flag
+      excluding: argumentExtractor.extractOption(named: "exclude"))
+
+    var processArguments = inputPaths + [
       "--swift-format-path",
       try context.tool(named: "swiftformat").path.string,
       "--swift-lint-path",
@@ -28,16 +35,20 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
       context.pluginWorkDirectory.string + "/swiftlint.cache",
     ]
 
-    if arguments.contains("--lint") {
-      processArguments += ["--lint"]
-    }
+    // Pass any remaining arguments directly to the child process
+    processArguments += argumentExtractor.remainingArguments
 
     process.arguments = processArguments
     try process.run()
     process.waitUntilExit()
 
-    guard process.terminationStatus == 0 else {
-      throw LintError.lintFailure
+    switch process.terminationStatus {
+    case EXIT_SUCCESS:
+      break
+    case EXIT_FAILURE:
+      throw Error.lintFailure
+    default:
+      throw Error.unknownError(exitCode: Int(process.terminationStatus))
     }
   }
 
@@ -53,7 +64,7 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
   ///    `excluded` configuration in our `swiftlint.yml`.
   ///  - We could lint `context.package.targets.map { $0.directory }`, but that excludes
   ///    plugin targets, which include Swift code that we want to lint.
-  private func inputPaths(context: PluginContext) throws -> [String] {
+  private func inputPaths(context: PluginContext, excluding subfoldersToExclude: [String]) throws -> [String] {
     let packageDirectoryContents = try FileManager.default.contentsOfDirectory(
       at: URL(fileURLWithPath: context.package.directory.string),
       includingPropertiesForKeys: nil,
@@ -61,13 +72,26 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
 
     let subdirectories = packageDirectoryContents.filter { $0.hasDirectoryPath }
     let rootSwiftFiles = packageDirectoryContents.filter { $0.pathExtension.hasSuffix("swift") }
-    return (subdirectories + rootSwiftFiles).map { $0.path }
+
+    return (subdirectories + rootSwiftFiles)
+      .map { $0.path }
+      // Filter out any directories included in the `--exclude` option
+      .filter { path in
+        for subfoldersToExclude in subfoldersToExclude {
+          if path.hasSuffix(subfoldersToExclude) {
+            return false
+          }
+        }
+
+        return true
+      }
   }
 
 }
 
-// MARK: - LintError
+// MARK: - Error
 
-enum LintError: Error {
+enum Error: Swift.Error {
+  case unknownError(exitCode: Int)
   case lintFailure
 }

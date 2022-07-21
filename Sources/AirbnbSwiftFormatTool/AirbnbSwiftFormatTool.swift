@@ -28,6 +28,9 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Flag(help: "When true, source files are not reformatted")
   var lint = false
 
+  @Flag(help: "When true, logs the commands that are executed")
+  var log = false
+
   @Option(help: "The absolute path to the SwiftFormat config file")
   var swiftFormatConfig = Bundle.module.path(forResource: "airbnb", ofType: "swiftformat")!
 
@@ -41,11 +44,25 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     try swiftLint.run()
     swiftLint.waitUntilExit()
 
-    guard
-      swiftFormat.terminationStatus == 0,
-      swiftLint.terminationStatus == 0
-    else {
-      throw LintError.lintFailure
+    if log {
+      log(swiftFormat.shellCommand)
+      log(swiftLint.shellCommand)
+      print("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
+      print("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
+    }
+
+    // SwiftFormat ends with exit code 1 on lint failure, and SwiftLint ends with exit code 2
+    if swiftFormat.terminationStatus == 1 || swiftLint.terminationStatus == 2 {
+      throw ExitCode(EXIT_FAILURE)
+    }
+
+    // Any other non-success exit code is an unknown failure
+    if swiftFormat.terminationStatus != EXIT_SUCCESS {
+      throw ExitCode(swiftFormat.terminationStatus)
+    }
+
+    if swiftLint.terminationStatus != EXIT_SUCCESS {
+      throw ExitCode(swiftLint.terminationStatus)
     }
   }
 
@@ -93,10 +110,17 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     return swiftLint
   }()
 
+  private func log(_ string: String) {
+    
+    print(string)
+  }
+
 }
 
-// MARK: - LintError
-
-enum LintError: Error {
-  case lintFailure
+extension Process {
+  var shellCommand: String {
+    let launchPath = launchPath ?? ""
+    let arguments = arguments ?? []
+    return "\(launchPath) \(arguments.joined(separator: " "))"
+  }
 }
