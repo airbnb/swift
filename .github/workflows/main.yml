@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Test Package Plugin
-        run: swift package --allow-writing-to-package-directory format --lint
+        run: swift package --allow-writing-to-package-directory airbnb-format-swift --lint
