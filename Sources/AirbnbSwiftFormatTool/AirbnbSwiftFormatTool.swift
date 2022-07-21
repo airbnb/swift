@@ -47,8 +47,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     if log {
       log(swiftFormat.shellCommand)
       log(swiftLint.shellCommand)
-      print("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
-      print("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
+      log("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
+      log("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
     }
 
     // SwiftFormat ends with exit code 1 on lint failure, and SwiftLint ends with exit code 2
@@ -111,7 +111,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   }()
 
   private func log(_ string: String) {
-    
+    // swiftlint:disable:next no_direct_standard_out_logs
     print(string)
   }
 
