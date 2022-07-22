@@ -16,10 +16,27 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
 
     var argumentExtractor = ArgumentExtractor(arguments)
 
-    let inputPaths = try inputPaths(
-      context: context,
-      // Consumers can exclude additional subdirectories with an `--exclude` flag
-      excluding: argumentExtractor.extractOption(named: "exclude"))
+    // When ran from Xcode, the plugin command is invoked with `--target` arguments,
+    // specifying the targets selected in the plugin dialog.
+    let inputTargets = argumentExtractor.extractOption(named: "target")
+
+    var inputPaths: [String]
+    if !inputTargets.isEmpty {
+      // If a set of input targets were given, lint/format the directory for each of them
+      inputPaths = try context.package.targets(named: inputTargets).map { $0.directory.string }
+    } else {
+      // Otherwise if no targets we listed we default to linting/formatting
+      // the entire package directory.
+      inputPaths = try self.inputPaths(for: context.package)
+    }
+
+    // Filter out any excluded paths passed in with `--exclude`
+    let excludedPaths = argumentExtractor.extractOption(named: "exclude")
+    inputPaths = inputPaths.filter { path in
+      !excludedPaths.contains(where: { excludedPath in
+        path.hasSuffix(excludedPath)
+      })
+    }
 
     var processArguments = inputPaths + [
       "--swift-format-path",
@@ -64,27 +81,15 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
   ///    `excluded` configuration in our `swiftlint.yml`.
   ///  - We could lint `context.package.targets.map { $0.directory }`, but that excludes
   ///    plugin targets, which include Swift code that we want to lint.
-  private func inputPaths(context: PluginContext, excluding subfoldersToExclude: [String]) throws -> [String] {
+  private func inputPaths(for package: Package) throws -> [String] {
     let packageDirectoryContents = try FileManager.default.contentsOfDirectory(
-      at: URL(fileURLWithPath: context.package.directory.string),
+      at: URL(fileURLWithPath: package.directory.string),
       includingPropertiesForKeys: nil,
       options: [.skipsHiddenFiles])
 
     let subdirectories = packageDirectoryContents.filter { $0.hasDirectoryPath }
     let rootSwiftFiles = packageDirectoryContents.filter { $0.pathExtension.hasSuffix("swift") }
-
-    return (subdirectories + rootSwiftFiles)
-      .map { $0.path }
-      // Filter out any directories included in the `--exclude` option
-      .filter { path in
-        for subfoldersToExclude in subfoldersToExclude {
-          if path.hasSuffix(subfoldersToExclude) {
-            return false
-          }
-        }
-
-        return true
-      }
+    return (subdirectories + rootSwiftFiles).map { $0.path }
   }
 
 }
