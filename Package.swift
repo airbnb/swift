@@ -12,8 +12,10 @@ let package = Package(
     .package(url: "https://github.com/calda/SwiftFormat", exact: "0.49.11-beta-2"),
     // The `SwiftLintFramework` target uses "unsafe build flags" so Xcode doesn't
     // allow us to reference a specific version number. To work around that,
-    // we can reference the specific commit for that version (0.47.1).
-    .package(url: "https://github.com/realm/SwiftLint", revision: "e497f1f"),
+    // we can reference the specific commit for that version.
+    //  - This is top-of-tree master from 7/22/22, because the most recent release version
+    //    (0.47.1) seems to have issues in some real-world projects like airbnb/epoxy-ios.
+    .package(url: "https://github.com/realm/SwiftLint", revision: "c5aa806"),
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3"),
   ],
   targets: [
