@@ -28,6 +28,9 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Flag(help: "When true, source files are not reformatted")
   var lint = false
 
+  @Flag(help: "When true, logs the commands that are executed")
+  var log = false
+
   @Option(help: "The absolute path to the SwiftFormat config file")
   var swiftFormatConfig = Bundle.module.path(forResource: "airbnb", ofType: "swiftformat")!
 
@@ -41,11 +44,27 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     try swiftLint.run()
     swiftLint.waitUntilExit()
 
-    guard
-      swiftFormat.terminationStatus == 0,
-      swiftLint.terminationStatus == 0
-    else {
-      throw LintError.lintFailure
+    if log {
+      log(swiftFormat.shellCommand)
+      log(swiftLint.shellCommand)
+      log("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
+      log("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
+    }
+
+    if
+      swiftFormat.terminationStatus == SwiftFormatExitCode.lintFailure ||
+      swiftLint.terminationStatus == SwiftLintExitCode.lintFailure
+    {
+      throw ExitCode.failure
+    }
+
+    // Any other non-success exit code is an unknown failure
+    if swiftFormat.terminationStatus != EXIT_SUCCESS {
+      throw ExitCode(swiftFormat.terminationStatus)
+    }
+
+    if swiftLint.terminationStatus != EXIT_SUCCESS {
+      throw ExitCode(swiftLint.terminationStatus)
     }
   }
 
@@ -93,10 +112,31 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     return swiftLint
   }()
 
+  private func log(_ string: String) {
+    // swiftlint:disable:next no_direct_standard_out_logs
+    print(string)
+  }
+
 }
 
-// MARK: - LintError
+extension Process {
+  var shellCommand: String {
+    let launchPath = launchPath ?? ""
+    let arguments = arguments ?? []
+    return "\(launchPath) \(arguments.joined(separator: " "))"
+  }
+}
 
-enum LintError: Error {
-  case lintFailure
+// MARK: - SwiftFormatExitCode
+
+/// Known exit codes used by SwiftFormat
+enum SwiftFormatExitCode {
+  static let lintFailure: Int32 = 1
+}
+
+// MARK: - SwiftLintExitCode
+
+/// Known exit codes used by SwiftLint
+enum SwiftLintExitCode {
+  static let lintFailure: Int32 = 2
 }
