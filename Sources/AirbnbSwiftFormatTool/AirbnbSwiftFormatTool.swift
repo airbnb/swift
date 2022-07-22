@@ -51,9 +51,11 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
       log("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
     }
 
-    // SwiftFormat ends with exit code 1 on lint failure, and SwiftLint ends with exit code 2
-    if swiftFormat.terminationStatus == 1 || swiftLint.terminationStatus == 2 {
-      throw ExitCode(EXIT_FAILURE)
+    if
+      swiftFormat.terminationStatus == SwiftFormatExitCode.lintFailure ||
+      swiftLint.terminationStatus == SwiftLintExitCode.lintFailure
+    {
+      throw ExitCode.failure
     }
 
     // Any other non-success exit code is an unknown failure
@@ -123,4 +125,18 @@ extension Process {
     let arguments = arguments ?? []
     return "\(launchPath) \(arguments.joined(separator: " "))"
   }
+}
+
+// MARK: - SwiftFormatExitCode
+
+/// Known exit codes used by SwiftFormat
+enum SwiftFormatExitCode {
+  static let lintFailure: Int32 = 1
+}
+
+// MARK: - SwiftLintExitCode
+
+/// Known exit codes used by SwiftLint
+enum SwiftLintExitCode {
+  static let lintFailure: Int32 = 2
 }

@@ -46,9 +46,9 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
     case EXIT_SUCCESS:
       break
     case EXIT_FAILURE:
-      throw Error.lintFailure
+      throw CommandError.lintFailure
     default:
-      throw Error.unknownError(exitCode: Int(process.terminationStatus))
+      throw CommandError.unknownError(exitCode: process.terminationStatus)
     }
   }
 
@@ -89,9 +89,9 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
 
 }
 
-// MARK: - Error
+// MARK: - CommandError
 
-enum Error: Swift.Error {
-  case unknownError(exitCode: Int)
+enum CommandError: Error {
   case lintFailure
+  case unknownError(exitCode: Int32)
 }
