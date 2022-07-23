@@ -20,10 +20,9 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
     // specifying the targets selected in the plugin dialog.
     let inputTargets = argumentExtractor.extractOption(named: "target")
 
-    // Only lint the paths passed to `--paths`
-    let paths = argumentExtractor.extractOption(named: "paths")
+    // If given, lint only the paths passed to `--paths`
+    var inputPaths = argumentExtractor.extractOption(named: "paths")
 
-    var inputPaths: [String] = paths
     if !inputTargets.isEmpty {
       // If a set of input targets were given, lint/format the directory for each of them
       inputPaths += try context.package.targets(named: inputTargets).map { $0.directory.string }
