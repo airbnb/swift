@@ -28,7 +28,7 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
       // If a set of input targets were given, lint/format the directory for each of them
       inputPaths = try context.package.targets(named: inputTargets).map { $0.directory.string }
     } else if inputFiles.isEmpty {
-      // Otherwise if no targets we listed we default to linting/formatting
+      // Otherwise if no targets or files listed we default to linting/formatting
       // the entire package directory.
       inputPaths = try self.inputPaths(for: context.package)
     }
