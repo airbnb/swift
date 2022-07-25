@@ -17,9 +17,49 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 * We strive to make every rule lintable:
-  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftLint](https://github.com/realm/SwiftLint) autocorrect or [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)).
+  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect). 
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
+
+## Swift Package Manager command plugin
+
+This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/airbnb/swift", from: "1.0.0"),
+]
+```
+
+and then run the `format` command plugin in your package directory:
+
+```shell
+$ swift package format
+```
+
+<details>
+<summary>Usage guide</summary>
+
+```shell
+# Supported in Xcode 14+. Prompts for permission to write to the package directory.
+$ swift package format
+
+# When using the Xcode 13 toolchain, or a noninteractive shell, you must use: 
+$ swift package --allow-writing-to-package-directory format
+
+# To just lint without reformatting, you can use `--lint`:
+$ swift package format --lint
+
+# By default the command plugin runs on the entire package directory.
+# You can exclude directories using `exclude`:
+$ swift package format --exclude Tests
+
+# Alternatively you can explicitly list the set of paths and/or SPM targets:
+$ swift package format --paths Sources Tests Package.swift
+$ swift package format --targets AirbnbSwiftFormatTool
+```
+
+</details>
 
 ## Table of Contents
 
