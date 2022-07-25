@@ -50,9 +50,13 @@ $ swift package --allow-writing-to-package-directory format
 # To just lint without reformatting, you can use `--lint`:
 $ swift package format --lint
 
-# By default the command plugin lints the entire package directory.
+# By default the command plugin runs on the entire package directory.
 # You can exclude directories using `exclude`:
-$ swift package format --lint --exclude Tests --exclude Samples
+$ swift package format --exclude Tests
+
+# Alternatively you can explicitly list the set of paths and/or SPM targets:
+$ swift package format --paths Sources Tests Package.swift
+$ swift package format --targets AirbnbSwiftFormatTool
 ```
 
 </details>
