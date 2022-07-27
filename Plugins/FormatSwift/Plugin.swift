@@ -120,7 +120,7 @@ extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
 
   func performCommand(context: XcodePluginContext, arguments: [String]) throws {
     var argumentExtractor = ArgumentExtractor(arguments)
-    
+
     // When ran from Xcode, the plugin command is invoked with `--target` arguments,
     // specifying the targets selected in the plugin dialog.
     //  - Unlike SPM targets which are just directories, Xcode targets are
@@ -131,7 +131,7 @@ extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
       .flatMap { $0.inputFiles }
       .map { $0.path.string }
       .filter { $0.hasSuffix(".swift") }
-    
+
     try performCommand(
       context: context,
       inputPaths: Array(inputPaths),
