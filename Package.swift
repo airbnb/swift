@@ -5,7 +5,6 @@ let package = Package(
   name: "AirbnbSwift",
   platforms: [.macOS(.v10_13)],
   products: [
-    .executable(name: "AirbnbSwiftFormatTool", targets: ["AirbnbSwiftFormatTool"]),
     .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
   ],
   dependencies: [
