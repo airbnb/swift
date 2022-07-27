@@ -12,6 +12,7 @@ import XcodeProjectPlugin
 @main
 struct AirbnbSwiftFormatPlugin {
 
+  /// Calls the `AirbnbSwiftFormatTool` executable with the given arguments
   func performCommand(
     context: CommandContext,
     inputPaths: [String],
@@ -118,7 +119,23 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
 extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
 
   func performCommand(context: XcodePluginContext, arguments: [String]) throws {
-    print("Command plugin execution for Xcode project \(context.xcodeProject.displayName) with arguments \(arguments)")
+    var argumentExtractor = ArgumentExtractor(arguments)
+    
+    // When ran from Xcode, the plugin command is invoked with `--target` arguments,
+    // specifying the targets selected in the plugin dialog.
+    //  - Unlike SPM targets which are just directories, Xcode targets are
+    //    an arbitrary collection of paths.
+    let inputTargetNames = Set(argumentExtractor.extractOption(named: "target"))
+    let inputPaths = context.xcodeProject.targets.lazy
+      .filter { inputTargetNames.contains($0.displayName) }
+      .flatMap { $0.inputFiles }
+      .map { $0.path.string }
+      .filter { $0.hasSuffix(".swift") }
+    
+    try performCommand(
+      context: context,
+      inputPaths: Array(inputPaths),
+      additionalArguments: argumentExtractor.remainingArguments)
   }
 
 }
