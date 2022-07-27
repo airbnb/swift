@@ -1,12 +1,12 @@
 import Foundation
 import PackagePlugin
 
-// MARK: - AirbnbSwiftFormatPlugin
+// MARK: - AirbnbSwiftFormatCommandPlugin
 
 /// A Swift Package Manager `CommandPlugin` that executes `AirbnbSwiftFormatTool`
 /// to format source code in Swift package targets according to the Airbnb Swift Style Guide.
 @main
-struct AirbnbSwiftFormatPlugin: CommandPlugin {
+struct AirbnbSwiftFormatCommandPlugin: CommandPlugin {
 
   // MARK: Internal
 
