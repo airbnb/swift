@@ -59,6 +59,10 @@ $ swift package format --exclude Tests
 # Alternatively you can explicitly list the set of paths and/or SPM targets:
 $ swift package format --paths Sources Tests Package.swift
 $ swift package format --targets AirbnbSwiftFormatTool
+
+# The plugin infers your package's minimum Swift version from the `swift-tools-version`
+# in your `Package.swift`, but you can provide a custom value with `--swift-version`:
+$ swift package format --swift-version 5.3
 ```
 
 </details>
