@@ -36,11 +36,10 @@ let package = Package(
         .process("swiftlint.yml"),
       ]),
 
-    // We don't always use official SwiftFormat releases from the nicklockwood/SwiftFormat
-    // repo, so we host our own artifactbundle instead of downloading one.
     .binaryTarget(
       name: "SwiftFormat",
-      path: "resources/SwiftFormat.artifactbundle"),
+      url: "https://github.com/calda/SwiftFormat/releases/download/0.50-beta-2/SwiftFormat.artifactbundle.zip",
+      checksum: "8b96c5237d47b398f3eda215713ee164bc28556ef849a73a32995dcc4f12d702"),
 
     .binaryTarget(
       name: "SwiftLintBinary",
