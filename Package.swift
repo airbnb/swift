@@ -8,13 +8,6 @@ let package = Package(
     .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/calda/SwiftFormat", exact: "0.49.11-beta-2"),
-    // The `SwiftLintFramework` target uses "unsafe build flags" so Xcode doesn't
-    // allow us to reference a specific version number. To work around that,
-    // we can reference the specific commit for that version.
-    //  - This is top-of-tree master from 7/22/22, because the most recent release version
-    //    (0.47.1) seems to have issues in some real-world projects like airbnb/epoxy-ios.
-    .package(url: "https://github.com/realm/SwiftLint", revision: "c5aa806"),
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3"),
   ],
   targets: [
@@ -29,9 +22,10 @@ let package = Package(
         ]),
       dependencies: [
         "AirbnbSwiftFormatTool",
-        .product(name: "swiftformat", package: "SwiftFormat"),
-        .product(name: "swiftlint", package: "SwiftLint"),
+        "SwiftFormat",
+        "SwiftLintBinary",
       ]),
+
     .executableTarget(
       name: "AirbnbSwiftFormatTool",
       dependencies: [
@@ -41,4 +35,14 @@ let package = Package(
         .process("airbnb.swiftformat"),
         .process("swiftlint.yml"),
       ]),
+
+    .binaryTarget(
+      name: "SwiftFormat",
+      url: "https://github.com/calda/SwiftFormat/releases/download/0.50-beta-2/SwiftFormat.artifactbundle.zip",
+      checksum: "8b96c5237d47b398f3eda215713ee164bc28556ef849a73a32995dcc4f12d702"),
+
+    .binaryTarget(
+      name: "SwiftLintBinary",
+      url: "https://github.com/realm/SwiftLint/releases/download/0.48.0/SwiftLintBinary-macos.artifactbundle.zip",
+      checksum: "9c255e797260054296f9e4e4cd7e1339a15093d75f7c4227b9568d63edddba50"),
   ])

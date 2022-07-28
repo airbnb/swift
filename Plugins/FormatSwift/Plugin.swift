@@ -1,19 +1,63 @@
 import Foundation
 import PackagePlugin
+#if canImport(XcodeProjectPlugin)
+import XcodeProjectPlugin
+#endif
 
 // MARK: - AirbnbSwiftFormatPlugin
 
-/// A Swift Package Manager `CommandPlugin` that executes `AirbnbSwiftFormatTool`
-/// to format source code in Swift package targets according to the Airbnb Swift Style Guide.
+/// A Swift Package Manager `CommandPlugin` and `XcodeCommandPlugin` that executes
+/// `AirbnbSwiftFormatTool` to format source code in Swift package targets according
+/// to the Airbnb Swift Style Guide.
 @main
-struct AirbnbSwiftFormatPlugin: CommandPlugin {
+struct AirbnbSwiftFormatPlugin {
+
+  /// Calls the `AirbnbSwiftFormatTool` executable with the given arguments
+  func performCommand(
+    context: CommandContext,
+    inputPaths: [String],
+    additionalArguments: [String])
+    throws
+  {
+    let process = Process()
+    process.launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
+
+    process.arguments = inputPaths + [
+      "--swift-format-path",
+      try context.tool(named: "swiftformat").path.string,
+      "--swift-lint-path",
+      try context.tool(named: "swiftlint").path.string,
+      // The process we spawn doesn't have read/write access to the default
+      // cache file locations, so we pass in our own cache paths from
+      // the plugin's work directory.
+      "--swift-format-cache-path",
+      context.pluginWorkDirectory.string + "/swiftformat.cache",
+      "--swift-lint-cache-path",
+      context.pluginWorkDirectory.string + "/swiftlint.cache",
+    ] + additionalArguments
+
+    try process.run()
+    process.waitUntilExit()
+
+    switch process.terminationStatus {
+    case EXIT_SUCCESS:
+      break
+    case EXIT_FAILURE:
+      throw CommandError.lintFailure
+    default:
+      throw CommandError.unknownError(exitCode: process.terminationStatus)
+    }
+  }
+
+}
+
+// MARK: CommandPlugin
+
+extension AirbnbSwiftFormatPlugin: CommandPlugin {
 
   // MARK: Internal
 
   func performCommand(context: PluginContext, arguments: [String]) async throws {
-    let process = Process()
-    process.launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
-
     var argumentExtractor = ArgumentExtractor(arguments)
 
     // When ran from Xcode, the plugin command is invoked with `--target` arguments,
@@ -40,35 +84,10 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
       })
     }
 
-    var processArguments = inputPaths + [
-      "--swift-format-path",
-      try context.tool(named: "swiftformat").path.string,
-      "--swift-lint-path",
-      try context.tool(named: "swiftlint").path.string,
-      // The process we spawn doesn't have read/write access to the default
-      // cache file locations, so we pass in our own cache paths from
-      // the plugin's work directory.
-      "--swift-format-cache-path",
-      context.pluginWorkDirectory.string + "/swiftformat.cache",
-      "--swift-lint-cache-path",
-      context.pluginWorkDirectory.string + "/swiftlint.cache",
-    ]
-
-    // Pass any remaining arguments directly to the child process
-    processArguments += argumentExtractor.remainingArguments
-
-    process.arguments = processArguments
-    try process.run()
-    process.waitUntilExit()
-
-    switch process.terminationStatus {
-    case EXIT_SUCCESS:
-      break
-    case EXIT_FAILURE:
-      throw CommandError.lintFailure
-    default:
-      throw CommandError.unknownError(exitCode: process.terminationStatus)
-    }
+    try performCommand(
+      context: context,
+      inputPaths: inputPaths,
+      additionalArguments: argumentExtractor.remainingArguments)
   }
 
   // MARK: Private
@@ -95,6 +114,32 @@ struct AirbnbSwiftFormatPlugin: CommandPlugin {
   }
 
 }
+
+#if canImport(XcodeProjectPlugin)
+extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
+
+  func performCommand(context: XcodePluginContext, arguments: [String]) throws {
+    var argumentExtractor = ArgumentExtractor(arguments)
+
+    // When ran from Xcode, the plugin command is invoked with `--target` arguments,
+    // specifying the targets selected in the plugin dialog.
+    //  - Unlike SPM targets which are just directories, Xcode targets are
+    //    an arbitrary collection of paths.
+    let inputTargetNames = Set(argumentExtractor.extractOption(named: "target"))
+    let inputPaths = context.xcodeProject.targets.lazy
+      .filter { inputTargetNames.contains($0.displayName) }
+      .flatMap { $0.inputFiles }
+      .map { $0.path.string }
+      .filter { $0.hasSuffix(".swift") }
+
+    try performCommand(
+      context: context,
+      inputPaths: Array(inputPaths),
+      additionalArguments: argumentExtractor.remainingArguments)
+  }
+
+}
+#endif
 
 // MARK: - CommandError
 
