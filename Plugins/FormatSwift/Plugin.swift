@@ -84,10 +84,17 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
       })
     }
 
+    // When running on a SPM package we infer the minimum Swift version from the
+    // `swift-tools-version` in `Package.swift`
+    let additionalArguments = [
+      "--swift-version",
+      "\(context.package.toolsVersion.major).\(context.package.toolsVersion.minor)",
+    ] + argumentExtractor.remainingArguments
+
     try performCommand(
       context: context,
       inputPaths: inputPaths,
-      additionalArguments: argumentExtractor.remainingArguments)
+      additionalArguments: additionalArguments)
   }
 
   // MARK: Private

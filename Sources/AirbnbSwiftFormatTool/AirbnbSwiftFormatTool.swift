@@ -37,6 +37,9 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Option(help: "The absolute path to the SwiftLint config file")
   var swiftLintConfig = Bundle.module.path(forResource: "swiftlint", ofType: "yml")!
 
+  @Option(help: "The project's minimum Swift version")
+  var swiftVersion: String?
+
   mutating func run() throws {
     try swiftFormat.run()
     swiftFormat.waitUntilExit()
@@ -81,6 +84,10 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
 
     if lint {
       arguments += ["--lint"]
+    }
+
+    if let swiftVersion = swiftVersion {
+      arguments += ["--swiftversion", swiftVersion]
     }
 
     let swiftFormat = Process()
