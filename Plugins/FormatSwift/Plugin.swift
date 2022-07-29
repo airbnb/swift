@@ -16,13 +16,21 @@ struct AirbnbSwiftFormatPlugin {
   func performCommand(
     context: CommandContext,
     inputPaths: [String],
-    additionalArguments: [String])
+    arguments: [String])
     throws
   {
-    let process = Process()
-    process.launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
+    var argumentExtractor = ArgumentExtractor(arguments)
 
-    process.arguments = inputPaths + [
+    // Filter out any excluded paths passed in with `--exclude`
+    let excludedPaths = argumentExtractor.extractOption(named: "exclude")
+    let inputPaths = inputPaths.filter { path in
+      !excludedPaths.contains(where: { excludedPath in
+        path.hasSuffix(excludedPath)
+      })
+    }
+
+    let launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
+    let arguments = inputPaths + [
       "--swift-format-path",
       try context.tool(named: "swiftformat").path.string,
       "--swift-lint-path",
@@ -34,8 +42,16 @@ struct AirbnbSwiftFormatPlugin {
       context.pluginWorkDirectory.string + "/swiftformat.cache",
       "--swift-lint-cache-path",
       context.pluginWorkDirectory.string + "/swiftlint.cache",
-    ] + additionalArguments
+    ] + argumentExtractor.remainingArguments
 
+    if arguments.contains("--log") {
+      // swiftlint:disable:next no_direct_standard_out_logs
+      print(launchPath, arguments.joined(separator: " "))
+    }
+
+    let process = Process()
+    process.launchPath = launchPath
+    process.arguments = arguments
     try process.run()
     process.waitUntilExit()
 
@@ -76,25 +92,21 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
       inputPaths = try self.inputPaths(for: context.package)
     }
 
-    // Filter out any excluded paths passed in with `--exclude`
-    let excludedPaths = argumentExtractor.extractOption(named: "exclude")
-    inputPaths = inputPaths.filter { path in
-      !excludedPaths.contains(where: { excludedPath in
-        path.hasSuffix(excludedPath)
-      })
-    }
-
     // When running on a SPM package we infer the minimum Swift version from the
-    // `swift-tools-version` in `Package.swift`
-    let additionalArguments = [
+    // `swift-tools-version` in `Package.swift` by default if the user doesn't
+    // specify one manually
+    let swiftVersion = argumentExtractor.extractOption(named: "swift-version").last
+      ?? "\(context.package.toolsVersion.major).\(context.package.toolsVersion.minor)"
+
+    let arguments = [
       "--swift-version",
-      "\(context.package.toolsVersion.major).\(context.package.toolsVersion.minor)",
+      swiftVersion,
     ] + argumentExtractor.remainingArguments
 
     try performCommand(
       context: context,
       inputPaths: inputPaths,
-      additionalArguments: additionalArguments)
+      arguments: arguments)
   }
 
   // MARK: Private
@@ -142,7 +154,7 @@ extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
     try performCommand(
       context: context,
       inputPaths: Array(inputPaths),
-      additionalArguments: argumentExtractor.remainingArguments)
+      arguments: argumentExtractor.remainingArguments)
   }
 
 }
