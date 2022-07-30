@@ -46,7 +46,7 @@ struct AirbnbSwiftFormatPlugin {
 
     if arguments.contains("--log") {
       // swiftlint:disable:next no_direct_standard_out_logs
-      print(launchPath, arguments.joined(separator: " "))
+      print("[Plugin]", launchPath, arguments.joined(separator: " "))
     }
 
     let process = Process()
