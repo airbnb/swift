@@ -121,7 +121,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
 
   private func log(_ string: String) {
     // swiftlint:disable:next no_direct_standard_out_logs
-    print(string)
+    print("[AibnbSwiftFormatTool]", string)
   }
 
 }
