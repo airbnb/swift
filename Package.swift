@@ -36,13 +36,15 @@ let package = Package(
         .process("swiftlint.yml"),
       ]),
 
+    // As of Xcode 13.4 / 14.0, there's an issue that causes projects with this repo
+    // as a dependency to spin indefinitely at 100% CPU resolving this package's binary
+    // dependencies if we use remote binary targets. As a workaround, we can instead
+    // include the artifact bundles directly in this repo instead.
     .binaryTarget(
       name: "SwiftFormat",
-      url: "https://github.com/calda/SwiftFormat/releases/download/0.50-beta-2/SwiftFormat.artifactbundle.zip",
-      checksum: "8b96c5237d47b398f3eda215713ee164bc28556ef849a73a32995dcc4f12d702"),
+      path: "resources/SwiftFormat.artifactbundle.zip"),
 
     .binaryTarget(
       name: "SwiftLintBinary",
-      url: "https://github.com/realm/SwiftLint/releases/download/0.48.0/SwiftLintBinary-macos.artifactbundle.zip",
-      checksum: "9c255e797260054296f9e4e4cd7e1339a15093d75f7c4227b9568d63edddba50"),
+      path: "resources/SwiftLintBinary.artifactbundle.zip"),
   ])
