@@ -1,0 +1,16 @@
+{
+    "schemaVersion": "1.0",
+    "artifacts": {
+        "swiftlint": {
+            "source": "https://github.com/realm/SwiftLint/releases/download/0.48.0/SwiftLintBinary-macos.artifactbundle.zip",
+            "version": "0.48.0",
+            "type": "executable",
+            "variants": [
+                {
+                    "path": "swiftlint-0.48.0-macos/bin/swiftlint",
+                    "supportedTriples": ["x86_64-apple-macosx", "arm64-apple-macosx"]
+                }
+            ]
+        }
+    }
+}

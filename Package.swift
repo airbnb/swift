@@ -42,9 +42,9 @@ let package = Package(
     // include the artifact bundles directly in this repo instead.
     .binaryTarget(
       name: "SwiftFormat",
-      path: "resources/SwiftFormat.artifactbundle.zip"),
+      path: "resources/SwiftFormat.artifactbundle"),
 
     .binaryTarget(
       name: "SwiftLintBinary",
-      path: "resources/SwiftLintBinary.artifactbundle.zip"),
+      path: "resources/SwiftLintBinary.artifactbundle"),
   ])
