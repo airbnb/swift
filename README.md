@@ -633,7 +633,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     #### Why?
 
-    1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
+    1. **Consistency**: We should prefer to either _always_ inline the `let` keyword or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
 
     2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier.
 
@@ -644,7 +644,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case .enumCaseWithMultipleAssociatedValues(let string, let int):
 
     // The `let` keyword is quite far from the variable identifiers,
-    // so its less obvious that they represent new variable bindings
+    // so it is less obvious that they represent new variable bindings
     case let .enumCaseWithSingleAssociatedValue(string):
     case let .enumCaseWithMultipleAssociatedValues(string, int):
 
@@ -749,7 +749,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   else { … }
 
   // WRONG
-  guard let earth = unvierse.find(
+  guard let earth = universe.find(
     .planet,
     named: "Earth"),
     earth.isHabitable // Blends in with previous condition's method arguments
@@ -769,7 +769,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   guard
-    let earth = unvierse.find(
+    let earth = universe.find(
       .planet,
       named: "Earth"),
     earth.isHabitable
@@ -1709,7 +1709,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
+  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicitly, and document what these values are mapping to.
 
   This ensures that if someone adds a new value in the middle, they won't accidentally break things.
 
