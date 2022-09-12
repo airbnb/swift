@@ -1476,6 +1476,28 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='generic-extensions'></a>(<a href='#generic-extensions'>link</a>) When extending generic types, prefer using generic bracket syntax (or sugared syntax for applicable standard library types) instead of generic type constraints. [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#genericExtensions)
+
+  <details>
+
+  ```swift
+  // WRONG
+  extension Array where Element == Star { … }
+  extension Optional where Wrapped == Spaceship { … }
+  extension Dictionary where Key == Moon, Element == Planet { … }
+  extension Collection where Element == Universe { … }
+  extension StateStore where State == SpaceshipState, Action == Spaceship { … }
+
+  // RIGHT
+  extension [Star] { … }
+  extension Spaceship? { … }
+  extension [Moon: Planet] { … }
+  extension Collection<Universe> { … }
+  extension StateStore<SpaceshipState, SpaceshipAction> { … }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Patterns

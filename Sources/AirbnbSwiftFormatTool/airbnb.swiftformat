@@ -75,3 +75,4 @@
 --rules blankLinesAtEndOfScope
 --rules emptyBraces
 --rules andOperator
+--rules genericExtensions
