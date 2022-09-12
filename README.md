@@ -2155,7 +2155,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // WRONG
     func spaceshipDashboard<WarpDriveView: View, CaptainsLogView: View>(
       warpDrive: WarpDriveView,
-      captainsLogView: CaptainsLogView)
+      captainsLog: CaptainsLogView)
       -> some View
     { … }
 
@@ -2166,7 +2166,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // RIGHT
     func spaceshipDashboard(
       warpDrive: some View,
-      captainsLogView: some View)
+      captainsLog: some View)
       -> some View
     { … }
 
