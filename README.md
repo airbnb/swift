@@ -2143,7 +2143,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='opaque-generic-parameters'></a>(<a href='#opaque-generic-parameters'>link</a>) Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible. [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#opaqueGenericParameters)
+* <a id='opaque-generic-parameters'></a>(<a href='#opaque-generic-parameters'>link</a>) **Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible.**  [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#opaqueGenericParameters)
 
     <details>
 
@@ -2174,6 +2174,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
       …
     }
     ```
+
+    #### `some Any`
+
+    Fully-unconstrained generic parameters are somewhat uncommon, but are equivalent to `some Any`. For example:
+
+    ```swift
+    func assertFailure<Value>(_ result: Result<Value, Error>) {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription)
+      }
+    }
+
+    // is equivalent to:
+    func assertFailure(_ result: Result<some Any, Error>) {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription)
+      }
+    }
+    ```
+
+    `some Any` is somewhat unintuitive, and the named generic parameter is useful in this situation to compensate for the weak type information. Because of this, prefer using named generic parameters instead of `some Any`.
 
     </details>
 
