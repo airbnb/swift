@@ -2143,6 +2143,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='opaque-generic-parameters'></a>(<a href='#opaque-generic-parameters'>link</a>) Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible. [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#opaqueGenericParameters)
+
+    <details>
+
+    #### Why?
+
+    Opaque generic parameter syntax is significantly less verbose and thus more legible than the full named generic parameter syntax.
+
+    ```swift
+    // WRONG
+    func spaceshipDashboard<WarpDriveView: View, CaptainsLogView: View>(
+      warpDrive: WarpDriveView,
+      captainsLogView: CaptainsLogView)
+      -> some View
+    { … }
+
+    func generate<Planets>(_ planets: Planets) where Planets: Collection, Planets.Element == Planet {
+      …
+    }
+
+    // RIGHT
+    func spaceshipDashboard(
+      warpDrive: some View,
+      captainsLogView: some View)
+      -> some View
+    { … }
+
+    func generate(_ planets: some Collection<Planet>) {
+      …
+    }
+    ```
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
