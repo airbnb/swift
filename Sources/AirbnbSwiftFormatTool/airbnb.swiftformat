@@ -11,7 +11,7 @@
 --wrapparameters before-first # wrapArguments
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
---wrapreturntype if-multiline #wrapArguments
+--wrapreturntype preserve #wrapArguments
 --closingparen same-line # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
@@ -26,8 +26,8 @@
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
 
-# We recommend a max width of 100 but _strictly enforce_ a max width of 130
---maxwidth 130 # wrap
+# We recommend a max width of 100 but _strictly enforce_ a max width of 120
+--maxwidth 120 # wrap
 
 # rules
 --rules anyObjectProtocol
@@ -54,7 +54,6 @@
 --rules trailingSpace
 --rules typeSugar
 --rules wrap
---rules wrapMultilineStatementBraces
 --rules wrapArguments
 --rules wrapAttributes
 --rules braces

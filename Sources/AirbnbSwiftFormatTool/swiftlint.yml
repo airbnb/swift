@@ -6,7 +6,8 @@ only_rules:
   - legacy_constant
   - legacy_constructor
   - legacy_nsgeometry_functions
-  - operator_usage_whitespace
+  - operator_usage_whitespace:
+    - allowed_no_space_operators: []
   - return_arrow_whitespace
   - trailing_newline
   - unused_optional_binding
