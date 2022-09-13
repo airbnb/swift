@@ -2173,6 +2173,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func generate(_ planets: some Collection<Planet>) {
       …
     }
+    
+    // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
+    // that two parameters in the type signature are of the same type:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
+      …
+    }
+    
+    // Also fine, since the generic patameter name is referenced in the function body so can't be removed:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
+      plataryBody.generateAtmosphere(Body.idealAtmosphere)
+    }
     ```
 
     #### `some Any`
