@@ -1041,6 +1041,50 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='doc-comments'></a>(<a href='#doc-comments'>link</a>) Use doc comments (`///`) before declarations, and regular comments (`//`) elsewhere. [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docComments)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  // A planet that exists somewhere in the universe.
+  class Planet {
+    // Properties of a planet that are important for life
+    let atmosphere: Atmosphere
+    let oceans: [Ocean]
+
+    // Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
+    func terraform() {
+      /// This gas concentration has a pretty good track record so far
+      let configuration = AtmosphereConfiguration(nitrogen: 0.78, oxygen: 0.22)
+      
+      /// Generate the atmosphere first, then the oceans
+      generateAtmosphere(using: configuration)
+      generateOceans()
+    }
+  }
+
+  // RIGHT
+
+  /// A planet that exists somewhere in the universe.
+  class Planet {
+    /// Properties of a planet that are important for life
+    let atmosphere: Atmosphere
+    let oceans: [Ocean]
+
+    /// Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
+    func terraform() {
+      // This gas concentration has a pretty good track record so far
+      let configuration = AtmosphereConfiguration(nitrogen: 0.78, oxygen: 0.22)
+      
+      // Generate the atmosphere first, then the oceans
+      generateAtmosphere(using: configuration)
+      generateOceans()
+    }
+  }
+  ```
+
   </details>
 
 * <a id='whitespace-around-comment-delimiters'></a>(<a href='#whitespace-around-comment-delimiters'>link</a>) Include spaces or newlines before and after comment delimiters (`//`, `///`, `/*`, and `*/`) [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideComments)
