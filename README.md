@@ -1393,6 +1393,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
+
+  <details>
+
+  ```swift
+  // WRONG
+  planets.map({ $0.name })
+
+  // RIGHT
+  planets.map { $0.name }
+
+  // ALSO RIGHT, since this closure has a parameter name
+  planets.first(where: { $0.isGasGiant })
+
+  // ALSO FINE. Trailing closure syntax is still permitted for closures
+  // with parameter names. However, consider using non-trailing syntax
+  // in cases where the parameter name is semantically meaningful.
+  planets.first { $0.isGasGiant }
+  ```
+
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
