@@ -1,5 +1,5 @@
 # options
---swiftversion 5.6
+--swiftversion 5.7
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
@@ -61,6 +61,7 @@
 --rules redundantClosure
 --rules redundantInit
 --rules redundantVoidReturnType
+--rules redundantOptionalBinding
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
@@ -76,3 +77,4 @@
 --rules emptyBraces
 --rules andOperator
 --rules genericExtensions
+--rules trailingClosures
