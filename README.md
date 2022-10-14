@@ -1538,7 +1538,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   extension Optional where Wrapped == Spaceship { … }
   extension Dictionary where Key == Moon, Element == Planet { … }
   extension Collection where Element == Universe { … }
-  extension StateStore where State == SpaceshipState, Action == Spaceship { … }
+  extension StateStore where State == SpaceshipState, Action == SpaceshipAction { … }
 
   // RIGHT
   extension [Star] { … }
