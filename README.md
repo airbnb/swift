@@ -1528,7 +1528,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='generic-extensions'></a>(<a href='#generic-extensions'>link</a>) When extending generic types, prefer using generic bracket syntax (or sugared syntax for applicable standard library types) instead of generic type constraints. [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#genericExtensions)
+* <a id='prefer-bound-generic-extension-shorthand'></a>(<a href='#prefer-bound-generic-extension-shorthand'>link</a>) When extending bound generic types, prefer using generic bracket syntax (`extension Collection<Planet>`), or sugared syntax for applicable standard library types (`extension [Planet]`) instead of generic type constraints. [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#genericExtensions)
 
   <details>
 
@@ -1546,6 +1546,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   extension [Moon: Planet] { … }
   extension Collection<Universe> { … }
   extension StateStore<SpaceshipState, SpaceshipAction> { … }
+
+  // ALSO RIGHT -- there are multiple types that could satifsy this constraint
+  // (e.g. [Planet], [Moon]), so this is not a "bound generic type" and isn't
+  // eligible for the generic bracket syntax.
+  extension Array where Element: PlanetaryBody { }
   ```
 
   </details>
