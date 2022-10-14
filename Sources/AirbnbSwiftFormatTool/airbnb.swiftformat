@@ -78,4 +78,5 @@
 --rules emptyBraces
 --rules andOperator
 --rules opaqueGenericParameters
+--rules genericExtensions
 --rules trailingClosures
