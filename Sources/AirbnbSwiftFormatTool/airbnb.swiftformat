@@ -62,6 +62,7 @@
 --rules redundantClosure
 --rules redundantInit
 --rules redundantVoidReturnType
+--rules redundantOptionalBinding
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
@@ -77,3 +78,4 @@
 --rules emptyBraces
 --rules andOperator
 --rules opaqueGenericParameters
+--rules trailingClosures

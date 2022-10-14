@@ -413,7 +413,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        guard let self = self else { return }
+        guard let self else { return }
         // Do work
         completion()
       }
@@ -729,6 +729,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
     & CivilizationServiceProviding
   ```
 
+* <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name. [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantOptionalBinding)
+
+  <details>
+
+  #### Why?
+
+  Following the rationale in [SE-0345](https://github.com/apple/swift-evolution/blob/main/proposals/0345-if-let-shorthand.md), this shorthand syntax removes unnecessary boilerplate while retaining clarity.
+
+  ```swift
+  // WRONG
+  if
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  { … }
+
+  guard
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+
+  // RIGHT
+  if
+    let galaxy,
+    galaxy.name == "Milky Way"
+  { … }
+
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
@@ -739,12 +771,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  if let galaxy = galaxy,
+  if let galaxy,
     galaxy.name == "Milky Way" // Indenting by two spaces fights Xcode's ^+I indentation behavior
   { … }
 
   // WRONG
-  guard let galaxy = galaxy,
+  guard let galaxy,
         galaxy.name == "Milky Way" // Variable width indentation (6 spaces)
   else { … }
 
@@ -757,13 +789,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   if
-    let galaxy = galaxy,
+    let galaxy,
     galaxy.name == "Milky Way"
   { … }
 
   // RIGHT
   guard
-    let galaxy = galaxy,
+    let galaxy,
     galaxy.name == "Milky Way"
   else { … }
 
@@ -776,12 +808,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   else { … }
 
   // RIGHT
-  if let galaxy = galaxy {
+  if let galaxy {
     …
   }
 
   // RIGHT
-  guard let galaxy = galaxy else {
+  guard let galaxy else {
     …
   }
   ```
@@ -1393,6 +1425,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
+
+  <details>
+
+  ```swift
+  // WRONG
+  planets.map({ $0.name })
+
+  // RIGHT
+  planets.map { $0.name }
+
+  // ALSO RIGHT, since this closure has a parameter name
+  planets.first(where: { $0.isGasGiant })
+
+  // ALSO FINE. Trailing closure syntax is still permitted for closures
+  // with parameter names. However, consider using non-trailing syntax
+  // in cases where the parameter name is semantically meaningful.
+  planets.first { $0.isGasGiant }
+  ```
+
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
@@ -1558,7 +1610,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        if let self = self {
+        if let self {
           // Processing and side effects
         }
         completion()
@@ -1571,7 +1623,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        guard let self = self else { return }
+        guard let self else { return }
         self.doSomething(with: self.property, response: response)
         completion()
       }
