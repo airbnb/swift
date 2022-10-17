@@ -25,6 +25,7 @@
 --redundanttype inferred # redundantType
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
+--someAny disabled # opaqueGenericParameters
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
@@ -76,5 +77,6 @@
 --rules blankLinesAtEndOfScope
 --rules emptyBraces
 --rules andOperator
+--rules opaqueGenericParameters
 --rules genericExtensions
 --rules trailingClosures

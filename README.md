@@ -2221,6 +2221,72 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='prefer-opaque-generic-parameters'></a>(<a href='#prefer-opaque-generic-parameters'>link</a>) **Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible.**  [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#opaqueGenericParameters)
+
+    <details>
+
+    #### Why?
+
+    Opaque generic parameter syntax is significantly less verbose and thus more legible than the full named generic parameter syntax.
+
+    ```swift
+    // WRONG
+    func spaceshipDashboard<WarpDriveView: View, CaptainsLogView: View>(
+      warpDrive: WarpDriveView,
+      captainsLog: CaptainsLogView)
+      -> some View
+    { … }
+
+    func generate<Planets>(_ planets: Planets) where Planets: Collection, Planets.Element == Planet {
+      …
+    }
+
+    // RIGHT
+    func spaceshipDashboard(
+      warpDrive: some View,
+      captainsLog: some View)
+      -> some View
+    { … }
+
+    func generate(_ planets: some Collection<Planet>) {
+      …
+    }
+    
+    // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
+    // that two parameters in the type signature are of the same type:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
+      …
+    }
+    
+    // Also fine, since the generic patameter name is referenced in the function body so can't be removed:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
+      plataryBody.generateAtmosphere(Body.idealAtmosphere)
+    }
+    ```
+
+    #### `some Any`
+
+    Fully-unconstrained generic parameters are somewhat uncommon, but are equivalent to `some Any`. For example:
+
+    ```swift
+    func assertFailure<Value>(_ result: Result<Value, Error>) {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription)
+      }
+    }
+
+    // is equivalent to:
+    func assertFailure(_ result: Result<some Any, Error>) {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription)
+      }
+    }
+    ```
+
+    `some Any` is somewhat unintuitive, and the named generic parameter is useful in this situation to compensate for the weak type information. Because of this, prefer using named generic parameters instead of `some Any`.
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
