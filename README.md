@@ -136,12 +136,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-  _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
+  _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level._
 
   <details>
 
   #### Why?
-  There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
+  There are specific scenarios where backing a property or method could be easier to read than using a more descriptive name.
 
   - Type erasure
 
@@ -159,15 +159,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
       onFailure: @escaping (Error) -> Void)
       -> URLSessionCancellable
     {
-      return _executeRequest(request, session, parser, onSuccess, onFailure)
+      return _executeRequest(request, onSuccess, onFailure)
     }
 
     private let _executeRequest: (
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
-      @escaping (NSError) -> Void)
+      @escaping (Error) -> Void)
       -> URLSessionCancellable
-
   }
   ```
 
@@ -1547,7 +1546,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   extension Collection<Universe> { … }
   extension StateStore<SpaceshipState, SpaceshipAction> { … }
 
-  // ALSO RIGHT -- there are multiple types that could satifsy this constraint
+  // ALSO RIGHT -- there are multiple types that could satisfy this constraint
   // (e.g. [Planet], [Moon]), so this is not a "bound generic type" and isn't
   // eligible for the generic bracket syntax.
   extension Array where Element: PlanetaryBody { }
