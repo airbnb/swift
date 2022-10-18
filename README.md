@@ -2258,9 +2258,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
       …
     }
     
-    // Also fine, since the generic patameter name is referenced in the function body so can't be removed:
+    // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
-      plataryBody.generateAtmosphere(Body.idealAtmosphere)
+      planetaryBody.generateAtmosphere(Body.idealAtmosphere)
     }
     ```
 
