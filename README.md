@@ -141,7 +141,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  There are specific scenarios where backing a property or method could be easier to read than using a more descriptive name.
+  There are specific scenarios where a backing property or method could be easier to read than using a more descriptive name.
 
   - Type erasure
 
