@@ -12,7 +12,7 @@
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
---wrapeffects if-mutliline #wrapArguments
+--wrapeffects if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
