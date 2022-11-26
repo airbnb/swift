@@ -7,14 +7,14 @@ import XcodeProjectPlugin
 
 /// Shared methods implemented by `PluginContext` and `XcodePluginContext`
 protocol CommandContext {
-  var pluginWorkDirectory: Path { get }
-  func tool(named name: String) throws -> PluginContext.Tool
+    var pluginWorkDirectory: Path { get }
+    func tool(named name: String) throws -> PluginContext.Tool
 }
 
 // MARK: - PluginContext + CommandContext
 
-extension PluginContext: CommandContext { }
+extension PluginContext: CommandContext {}
 
 #if canImport(XcodeProjectPlugin)
-extension XcodePluginContext: CommandContext { }
+extension XcodePluginContext: CommandContext {}
 #endif
