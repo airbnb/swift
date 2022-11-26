@@ -3,7 +3,7 @@ name: Synchronize Resources
 on:
   pull_request:
     branches:
-      - main
+      - master
     types:
       - closed
     paths:
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 env:
-  PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+  RUNNER_TOKEN: ${{ secrets.RUNNER_TOKEN }}
 
 jobs:
   sync:
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: destination
-          token: ${{ env.PERSONAL_TOKEN }}
+          token: ${{ env.RUNNER_TOKEN }}
           repository: ${{ env.owner }}/${{ env.repository }}
           ref: ${{ env.base_branch }}
       - name: Configure
@@ -62,13 +62,13 @@ jobs:
           echo "::group::Configure git"
           git config user.name "bugfactory-ci"
           git config user.email "kiermasz.k+bugfactory-ci@gmail.com"
-          git remote set-url origin "https://oauth2:${{ env.PERSONAL_TOKEN }}@github.com/${{ env.owner }}/${{ env.repository }}.git"
+          git remote set-url origin "https://oauth2:${{ env.RUNNER_TOKEN }}@github.com/${{ env.owner }}/${{ env.repository }}.git"
           git config -l
           git remote -v
           echo "::endgroup::"
 
           echo "::group::Configure gh"
-          gh auth login --with-token <<< "${{ env.PERSONAL_TOKEN }}"
+          gh auth login --with-token <<< "${{ env.RUNNER_TOKEN }}"
           gh auth status
           echo "::endgroup::"
       - name: Copy files
