@@ -1,0 +1,131 @@
+name: Synchronize Resources
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+    paths:
+      - 'Sources/AirbnbSwiftFormatTool/airbnb.swiftformat'
+      - 'Sources/AirbnbSwiftFormatTool/swiftlint.yml'
+      - .github/workflows/synchronize-resources.yml
+  workflow_dispatch:
+
+env:
+  RUNNER_TOKEN: ${{ secrets.RUNNER_TOKEN }}
+
+jobs:
+  sync:
+    name: Synchronize
+    if: github.event.pull_request.merged && !contains(github.event.pull_request.labels.*.name, 'skip-sync')
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        work:
+          - repository: drinklet-ios
+            files:
+              - from: Sources/AirbnbSwiftFormatTool/airbnb.swiftformat
+                to: swiftformat
+              - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
+                to: .swiftlint.yml
+          - repository: drinklet-server
+            files:
+              - from: Sources/AirbnbSwiftFormatTool/airbnb.swiftformat
+                to: swiftformat
+              - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
+                to: .swiftlint.yml
+
+    defaults:
+      run:
+        working-directory: destination
+    env:
+      repository: ${{ matrix.work.repository }}
+      owner: ${{ github.repository_owner }}
+      base_branch: ${{ matrix.work.base_branch || 'main' }}
+      head_branch: resources-update
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          path: source
+      - name: Checkout destination
+        uses: actions/checkout@v2
+        with:
+          path: destination
+          token: ${{ env.RUNNER_TOKEN }}
+          repository: ${{ env.owner }}/${{ env.repository }}
+          ref: ${{ env.base_branch }}
+      - name: Configure
+        run: |
+          echo "::group::Configure git"
+          git config user.name "bugfactory-ci"
+          git config user.email "kiermasz.k+bugfactory-ci@gmail.com"
+          git remote set-url origin "https://oauth2:${{ env.RUNNER_TOKEN }}@github.com/${{ env.owner }}/${{ env.repository }}.git"
+          git config -l
+          git remote -v
+          echo "::endgroup::"
+
+          echo "::group::Configure gh"
+          gh auth login --with-token <<< "${{ env.RUNNER_TOKEN }}"
+          gh auth status
+          echo "::endgroup::"
+      - name: Copy files
+        run: |
+          files() {
+          cat <<EOF
+            ${{ toJSON(matrix.work.files) }}
+          EOF
+          }
+
+          files \
+            | jq -c '.[]' \
+            | while read LINE
+              do
+                FROM=`echo $LINE | jq -r '.from'`
+                TO=`echo $LINE | jq -r '.to'`
+
+                echo "::group::Copy from $FROM to $TO"
+                echo "$TO" | xargs dirname | xargs mkdir -p
+                cp -Rv "../source/$FROM" "$TO"
+                echo "::endgroup::"
+              done
+      - name: Publish
+        run: |
+          notify() {
+            echo "::notice title=${{ env.repository }}::$1"
+            exit 0
+          }
+          pr_url() {
+            gh pr view ${{ env.head_branch }} --json url -q .url
+          }
+
+          echo "::group::Commit"
+          git add -A
+          git commit -m "Sync resources" || notify "(no changes)"
+          echo "::endgroup::"
+
+          echo "::group::Push"
+          git push -f origin HEAD:${{ env.head_branch }}
+          echo "::endgroup::"
+
+          echo "::group::Create PR"
+          gh pr create \
+            --base ${{ env.base_branch }} \
+            --head ${{ env.head_branch }} \
+            --title "Update guidelines" \
+            --body "bam!" \
+            || notify "(updated) `pr_url`"
+          echo "::endgroup::"
+
+          echo "::group::Enable auto-merge"
+          gh pr merge \
+            `pr_url` \
+            --auto \
+            --squash
+          echo "::endgroup::"
+
+          echo "::group::Notify"
+          notify "(new) `pr_url`"
+          echo "::endgroup::"
