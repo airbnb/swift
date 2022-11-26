@@ -69,34 +69,58 @@ $ swift package format --swift-version 5.3
 
 ## Table of Contents
 
-1. [Xcode Formatting](#xcode-formatting)
-1. [Naming](#naming)
-1. [Style](#style)
-    1. [Functions](#functions)
-    1. [Closures](#closures)
-    1. [Operators](#operators)
-1. [Patterns](#patterns)
-1. [File Organization](#file-organization)
-1. [Objective-C Interoperability](#objective-c-interoperability)
-1. [Contributors](#contributors)
-1. [Amendments](#amendments)
+- [Airbnb Swift Style Guide](#airbnb-swift-style-guide)
+  - [Goals](#goals)
+  - [Guiding Tenets](#guiding-tenets)
+  - [Swift Package Manager command plugin](#swift-package-manager-command-plugin)
+  - [Table of Contents](#table-of-contents)
+  - [Xcode Formatting](#xcode-formatting)
+      - [Why?](#why)
+  - [Naming](#naming)
+      - [Why?](#why-1)
+      - [Why?](#why-2)
+  - [Style](#style)
+      - [Why?](#why-3)
+      - [Why?](#why-4)
+    - [Functions](#functions)
+    - [Closures](#closures)
+    - [Operators](#operators)
+  - [Patterns](#patterns)
+      - [Why?](#why-5)
+      - [Why?](#why-6)
+      - [Why?](#why-7)
+      - [Why?](#why-8)
+      - [Why?](#why-9)
+      - [Why?](#why-10)
+      - [Why?](#why-11)
+      - [Why?](#why-12)
+      - [Why?](#why-13)
+      - [Why?](#why-14)
+      - [Why?](#why-15)
+      - [Why?](#why-16)
+  - [File Organization](#file-organization)
+      - [Why?](#why-17)
+      - [Why?](#why-18)
+  - [Objective-C Interoperability](#objective-c-interoperability)
+  - [Contributors](#contributors)
+  - [Amendments](#amendments)
 
 ## Xcode Formatting
 
 _You can enable the following settings in Xcode by running [this script](resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.** [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 180 characters.** [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
 
   <details>
 
   #### Why?
   Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
   
-  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
+  We currently only "strictly enforce" (lint / auto-format) a maximum column width of 180 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
 
-* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 4 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
 
 * <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.** [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingSpace)
 
@@ -1099,34 +1123,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func travelBackInTime() { } // TODO: research whether or not this is possible
 
-  }
-  ```
-
-  </details>
-
-* <a id='space-in-empty-braces'></a>(<a href='#space-in-empty-braces'>link</a>) Include a single space in an empty set of braces (`{ }`). [![SwiftFormat: emptyBraces](https://img.shields.io/badge/SwiftFormat-emptyBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyBraces)
-
-  <details>
-
-  ```swift
-  // WRONG
-  extension Spaceship: Trackable {}
-
-  extension SpaceshipView {
-    var accessibilityIdentifier: String {
-      get { spaceship.name }
-      set {}
-    }
-  }
-
-  // RIGHT
-  extension Spaceship: Trackable { }
-
-  extension SpaceshipView {
-    var accessibilityIdentifier: String {
-      get { spaceship.name }
-      set { }
-    }
   }
   ```
 
@@ -2520,12 +2516,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   </details>
 
 * <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of type definitions and extensions into the sections listed below, in order.** All type definitions and extensions should be divided up in this consistent way, allowing a reader of your code to easily jump to what they are interested in. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-  * `// MARK: Lifecycle` for `init` and `deinit` methods.
-  * `// MARK: Open` for `open` properties and methods.
-  * `// MARK: Public` for `public` properties and methods.
-  * `// MARK: Internal` for `internal` properties and methods.
-  * `// MARK: Fileprivate` for `fileprivate` properties and methods.
-  * `// MARK: Private` for `private` properties and methods.
+  * `// MARK: - Lifecycle` for `init` and `deinit` methods.
+  * `// MARK: - Open` for `open` properties and methods.
+  * `// MARK: - Public` for `public` properties and methods.
+  * `// MARK: - Internal` for `internal` properties and methods.
+  * `// MARK: - Fileprivate` for `fileprivate` properties and methods.
+  * `// MARK: - Private` for `private` properties and methods.
   * If the type in question is an enum, its cases should go above the first `// MARK:`.
   * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there are enough methods that sub-sections seem necessary, consider refactoring your code into multiple types.
   * If all of the type or extension's definitions belong to the same category (e.g. the type or extension only consists of `internal` properties), it is OK to omit the `// MARK:`s.
