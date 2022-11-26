@@ -2515,17 +2515,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK:` to separate the contents of type definitions and extensions into the sections listed below, in order.** All type definitions and extensions should be divided up in this consistent way, allowing a reader of your code to easily jump to what they are interested in. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-  * `// MARK: - Lifecycle` for `init` and `deinit` methods.
-  * `// MARK: - Open` for `open` properties and methods.
-  * `// MARK: - Public` for `public` properties and methods.
-  * `// MARK: - Internal` for `internal` properties and methods.
-  * `// MARK: - Fileprivate` for `fileprivate` properties and methods.
-  * `// MARK: - Private` for `private` properties and methods.
-  * If the type in question is an enum, its cases should go above the first `// MARK:`.
-  * Do not subdivide each of these sections into subsections, as it makes the method dropdown more cluttered and therefore less useful. Instead, group methods by functionality and use smart naming to make clear which methods are related. If there are enough methods that sub-sections seem necessary, consider refactoring your code into multiple types.
-  * If all of the type or extension's definitions belong to the same category (e.g. the type or extension only consists of `internal` properties), it is OK to omit the `// MARK:`s.
-  * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK:`s, as it would hurt legibility.
+* <a id='marks-within-types'></a>(<a href='#marks-within-types'>link</a>) **Use `// MARK: - ` to separate the contents of type definitions and extensions into the sections listed below, in order.** All type definitions and extensions should be divided up in this consistent way, allowing a reader of your code to easily jump to what they are interested in.
+  * `// MARK: - Properties` for properties, sorted by access level.
+  * `// MARK: - Initialisation` for `convenience init`, `init` and `deinit` methods.
+  * `// MARK: - Life Cycle` for `loadView`, `layoutSubviews` and `viewDidLoad`, etc. methods.
+  * If the type in question is an enum, its cases should go above the first `// MARK: -` and below `// MARK: - Cases`.
+  * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK: -`s, as it would hurt legibility.
 
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
   * Nested types and typealiases
