@@ -27,13 +27,13 @@ jobs:
           - repository: drinklet-ios
             files:
               - from: Sources/AirbnbSwiftFormatTool/airbnb.swiftformat
-                to: swiftformat
+                to: .swiftformat
               - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
                 to: .swiftlint.yml
           - repository: drinklet-server
             files:
               - from: Sources/AirbnbSwiftFormatTool/airbnb.swiftformat
-                to: swiftformat
+                to: .swiftformat
               - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
                 to: .swiftlint.yml
 

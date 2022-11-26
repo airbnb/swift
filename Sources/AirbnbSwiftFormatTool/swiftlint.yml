@@ -21,7 +21,7 @@ excluded:
 colon:
   apply_to_dictionaries: false
 
-indentation: 2
+indentation: 4
 
 custom_rules:
   no_objcMembers:
