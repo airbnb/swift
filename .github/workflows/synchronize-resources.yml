@@ -11,7 +11,7 @@ on:
       - 'Sources/AirbnbSwiftFormatTool/swiftlint.yml'
       - '.github/workflows/synchronize-resources.yml'
       - '.pre-commit-config.yaml'
-      - 'scripts/git-format-staged.sh'
+      - 'scripts/git-format-staged.py'
       - 'scripts/swiftformat-wrapper.sh'
   workflow_dispatch:
 
@@ -35,8 +35,8 @@ jobs:
                 to: .swiftlint.yml
               - from: .pre-commit-config.yaml
                 to: .pre-commit-config.yaml
-              - from: scripts/git-format-staged.sh
-                to: scripts/git-format-staged.sh
+              - from: scripts/git-format-staged.py
+                to: scripts/git-format-staged.py
               - from: scripts/swiftformat-wrapper.sh
                 to: scripts/swiftformat-wrapper.sh
           - repository: drinklet-server
@@ -47,8 +47,8 @@ jobs:
                 to: .swiftlint.yml
               - from: .pre-commit-config.yaml
                 to: .pre-commit-config.yaml
-              - from: scripts/git-format-staged.sh
-                to: scripts/git-format-staged.sh
+              - from: scripts/git-format-staged.py
+                to: scripts/git-format-staged.py
               - from: scripts/swiftformat-wrapper.sh
                 to: scripts/swiftformat-wrapper.sh
 
