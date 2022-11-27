@@ -9,7 +9,10 @@ on:
     paths:
       - 'Sources/AirbnbSwiftFormatTool/airbnb.swiftformat'
       - 'Sources/AirbnbSwiftFormatTool/swiftlint.yml'
-      - .github/workflows/synchronize-resources.yml
+      - '.github/workflows/synchronize-resources.yml'
+      - '.pre-commit-config.yaml'
+      - 'scripts/git-format-staged.sh'
+      - 'scripts/swiftformat-wrapper.sh'
   workflow_dispatch:
 
 env:
@@ -30,12 +33,24 @@ jobs:
                 to: .swiftformat
               - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
                 to: .swiftlint.yml
+              - from: .pre-commit-config.yaml
+                to: .pre-commit-config.yaml
+              - from: scripts/git-format-staged.sh
+                to: scripts/git-format-staged.sh
+              - from: scripts/swiftformat-wrapper.sh
+                to: scripts/swiftformat-wrapper.sh
           - repository: drinklet-server
             files:
               - from: Sources/AirbnbSwiftFormatTool/airbnb.swiftformat
                 to: .swiftformat
               - from: Sources/AirbnbSwiftFormatTool/swiftlint.yml
                 to: .swiftlint.yml
+              - from: .pre-commit-config.yaml
+                to: .pre-commit-config.yaml
+              - from: scripts/git-format-staged.sh
+                to: scripts/git-format-staged.sh
+              - from: scripts/swiftformat-wrapper.sh
+                to: scripts/swiftformat-wrapper.sh
 
     defaults:
       run:

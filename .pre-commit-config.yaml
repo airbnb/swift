@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: swiftformat
+        name: SwiftFormat
+        entry: scripts/swiftformat-wrapper.sh
+        language: system
+        files: '.*\.swift'
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
