@@ -1244,8 +1244,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     at: location,
     count: 5,
     color: starColor,
-    withAverageDistance: 4
-  )
+    withAverageDistance: 4)
 
   // WRONG
   universe.generate(5,
@@ -1257,13 +1256,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
     at: location,
     count: 5,
     color: starColor,
-    withAverageDistance: 4)
+    withAverageDistance: 4
+  )
 
   // RIGHT
   universe.generate(
     5,
     .stars,
-    at: location)
+    at: location
+  )
   ```
 
   </details>
