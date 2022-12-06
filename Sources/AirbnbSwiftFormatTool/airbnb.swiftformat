@@ -1,10 +1,13 @@
-# Current version of formatting rules used at Airbnb: 
+# Current (adjusted) version of formatting rules used at Airbnb: 
 # https://github.com/airbnb/swift
+# Requires this version of SwiftFormat, the most recent version 
+# which supports both this ruleset and our deployment target:
+# https://github.com/calda/SwiftFormat/releases/tag/0.51-beta-1
 
 --exclude **/Pods,**/fastlane,**/Submodules
 
 # options
---swiftversion 5.7
+--swiftversion 5.6 # Airbnb is using Swift 5.7, but we aren't ready to yet. This should be incremented when we start using Xcode 14.x.
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
@@ -17,7 +20,7 @@
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
---wrapeffects if-multiline #wrapArguments
+# --wrapeffects if-multiline #wrapArguments # This is not supported by our current SwiftFormat pod
 --closingparen same-line # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
