@@ -1,5 +1,7 @@
 # Airbnb Swift Style Guide
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/airbnb/swift)
+
 ## Goals
 
 Following this style guide should:
@@ -17,9 +19,53 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 * We strive to make every rule lintable:
-  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftLint](https://github.com/realm/SwiftLint) autocorrect or [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)).
+  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect). 
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
+
+## Swift Package Manager command plugin
+
+This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/airbnb/swift", from: "1.0.0"),
+]
+```
+
+and then run the `format` command plugin in your package directory:
+
+```shell
+$ swift package format
+```
+
+<details>
+<summary>Usage guide</summary>
+
+```shell
+# Supported in Xcode 14+. Prompts for permission to write to the package directory.
+$ swift package format
+
+# When using the Xcode 13 toolchain, or a noninteractive shell, you must use: 
+$ swift package --allow-writing-to-package-directory format
+
+# To just lint without reformatting, you can use `--lint`:
+$ swift package format --lint
+
+# By default the command plugin runs on the entire package directory.
+# You can exclude directories using `exclude`:
+$ swift package format --exclude Tests
+
+# Alternatively you can explicitly list the set of paths and/or SPM targets:
+$ swift package format --paths Sources Tests Package.swift
+$ swift package format --targets AirbnbSwiftFormatTool
+
+# The plugin infers your package's minimum Swift version from the `swift-tools-version`
+# in your `Package.swift`, but you can provide a custom value with `--swift-version`:
+$ swift package format --swift-version 5.3
+```
+
+</details>
 
 ## Table of Contents
 
@@ -90,12 +136,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-  _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
+  _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level._
 
   <details>
 
   #### Why?
-  There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
+  There are specific scenarios where a backing property or method that is prefixed with an underscore could be easier to read than using a more descriptive name.
 
   - Type erasure
 
@@ -113,15 +159,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
       onFailure: @escaping (Error) -> Void)
       -> URLSessionCancellable
     {
-      return _executeRequest(request, session, parser, onSuccess, onFailure)
+      return _executeRequest(request, onSuccess, onFailure)
     }
 
     private let _executeRequest: (
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
-      @escaping (NSError) -> Void)
+      @escaping (Error) -> Void)
       -> URLSessionCancellable
-
   }
   ```
 
@@ -350,7 +395,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  //WRONG
+  // WRONG
   class MyClass {
 
     func request(completion: () -> Void) {
@@ -367,7 +412,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        guard let self = self else { return }
+        guard let self else { return }
         // Do work
         completion()
       }
@@ -395,6 +440,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
     listingUrgencyBookedRowContent(),
     listingUrgencyBookedShortRowContent(),
   ]
+  ```
+
+* <a id='no-space-inside-collection-brackets'></a>(<a href='#no-space-inside-brackets'>link</a>) **There should be no spaces inside the brackets of collection literals.** [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideBrackets)
+
+  <details>
+
+  ```swift
+  // WRONG
+  let innerPlanets = [ mercury, venus, earth, mars ]
+  let largestObjects = [ .star: sun, .planet: jupiter  ]
+
+  // RIGHT
+  let innerPlanets = [mercury, venus, earth, mars]
+  let largestObjects = [.star: sun, .planet: jupiter]
   ```
 
   </details>
@@ -573,7 +632,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     #### Why?
 
-    1. **Consistency**: We should prefer to either _always_ inline the `let` keyworkd or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
+    1. **Consistency**: We should prefer to either _always_ inline the `let` keyword or _never_ inline the `let` keyword. In Airbnb's Swift codebase, we [observed](https://github.com/airbnb/swift/pull/126#discussion_r631979244) that inline `let` is used far more often in practice (especially when destructuring enum cases with a single associated value).
 
     2. **Clarity**: Inlining the `let` keyword makes it more clear which identifiers are part of the conditional check and which identifiers are binding new variables, since the `let` keyword is always adjacent to the variable identifier.
 
@@ -584,7 +643,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case .enumCaseWithMultipleAssociatedValues(let string, let int):
 
     // The `let` keyword is quite far from the variable identifiers,
-    // so its less obvious that they represent new variable bindings
+    // so it is less obvious that they represent new variable bindings
     case let .enumCaseWithSingleAssociatedValue(string):
     case let .enumCaseWithMultipleAssociatedValues(string, int):
 
@@ -669,6 +728,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
     & CivilizationServiceProviding
   ```
 
+* <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name. [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantOptionalBinding)
+
+  <details>
+
+  #### Why?
+
+  Following the rationale in [SE-0345](https://github.com/apple/swift-evolution/blob/main/proposals/0345-if-let-shorthand.md), this shorthand syntax removes unnecessary boilerplate while retaining clarity.
+
+  ```swift
+  // WRONG
+  if
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  { … }
+
+  guard
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+
+  // RIGHT
+  if
+    let galaxy,
+    galaxy.name == "Milky Way"
+  { … }
+
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
@@ -679,17 +770,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  if let galaxy = galaxy,
+  if let galaxy,
     galaxy.name == "Milky Way" // Indenting by two spaces fights Xcode's ^+I indentation behavior
   { … }
 
   // WRONG
-  guard let galaxy = galaxy,
+  guard let galaxy,
         galaxy.name == "Milky Way" // Variable width indentation (6 spaces)
   else { … }
 
   // WRONG
-  guard let earth = unvierse.find(
+  guard let earth = universe.find(
     .planet,
     named: "Earth"),
     earth.isHabitable // Blends in with previous condition's method arguments
@@ -697,31 +788,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   if
-    let galaxy = galaxy,
+    let galaxy,
     galaxy.name == "Milky Way"
   { … }
 
   // RIGHT
   guard
-    let galaxy = galaxy,
+    let galaxy,
     galaxy.name == "Milky Way"
   else { … }
 
   // RIGHT
   guard
-    let earth = unvierse.find(
+    let earth = universe.find(
       .planet,
       named: "Earth"),
     earth.isHabitable
   else { … }
 
   // RIGHT
-  if let galaxy = galaxy {
+  if let galaxy {
     …
   }
 
   // RIGHT
-  guard let galaxy = galaxy else {
+  guard let galaxy else {
     …
   }
   ```
@@ -794,7 +885,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not reqired.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
+* <a id='omit-explicit-init'></a>(<a href='#omit-explicit-init'>link</a>) **Omit explicit `.init` when not required.** [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInit)
 
   <details>
 
@@ -915,6 +1006,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='no-spaces-around-function-parens'></a>(<a href='#no-spaces-around-parens'>link</a>) For function calls and declarations, there should be no spaces before or inside the parentheses of the argument list. [![SwiftFormat: spaceInsideParens](https://img.shields.io/badge/SwiftFormat-spaceInsideParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideParens) [![SwiftFormat: spaceAroundParens](https://img.shields.io/badge/SwiftFormat-spaceAroundParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundParens)
+
+  <details>
+
+  ```swift
+  // WRONG
+  func install ( _ engine: Engine ) { }
+
+  install ( AntimatterDrive( ) )
+
+  // RIGHT
+  func install(_ engine: Engine) { }
+
+  install(AntimatterDrive())
+  ```
+
   </details>
 
 * <a id='single-line-comments'></a>(<a href='#single-line-comments'>link</a>) **Comment blocks should use single-line comments (`//` for code comments and `///` for documentation comments)**, rather than multi-line comments (`/* ... */` and `/** ... */`). [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blockComments)
@@ -967,6 +1074,64 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='whitespace-around-comment-delimiters'></a>(<a href='#whitespace-around-comment-delimiters'>link</a>) Include spaces or newlines before and after comment delimiters (`//`, `///`, `/*`, and `*/`) [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideComments)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  ///A spacecraft with incredible performance characteristics
+  struct Spaceship {
+
+    func travelFasterThanLight() {/*unimplemented*/}
+
+    func travelBackInTime() { }//TODO: research whether or not this is possible
+
+  }
+
+  // RIGHT
+
+  /// A spacecraft with incredible performance characteristics
+  struct Spaceship {
+
+    func travelFasterThanLight() { /* unimplemented */ }
+
+    func travelBackInTime() { } // TODO: research whether or not this is possible
+
+  }
+  ```
+
+  </details>
+
+* <a id='space-in-empty-braces'></a>(<a href='#space-in-empty-braces'>link</a>) Include a single space in an empty set of braces (`{ }`). [![SwiftFormat: emptyBraces](https://img.shields.io/badge/SwiftFormat-emptyBraces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyBraces)
+
+  <details>
+
+  ```swift
+  // WRONG
+  extension Spaceship: Trackable {}
+
+  extension SpaceshipView {
+    var accessibilityIdentifier: String {
+      get { spaceship.name }
+      set {}
+    }
+  }
+
+  // RIGHT
+  extension Spaceship: Trackable { }
+
+  extension SpaceshipView {
+    var accessibilityIdentifier: String {
+      get { spaceship.name }
+      set { }
+    }
+  }
+  ```
+
+  </details>
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
@@ -987,7 +1152,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label and before the return signature.** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the return signature or any effects (`async`, `throws`).** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
 
   <details>
 
@@ -1027,6 +1192,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
       populateUniverse() // this line blends in with the argument list
     }
 
+    // WRONG
+    func generateStars(
+      at location: Point,
+      count: Int,
+      color: StarColor,
+      withAverageDistance averageDistance: Float) async throws // these effects are easy to miss since they're visually associated with the last parameter
+      -> String 
+    {
+      populateUniverse()
+    }
+
     // RIGHT
     func generateStars(
       at location: Point,
@@ -1044,7 +1220,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       count: Int,
       color: StarColor,
       withAverageDistance averageDistance: Float)
-      throws -> String
+      async throws -> String
     {
       populateUniverse()
     }
@@ -1259,6 +1435,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
+
+  <details>
+
+  ```swift
+  // WRONG
+  planets.map({ $0.name })
+
+  // RIGHT
+  planets.map { $0.name }
+
+  // ALSO RIGHT, since this closure has a parameter name
+  planets.first(where: { $0.isGasGiant })
+
+  // ALSO FINE. Trailing closure syntax is still permitted for closures
+  // with parameter names. However, consider using non-trailing syntax
+  // in cases where the parameter name is semantically meaningful.
+  planets.first { $0.isGasGiant }
+  ```
+
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
@@ -1305,6 +1501,67 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ? solarSystem.planetsInHabitableZone.first
     : solarSystem.uninhabitablePlanets.first
    ```
+
+  </details>
+
+* <a id='use-commas-in-and-conditions'></a>(<a href='#use-commas-in-and-conditions'>link</a>) In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#andOperator)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if let star = planet.star, !planet.isHabitable && planet.isInHabitableZone(of: star) {
+    planet.terraform()
+  }
+
+  if
+    let star = planet.star, 
+    !planet.isHabitable 
+    && planet.isInHabitableZone(of: star)
+  {
+    planet.terraform()
+  }
+
+  // RIGHT
+  if let star = planet.star, !planet.isHabitable, planet.isInHabitableZone(of: star) {
+    planet.terraform()
+  }
+
+  if
+    let star = planet.star,
+    !planet.isHabitable,
+    planet.isInHabitableZone(of: star)
+  {
+    planet.terraform()
+  }
+  ```
+
+  </details>
+
+* <a id='prefer-bound-generic-extension-shorthand'></a>(<a href='#prefer-bound-generic-extension-shorthand'>link</a>) When extending bound generic types, prefer using generic bracket syntax (`extension Collection<Planet>`), or sugared syntax for applicable standard library types (`extension [Planet]`) instead of generic type constraints. [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#genericExtensions)
+
+  <details>
+
+  ```swift
+  // WRONG
+  extension Array where Element == Star { … }
+  extension Optional where Wrapped == Spaceship { … }
+  extension Dictionary where Key == Moon, Element == Planet { … }
+  extension Collection where Element == Universe { … }
+  extension StateStore where State == SpaceshipState, Action == SpaceshipAction { … }
+
+  // RIGHT
+  extension [Star] { … }
+  extension Spaceship? { … }
+  extension [Moon: Planet] { … }
+  extension Collection<Universe> { … }
+  extension StateStore<SpaceshipState, SpaceshipAction> { … }
+
+  // ALSO RIGHT -- there are multiple types that could satisfy this constraint
+  // (e.g. [Planet], [Moon]), so this is not a "bound generic type" and isn't
+  // eligible for the generic bracket syntax.
+  extension Array where Element: PlanetaryBody { }
+  ```
 
   </details>
 
@@ -1385,12 +1642,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  //WRONG
+  // WRONG
   class MyClass {
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        if let self = self {
+        if let self {
           // Processing and side effects
         }
         completion()
@@ -1403,7 +1660,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
-        guard let self = self else { return }
+        guard let self else { return }
         self.doSomething(with: self.property, response: response)
         completion()
       }
@@ -1487,7 +1744,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  func age(of person, bornAt timeInterval) -> Int {
+  func age(of person: Person, bornAt: TimeInterval) -> Int {
     // ...
   }
 
@@ -1541,7 +1798,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
+  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicitly, and document what these values are mapping to.
 
   This ensures that if someone adds a new value in the middle, they won't accidentally break things.
 
@@ -1857,16 +2114,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  [SE-0156](https://github.com/apple/swift-evolution/blob/master/proposals/0156-subclass-existentials.md]), which introduced support for using the `AnyObject` keyword as a protocol constraint, recommends preferring `AnyObject` over `class`:
+  [SE-0156](https://github.com/apple/swift-evolution/blob/master/proposals/0156-subclass-existentials.md), which introduced support for using the `AnyObject` keyword as a protocol constraint, recommends preferring `AnyObject` over `class`:
 
   > This proposal merges the concepts of `class` and `AnyObject`, which now have the same meaning: they represent an existential for classes. To get rid of the duplication, we suggest only keeping `AnyObject` around. To reduce source-breakage to a minimum, `class` could be redefined as `typealias class = AnyObject` and give a deprecation warning on class for the first version of Swift this proposal is implemented in. Later, `class` could be removed in a subsequent version of Swift.
 
   ```swift
   // WRONG
-  protocol Foo: class {}
+  protocol Foo: class { }
 
   // RIGHT
-  protocol Foo: AnyObject {}
+  protocol Foo: AnyObject { }
   ```
 
   </details>
@@ -1975,6 +2232,80 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='prefer-opaque-generic-parameters'></a>(<a href='#prefer-opaque-generic-parameters'>link</a>) **Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible.**  [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#opaqueGenericParameters)
+
+    <details>
+
+    #### Why?
+
+    Opaque generic parameter syntax is significantly less verbose and thus more legible than the full named generic parameter syntax.
+
+    ```swift
+    // WRONG
+    func spaceshipDashboard<WarpDriveView: View, CaptainsLogView: View>(
+      warpDrive: WarpDriveView,
+      captainsLog: CaptainsLogView)
+      -> some View
+    { … }
+
+    func generate<Planets>(_ planets: Planets) where Planets: Collection, Planets.Element == Planet {
+      …
+    }
+
+    // RIGHT
+    func spaceshipDashboard(
+      warpDrive: some View,
+      captainsLog: some View)
+      -> some View
+    { … }
+
+    func generate(_ planets: some Collection<Planet>) {
+      …
+    }
+    
+    // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
+    // that two parameters in the type signature are of the same type:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
+      …
+    }
+    
+    // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
+      planetaryBody.generateAtmosphere(Body.idealAtmosphere)
+    }
+    ```
+
+    #### `some Any`
+
+    Fully-unconstrained generic parameters are somewhat uncommon, but are equivalent to `some Any`. For example:
+
+    ```swift
+    func assertFailure<Value>(
+      _ result: Result<Value, Error>,
+      file: StaticString = #filePath,
+      line: UInt = #line)
+    {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription, file: file, line: line)
+      }
+    }
+
+    // is equivalent to:
+    func assertFailure(
+      _ result: Result<some Any, Error>,
+      file: StaticString = #filePath,
+      line: UInt = #line)
+    {
+      if case .failure(let error) = result {
+        XCTFail(error.localizedDescription, file: file, line: line)
+      }
+    }
+    ```
+
+    `some Any` is somewhat unintuitive, and the named generic parameter is useful in this situation to compensate for the weak type information. Because of this, prefer using named generic parameters instead of `some Any`.
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
@@ -1999,7 +2330,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   import Foundation
 
-  //RIGHT
+  // RIGHT
 
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
@@ -2028,7 +2359,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import Nimble
   import Quick
 
-  //RIGHT
+  // RIGHT
 
   //  Copyright © 2018 Airbnb. All rights reserved.
   //
@@ -2120,6 +2451,42 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func contains(_ solarSystem: SolarSystem) -> Bool {
       …
     }
+  }
+  ```
+
+  </details>
+
+* <a id='no-blank-lines-at-start-or-end-of-non-type-scopes'></a>(<a href='#no-blank-lines-at-start-or-end-of-non-type-scopes'>link</a>) **Remove blank lines at the top and bottom of scopes**, excluding type bodies which can optionally include blank lines. [![SwiftFormat: blankLinesAtStartOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtStartOfScope-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesAtStartOfScope) [![SwiftFormat: blankLinesAtEndOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtEndOfScope-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLinesAtEndOfScope)
+
+  <details>
+
+  ```swift
+  // WRONG
+  class Planet {
+    func terraform() {
+
+      generateAtmosphere()
+      generateOceans()
+
+    }
+  }
+
+  // RIGHT
+  class Planet {
+    func terraform() {
+      generateAtmosphere()
+      generateOceans()
+    } 
+  }
+
+  // Also fine!
+  class Planet {
+
+    func terraform() {
+      generateAtmosphere()
+      generateOceans()
+    }
+
   }
   ```
 
