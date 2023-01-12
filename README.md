@@ -1283,12 +1283,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ```swift
     // WRONG
 
-    // In this method, the `newContext` parameter is unused.
+    // In this method, the `newCondition` parameter is unused.
     // This is actually a logical error, and is easy to miss, but compiles without warning.
-    func withContext(_ newContext: Context) {
-      var updatedValue = self
-      updatedValue.context = context
-      return updatedValue  
+    func updateWeather(_ newCondition: WeatherCondition) -> Weather {
+      var updatedWeather = self
+      updatedWeather.condition = condition // this mistake inadvertently makes this method unable to change the weather condition
+      return updatedWeather
     }
 
     // In this method, the `color` parameter is unused.
@@ -1314,10 +1314,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // Automatically reformatting the unused parameter to be an underscore
     // makes it more clear that the parameter is unused, which makes it
     // easier to spot the logical error.
-    func withContext(_: Context) {
-      var updatedValue = self
-      updatedValue.context = context
-      return updatedValue  
+    func updateWeather(_: WeatherCondition) -> Weather {
+      var updatedWeather = self
+      updatedWeather.condition = condition
+      return updatedWeather
     }
 
     // The underscore makes it more clear that the `color` parameter is unused.
