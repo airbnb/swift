@@ -31,9 +31,6 @@ colon:
   apply_to_dictionaries: false
 
 indentation: 4
-
-attributes:
-  always_on_line_above: ["@testable", "@available", "@discardableResult", "@objc", "@IBAction", "@IBDesignable"]
     
 cyclomatic_complexity:
   warning: 25
