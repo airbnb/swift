@@ -26,6 +26,7 @@ only_rules:
 excluded:
   - Carthage
   - Pods
+  - ../Pods
   
 colon:
   apply_to_dictionaries: false
