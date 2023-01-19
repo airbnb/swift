@@ -27,6 +27,8 @@ excluded:
   - Carthage
   - Pods
   - ../Pods
+  - ../../Pods
+  - ../../../Pods  
   
 colon:
   apply_to_dictionaries: false
