@@ -225,7 +225,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
+* <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for". Most importantly, be consistent with how you order the parts of your name.
 
   <details>
 
@@ -1446,7 +1446,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // RIGHT
   planets.map { $0.name }
 
-  // ALSO RIGHT, since this closure has a parameter name
+  // ALSO RIGHT. Since this closure has a parameter name.
   planets.first(where: { $0.isGasGiant })
 
   // ALSO FINE. Trailing closure syntax is still permitted for closures
