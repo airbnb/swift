@@ -25,6 +25,7 @@
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
+--varattributes same-line
 --wrapternary before-operators # wrap
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
