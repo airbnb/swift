@@ -2035,7 +2035,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  switch anEnum {
+  switch trafficLight {
   case .greenLight:
     // Move your vehicle
   case .yellowLight, .redLight:
