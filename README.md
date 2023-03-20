@@ -2027,19 +2027,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  switch anEnum {
-  case .a:
-    // Do something
+  switch trafficLight {
+  case .greenLight:
+    // Move your vehicle
   default:
-    // Do something else.
+    // Stop your vehicle
   }
 
   // RIGHT
   switch anEnum {
-  case .a:
-    // Do something
-  case .b, .c:
-    // Do something else.
+  case .greenLight:
+    // Move your vehicle
+  case .yellowLight, .redLight:
+    // Stop your vehicle
   }
   ```
 
