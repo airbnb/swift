@@ -1804,10 +1804,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
+  // swiftformat:disable redundantRawValues
   enum ErrorType: String {
     case error = "error"
     case warning = "warning"
   }
+  // swiftformat:enable redundantRawValues
 
   // WRONG
   enum UserType: String {
@@ -1854,7 +1856,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   // Relying on Swift's automatic enum values
-  // swiftformat:disable redundantRawValues
   enum Planet: Int {
     case mercury
     case venus
@@ -1865,7 +1866,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case uranus
     case neptune
   }
-  // swiftformat:enable redundantRawValues
 
   // RIGHT
   /// These values come from the server, so we set them here explicitly to match those values.
