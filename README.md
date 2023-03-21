@@ -1843,6 +1843,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
+  // swiftformat:disable redundantRawValues
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
   enum UserType: String {
     case owner = "owner"
@@ -1851,6 +1852,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
+  // swiftformat:enable redundantRawValues
   // Relying on Swift's automatic enum values
   enum Planet: Int {
     case mercury
