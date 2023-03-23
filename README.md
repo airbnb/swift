@@ -664,7 +664,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-
   @objc
   class Spaceship {
 
@@ -685,7 +684,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let rowContent = [listingUrgencyDatesRowContent(),
                     listingUrgencyBookedRowContent(),
                     listingUrgencyBookedShortRowContent()]
-
+  
+  // WRONG
   let rowContent = [
     listingUrgencyDatesRowContent(),
     listingUrgencyBookedRowContent(),
