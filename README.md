@@ -1779,6 +1779,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
 
   ```swift
+  // WRONG
+  struct Environment { 
+    static let earthGravity = 9.8 
+    static let moonGravity = 1.6 
+  }
+  
+  // WRONG
+  struct Environment {
+  
+    struct Earth {
+      static let gravity = 9.8
+    }
+  
+    struct Moon {
+      static let gravity = 1.6
+    }
+  }
+  
+  // RIGHT
   enum Environment {
 
     enum Earth {
