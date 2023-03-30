@@ -401,7 +401,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
-        // Do work
+
         completion()
       }
     }
@@ -1779,6 +1779,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
 
   ```swift
+  // RIGHT
   enum Environment {
 
     enum Earth {
