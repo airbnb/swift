@@ -1,5 +1,5 @@
 # Exclude checkout directories for common package managers
---exclude Carthage,Pods
+--exclude Carthage,Pods,.build
 
 # options
 --swiftversion 5.7
