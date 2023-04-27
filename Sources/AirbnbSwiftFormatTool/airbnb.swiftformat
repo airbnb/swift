@@ -1,3 +1,6 @@
+# Exclude checkout directories for common package managers
+--exclude Carthage,Pods,.build
+
 # options
 --swiftversion 5.7
 --self remove # redundantSelf
