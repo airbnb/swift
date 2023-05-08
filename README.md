@@ -706,14 +706,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG (too long)
-  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding & PlanetBuilderProviding & CivilizationServiceProviding
+  public typealias Dependencies = CivilizationServiceProviding & LawsOfPhysicsProviding & PlanetBuilderProviding & UniverseBuilderProviding & UniverseSimulatorServiceProviding
 
   // WRONG (naive wrapping)
-  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding &
-    PlanetBuilderProviding & CivilizationServiceProviding
+  public typealias Dependencies = CivilizationServiceProviding & LawsOfPhysicsProviding & PlanetBuilderProviding &
+    UniverseBuilderProviding & UniverseSimulatorServiceProviding
 
   // WRONG (unbalanced)
-  public typealias Dependencies = UniverseBuilderProviding
+  public typealias Dependencies = CivilizationServiceProviding
+    & LawsOfPhysicsProviding
+    & PlanetBuilderProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
+
+  // RIGHT
+  public typealias Dependencies
+    = CivilizationServiceProviding
+    & LawsOfPhysicsProviding
+    & PlanetBuilderProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
+  ```
+
+* <a id='sort-typealiases'></a>(<a href='#sort-typealiases'>link</a>) **Sort protocol composition type aliases alphabetically.** [![SwiftFormat: sortTypealiases](https://img.shields.io/badge/SwiftFormat-sortTypealiases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortTypealiases)
+
+  <details>
+
+  #### Why?
+
+  Type aliases are an unordered list with no natural ordering. Sorting alphabetically keeps these lists more organized, which is especially valuable for long protocol compositions.
+
+  ```swift
+  // WRONG (not sorted)
+  public typealias Dependencies
+    = UniverseBuilderProviding
     & LawsOfPhysicsProviding
     & UniverseSimulatorServiceProviding
     & PlanetBuilderProviding
@@ -721,11 +747,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   public typealias Dependencies
-    = UniverseBuilderProviding
+    = CivilizationServiceProviding
     & LawsOfPhysicsProviding
-    & UniverseSimulatorServiceProviding
     & PlanetBuilderProviding
-    & CivilizationServiceProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
   ```
 
 * <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name. [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantOptionalBinding)
