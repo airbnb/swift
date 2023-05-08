@@ -817,6 +817,33 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+* <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Break before the `else` keyword in a multi-line guard statement.** [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine )
+
+  <details>
+
+  ```swift
+  // WRONG -- else should be on its own line for multi-line guard statements
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way" else
+  { … }
+
+  // WRONG -- else should be on the same line for single-line guard statements
+  guard let galaxy
+  else { … }
+
+  // RIGHT
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
+
+  // RIGHT
+  guard let galaxy else {
+    …
+  }
+  ```
+
 * <a id='indent-multiline-string-literals'></a>(<a href='#indent-multiline-string-literals'>link</a>) **Indent the body and closing triple-quote of multiline string literals**, unless the string literal begins on its own line in which case the string literal contents and closing triple-quote should have the same indentation as the opening triple-quote. [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
 
   <details>
