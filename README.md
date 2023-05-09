@@ -734,7 +734,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Type aliases are an unordered list with no natural ordering. Sorting alphabetically keeps these lists more organized, which is especially valuable for long protocol compositions.
+  Protocol composition type aliases are an unordered list with no natural ordering. Sorting alphabetically keeps these lists more organized, which is especially valuable for long protocol compositions.
 
   ```swift
   // WRONG (not sorted)
