@@ -2,7 +2,7 @@
 --exclude Carthage,Pods,.build
 
 # options
---swiftversion 5.7
+--swiftversion 5.8
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
@@ -86,3 +86,4 @@
 --rules genericExtensions
 --rules trailingClosures
 --rules elseOnSameLine
+--rules sortTypealiases

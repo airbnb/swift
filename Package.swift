@@ -22,7 +22,7 @@ let package = Package(
         ]),
       dependencies: [
         "AirbnbSwiftFormatTool",
-        "swiftformat",
+        "SwiftFormat",
         "SwiftLintBinary",
       ]),
 
@@ -37,9 +37,9 @@ let package = Package(
       ]),
 
     .binaryTarget(
-      name: "swiftformat",
-      url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.51.8/SwiftFormat.artifactbundle.zip",
-      checksum: "69dcca93d5f9e8104c35e5091a77b30551d1e01dd80473d1a8ac7b40196ad31d"),
+      name: "SwiftFormat",
+      url: "https://github.com/calda/SwiftFormat/releases/download/0.52-beta-1/SwiftFormat.artifactbundle.zip",
+      checksum: "9061b1aa419bba4c990d5fbbd1e6a6dd61050e4b35669bc90f38535a5700ac32"),
 
     .binaryTarget(
       name: "SwiftLintBinary",
