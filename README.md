@@ -786,6 +786,60 @@ _You can enable the following settings in Xcode by running [this script](resourc
   else { … }
   ```
 
+* <a id='else-on-same-line'></a>(<a href='#else-on-same-line'>link</a>) **Else statements should start on the same line as the previous condition's closing brace, unless the conditions are separated by a blank line or comments. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if let galaxy {
+    …
+  }
+  else if let bigBangService {
+    …
+  }
+  else {
+    …
+  }
+
+  // RIGHT
+  if let galaxy {
+    …
+  } else if let bigBangService {
+    …
+  } else {
+    …
+  }
+
+  // RIGHT, because there are comments between the conditions
+  if let galaxy {
+    …
+  }
+  // If the galaxy hasn't been created yet, create it using the big bang service
+  else if let bigBangService {
+    …
+  }
+  // If the big bang service doesn't exist, fail gracefully
+  else {
+    …
+  }
+
+  // RIGHT, because there are blank lines between the conditions
+  if let galaxy {
+    …
+  }
+
+  else if let bigBangService {
+    // If the galaxy hasn't been created yet, create it using the big bang service
+    …
+  }
+
+  else {
+    // If the big bang service doesn't exist, fail gracefully
+    …
+  }
+  ```
+
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
