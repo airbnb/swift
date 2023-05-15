@@ -664,7 +664,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-
   @objc
   class Spaceship {
 
@@ -685,7 +684,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let rowContent = [listingUrgencyDatesRowContent(),
                     listingUrgencyBookedRowContent(),
                     listingUrgencyBookedShortRowContent()]
-
+  
+  // WRONG
   let rowContent = [
     listingUrgencyDatesRowContent(),
     listingUrgencyBookedRowContent(),
@@ -700,7 +700,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
-* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) typealiases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 
@@ -1779,6 +1779,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
 
   ```swift
+  // WRONG
+  struct Environment { 
+    static let earthGravity = 9.8 
+    static let moonGravity = 1.6 
+  }
+  
+  // WRONG
+  struct Environment {
+  
+    struct Earth {
+      static let gravity = 9.8
+    }
+  
+    struct Moon {
+      static let gravity = 1.6
+    }
+  }
+  
+  // RIGHT
   enum Environment {
 
     enum Earth {
@@ -1809,12 +1828,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case warning = "warning"
   }
 
+  // WRONG
   enum UserType: String {
     case owner
     case manager
     case member
   }
 
+  // WRONG
   enum Planet: Int {
     case mercury = 0
     case venus = 1
@@ -1826,6 +1847,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case neptune = 7
   }
 
+  // WRONG
   enum ErrorCode: Int {
     case notEnoughMemory
     case invalidResource
@@ -1833,11 +1855,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
+  // Relying on Swift's automatic enum values
   enum ErrorType: String {
     case error
     case warning
   }
 
+  // RIGHT
+  /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
   // swiftformat:disable redundantRawValues
   /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
   enum UserType: String {
@@ -1847,6 +1872,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   // swiftformat:enable redundantRawValues
 
+  // RIGHT
+  // Relying on Swift's automatic enum values
   enum Planet: Int {
     case mercury
     case venus
@@ -1858,6 +1885,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case neptune
   }
 
+  // RIGHT
   /// These values come from the server, so we set them here explicitly to match those values.
   enum ErrorCode: Int {
     case notEnoughMemory = 0
@@ -1904,7 +1932,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='prefer-immutable-statics'></a>(<a href='#prefer-immutable-statics'>link</a>) **Prefer immutable or computed static properties over mutable ones whenever possible.** Use stored `static let` properties or computed `static var` properties over stored `static var`s properties whenever possible, as stored `static var` properties are global mutable state.
+* <a id='prefer-immutable-statics'></a>(<a href='#prefer-immutable-statics'>link</a>) **Prefer immutable or computed static properties over mutable ones whenever possible.** Use stored `static let` properties or computed `static var` properties over stored `static var` properties whenever possible, as stored `static var` properties are global mutable state.
 
   <details>
 
@@ -2027,19 +2055,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  switch anEnum {
-  case .a:
-    // Do something
+  switch trafficLight {
+  case .greenLight:
+    // Move your vehicle
   default:
-    // Do something else.
+    // Stop your vehicle
   }
 
   // RIGHT
-  switch anEnum {
-  case .a:
-    // Do something
-  case .b, .c:
-    // Do something else.
+  switch trafficLight {
+  case .greenLight:
+    // Move your vehicle
+  case .yellowLight, .redLight:
+    // Stop your vehicle
   }
   ```
 
@@ -2532,7 +2560,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-  * Nested types and typealiases
+  * Nested types and type aliases
   * Static properties
   * Class properties
   * Instance properties
