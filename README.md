@@ -897,7 +897,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-* <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine )
+* <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
 
   <details>
 
