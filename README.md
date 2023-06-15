@@ -2315,7 +2315,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  The behavior of the #file literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as #filePath) to a human-readable string containing module and file name (the behavior of #fileID). Use the literal (or macro) with the more explicit behavior.
+  The behavior of the `#file` literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as `#filePath`) to a human-readable string containing module and file name (the behavior of `#fileID`). Use the literal (or macro) with the more explicit behavior.
 
   [Swift documentation](https://developer.apple.com/documentation/swift/file)
 
@@ -2323,12 +2323,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='no-filepath-literal'></a>(<a href='#no-file-macro'>link</a>) **Don't use #filePath in production code. Use #fileID.**
+* <a id='no-filepath-literal'></a>(<a href='#no-file-literal'>link</a>) **Don't use `#filePath` in production code. Use `#fileID`.**
 
   <details>
 
   #### Why?
-  #filePath should only be used in non-production code where the full path of the source file provides useful information to developers. Because #fileID doesn’t embed the full path to the source file, so it won't expose your file system and reduces the size of the compiled binary.
+  `#filePath` should only be used in non-production code where the full path of the source file provides useful information to developers. Because `#fileID` doesn’t embed the full path to the source file, so it won't expose your file system and reduces the size of the compiled binary.
 
   [#filePath documentation](https://developer.apple.com/documentation/swift/filepath#overview)
 
