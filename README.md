@@ -2315,7 +2315,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  The behavior of the `#file` literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as `#filePath`) to a human-readable string containing module and file name (the behavior of `#fileID`). Use the literal (or macro) with the more explicit behavior.
+  The behavior of the `#file` literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as of filePath`) to a human-readable string containing module and file name (the behavior of `#fileID`). Use the literal (or macro) with the most appropriate behavior for your use case.
 
   [Swift documentation](https://developer.apple.com/documentation/swift/file)
 
