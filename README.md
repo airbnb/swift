@@ -2310,7 +2310,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='no-file-literal'></a>(<a href='#no-file-literal'>link</a>) **Don't use #file. Use #fileID or #filePath as appropriate.**
+* <a id='no-file-literal'></a>(<a href='#no-file-literal'>link</a>) **Don't use `#file`. Use `#fileID` or `#filePath` as appropriate.**
 
   <details>
 
