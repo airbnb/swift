@@ -42,4 +42,10 @@ custom_rules:
     regex: "(\\b#file\\b)"
     match_kinds:
     - identifier
-    message: "Instead of #file, use #fileID or #filePath as appropriate."
+    message: "Instead of #file, use #fileID"
+  no_filepath_literal:
+    name: "#filePath is disallowed"
+    regex: "(\\b#filePath\\b)"
+    match_kinds:
+    - identifier
+    message: "Instead of #filePath, use #fileID."
