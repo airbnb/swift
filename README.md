@@ -19,7 +19,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 * We strive to make every rule lintable:
-  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect). 
+  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect).
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
 
@@ -46,7 +46,7 @@ $ swift package format
 # Supported in Xcode 14+. Prompts for permission to write to the package directory.
 $ swift package format
 
-# When using the Xcode 13 toolchain, or a noninteractive shell, you must use: 
+# When using the Xcode 13 toolchain, or a noninteractive shell, you must use:
 $ swift package --allow-writing-to-package-directory format
 
 # To just lint without reformatting, you can use `--lint`:
@@ -90,8 +90,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
-  
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80.
+
   We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
@@ -684,7 +684,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let rowContent = [listingUrgencyDatesRowContent(),
                     listingUrgencyBookedRowContent(),
                     listingUrgencyBookedShortRowContent()]
-  
+
   // WRONG
   let rowContent = [
     listingUrgencyDatesRowContent(),
@@ -1073,7 +1073,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default) 
+      oceanOptions: OceanOptions = .default)
     {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
@@ -1149,7 +1149,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     */
     func terraform() {
-      /* 
+      /*
       Generate the atmosphere first, before generating the ocean.
       Otherwise, the water will just boil off immediately.
       */
@@ -1305,7 +1305,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       count: Int,
       color: StarColor,
       withAverageDistance averageDistance: Float) async throws // these effects are easy to miss since they're visually associated with the last parameter
-      -> String 
+      -> String
     {
       populateUniverse()
     }
@@ -1507,20 +1507,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // WRONG
   let evenSquares = numbers
-    .filter{ 
-      $0.isMultiple(of: 2) 
+    .filter{
+      $0.isMultiple(of: 2)
     }
-    .map{ 
-      $0 * $0 
+    .map{
+      $0 * $0
     }
 
   // RIGHT
   let evenSquares = numbers
     .filter {
-      $0.isMultiple(of: 2) 
+      $0.isMultiple(of: 2)
     }
     .map {
-      $0 * $0 
+      $0 * $0
     }
   ```
 
@@ -1622,8 +1622,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   if
-    let star = planet.star, 
-    !planet.isHabitable 
+    let star = planet.star,
+    !planet.isHabitable
     && planet.isInHabitableZone(of: star)
   {
     planet.terraform()
@@ -1801,7 +1801,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // but extensions in the same file can access `private` members.
     fileprivate let engine: AntimatterEngine
 
-    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
+    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary.
     fileprivate let hull: Hull
 
     // RIGHT: `navigation` is used in `extension Pilot` below,
@@ -1836,7 +1836,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       engine.start()
     }
   }
-  
+
   extension Pilot {
     public func chartCourse() {
       spaceship.navigation.course = .andromedaGalaxy
@@ -1887,23 +1887,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  struct Environment { 
-    static let earthGravity = 9.8 
-    static let moonGravity = 1.6 
+  struct Environment {
+    static let earthGravity = 9.8
+    static let moonGravity = 1.6
   }
-  
+
   // WRONG
   struct Environment {
-  
+
     struct Earth {
       static let gravity = 9.8
     }
-  
+
     struct Moon {
       static let gravity = 1.6
     }
   }
-  
+
   // RIGHT
   enum Environment {
 
@@ -2310,14 +2310,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no-file-literal'></a>(<a href='#no-file-literal'>link</a>) **Don't use `#file`. Use `#fileID` or `#filePath` as appropriate.**
+
+  <details>
+
+  #### Why?
+  The behavior of the `#file` literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as of `#filePath`) to a human-readable string containing module and file name (the behavior of `#fileID`). Use the literal (or macro) with the most appropriate behavior for your use case.
+
+  [Swift documentation](https://developer.apple.com/documentation/swift/file)
+
+  [Swift Evolution Proposal: Concise magic file names](https://github.com/apple/swift-evolution/blob/main/proposals/0274-magic-file.md)
+
+  </details>
+
+* <a id='no-filepath-literal'></a>(<a href='#no-filepath-literal'>link</a>) **Don't use `#filePath` in production code. Use `#fileID` instead.**
+
+  <details>
+
+  #### Why?
+  `#filePath` should only be used in non-production code where the full path of the source file provides useful information to developers. Because `#fileID` doesn’t embed the full path to the source file, it won't expose your file system and reduces the size of the compiled binary.
+
+  [#filePath documentation](https://developer.apple.com/documentation/swift/filepath#overview)
+
+  </details>
+
 * <a id='avoid-redundant-closures'></a>(<a href='#avoid-redundant-closures'>link</a>) **Avoid single-expression closures that are always called immediately**. Instead, prefer inlining the expression. [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantClosure)
 
   <details>
 
   ```swift
   // WRONG
-  lazy var universe: Universe = { 
-    Universe() 
+  lazy var universe: Universe = {
+    Universe()
   }()
 
   lazy var stars = {
@@ -2329,7 +2353,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }()
 
   // RIGHT
-  lazy var universe = Universe() 
+  lazy var universe = Universe()
 
   lazy var stars = universe.generateStars(
     at: location,
@@ -2396,13 +2420,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func generate(_ planets: some Collection<Planet>) {
       …
     }
-    
+
     // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
     // that two parameters in the type signature are of the same type:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
       …
     }
-    
+
     // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
       planetaryBody.generateAtmosphere(Body.idealAtmosphere)
@@ -2610,7 +2634,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func terraform() {
       generateAtmosphere()
       generateOceans()
-    } 
+    }
   }
 
   // Also fine!

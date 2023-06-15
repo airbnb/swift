@@ -37,3 +37,15 @@ custom_rules:
     - identifier
     message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
     severity: warning
+  no_file_literal:
+    name: "#file is disallowed"
+    regex: "(\\b#file\\b)"
+    match_kinds:
+    - identifier
+    message: "Instead of #file, use #fileID"
+  no_filepath_literal:
+    name: "#filePath is disallowed"
+    regex: "(\\b#filePath\\b)"
+    match_kinds:
+    - identifier
+    message: "Instead of #filePath, use #fileID."
