@@ -2328,7 +2328,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  `#filePath` should only be used in non-production code where the full path of the source file provides useful information to developers. Because `#fileID` doesn’t embed the full path to the source file, so it won't expose your file system and reduces the size of the compiled binary.
+  `#filePath` should only be used in non-production code where the full path of the source file provides useful information to developers. Because `#fileID` doesn’t embed the full path to the source file, it won't expose your file system and reduces the size of the compiled binary.
 
   [#filePath documentation](https://developer.apple.com/documentation/swift/filepath#overview)
 
