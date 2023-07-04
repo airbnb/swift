@@ -11,11 +11,9 @@ only_rules:
   - return_arrow_whitespace
   - trailing_newline
   - unused_optional_binding
-  - vertical_whitespace
   - void_return
   - custom_rules
   # Slumber Group Rules
-  - attributes
   - cyclomatic_complexity
   - function_body_length
   - function_parameter_count
