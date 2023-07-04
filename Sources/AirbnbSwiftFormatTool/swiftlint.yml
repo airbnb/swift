@@ -14,7 +14,6 @@ only_rules:
   - void_return
   - custom_rules
   # Slumber Group Rules
-  - attributes
   - cyclomatic_complexity
   - function_body_length
   - function_parameter_count
