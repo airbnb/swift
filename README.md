@@ -2681,6 +2681,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Open` for `open` properties and methods.
   * `// MARK: Public` for `public` properties and methods.
+  * `// MARK: Package` for `package` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
   * `// MARK: Fileprivate` for `fileprivate` properties and methods.
   * `// MARK: Private` for `private` properties and methods.
