@@ -41,7 +41,7 @@
 --rules anyObjectProtocol
 --rules blankLinesBetweenScopes
 --rules consecutiveSpaces
---rules consecutiveBreakLines
+--rules consecutiveBlankLines
 --rules duplicateImports
 --rules extensionAccessControl
 --rules hoistPatternLet
