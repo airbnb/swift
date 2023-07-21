@@ -4,7 +4,7 @@
 --exclude **/Pods,**/fastlane,**/Submodules
 
 # options
---swiftversion 5.8 # This change is provisional, and may need to be decremented when we roll it out
+--swiftversion 5.6
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
