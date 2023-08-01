@@ -1542,6 +1542,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+  </details>
+
 * <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
 
   <details>
@@ -1561,6 +1563,63 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // in cases where the parameter name is semantically meaningful.
   planets.first { $0.isGasGiant }
   ```
+
+  </details>
+
+* <a id='prefer-for-loop-over-forEach'></a>(<a href='#prefer-for-loop-over-forEach'>link</a>) **Prefer using for loops over the functional `forEach { ... }` method**, unless using `forEach` as the last element in a functional chain. [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#forLoop)
+
+  <details>
+
+  #### Why?
+  For loops are more idiomatic than the `forEach` method, and are typically familiar to all developers who have experience with C-family languages. 
+
+  For loops are also more expressive than the `forEach` method. For example, for loops support using the `break` keyword to terminate the loop. This isn't possible when just using `forEach`:
+
+  ```swift
+  let planets = [.mercury, .venus, .earth, .mars, .jupiter, .saturn, .uranus, .neptune]
+
+  for planet in planets {
+    if planet.isGasGiant { 
+      // We can only terraform the terrestrial planets, so stop once we reach a gas giant.
+      break
+    }
+    
+    planet.teraform()
+  }
+
+  planets.forEach { planet in
+    if planet.isGasGiant {
+      // We have no way to terminate the loop, since `return` just continues to the next item in the array
+    }
+
+    planet.terraform()
+  }
+  ```
+  
+  ```swift
+  // WRONG
+  planets.forEach { planet in
+    planet.terraform()
+  }
+
+  // WRONG
+  planets.forEach {
+    $0.terraform()
+  }
+
+  // RIGHT
+  for planet in planets {
+    planet.terraform()
+  }
+
+  // ALSO FINE, since forEach is useful when paired with other functional methods in a chain.
+  planets
+    .filter { !$0.isGasGiant }
+    .map { PlanetTerraformer(planet: $0) }
+    .forEach { $0.terraform() }
+  ```
+
+  </details>
 
 ### Operators
 

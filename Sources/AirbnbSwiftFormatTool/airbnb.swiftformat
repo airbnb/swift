@@ -88,3 +88,4 @@
 --rules trailingClosures
 --rules elseOnSameLine
 --rules sortTypealiases
+--rules forLoop
