@@ -1239,6 +1239,28 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) Omit the `internal` keyword when defining types, properties, or functions with an internal access control level. [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInternal)
+
+  <details>
+
+  ```swift
+  // WRONG
+  interal class Spaceship {
+    internal init() { … }
+
+    internal func travel(to planet: Planet) { … }
+  }
+
+  // RIGHT, because internal access control is implied if no other access control level is specified.
+  class Spaceship {
+    init() { … }
+
+    func travel(to planet: Planet) { … }
+  }
+  ```
+
+  </details>
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
