@@ -1245,7 +1245,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  interal class Spaceship {
+  internal class Spaceship {
     internal init() { … }
 
     internal func travel(to planet: Planet) { … }
