@@ -1573,28 +1573,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   #### Why?
   For loops are more idiomatic than the `forEach` method, and are typically familiar to all developers who have experience with C-family languages. 
 
-  For loops are also more expressive than the `forEach` method. For example, for loops support using the `break` keyword to terminate the loop. This isn't possible when just using `forEach`:
-
-  ```swift
-  let planets = [.mercury, .venus, .earth, .mars, .jupiter, .saturn, .uranus, .neptune]
-
-  for planet in planets {
-    if planet.isGasGiant { 
-      // We can only terraform the terrestrial planets, so stop once we reach a gas giant.
-      break
-    }
-    
-    planet.teraform()
-  }
-
-  planets.forEach { planet in
-    if planet.isGasGiant {
-      // We have no way to terminate the loop, since `return` just continues to the next item in the array
-    }
-
-    planet.terraform()
-  }
-  ```
+  For loops are also more expressive than the `forEach` method. For loops support the `return`, `continue`, and `break` control flow keywords, while `forEach` only supports `return` (which has the same behavior as `continue` in a for loop).
   
   ```swift
   // WRONG
