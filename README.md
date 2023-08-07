@@ -1239,6 +1239,41 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='prefer-for-loop-over-forEach'></a>(<a href='#prefer-for-loop-over-forEach'>link</a>) **Prefer using `for` loops over the functional `forEach(…)` method**, unless using `forEach(…)` as the last element in a functional chain. [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#forLoop)
+
+  <details>
+
+  #### Why?
+  For loops are more idiomatic than the `forEach(…)` method, and are typically familiar to all developers who have experience with C-family languages. 
+
+  For loops are also more expressive than the `forEach(…)` method. For loops support the `return`, `continue`, and `break` control flow keywords, while `forEach(…)` only supports `return` (which has the same behavior as `continue` in a for loop).
+  
+  ```swift
+  // WRONG
+  planets.forEach { planet in
+    planet.terraform()
+  }
+
+  // WRONG
+  planets.forEach {
+    $0.terraform()
+  }
+
+  // RIGHT
+  for planet in planets {
+    planet.terraform()
+  }
+
+  // ALSO FINE, since forEach is useful when paired with other functional methods in a chain.
+  planets
+    .filter { !$0.isGasGiant }
+    .map { PlanetTerraformer(planet: $0) }
+    .forEach { $0.terraform() }
+  ```
+
+  </details>
+
+
 ### Functions
 
 * <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.** [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantVoidReturnType)
@@ -1562,40 +1597,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // with parameter names. However, consider using non-trailing syntax
   // in cases where the parameter name is semantically meaningful.
   planets.first { $0.isGasGiant }
-  ```
-
-  </details>
-
-* <a id='prefer-for-loop-over-forEach'></a>(<a href='#prefer-for-loop-over-forEach'>link</a>) **Prefer using `for` loops over the functional `forEach { ... }` method**, unless using `forEach` as the last element in a functional chain. [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#forLoop)
-
-  <details>
-
-  #### Why?
-  For loops are more idiomatic than the `forEach` method, and are typically familiar to all developers who have experience with C-family languages. 
-
-  For loops are also more expressive than the `forEach` method. For loops support the `return`, `continue`, and `break` control flow keywords, while `forEach` only supports `return` (which has the same behavior as `continue` in a for loop).
-  
-  ```swift
-  // WRONG
-  planets.forEach { planet in
-    planet.terraform()
-  }
-
-  // WRONG
-  planets.forEach {
-    $0.terraform()
-  }
-
-  // RIGHT
-  for planet in planets {
-    planet.terraform()
-  }
-
-  // ALSO FINE, since forEach is useful when paired with other functional methods in a chain.
-  planets
-    .filter { !$0.isGasGiant }
-    .map { PlanetTerraformer(planet: $0) }
-    .forEach { $0.terraform() }
   ```
 
   </details>
