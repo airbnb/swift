@@ -102,6 +102,8 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
     let arguments = [
       "--swift-version",
       swiftVersion,
+      "--package-directory",
+      context.package.directory.string,
     ] + argumentExtractor.remainingArguments
 
     try performCommand(

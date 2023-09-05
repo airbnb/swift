@@ -46,28 +46,40 @@ extension SwiftSettings {
   // MARK: Internal
 
   @available(macOS 13.0, *)
-  static func updatePackageManifest(at packageManifestPath: String, lintOnly: Bool) throws {
-    var contents = try String(contentsOfFile: packageManifestPath)
-    let originalContent = contents
+  static func updatePackageManifests(in packageDirectory: URL, lintOnly: Bool, verbose: Bool) throws {
+    for packageManifestURL in packageManifestURLs(in: packageDirectory) {
+      var contents = try String(contentsOf: packageManifestURL)
+      let originalContent = contents
 
-    let extensionRegex = Regex {
-      "extension [SwiftSetting] {"
-      OneOrMore { .any }
-      "static func airbnbDefault"
-      OneOrMore { .any }
-      OneOrMore { .newlineSequence }
-      "}"
-    }
+      let extensionRegex = Regex {
+        "extension [SwiftSetting] {"
+        OneOrMore { .any }
+        "static func airbnbDefault"
+        OneOrMore { .any }
+        OneOrMore { .newlineSequence }
+        "}"
+      }
 
-    contents.replace(extensionRegex, with: airbnbDefaultSwiftSettings)
+      contents.replace(extensionRegex, with: airbnbDefaultSwiftSettings)
 
-    guard contents != originalContent else { return }
+      guard contents != originalContent else {
+        if verbose {
+          log("Validated Swift Settings in \(packageManifestURL.lastPathComponent)")
+        }
 
-    if lintOnly {
-      log("Package.swift `[SwiftSetting].airbnbDefault()` is out of date.")
-      throw ExitCode.failure
-    } else {
-      try contents.write(toFile: packageManifestPath, atomically: true, encoding: .utf8)
+        continue
+      }
+
+      if lintOnly {
+        log("[SwiftSetting].airbnbDefault() is out of date in \(packageManifestURL.lastPathComponent).")
+        throw ExitCode.failure
+      } else {
+        try contents.write(to: packageManifestURL, atomically: true, encoding: .utf8)
+
+        if verbose {
+          log("Updated Swift Settings in \(packageManifestURL.lastPathComponent)")
+        }
+      }
     }
   }
 
@@ -76,5 +88,27 @@ extension SwiftSettings {
   private static func log(_ string: String) {
     // swiftlint:disable:next no_direct_standard_out_logs
     print("[AibnbSwiftFormatTool]", string)
+  }
+
+  private static func packageManifestURLs(in packageDirectory: URL) -> [URL] {
+    let enumerator = FileManager.default.enumerator(
+      at: packageDirectory,
+      includingPropertiesForKeys: nil,
+      options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles])
+
+    var packageManifestURLs = [URL]()
+
+    while let fileURL = enumerator?.nextObject() as? URL {
+      let fileName = fileURL.lastPathComponent
+
+      if
+        fileName == "Package.swift"
+        || (fileName.hasPrefix("Package@swift-") && fileName.hasSuffix(".swift"))
+      {
+        packageManifestURLs.append(fileURL)
+      }
+    }
+
+    return packageManifestURLs
   }
 }
