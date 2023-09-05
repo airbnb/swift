@@ -37,6 +37,9 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Option(help: "The absolute path to the SwiftLint config file")
   var swiftLintConfig = Bundle.module.path(forResource: "swiftlint", ofType: "yml")!
 
+  @Option(help: "The absolute path to the Package.swift file")
+  var packageManifestPath: String?
+
   @Option(help: "The project's minimum Swift version")
   var swiftVersion: String?
 
@@ -52,6 +55,10 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
       log(swiftLint.shellCommand)
       log("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
       log("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
+    }
+
+    if let packageManifestPath = packageManifestPath, #available(macOS 13.0, *) {
+      try SwiftSettings.updatePackageManifest(at: packageManifestPath, lintOnly: lint)
     }
 
     if
