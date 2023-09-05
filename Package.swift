@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.6
 import PackageDescription
 
 let package = Package(
@@ -34,8 +34,7 @@ let package = Package(
       resources: [
         .process("airbnb.swiftformat"),
         .process("swiftlint.yml"),
-      ],
-      swiftSettings: .airbnbDefault()),
+      ]),
 
     .binaryTarget(
       name: "SwiftFormat",
@@ -53,24 +52,3 @@ let package = Package(
 #if os(Linux)
 #error("Linux is currently not supported")
 #endif
-
-extension [SwiftSetting] {
-  /// Default Swift compiler flags recommended by the Airbnb Swift Style Guide.
-  /// Do not modify: updated automatically by Airbnb Swift Format Tool.
-  ///
-  /// - Parameter foundationModule: Whether or not this target is considered
-  ///   a "foundation module". We currently only recommend using strict
-  ///   concurrency checking in foundational modules, rather than feature modules.
-  static func airbnbDefault(foundationModule: Bool = false) -> [SwiftSetting] {
-    var settings = [SwiftSetting]()
-    settings.append(.enableExperimentalFeature("BareSlashRegexLiterals"))
-    settings.append(.enableExperimentalFeature("ConciseMagicFile"))
-    settings.append(.enableExperimentalFeature("ImplicitOpenExistentials"))
-
-    if foundationModule {
-      settings.append(.enableUpcomingFeature("StrictConcurrency"))
-    }
-
-    return settings
-  }
-}
