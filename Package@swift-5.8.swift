@@ -54,12 +54,6 @@ let package = Package(
 #error("Linux is currently not supported")
 #endif
 
-// Emit an error on Linux, so Swift Package Manager's platform support detection doesn't say this package supports Linux
-// https://github.com/airbnb/swift/discussions/197#discussioncomment-4055303
-#if os(Linux)
-#error("Linux is currently not supported")
-#endif
-
 extension [SwiftSetting] {
   /// Default Swift compiler flags recommended by the Airbnb Swift Style Guide.
   /// Do not modify: updated automatically by Airbnb Swift Format Tool.
