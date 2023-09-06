@@ -21,21 +21,12 @@ enum SwiftSettings {
     extension [SwiftSetting] {
       /// Default Swift compiler flags recommended by the Airbnb Swift Style Guide.
       /// Do not modify: updated automatically by Airbnb Swift Format Tool.
-      ///
-      /// - Parameter foundationModule: Whether or not this target is considered
-      ///   a "foundation module". We currently only recommend using strict
-      ///   concurrency checking in foundational modules, rather than feature modules.
-      static func airbnbDefault(foundationModule: Bool = false) -> [SwiftSetting] {
-        var settings = [SwiftSetting]()
-        settings.append(.enableExperimentalFeature("BareSlashRegexLiterals"))
-        settings.append(.enableExperimentalFeature("ConciseMagicFile"))
-        settings.append(.enableExperimentalFeature("ImplicitOpenExistentials"))
-
-        if foundationModule {
-          settings.append(.enableUpcomingFeature("StrictConcurrency"))
-        }
-
-        return settings
+      static func airbnbDefault() -> [SwiftSetting] {
+        [
+          .enableExperimentalFeature("BareSlashRegexLiterals"),
+          .enableExperimentalFeature("ConciseMagicFile"),
+          .enableExperimentalFeature("ImplicitOpenExistentials"),
+        ]
       }
     }
     """
@@ -45,6 +36,8 @@ extension SwiftSettings {
 
   // MARK: Internal
 
+  /// Finds all of the `Package.swift` package manifest files in the given package directory,
+  /// and updates the `[SwiftSetting].airbnbDefault()` declaration if present.
   @available(macOS 13.0, *)
   static func updatePackageManifests(in packageDirectory: URL, lintOnly: Bool, verbose: Bool) throws {
     for packageManifestURL in packageManifestURLs(in: packageDirectory) {
