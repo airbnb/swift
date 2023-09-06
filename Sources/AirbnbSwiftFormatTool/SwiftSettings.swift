@@ -26,6 +26,7 @@ enum SwiftSettings {
           .enableUpcomingFeature("BareSlashRegexLiterals"),
           .enableUpcomingFeature("ConciseMagicFile"),
           .enableUpcomingFeature("ImplicitOpenExistentials"),
+          .enableExperimentalFeature("StrictConcurrency=targeted"),
         ]
       }
     }
