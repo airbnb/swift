@@ -112,8 +112,6 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
       "--config", swiftLintConfig,
       // Required for SwiftLint to emit a non-zero exit code on lint failure
       "--strict",
-      // This flag is required when invoking SwiftLint from an SPM plugin, due to sandboxing
-      "--in-process-sourcekit",
     ]
 
     if let swiftLintCachePath = swiftLintCachePath {
