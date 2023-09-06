@@ -1622,6 +1622,54 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Prefer using `weak` captures over `unowned` captures.**  [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
+
+  <details>
+  `unowned` captures are unsafe because they will cause the application to crash if the referenced object has been deallocated. `weak` captures are safer because they require the author to explicitly handle the case where the referenced object no longer exists.
+  
+  ```swift
+  // WRONG: Crashes if `planet` has been deallocated when the closure is called.
+
+  spaceship.travel(to: planet, onArrival: { [unowned planet] in
+    planet.colonize()
+  })
+
+  spaceship.travel(to: planet, nextDestination: { [unowned planet] in
+    planet.moons.first ?? planet.sun
+  })
+  ```
+
+  ```swift
+  // RIGHT: Explicitly handles case where `planet` has been deallocated.
+
+  spaceship.travel(to: planet, onArrival: { [weak planet] in
+    guard let planet else { return }
+    planet.colonize()
+  })
+
+  // For closures that return a non-optional value, you could either 
+  // use `fatalError` to avoid having to return anything:
+  spaceship.travel(to: planet, nextDestination: { [weak planet] in
+    guard let planet else {
+      fatalError("Planet was unexpectedly deallocated before reached by spaceship")
+    }
+    
+    return planet.moons.first ?? planet.sun
+  })
+
+  // Or you could return a placeholder value with an optional `assertionFailure`:
+  spaceship.travel(to: planet, nextDestination: { [weak planet] in     
+    guard let planet else {
+      assertionFailure("Planet was unexpectedly deallocated before reached by spaceship")
+      return Planet()
+    }
+    
+    return planet.moons.first ?? planet.sun
+  })
+  ```
+  
+  </details>
+
 ### Operators
 
 * <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
