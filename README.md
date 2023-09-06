@@ -2524,6 +2524,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Avoid using `@unchecked Sendable`**. Prefer using a standard `Sendable` conformance instead. 
+
+    <details>
+
+    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and simply suppresses compiler errors related to concurrency checking.
+
+    If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with a comment explaining why it's necessary to use `@unchecked Sendable` instead of `Sendable`, along with an explanation as to how we know that the `@unchecked Sendable` conformance is safe and correct.
+
+    ```swift
+    class PlanetaryBody { 
+      let mass: Double  
+    }
+
+    class Planet: PlanetaryBody { 
+      let star: Star
+    }
+
+    // WRONG
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // WRONG: suppressing lint error without an explanation
+    // swiftlint:disable:next no_unchecked_sendable
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // RIGHT:
+    // PlanetaryBody cannot conform to Sendable because it is non-final and has subclasses.
+    // PlanetaryBody itself is safely Sendable because it only consists of immutable values.
+    // All subclasses of PlanetaryBody are also simple immutable values, so are safely Sendable as well.
+    // swiftlint:disable:next no_unchecked_sendable
+    extension PlanetaryBody: @unchecked Sendable { }
+    ```
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
