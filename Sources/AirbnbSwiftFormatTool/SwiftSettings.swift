@@ -23,9 +23,9 @@ enum SwiftSettings {
       /// Do not modify: updated automatically by Airbnb Swift Format Tool.
       static func airbnbDefault() -> [SwiftSetting] {
         [
-          .enableExperimentalFeature("BareSlashRegexLiterals"),
-          .enableExperimentalFeature("ConciseMagicFile"),
-          .enableExperimentalFeature("ImplicitOpenExistentials"),
+          .enableUpcomingFeature("BareSlashRegexLiterals"),
+          .enableUpcomingFeature("ConciseMagicFile"),
+          .enableUpcomingFeature("ImplicitOpenExistentials"),
         ]
       }
     }
