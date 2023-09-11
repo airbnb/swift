@@ -2524,13 +2524,84 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Avoid using `@unchecked Sendable`**. Prefer using a standard `Sendable` conformance instead. 
+* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Prefer to avoid using `@unchecked Sendable`**. Use a standard `Sendable` conformance instead where possible. If working with a type from a module that has not yet been updated to support Swift Concurrency, suppress concurrency-related errors using `@preconcurrency import`. 
 
     <details>
 
-    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and simply suppresses compiler errors related to concurrency checking.
+    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and instead unsafely suppresses compiler errors related to concurrency checking. 
 
-    If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with a comment explaining why it's necessary to use `@unchecked Sendable` instead of `Sendable`, along with an explanation as to how we know that the `@unchecked Sendable` conformance is safe and correct.
+    There are typically other, safer methods for suppressing concurrency-related errors:
+
+    ### 1. Use `Sendable` instead of `@unchecked Sendable`, with `@MainActor` if appropriate
+
+    A `Sendable` conformance is the preferred way to declare that a type is thread-safe. The compiler will emit an error if a type conforming to `Sendable` is not thread-safe. For example, simple value types and immutable classes can always safely conform to `Sendable`, but mutable classes cannot:
+
+    ```swift
+    // RIGHT: Simple value types are thread-safe.
+    struct Planet: Sendable {
+      var mass: Double
+    }
+
+    // RIGHT: Immutable classes are thread-safe.
+    final class Planet: Sendable {
+      let mass: Double
+    }
+
+    // WRONG: Mutable classes are not thread-safe.
+    final class Planet: Sendable {
+      // ERROR: stored property 'mass' of 'Sendable'-conforming class 'Planet' is mutable
+      var mass: Double
+    }
+
+    // WRONG: @unchecked is unnecessary because the compiler can prove that the type is thread-safe.
+    struct Planet: @unchecked Sendable {
+      var mass: Double
+    }
+    ```
+
+    Mutable classes can be made `Sendable` and thread-safe if they are isolated to a single actor / thread / concurrency domain. Any mutable class can be made `Sendable` by isolating it to a global actor using an annotation like `@MainActor` (which isolates it to the main actor):
+
+    ```swift
+    // RIGHT: A mutable class isolated to the main actor is thread-safe.
+    @MainActor
+    final class Planet: Sendable {
+      var mass: Double
+    }
+
+    // WRONG: @unchecked Sendable is unsafe because mutable classes are not thread-safe.
+    struct Planet: @unchecked Sendable {
+      var mass: Double
+    }
+    ```
+
+    ### 2. Use `@preconcurrency import`
+
+    If working with a non-`Sendable` type from a module that hasn't yet adopted Swift concurrency, suppress concurrency-related errors using `@preconcurrency import`.
+
+    ```swift
+    /// Defined in `UniverseKit` module
+    class Planet: PlanetaryBody { 
+      var star: Star
+    }
+    ```
+
+    ```swift 
+    // WRONG: Unsafely marking a non-thread-safe class as Sendable only to suppress errors
+    import PlantaryBody
+
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // RIGHT
+    @preconcurreny import PlanetaryBody
+    ```
+
+    ### 3. Restructure code so the compiler can verify that it is thread-safe
+
+    If possible, restructure code so that the compiler can verify that it is thread safe. This lets you use a `Sendable` conformance instead of an unsafe `@unchecked Sendable` conformance. 
+
+    When conforming to `Sendable`, the compiler will emit an error in the future if you attempt to make a change that is not thread-safe. This guaruntee is lost when using `@unchecked Sendable`, which makes it easier to accidentially introduce changes which are not thread-safe.
+
+    For example, given this set of classes:
 
     ```swift
     class PlanetaryBody { 
@@ -2541,14 +2612,68 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let star: Star
     }
 
-    // WRONG
+    // NOT IDEAL: no compiler-enforced thread safety.
+    extension PlanetaryBody: @unchecked Sendable { }
+    ```
+
+    the compiler can't verify `PlanetaryBody` is `Sendable` because it is not `final`. Instead of using `@unchecked Sendable`, you could restructure the code to not use subclassing:
+
+    ```swift
+    // BETTER: Compiler-enforced thread safety.
+    protocol PlanetaryBody: Sendable {
+      var mass: Double { get }
+    }
+
+    final class Planet: PlanetaryBody, Sendable {
+      let mass: Double
+      let star: Star
+    }
+    ```
+
+    ### Using `@unchecked Sendable` when necessary
+
+    Sometimes it is truly necessary to use `@unchecked Sendable`. In these cases, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with an explanation for how we know the type is thread-safe, and why we have to use `@unchecked Sendable` instead of `Sendable`.
+
+    A canonical, safe use case of `@unchecked Sendable` is a class where the mutable state is protected by some other thread-safe mechanism like a lock. This type is thread-safe, but the compiler cannot verify this.
+
+    ```swift
+    struct Atomic<Value> {
+      /// `value` is thread-safe because it is manually protected by a lock.
+      var value: Value { ... }
+    }
+
+    // WRONG: disallowed by linter
+    extension Atomic: @unchecked Sendable { }
+
+    // WRONG: suppressing lint error without an explanation
+    // swiftlint:disable:next no_unchecked_sendable
+    extension Atomic: @unchecked Sendable { }
+
+    // RIGHT: suppressing the linter with an explanation why the type is thread-safe
+    // Atomic is thread-safe because its underlying mutable state is protected by a lock.
+    // swiftlint:disable:next no_unchecked_sendable
+    extension Atomic: @unchecked Sendable { }
+    ```
+
+    It is also reasonable to use `@unchecked Sendable` for types are thread-safe in existing usage but can't be refactored to support a proper `Sendable` conformance (e.g. due to backwards compatibility constraints):
+
+    ```swift
+    class PlanetaryBody { 
+      let mass: Double  
+    }
+
+    class Planet: PlanetaryBody { 
+      let star: Star
+    }
+
+    // WRONG: disallowed by linter
     extension PlanetaryBody: @unchecked Sendable { }
 
     // WRONG: suppressing lint error without an explanation
     // swiftlint:disable:next no_unchecked_sendable
     extension PlanetaryBody: @unchecked Sendable { }
 
-    // RIGHT:
+    // RIGHT: suppressing the linter with an explanation why the type is thread-safe
     // PlanetaryBody cannot conform to Sendable because it is non-final and has subclasses.
     // PlanetaryBody itself is safely Sendable because it only consists of immutable values.
     // All subclasses of PlanetaryBody are also simple immutable values, so are safely Sendable as well.
