@@ -52,4 +52,4 @@ custom_rules:
   no_unchecked_sendable:
     name: "`@unchecked Sendable` is discouraged."
     regex: "@unchecked Sendable"
-    message: "If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with a comment explaining why it's necessary to use `@unchecked Sendable` instead of `Sendable`, along with an explanation as to how we know that the `@unchecked Sendable` conformance is safe and correct."
+    message: "Instead of using `@unchecked Sendable`, consider a safe alternative like a standard `Sendable` conformance or using `@preconcurrency import`. If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with an explanation for how we know the type is thread-safe, and why we have to use @unchecked Sendable instead of Sendable. More explanation and suggested safe alternatives are available at https://github.com/airbnb/swift#unchecked-sendable."
