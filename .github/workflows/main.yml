@@ -34,3 +34,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Test Package Plugin
         run: swift package --allow-writing-to-package-directory format --lint --log
+
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Unit Tests
+        run: swift test
