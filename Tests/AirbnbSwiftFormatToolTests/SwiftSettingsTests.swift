@@ -18,9 +18,18 @@ extension SwiftSettings {
 
 // MARK: - SwiftSettingsTests
 
+@available(macOS 13.0, *)
 final class SwiftSettingsTests: XCTestCase {
 
-  @available(macOS 13.0, *)
+  func testCanUseRegexLiterals() {
+    // Verifying that this module can use regex literals,
+    // meaning that the Swift Settings are applied correctly.
+    // (In Swift 5.x this does not compile successfully by default)
+    let regex = /Check it out .+, I'm a (regex|REGEX) literal!/
+    XCTAssert("Check it out mom, I'm a regex literal!".contains(regex))
+    XCTAssert("Check it out dad, I'm a REGEX literal!".contains(regex))
+  }
+
   func testUpdatesSwiftSettings() {
     let input = """
       // swift-tools-version: 5.8
@@ -58,7 +67,6 @@ final class SwiftSettingsTests: XCTestCase {
     XCTAssertEqual(updatedManifest, expectedOutput)
   }
 
-  @available(macOS 13.0, *)
   func testPreservesExistingSettings() {
     let input = """
       // swift-tools-version: 5.8
@@ -81,7 +89,6 @@ final class SwiftSettingsTests: XCTestCase {
     XCTAssertEqual(updatedManifest, input)
   }
 
-  @available(macOS 13.0, *)
   func testDoesNothingIfNoExistingExtension() {
     let input = """
       // swift-tools-version: 5.6

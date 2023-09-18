@@ -77,7 +77,7 @@ extension SwiftSettings {
       OneOrMore { .any }
       "static func airbnbDefault"
       OneOrMore { .any }
-      /\n+/ // Equivalent to `OneOrMore { .newlineSequence }`. Demonstrating support for regex literals.
+      OneOrMore { .newlineSequence }
       "}"
     }
 

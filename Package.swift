@@ -36,7 +36,9 @@ let package = Package(
         .process("swiftlint.yml"),
       ]),
 
-    .testTarget(name: "AirbnbSwiftFormatToolTests", dependencies: ["AirbnbSwiftFormatTool"]),
+    .testTarget(
+      name: "AirbnbSwiftFormatToolTests",
+      dependencies: ["AirbnbSwiftFormatTool"]),
 
     .binaryTarget(
       name: "SwiftFormat",

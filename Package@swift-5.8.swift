@@ -37,7 +37,10 @@ let package = Package(
       ],
       swiftSettings: .airbnbDefault()),
 
-    .testTarget(name: "AirbnbSwiftFormatToolTests", dependencies: ["AirbnbSwiftFormatTool"]),
+    .testTarget(
+      name: "AirbnbSwiftFormatToolTests",
+      dependencies: ["AirbnbSwiftFormatTool"],
+      swiftSettings: .airbnbDefault()),
 
     .binaryTarget(
       name: "SwiftFormat",
