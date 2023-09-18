@@ -16,42 +16,43 @@ extension SwiftSettings {
     """
 }
 
+// MARK: - SwiftSettingsTests
 
 final class SwiftSettingsTests: XCTestCase {
 
   @available(macOS 13.0, *)
   func testUpdatesSwiftSettings() {
     let input = """
-    // swift-tools-version: 5.8
-    import PackageDescription
+      // swift-tools-version: 5.8
+      import PackageDescription
 
-    let package = Package(
-      name: "MyPackage",
-      targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
+      let package = Package(
+        name: "MyPackage",
+        targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
 
-    extension [SwiftSetting] {
-      static func airbnbDefault() -> [SwiftSetting] {
-        []
+      extension [SwiftSetting] {
+        static func airbnbDefault() -> [SwiftSetting] {
+          []
+        }
       }
-    }
-    """
+      """
 
     let expectedOutput = """
-    // swift-tools-version: 5.8
-    import PackageDescription
+      // swift-tools-version: 5.8
+      import PackageDescription
 
-    let package = Package(
-      name: "MyPackage",
-      targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
+      let package = Package(
+        name: "MyPackage",
+        targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
 
-    extension [SwiftSetting] {
-      static func airbnbDefault() -> [SwiftSetting] {
-        [
-          .enableUpcomingFeature("TestCase")
-        ]
+      extension [SwiftSetting] {
+        static func airbnbDefault() -> [SwiftSetting] {
+          [
+            .enableUpcomingFeature("TestCase")
+          ]
+        }
       }
-    }
-    """
+      """
 
     let updatedManifest = SwiftSettings.updateContentsOfPackageManifest(input, with: SwiftSettings.testCaseSwiftSettings)
     XCTAssertEqual(updatedManifest, expectedOutput)
@@ -60,21 +61,21 @@ final class SwiftSettingsTests: XCTestCase {
   @available(macOS 13.0, *)
   func testPreservesExistingSettings() {
     let input = """
-    // swift-tools-version: 5.8
-    import PackageDescription
+      // swift-tools-version: 5.8
+      import PackageDescription
 
-    let package = Package(
-      name: "MyPackage",
-      targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
+      let package = Package(
+        name: "MyPackage",
+        targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
 
-    extension [SwiftSetting] {
-      static func airbnbDefault() -> [SwiftSetting] {
-        [
-          .enableUpcomingFeature("TestCase")
-        ]
+      extension [SwiftSetting] {
+        static func airbnbDefault() -> [SwiftSetting] {
+          [
+            .enableUpcomingFeature("TestCase")
+          ]
+        }
       }
-    }
-    """
+      """
 
     let updatedManifest = SwiftSettings.updateContentsOfPackageManifest(input, with: SwiftSettings.testCaseSwiftSettings)
     XCTAssertEqual(updatedManifest, input)
@@ -83,13 +84,13 @@ final class SwiftSettingsTests: XCTestCase {
   @available(macOS 13.0, *)
   func testDoesNothingIfNoExistingExtension() {
     let input = """
-    // swift-tools-version: 5.6
-    import PackageDescription
+      // swift-tools-version: 5.6
+      import PackageDescription
 
-    let package = Package(
-      name: "MyPackage",
-      targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
-    """
+      let package = Package(
+        name: "MyPackage",
+        targets: [.target(name: "MyTarget", swiftSettings: .airbnbDefault())])
+      """
 
     let updatedManifest = SwiftSettings.updateContentsOfPackageManifest(input, with: SwiftSettings.testCaseSwiftSettings)
     XCTAssertEqual(updatedManifest, input)
