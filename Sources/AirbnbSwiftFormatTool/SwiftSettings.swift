@@ -42,21 +42,10 @@ extension SwiftSettings {
   @available(macOS 13.0, *)
   static func updatePackageManifests(in packageDirectory: URL, lintOnly: Bool, verbose: Bool) throws {
     for packageManifestURL in packageManifestURLs(in: packageDirectory) {
-      var contents = try String(contentsOf: packageManifestURL)
-      let originalContent = contents
+      let originalContents = try String(contentsOf: packageManifestURL)
+      let updatedContents = updateContentsOfPackageManifest(originalContents)
 
-      let extensionRegex = Regex {
-        "extension [SwiftSetting] {"
-        OneOrMore { .any }
-        "static func airbnbDefault"
-        OneOrMore { .any }
-        /\n+/ // Equivalent to `OneOrMore { .newlineSequence }`. Demonstrating support for regex literals.
-        "}"
-      }
-
-      contents.replace(extensionRegex, with: airbnbDefaultSwiftSettings)
-
-      guard contents != originalContent else {
+      guard updatedContents != originalContents else {
         if verbose {
           log("Validated Swift Settings in \(packageManifestURL.lastPathComponent)")
         }
@@ -68,13 +57,31 @@ extension SwiftSettings {
         log("[SwiftSetting].airbnbDefault() is out of date in \(packageManifestURL.lastPathComponent).")
         throw ExitCode.failure
       } else {
-        try contents.write(to: packageManifestURL, atomically: true, encoding: .utf8)
+        try updatedContents.write(to: packageManifestURL, atomically: true, encoding: .utf8)
 
         if verbose {
           log("Updated Swift Settings in \(packageManifestURL.lastPathComponent)")
         }
       }
     }
+  }
+
+  @available(macOS 13.0, *)
+  static func updateContentsOfPackageManifest(
+    _ contents: String,
+    with newExtensionImplementation: String = SwiftSettings.airbnbDefaultSwiftSettings)
+    -> String
+  {
+    let extensionRegex = Regex {
+      "extension [SwiftSetting] {"
+      OneOrMore { .any }
+      "static func airbnbDefault"
+      OneOrMore { .any }
+      /\n+/ // Equivalent to `OneOrMore { .newlineSequence }`. Demonstrating support for regex literals.
+      "}"
+    }
+
+    return contents.replacing(extensionRegex, with: newExtensionImplementation)
   }
 
   // MARK: Private

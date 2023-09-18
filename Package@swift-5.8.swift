@@ -37,6 +37,8 @@ let package = Package(
       ],
       swiftSettings: .airbnbDefault()),
 
+    .testTarget(name: "AirbnbSwiftFormatToolTests", dependencies: ["AirbnbSwiftFormatTool"]),
+
     .binaryTarget(
       name: "SwiftFormat",
       url: "https://github.com/calda/SwiftFormat/releases/download/0.52-beta-3/SwiftFormat.artifactbundle.zip",
