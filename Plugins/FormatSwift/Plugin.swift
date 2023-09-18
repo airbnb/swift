@@ -92,9 +92,9 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
       inputPaths = try self.inputPaths(for: context.package)
     }
 
-    // When running on a SPM package we infer the minimum Swift version from the
-    // `swift-tools-version` in `Package.swift` by default if the user doesn't
-    // specify one manually
+    // When running on a SPM package, by default we use the minimum swift version
+    // specified in any of the package manifest files. Alternatively the user can
+    // manually specify a swift version via the `--swift-version` argument.
     lazy var minimumSwiftVersion = context.package.minimumSwiftVersion
     let swiftVersion = argumentExtractor.extractOption(named: "swift-version").last
       ?? "\(minimumSwiftVersion.major).\(minimumSwiftVersion.minor)"
@@ -211,29 +211,20 @@ extension Package {
     ]
 
     // Look for all of the package manifest files in the directory root
-    let enumerator = FileManager.default.enumerator(
+    let filesInRootDirectory = try? FileManager.default.contentsOfDirectory(
       at: projectDirectory,
-      includingPropertiesForKeys: nil,
-      options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles])
+      includingPropertiesForKeys: nil)
 
-    while let fileURL = enumerator?.nextObject() as? URL {
+    for fileURL in filesInRootDirectory ?? [] {
       let fileName = fileURL.lastPathComponent
 
       guard fileName.hasPrefix("Package"), fileName.hasSuffix(".swift") else { continue }
 
-      // Parse the Swift version from the file name if it has a format like `Package@swift-5.8.swift`
-      if
-        fileName.hasPrefix("Package@swift-"),
-        let swiftVersion = parseSwiftVersion(from: fileName.dropFirst("Package@swift-".count))
-      {
-        supportedSwiftVersions.append(swiftVersion)
-      }
-
       // Parse the Swift tools version from the file body if it starts with a comment like `// swift-tools-version: 5.8`
       if
         let fileContents = try? String(contentsOf: fileURL),
-        fileContents.hasPrefix("// swift-tools-version: "),
-        let swiftVersion = parseSwiftVersion(from: fileContents.dropFirst("// swift-tools-version: ".count))
+        fileContents.hasPrefix("// swift-tools-version:"),
+        let swiftVersion = parseSwiftVersion(from: fileContents.dropFirst("// swift-tools-version:".count))
       {
         supportedSwiftVersions.append(swiftVersion)
       }
@@ -244,13 +235,13 @@ extension Package {
 
   /// Parses a Swift version from a string like "5.8"
   private func parseSwiftVersion(from string: Substring) -> SwiftVersion? {
-    var string = string
+    var string = Substring(string.trimmingCharacters(in: .whitespacesAndNewlines))
 
     guard
       string.count >= 3,
-      let major = string.popFirst().flatMap({ Int("\($0)") }),
+      let major = string.popFirst().flatMap({ Int(String($0)) }),
       string.popFirst() == ".",
-      let minor = string.popFirst().flatMap({ Int("\($0)") })
+      let minor = string.popFirst().flatMap({ Int(String($0)) })
     else { return nil }
 
     return SwiftVersion(major: major, minor: minor)
