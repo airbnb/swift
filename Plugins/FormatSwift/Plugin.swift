@@ -92,11 +92,12 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
       inputPaths = try self.inputPaths(for: context.package)
     }
 
-    // When running on a SPM package we infer the minimum Swift version from the
-    // `swift-tools-version` in `Package.swift` by default if the user doesn't
-    // specify one manually
+    // When running on a SPM package, by default we use the minimum swift version
+    // specified in any of the package manifest files. Alternatively the user can
+    // manually specify a swift version via the `--swift-version` argument.
+    lazy var minimumSwiftVersion = context.package.minimumSwiftVersion
     let swiftVersion = argumentExtractor.extractOption(named: "swift-version").last
-      ?? "\(context.package.toolsVersion.major).\(context.package.toolsVersion.minor)"
+      ?? "\(minimumSwiftVersion.major).\(minimumSwiftVersion.minor)"
 
     let arguments = [
       "--swift-version",
@@ -165,4 +166,84 @@ extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
 enum CommandError: Error {
   case lintFailure
   case unknownError(exitCode: Int32)
+}
+
+// MARK: - SwiftVersion
+
+struct SwiftVersion: Comparable {
+  var major: Int
+  var minor: Int
+
+  static func ==(_ lhs: SwiftVersion, _ rhs: SwiftVersion) -> Bool {
+    lhs.major == rhs.major
+      && lhs.minor == rhs.minor
+  }
+
+  static func <(_ lhs: SwiftVersion, _ rhs: SwiftVersion) -> Bool {
+    if lhs.major == rhs.major {
+      return lhs.minor < rhs.minor
+    } else {
+      return lhs.major < rhs.major
+    }
+  }
+}
+
+extension Package {
+
+  // MARK: Internal
+
+  /// The minimum Swift version supported by this package
+  var minimumSwiftVersion: SwiftVersion {
+    supportedSwiftVersions.sorted().first!
+  }
+
+  // MARK: Private
+
+  /// Swift versions supported by this package. Guaranteed to be non-empty.
+  ///  - This includes the `swift-tools-version` from the `Package.swift`,
+  ///    plus the Swift version of any additional version-specific Package manifest
+  ///    (e.g. `Package@swift-5.6.swift`).
+  private var supportedSwiftVersions: [SwiftVersion] {
+    guard let projectDirectory = URL(string: directory.string) else { return [] }
+
+    var supportedSwiftVersions = [
+      SwiftVersion(major: toolsVersion.major, minor: toolsVersion.minor),
+    ]
+
+    // Look for all of the package manifest files in the directory root
+    let filesInRootDirectory = try? FileManager.default.contentsOfDirectory(
+      at: projectDirectory,
+      includingPropertiesForKeys: nil)
+
+    for fileURL in filesInRootDirectory ?? [] {
+      let fileName = fileURL.lastPathComponent
+
+      guard fileName.hasPrefix("Package"), fileName.hasSuffix(".swift") else { continue }
+
+      // Parse the Swift tools version from the file body if it starts with a comment like `// swift-tools-version: 5.8`
+      if
+        let fileContents = try? String(contentsOf: fileURL),
+        fileContents.hasPrefix("// swift-tools-version:"),
+        let swiftVersion = parseSwiftVersion(from: fileContents.dropFirst("// swift-tools-version:".count))
+      {
+        supportedSwiftVersions.append(swiftVersion)
+      }
+    }
+
+    return supportedSwiftVersions
+  }
+
+  /// Parses a Swift version from a string like "5.8"
+  private func parseSwiftVersion(from string: Substring) -> SwiftVersion? {
+    var string = Substring(string.trimmingCharacters(in: .whitespacesAndNewlines))
+
+    guard
+      string.count >= 3,
+      let major = string.popFirst().flatMap({ Int(String($0)) }),
+      string.popFirst() == ".",
+      let minor = string.popFirst().flatMap({ Int(String($0)) })
+    else { return nil }
+
+    return SwiftVersion(major: major, minor: minor)
+  }
 }
