@@ -42,6 +42,8 @@ $ swift package format
 <details>
 <summary>Usage guide</summary>
 
+### Package plugin commands
+
 ```shell
 # Supported in Xcode 14+. Prompts for permission to write to the package directory.
 $ swift package format
@@ -63,6 +65,46 @@ $ swift package format --targets AirbnbSwiftFormatTool
 # The plugin infers your package's minimum Swift version from the `swift-tools-version`
 # in your `Package.swift`, but you can provide a custom value with `--swift-version`:
 $ swift package format --swift-version 5.3
+```
+
+### Swift compiler flags
+
+This repo includes several recommended Swift compiler flags, like those enabling upcoming Swift 6 features. Some rules or recommendations may depend on these specific flags being used.
+
+You can adopt the recommended Swift compiler flags in an SPM package by configuring the `swiftSettings` of your target:
+
+```swift
+.target(name: "MyModule", swiftSettings: .airbnbDefault())
+```
+
+The `airbnbDefault()` Swift Settings must be defined in an extension your `Package.swift`. The Swift package plugin keeps these flags up to date automatically. If you add the following extension to your `Package.swift` file:
+
+```swift
+ extension [SwiftSetting] {
+   /// Default Swift compiler flags recommended by the Airbnb Swift Style Guide.
+   /// Do not modify: updated automatically by Airbnb Swift Format Tool.
+   static func airbnbDefault() -> [SwiftSetting] {
+     []
+   }
+ }
+```
+
+the Swift package plugin will update it automatically to the latest set of flags every time you run `swift package format`:
+
+```diff
+ extension [SwiftSetting] {
+   /// Default Swift compiler flags recommended by the Airbnb Swift Style Guide.
+   /// Do not modify: updated automatically by Airbnb Swift Format Tool.
+   static func airbnbDefault() -> [SwiftSetting] {
+-    []   
++    [
++      .enableUpcomingFeature("BareSlashRegexLiterals"),
++      .enableUpcomingFeature("ConciseMagicFile"),
++      .enableUpcomingFeature("ImplicitOpenExistentials"),
++      .enableExperimentalFeature("StrictConcurrency=targeted"),
++    ]
+   }
+ }
 ```
 
 </details>
