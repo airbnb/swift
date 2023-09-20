@@ -1622,7 +1622,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Prefer using `weak` captures over `unowned` captures.**  [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
+* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Prefer using `weak` captures over `unowned` captures.**  [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
 
   <details>
   `unowned` captures are unsafe because they will cause the application to crash if the referenced object has been deallocated. `weak` captures are safer because they require the author to explicitly handle the case where the referenced object no longer exists.
