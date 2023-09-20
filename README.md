@@ -2655,7 +2655,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     extension Atomic: @unchecked Sendable { }
     ```
 
-    It is also reasonable to use `@unchecked Sendable` for types are thread-safe in existing usage but can't be refactored to support a proper `Sendable` conformance (e.g. due to backwards compatibility constraints):
+    It is also reasonable to use `@unchecked Sendable` for types that are thread-safe in existing usage but can't be refactored to support a proper `Sendable` conformance (e.g. due to backwards compatibility constraints):
 
     ```swift
     class PlanetaryBody { 
