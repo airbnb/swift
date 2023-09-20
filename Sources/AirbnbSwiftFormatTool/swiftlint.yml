@@ -36,16 +36,23 @@ custom_rules:
     match_kinds:
     - identifier
     message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
-    severity: warning
+    severity: error
   no_file_literal:
     name: "#file is disallowed"
     regex: "(\\b#file\\b)"
     match_kinds:
     - identifier
     message: "Instead of #file, use #fileID"
+    severity: error
   no_filepath_literal:
     name: "#filePath is disallowed"
     regex: "(\\b#filePath\\b)"
     match_kinds:
     - identifier
     message: "Instead of #filePath, use #fileID."
+    severity: error
+  no_unchecked_sendable:
+    name: "`@unchecked Sendable` is discouraged."
+    regex: "@unchecked Sendable"
+    message: "Instead of using `@unchecked Sendable`, consider a safe alternative like a standard `Sendable` conformance or using `@preconcurrency import`. If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with an explanation for how we know the type is thread-safe, and why we have to use @unchecked Sendable instead of Sendable. More explanation and suggested safe alternatives are available at https://github.com/airbnb/swift#unchecked-sendable."
+    severity: error
