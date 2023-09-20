@@ -12,6 +12,7 @@ only_rules:
   - unused_optional_binding
   - vertical_whitespace
   - void_return
+  - unowned_variable_capture
   - custom_rules
 
 excluded:
