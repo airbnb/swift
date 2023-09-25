@@ -40,40 +40,64 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   @Option(help: "The project's minimum Swift version")
   var swiftVersion: String?
 
-  mutating func run() throws {
-    try swiftFormat.run()
-    swiftFormat.waitUntilExit()
+  func run() throws {
+    let swiftFormat = makeSwiftFormatCommand()
+    let swiftLint = makeSwiftLintCommand(autocorrect: false)
+    let swiftLintAutocorrect = makeSwiftLintCommand(autocorrect: true)
 
-    try swiftLint.run()
-    swiftLint.waitUntilExit()
+    let swiftFormatExitCode = try swiftFormat.run()
 
-    if log {
-      log(swiftFormat.shellCommand)
-      log(swiftLint.shellCommand)
-      log("SwiftFormat ended with exit code \(swiftFormat.terminationStatus)")
-      log("SwiftLint ended with exit code \(swiftLint.terminationStatus)")
+    // We always have to run SwiftLint in lint-only mode at least once,
+    // because when in autocorrect mode SwiftLint won't emit any lint warnings.
+    let swiftLintExitCode = try swiftLint.run()
+
+    let swiftLintAutocorrectExitCode: Int32?
+    if
+      // When only linting, we shouldn't run SwiftLint with autocorrect enabled
+      !lintOnly,
+      // When formatting, only re-run SwiftLint a second time if the first
+      // invocation reported a lint failure that needs to be corrected
+      swiftLintExitCode == SwiftLintExitCode.lintFailure
+    {
+      swiftLintAutocorrectExitCode = try swiftLintAutocorrect.run()
+    } else {
+      swiftLintAutocorrectExitCode = nil
     }
 
     if
-      swiftFormat.terminationStatus == SwiftFormatExitCode.lintFailure ||
-      swiftLint.terminationStatus == SwiftLintExitCode.lintFailure
+      swiftFormatExitCode == SwiftFormatExitCode.lintFailure ||
+      swiftLintExitCode == SwiftLintExitCode.lintFailure ||
+      swiftLintAutocorrectExitCode == SwiftLintExitCode.lintFailure
     {
       throw ExitCode.failure
     }
 
     // Any other non-success exit code is an unknown failure
-    if swiftFormat.terminationStatus != EXIT_SUCCESS {
-      throw ExitCode(swiftFormat.terminationStatus)
+    if swiftFormatExitCode != EXIT_SUCCESS {
+      throw ExitCode(swiftFormatExitCode)
     }
 
-    if swiftLint.terminationStatus != EXIT_SUCCESS {
-      throw ExitCode(swiftLint.terminationStatus)
+    if swiftLintExitCode != EXIT_SUCCESS {
+      throw ExitCode(swiftLintExitCode)
+    }
+
+    if
+      let swiftLintAutocorrectExitCode = swiftLintAutocorrectExitCode,
+      swiftLintAutocorrectExitCode != EXIT_SUCCESS
+    {
+      throw ExitCode(swiftLintAutocorrectExitCode)
     }
   }
 
   // MARK: Private
 
-  private lazy var swiftFormat: Process = {
+  /// Whether the command should autocorrect invalid code, or only emit lint errors
+  private var lintOnly: Bool {
+    lint
+  }
+
+  /// Builds a command that runs the SwiftFormat tool
+  private func makeSwiftFormatCommand() -> Command {
     var arguments = directories + [
       "--config", swiftFormatConfig,
     ]
@@ -90,13 +114,16 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
       arguments += ["--swiftversion", swiftVersion]
     }
 
-    let swiftFormat = Process()
-    swiftFormat.launchPath = swiftFormatPath
-    swiftFormat.arguments = arguments
-    return swiftFormat
-  }()
+    return Command(
+      log: log,
+      launchPath: swiftFormatPath,
+      arguments: arguments)
+  }
 
-  private lazy var swiftLint: Process = {
+  /// Builds a command that runs the SwiftLint tool
+  ///  - If `autocorrect` is true, passes the `--fix` flag to SwiftLint.
+  ///    When autocorrecting, SwiftLint doesn't emit any lint warnings.
+  private func makeSwiftLintCommand(autocorrect: Bool) -> Command {
     var arguments = directories + [
       "--config", swiftLintConfig,
       // Required for SwiftLint to emit a non-zero exit code on lint failure
@@ -107,15 +134,15 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
       arguments += ["--cache-path", swiftLintCachePath]
     }
 
-    if !lint {
+    if autocorrect {
       arguments += ["--fix"]
     }
 
-    let swiftLint = Process()
-    swiftLint.launchPath = swiftLintPath
-    swiftLint.arguments = arguments
-    return swiftLint
-  }()
+    return Command(
+      log: log,
+      launchPath: swiftLintPath,
+      arguments: arguments)
+  }
 
   private func log(_ string: String) {
     // swiftlint:disable:next no_direct_standard_out_logs
