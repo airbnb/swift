@@ -1622,50 +1622,75 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Prefer using `weak` captures over `unowned` captures.**  [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
+* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Avoid using `unowned` captures.** Instead prefer safer alternatives like `weak` captures, or capturing variables directly. [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
 
   <details>
-  `unowned` captures are unsafe because they will cause the application to crash if the referenced object has been deallocated. `weak` captures are safer because they require the author to explicitly handle the case where the referenced object no longer exists.
-  
+  `unowned` captures are unsafe because they will cause the application to crash if the referenced object has been deallocated.
+
   ```swift
-  // WRONG: Crashes if `planet` has been deallocated when the closure is called.
-
-  spaceship.travel(to: planet, onArrival: { [unowned planet] in
-    planet.colonize()
-  })
-
-  spaceship.travel(to: planet, nextDestination: { [unowned planet] in
-    planet.moons.first ?? planet.sun
-  })
+  // WRONG: Crashes if `self` has been deallocated when closures are called.
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [unowned self] in
+        planet.colonize()
+      })
+    }
+    
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [unowned self] in
+        planet.moons?.first
+      })
+    }
+  }
   ```
 
+  `weak` captures are safer because they require the author to explicitly handle the case where the referenced object no longer exists.
+
   ```swift
-  // RIGHT: Explicitly handles case where `planet` has been deallocated.
-
-  spaceship.travel(to: planet, onArrival: { [weak planet] in
-    guard let planet else { return }
-    planet.colonize()
-  })
-
-  // For closures that return a non-optional value, you could either 
-  // use `fatalError` to avoid having to return anything:
-  spaceship.travel(to: planet, nextDestination: { [weak planet] in
-    guard let planet else {
-      fatalError("Planet was unexpectedly deallocated before reached by spaceship")
+  // RIGHT: Uses a `weak self` capture and explicitly handles the case where `self` has been deallocated
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [weak self] in
+        guard let self else { return }
+        planet.colonize()
+      })
     }
     
-    return planet.moons.first ?? planet.sun
-  })
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [weak self] in
+        guard let self else { return nil }
+        return planet.moons?.first
+      })
+    }
+  }
+  ```
 
-  // Or you could return a placeholder value with an optional `assertionFailure`:
-  spaceship.travel(to: planet, nextDestination: { [weak planet] in     
-    guard let planet else {
-      assertionFailure("Planet was unexpectedly deallocated before reached by spaceship")
-      return Planet()
+  Alternatively, consider directly capturing the variables that are used in the closure. This lets you avoid having to handle the case where `self` is nil, since you don't even need to reference `self`:
+
+  ```swift
+  // RIGHT: Explicitly captures `planet` instead of capturing `self`
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [planet] in
+        planet.colonize()
+      })
     }
     
-    return planet.moons.first ?? planet.sun
-  })
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [planet] in
+        planet.moons?.first
+      })
+    }
+  }
   ```
   
   </details>
