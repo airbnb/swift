@@ -8,7 +8,7 @@ struct Command {
 
   // MARK: Internal
 
-  /// Mock implementation of `Command.run` which can be provided during unit test
+  /// This property can be overridden to provide a mock implementation in unit tests.
   static var runCommand: (Command) throws -> Int32 = { try $0.executeShellCommand() }
 
   let log: Bool
