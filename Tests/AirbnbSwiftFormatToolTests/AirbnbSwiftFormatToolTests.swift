@@ -38,47 +38,6 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertTrue(ranSwiftLintAutocorrect)
   }
 
-  func testFormatWithOnlySwiftLintAutocorrectedViolation() {
-    var ranSwiftFormat = false
-    var ranSwiftLint = false
-    var ranSwiftLintAutocorrect = false
-
-    let error = runFormatTool(
-      with: MockCommands(
-        swiftFormat: {
-          ranSwiftFormat = true
-          return EXIT_SUCCESS
-        },
-        swiftLint: {
-          ranSwiftLint = true
-
-          // Assume that the codebase has violations that would be corrected by SwiftLint autocorrect.
-          if ranSwiftLintAutocorrect {
-            // If SwiftLint autocorrect has already run, then there are no more violations.
-            // This is the expected behavior.
-            return EXIT_SUCCESS
-          } else {
-            // If SwiftLint autocorrect hasn't run yet, then there are still violations.
-            // This should not happen, because we run autocorrect first.
-            return SwiftLintExitCode.lintFailure
-          }
-        },
-        swiftLintAutocorrect: {
-          // Assume that this SwiftLint autocorrect invocation applied a code change.
-          // In this case, SwiftLint still returns a zero exit code.
-          ranSwiftLintAutocorrect = true
-          return EXIT_SUCCESS
-        }))
-
-    // Even though there was a SwiftLint failure, it was autocorrected so doesn't require attention.
-    // The tool should not return an error (e.g. it should return a zero exit code).
-    XCTAssertNil(error)
-
-    XCTAssertTrue(ranSwiftFormat)
-    XCTAssertTrue(ranSwiftLint)
-    XCTAssertTrue(ranSwiftLintAutocorrect)
-  }
-
   func testLintWithNoViolations() {
     var ranSwiftFormat = false
     var ranSwiftLint = false
@@ -135,6 +94,47 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         }))
 
     XCTAssertEqual(error as? ExitCode, ExitCode(SwiftFormatExitCode.lintFailure))
+    XCTAssertTrue(ranSwiftFormat)
+    XCTAssertTrue(ranSwiftLint)
+    XCTAssertTrue(ranSwiftLintAutocorrect)
+  }
+
+  func testFormatWithOnlySwiftLintAutocorrectedViolation() {
+    var ranSwiftFormat = false
+    var ranSwiftLint = false
+    var ranSwiftLintAutocorrect = false
+
+    let error = runFormatTool(
+      with: MockCommands(
+        swiftFormat: {
+          ranSwiftFormat = true
+          return EXIT_SUCCESS
+        },
+        swiftLint: {
+          ranSwiftLint = true
+
+          // Assume that the codebase has violations that would be corrected by SwiftLint autocorrect.
+          if ranSwiftLintAutocorrect {
+            // If SwiftLint autocorrect has already run, then there are no more violations.
+            // This is the expected behavior.
+            return EXIT_SUCCESS
+          } else {
+            // If SwiftLint autocorrect hasn't run yet, then there are still violations.
+            // This should not happen, because we run autocorrect first.
+            return SwiftLintExitCode.lintFailure
+          }
+        },
+        swiftLintAutocorrect: {
+          // Assume that this SwiftLint autocorrect invocation applied a code change.
+          // In this case, SwiftLint still returns a zero exit code.
+          ranSwiftLintAutocorrect = true
+          return EXIT_SUCCESS
+        }))
+
+    // Even though there was a SwiftLint failure, it was autocorrected so doesn't require attention.
+    // The tool should not return an error (e.g. it should return a zero exit code).
+    XCTAssertNil(error)
+
     XCTAssertTrue(ranSwiftFormat)
     XCTAssertTrue(ranSwiftLint)
     XCTAssertTrue(ranSwiftLintAutocorrect)
