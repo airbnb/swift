@@ -45,5 +45,5 @@ jobs:
         - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
-      - name: Test Package Plugin
+      - name: Run Unit Tests
         run: swift test
