@@ -65,6 +65,10 @@ $ swift package format --targets AirbnbSwiftFormatTool
 $ swift package format --swift-version 5.3
 ```
 
+The package plugin returns a non-zero exit code if there is a lint failure that requires attention.
+ - In `--lint` mode, any lint failure from any tool will result in a non-zero exit code.
+ - In standard autocorrect mode without `--lint`, only failures from SwiftLint lint-only rules will result in a non-zero exit code.
+
 </details>
 
 ## Table of Contents
