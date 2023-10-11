@@ -50,15 +50,18 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
           return EXIT_SUCCESS
         },
         swiftLint: {
-          // If we run autocorrect on a codebase and SwiftLint autocorrect
-          // applies a fix, the SwiftLint lint-only invocation can only
-          // return EXIT_SUCCESS if ran after the autocorrect rule.
-          // (Because if it ran before the autocorrect rule, it would have
-          // seen the failure that was autocorrected before it was fixed).
-          XCTAssert(ranSwiftLintAutocorrect)
           ranSwiftLint = true
 
-          return EXIT_SUCCESS
+          // Assume that the codebase has violations that would be corrected by SwiftLint autocorrect.
+          if ranSwiftLintAutocorrect {
+            // If SwiftLint autocorrect has already run, then there are no more violations.
+            // This is the expected behavior.
+            return EXIT_SUCCESS
+          } else {
+            // If SwiftLint autocorrect hasn't run yet, then there are still violations.
+            // This should not happen, because we run autocorrect first.
+            return SwiftLintExitCode.lintFailure
+          }
         },
         swiftLintAutocorrect: {
           // Assume that this SwiftLint autocorrect invocation applied a code change.
@@ -67,7 +70,10 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
           return EXIT_SUCCESS
         }))
 
+    // Even though there was a SwiftLint failure, it was autocorrected so doesn't require attention.
+    // The tool should not return an error (e.g. it should return a zero exit code).
     XCTAssertNil(error)
+
     XCTAssertTrue(ranSwiftFormat)
     XCTAssertTrue(ranSwiftLint)
     XCTAssertTrue(ranSwiftLintAutocorrect)
