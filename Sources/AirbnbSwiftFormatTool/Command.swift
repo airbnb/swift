@@ -9,18 +9,22 @@ struct Command {
   // MARK: Internal
 
   /// Mock implementation of `Command.run` which can be provided during unit test
-  static var _mockRunCommand: ((Command) -> Int32)?
+  static var runCommand: (Command) throws -> Int32 = { try $0.executeShellCommand() }
 
   let log: Bool
   let launchPath: String
   let arguments: [String]
 
-  /// Synchronously runs this command and returns its exit code
+  /// Runs this command using the implementation of `Command.runCommand`
+  ///  - By default, synchronously runs this command and returns its exit code
   func run() throws -> Int32 {
-    if let _mockRunCommand = Command._mockRunCommand {
-      return _mockRunCommand(self)
-    }
+    try Command.runCommand(self)
+  }
 
+  // MARK: Private
+
+  /// Synchronously runs this command and returns its exit code
+  private func executeShellCommand() throws -> Int32 {
     let process = Process()
     process.launchPath = launchPath
     process.arguments = arguments
@@ -39,8 +43,6 @@ struct Command {
 
     return process.terminationStatus
   }
-
-  // MARK: Private
 
   private func log(_ string: String) {
     // swiftlint:disable:next no_direct_standard_out_logs

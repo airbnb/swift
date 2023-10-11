@@ -170,9 +170,6 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
   /// Runs `AirbnbSwiftFormatTool` with the `Command` calls mocked using the given mocks
   private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
-    Command._mockRunCommand = mocks.mockRunCommand(_:)
-    defer { Command._mockRunCommand = nil }
-
     let formatTool = try! AirbnbSwiftFormatTool.parse([
       "Sources",
       "--swift-format-path",
@@ -182,7 +179,7 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     ] + (arguments ?? []))
 
     do {
-      try formatTool.run()
+      try formatTool.run(executeCommand: mocks.mockRunCommand(_:))
       return nil
     } catch {
       return error
