@@ -29,7 +29,21 @@ jobs:
         xcode:
         - '14.2' # Swift 5.7
         - '14.3' # Swift 5.8
+        - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
       - name: Test Package Plugin
         run: swift package --allow-writing-to-package-directory format --lint
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: macos-13
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Unit Tests
+        run: swift test
