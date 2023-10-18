@@ -88,16 +88,6 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     }
   }
 
-  /// Runs the `AirbnbSwiftFormatTool` command with the given closure that executes each individual command.
-  func run(executeCommand: @escaping (Command) -> Int32) throws {
-    let existingImplementation = Command.runCommand
-
-    Command.runCommand = executeCommand
-    defer { Command.runCommand = existingImplementation }
-
-    try run()
-  }
-
   // MARK: Private
 
   /// Whether the command should autocorrect invalid code, or only emit lint errors
