@@ -2289,15 +2289,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
+* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
 
   <details>
 
   #### Why?
-  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added in the future.
 
   ```swift
-  // WRONG
+  // NOT PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
@@ -2305,13 +2305,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // Stop your vehicle
   }
 
-  // RIGHT
+  // PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
   case .yellowLight, .redLight:
     // Stop your vehicle
   }
+  
+  This is not always necessary, though:
+   - If the enum is very large, it may be unwieldy or unreasonable to enumerate each case in every switch statement.
+   - If you don't expect to need to exhaustively handle all enum cases added in the future at every call site, using `default` can reduce the overhead of introducing new enum cases.
   ```
 
   </details>
