@@ -194,6 +194,33 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertFalse(ranSwiftLintAutocorrect)
   }
 
+  func testLintWithOnlySwiftFormatViolation() {
+    var ranSwiftFormat = false
+    var ranSwiftLint = false
+    var ranSwiftLintAutocorrect = false
+
+    let error = runFormatTool(
+      arguments: ["--lint"],
+      with: MockCommands(
+        swiftFormat: {
+          ranSwiftFormat = true
+          return SwiftFormatExitCode.lintFailure
+        },
+        swiftLint: {
+          ranSwiftLint = true
+          return EXIT_SUCCESS
+        },
+        swiftLintAutocorrect: {
+          ranSwiftLintAutocorrect = true
+          return EXIT_SUCCESS
+        }))
+
+    XCTAssertEqual(error as? ExitCode, ExitCode.failure)
+    XCTAssertTrue(ranSwiftFormat)
+    XCTAssertTrue(ranSwiftLint)
+    XCTAssertFalse(ranSwiftLintAutocorrect)
+  }
+
   func testHandlesUnexpectedErrorCode() {
     let unexpectedSwiftFormatExitCode = runFormatTool(
       with: MockCommands(swiftFormat: { 1234 }))
@@ -209,6 +236,11 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
   /// Runs `AirbnbSwiftFormatTool` with the `Command` calls mocked using the given mocks
   private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
+    let existingRunCommandImplementation = Command.runCommand
+
+    Command.runCommand = mocks.mockRunCommand(_:)
+    defer { Command.runCommand = existingRunCommandImplementation }
+
     let formatTool = try! AirbnbSwiftFormatTool.parse([
       "Sources",
       "--swift-format-path",
@@ -218,7 +250,7 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     ] + (arguments ?? []))
 
     do {
-      try formatTool.run(executeCommand: mocks.mockRunCommand(_:))
+      try formatTool.run()
       return nil
     } catch {
       return error
