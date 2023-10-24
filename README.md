@@ -2664,19 +2664,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     ```swift 
     // WRONG: Unsafely marking a non-thread-safe class as Sendable only to suppress errors
-    import PlantaryBody
+    import PlanetaryBody
 
     extension PlanetaryBody: @unchecked Sendable { }
 
     // RIGHT
-    @preconcurreny import PlanetaryBody
+    @preconcurrency import PlanetaryBody
     ```
 
     ### 3. Restructure code so the compiler can verify that it is thread-safe
 
     If possible, restructure code so that the compiler can verify that it is thread safe. This lets you use a `Sendable` conformance instead of an unsafe `@unchecked Sendable` conformance. 
 
-    When conforming to `Sendable`, the compiler will emit an error in the future if you attempt to make a change that is not thread-safe. This guaruntee is lost when using `@unchecked Sendable`, which makes it easier to accidentially introduce changes which are not thread-safe.
+    When conforming to `Sendable`, the compiler will emit an error in the future if you attempt to make a change that is not thread-safe. This guarantee is lost when using `@unchecked Sendable`, which makes it easier to accidentally introduce changes which are not thread-safe.
 
     For example, given this set of classes:
 
