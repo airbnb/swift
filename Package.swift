@@ -48,7 +48,7 @@ let package = Package(
     .binaryTarget(
       name: "SwiftLintBinary",
       url: "https://github.com/realm/SwiftLint/releases/download/0.53.0/SwiftLintBinary-macos.artifactbundle.zip",
-      checksum: "03416a4f75f023e10f9a76945806ddfe70ca06129b895455cc773c5c7d86b73e),
+      checksum: "03416a4f75f023e10f9a76945806ddfe70ca06129b895455cc773c5c7d86b73e"),
   ])
 
 // Emit an error on Linux, so Swift Package Manager's platform support detection doesn't say this package supports Linux
