@@ -967,6 +967,111 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
   </details>
 
+* <a id='conditional-assignment'></a>(<a href='#conditional-assignment'>link</a>) **When initializing a new property with the result of a conditional statement (e.g. an if or switch statement), use a single if/switch expression where possible** rather than definining an uninitialized property and initializing it on every branch of the following conditional statement. [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#conditionalAssignment)
+
+  <details>
+
+  #### Why?
+
+  There are several benefits to using an if/switch expression over simply performing assignment on each branch of the following conditional statement:
+  1. In most cases, you no longer need to explicitly write a type annotation for the property that is being assigned to.
+  2. The compiler will diagnose more cases where using a mutable `var` is unnecessary.
+  3. The resulting syntax is visually ligher because the property name being assigned doesn't need to be written on each branch.
+
+  ```swift
+  // BEFORE
+  // 1. An explicit type annotation is required for the uninitialized property.
+  // 2. `var` is unnecessary here because `planetLocation` is never modified after being initialized, but the compiler doesn't diagnose.
+  // 3. The `planetLocation` property name is written on each branch so is redundant and visually noisy
+  var planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    planetLocation = "Rogue planet"
+  }
+
+  print(planetLocation)
+
+  // AFTER
+  // 1. No need to write an explicit `: String` type annotation.
+  // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead. 
+  // 3. Each conditional branch is simply the value being assigned.
+  var planetLocation = planet.star {
+    "The \(star.name) system"
+  } else {
+    "Rogue planet"
+  }
+
+  print(planetLocation)
+  ```
+
+  #### Examples
+
+  ```swift
+  // WRONG
+  let planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    planetLocation = "Rogue planet"
+  }
+
+  let planetType: PlanetType
+  switch planet {
+  case .mercury, .venus, .earth, .mars:
+    planetType = .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    planetType = .gasGiant
+  }
+
+  let canBeTerraformed: Bool 
+  if 
+    let star = planet.star, 
+    !planet.isHabitable,
+    planet.isInHabitableZone(of: star) 
+  {
+    canBeTerraformed = true
+  } else {
+    canBeTerraformed = false
+  }
+
+  // RIGHT
+  let planetLocation = if let star = planet.star {
+    "The \(star.name) system"
+  } else {
+    "Rogue planet"
+  }
+
+  let planetType: PlanetType = switch planet {
+  case .mercury, .venus, .earth, .mars:
+    .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    .gasGiant
+  }
+
+  let canBeTerraformed = if 
+    let star = planet.star, 
+    !planet.isHabitable,
+    planet.isInHabitableZone(of: star) 
+  {
+    true
+  } else {
+    false
+  }
+
+  // ALSO RIGHT. This example cannot be converted to an if/switch expression
+  // because one of the branches is more than just a single expression.
+  let planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    let actualLocaton = galaxy.name ?? "the universe"
+    planetLocation = "Rogue planet somewhere in \(actualLocation)"
+  }
+  ```
+
+  </details>
+
 * <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
 
   <details>
