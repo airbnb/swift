@@ -2343,10 +2343,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
         true
       case (.canceling, .canceling):
         true
-      case (.success, .success):
-        true
-      case (.failure, .failure):
-        true
+      case (.success(let lhs), .success(let rhs)):
+        lhs == rhs
+      case (.failure(let lhs), .failure(let rhs)):
+        lhs == rhs
       default:
         false
       }
