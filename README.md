@@ -2313,9 +2313,45 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // Stop your vehicle
   }
   
-  This is not always necessary, though:
-   - If the enum is very large, it may be unwieldy or unreasonable to enumerate each case in every switch statement.
-   - If you don't expect to need to exhaustively handle all enum cases added in the future at every call site, using `default` can reduce the overhead of introducing new enum cases.
+  // COUNTEREXAMPLES
+
+  enum TaskState {
+    case pending
+    case running
+    case canceling
+    case success(Success)
+    case failure(Error)
+
+    // We don't expect additional cases that may be added to the enumeration affecting this method.
+    public var isRunning: Bool {
+      switch self {
+      case .running:
+        true
+      default:
+        false
+      }
+    }  
+  }
+
+  extension TaskState: Equatable {
+    // Explicitly listing each state would be too burdensome. Ideally this function could be implemented with a custom macro.
+    public static func == (lhs: TaskState, rhs: TaskState) -> Bool {
+      switch (lhs, rhs) {
+      case (.pending, .pending):
+        true
+      case (.running, .running):
+        true
+      case (.canceling, .canceling):
+        true
+      case (.success, .success):
+        true
+      case (.failure, .failure):
+        true
+      default:
+        false
+      }
+    }
+  }
   ```
 
   </details>
