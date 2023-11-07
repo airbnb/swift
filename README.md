@@ -996,7 +996,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // 1. No need to write an explicit `: String` type annotation.
   // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead. 
   // 3. Each conditional branch is simply the value being assigned.
-  var planetLocation = planet.star {
+  var planetLocation = if let star = planet.star {
     "The \(star.name) system"
   } else {
     "Rogue planet"
