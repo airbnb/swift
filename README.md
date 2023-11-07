@@ -2289,7 +2289,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
+* <a id='switch-avoid-default'></a>(<a href='#switch-avoid-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
 
   <details>
 
@@ -2322,7 +2322,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case success(Success)
     case failure(Error)
 
-    // We don't expect additional cases that may be added to the enumeration affecting this method.
+    // We expect that this property will remain valid if additional cases are added to the enumeration.
     public var isRunning: Bool {
       switch self {
       case .running:
@@ -2334,7 +2334,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   extension TaskState: Equatable {
-    // Explicitly listing each state would be too burdensome. Ideally this function could be implemented with a custom macro.
+    // Explicitly listing each state would be too burdensome. Ideally this function could be implemented with a well-tested macro.
     public static func == (lhs: TaskState, rhs: TaskState) -> Bool {
       switch (lhs, rhs) {
       case (.pending, .pending):
