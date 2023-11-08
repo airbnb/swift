@@ -996,11 +996,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // 1. No need to write an explicit `: String` type annotation.
   // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead. 
   // 3. Each conditional branch is simply the value being assigned.
-  var planetLocation = if let star = planet.star {
-    "The \(star.name) system"
-  } else {
-    "Rogue planet"
-  }
+  var planetLocation =
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
 
   print(planetLocation)
   ```
@@ -1036,28 +1037,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  let planetLocation = if let star = planet.star {
-    "The \(star.name) system"
-  } else {
-    "Rogue planet"
-  }
+  let planetLocation =
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
 
-  let planetType: PlanetType = switch planet {
-  case .mercury, .venus, .earth, .mars:
-    .terrestrial
-  case .jupiter, .saturn, .uranus, .neptune:
-    .gasGiant
-  }
+  let planetType: PlanetType =
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
 
-  let canBeTerraformed = if 
-    let star = planet.star, 
-    !planet.isHabitable,
-    planet.isInHabitableZone(of: star) 
-  {
-    true
-  } else {
-    false
-  }
+  let canBeTerraformed =
+    if 
+      let star = planet.star, 
+      !planet.isHabitable,
+      planet.isInHabitableZone(of: star) 
+    {
+      true
+    } else {
+      false
+    }
 
   // ALSO RIGHT. This example cannot be converted to an if/switch expression
   // because one of the branches is more than just a single expression.
