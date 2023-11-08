@@ -967,14 +967,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
   </details>
 
-* <a id='conditional-assignment'></a>(<a href='#conditional-assignment'>link</a>) **When initializing a new property with the result of a conditional statement (e.g. an if or switch statement), use a single if/switch expression where possible** rather than definining an uninitialized property and initializing it on every branch of the following conditional statement. [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#conditionalAssignment)
+* <a id='conditional-assignment'></a>(<a href='#conditional-assignment'>link</a>) **When initializing a new property with the result of a conditional statement (e.g. an `if` or `switch` statement), use a single if/switch expression where possible** rather than defining an uninitialized property and initializing it on every branch of the following conditional statement. [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#conditionalAssignment)
 
   <details>
 
   #### Why?
 
   There are several benefits to using an if/switch expression over simply performing assignment on each branch of the following conditional statement:
-  1. In most cases, you no longer need to explicitly write a type annotation for the property that is being assigned to.
+  1. In most cases, you no longer need to explicitly write a type annotation for the variable that is being assigned to.
   2. The compiler will diagnose more cases where using a mutable `var` is unnecessary.
   3. The resulting syntax is visually ligher because the property name being assigned doesn't need to be written on each branch.
 
