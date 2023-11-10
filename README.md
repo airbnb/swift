@@ -2400,6 +2400,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
       preferredStyle: .alert)
   }
 
+  var alertTitle: String {
+    if issue.severity == .critical {
+      return "💥 Critical Error"
+    } else {
+      return "ℹ️ Info"
+  }
+
+  func type(of planet: Planet) -> PlanetType {
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      return .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      return .gasGiant
+    }
+  }
+
   // RIGHT
   ["1", "2", "3"].compactMap { Int($0) }
 
@@ -2414,6 +2430,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
       title: "ℹ️ Info",
       message: message,
       preferredStyle: .alert)
+  }
+
+  var alertTitle: String {
+    if issue.severity == .critical {
+      "💥 Critical Error"
+    } else {
+      "ℹ️ Info"
+  }
+
+  func type(of planet: Planet) -> PlanetType {
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
   }
   ```
 
