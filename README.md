@@ -2289,15 +2289,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
+* <a id='switch-avoid-default'></a>(<a href='#switch-avoid-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
 
   <details>
 
   #### Why?
-  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added in the future.
 
   ```swift
-  // WRONG
+  // NOT PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
@@ -2305,12 +2305,52 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // Stop your vehicle
   }
 
-  // RIGHT
+  // PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
   case .yellowLight, .redLight:
     // Stop your vehicle
+  }
+  
+  // COUNTEREXAMPLES
+
+  enum TaskState {
+    case pending
+    case running
+    case canceling
+    case success(Success)
+    case failure(Error)
+
+    // We expect that this property will remain valid if additional cases are added to the enumeration.
+    public var isRunning: Bool {
+      switch self {
+      case .running:
+        true
+      default:
+        false
+      }
+    }  
+  }
+
+  extension TaskState: Equatable {
+    // Explicitly listing each state would be too burdensome. Ideally this function could be implemented with a well-tested macro.
+    public static func == (lhs: TaskState, rhs: TaskState) -> Bool {
+      switch (lhs, rhs) {
+      case (.pending, .pending):
+        true
+      case (.running, .running):
+        true
+      case (.canceling, .canceling):
+        true
+      case (.success(let lhs), .success(let rhs)):
+        lhs == rhs
+      case (.failure(let lhs), .failure(let rhs)):
+        lhs == rhs
+      default:
+        false
+      }
+    }
   }
   ```
 
