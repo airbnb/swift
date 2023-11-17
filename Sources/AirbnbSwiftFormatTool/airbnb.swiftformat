@@ -55,7 +55,7 @@
 --rules redundantGet
 --rules redundantFileprivate
 --rules redundantRawValues
---rules sortedImports
+--rules sortImports
 --rules sortDeclarations
 --rules strongifiedSelf
 --rules trailingCommas
