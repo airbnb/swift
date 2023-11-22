@@ -910,8 +910,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   #### Why?
   
   This makes it so that `if` and `switch` expressions always have the same "shape" as standard `if` and `switch` statements, where:
-  1. The `if` / `switch` keyword is always the left-most token on a dedicated line of code
-  2. The conditional branches are always to the right of and below the `if` / `switch` keyword
+  1. The `if` / `switch` keyword is always the left-most token on a dedicated line of code.
+  2. The conditional branches are always to the right of and below the `if` / `switch` keyword.
 
   This is most consistent with how the `if` / `switch` keywords are used for control flow, and thus makes it easier to recognize that the code is using an `if` or `switch` expression at a glance. 
   
@@ -982,7 +982,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // BEFORE
   // 1. An explicit type annotation is required for the uninitialized property.
   // 2. `var` is unnecessary here because `planetLocation` is never modified after being initialized, but the compiler doesn't diagnose.
-  // 3. The `planetLocation` property name is written on each branch so is redundant and visually noisy
+  // 3. The `planetLocation` property name is written on each branch so is redundant and visually noisy.
   var planetLocation: String
   if let star = planet.star {
     planetLocation = "The \(star.name) system"
