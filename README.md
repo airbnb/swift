@@ -900,6 +900,72 @@ _You can enable the following settings in Xcode by running [this script](resourc
     …
   }
   ```
+  
+  </details>
+
+* <a id='wrap-multiline-conditional-assignment'></a>(<a href='#wrap-multiline-conditional-assignment'>link</a>) **Add a line break after the assignment operator (`=`) before a multi-line `if` or `switch` expression**, and indent the following `if` / `switch` expression. If the declaration fits on a single line, a line break is not required. [![SwiftFormat: wrapMultilineConditionalAssignment](https://img.shields.io/badge/SwiftFormat-wrapMultilineConditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineConditionalAssignment)
+
+  <details>
+
+  #### Why?
+  
+  This makes it so that `if` and `switch` expressions always have the same "shape" as standard `if` and `switch` statements, where:
+  1. The `if` / `switch` keyword is always the left-most token on a dedicated line of code
+  2. The conditional branches are always to the right of and below the `if` / `switch` keyword
+
+  This is most consistent with how the `if` / `switch` keywords are used for control flow, and thus makes it easier to recognize that the code is using an `if` or `switch` expression at a glance. 
+  
+  ```swift
+  // WRONG. Should have a line break after the first `=`. 
+  let planetLocation = if let star = planet.star {
+    "The \(star.name) system"
+   } else {
+    "Rogue planet"
+  }
+
+  // WRONG. The first `=` should be on the line of the variable being assigned.
+  let planetLocation 
+    = if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+
+  // WRONG. `switch` expression should be indented.
+  let planetLocation =
+  switch planet {
+  case .mercury, .venus, .earth, .mars:
+    .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    .gasGiant
+  }
+    
+  // RIGHT 
+  let planetLocation = 
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+    
+  // RIGHT
+  let planetType: PlanetType =
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
+    
+  // ALSO RIGHT. A line break is not required because the declaration fits on a single line. 
+  let moonName = if let moon = planet.moon { moon.name } else { "none" }
+
+  // ALSO RIGHT. A line break is permitted if it helps with readability.
+  let moonName =
+    if let moon = planet.moon { moon.name } else { "none" }
+  ```
+  
+  </details>
 
 * <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
 

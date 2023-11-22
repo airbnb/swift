@@ -92,3 +92,4 @@
 --rules elseOnSameLine
 --rules sortTypealiases
 --rules preferForLoop
+--rules wrapMultilineConditionalAssignment
