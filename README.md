@@ -931,12 +931,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
       "Rogue planet"
     }
 
-  // WRONG. `if` expression should be indented.
+  // WRONG. `switch` expression should be indented.
   let planetLocation =
-  if let star = planet.star {
-    "The \(star.name) system"
-  } else {
-    "Rogue planet"
+  switch planet {
+  case .mercury, .venus, .earth, .mars:
+    .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    .gasGiant
   }
     
   // RIGHT 
@@ -957,11 +958,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     
   // ALSO RIGHT. A line break is not required because the declaration fits on a single line. 
-  let planet = if useFirst { mercury } else { neptune }
+  let moonName = if let moon = planet.moon { moon.name } else { "none" }
 
   // ALSO RIGHT. A line break is permitted if it helps with readability.
-  let planet =
-    if useFirst { mercury } else { neptune }
+  let moonName =
+    if let moon = planet.moon { moon.name } else { "none" }
   ```
   
   </details>
