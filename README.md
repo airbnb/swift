@@ -654,8 +654,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ```
 
   </details>
-
-* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+  
+* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place attributes for functions, types, and computed properties on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
 
@@ -663,17 +663,85 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   @objc class Spaceship {
 
-    @discardableResult func fly() -> Bool {
+    @ViewBuilder var controlPanel: some View {
+      // ...
     }
+
+    @discardableResult func fly() -> Bool {
+      // ...
+    }
+
   }
 
   // RIGHT
   @objc
   class Spaceship {
 
+    @ViewBuilder
+    var controlPanel: some View {
+      // ...
+    }
+
     @discardableResult
     func fly() -> Bool {
+      // ...
     }
+
+  }
+  ```
+
+  </details>
+
+* <a id='stored-property-attributes-on-same-line'></a>(<a href='#stored-property-attributes-on-same-line'>link</a>) **Place simple attributes for stored properties on the same line as the rest of the declaration**. Complex attributes with arguments should be placed on the previous line. Despite having an argument, the SwiftUI `@Environment` attribute should be placed on the same line as the rest of the declaration. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG
+  struct SpaceshipDashboardView {
+
+    @State
+    private var warpDriveEnabled: Bool
+
+    @ObservedObject
+    private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) 
+    private var controlPanelStyle
+
+  }
+
+  // RIGHT
+  struct SpaceshipDashboardView {
+
+    @State private var warpDriveEnabled: Bool
+
+    @ObservedObject private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+
+  }
+  ```
+
+  ```
+  // WRONG
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
+
+  }
+
+  // RIGHT
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production")
+    var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030")
+    var atlas5Builder: Atlas5Builder
+
   }
   ```
 
