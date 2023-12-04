@@ -654,7 +654,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ```
 
   </details>
-  
+
 * <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place attributes for functions, types, and computed properties on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
