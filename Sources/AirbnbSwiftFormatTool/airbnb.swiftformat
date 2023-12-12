@@ -22,7 +22,6 @@
 --computedvarattrs prev-line # wrapAttributes
 --storedvarattrs same-line # wrapAttributes
 --complexattrs prev-line # wrapAttributes
---noncomplexattrs @Environment # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --wrapternary before-operators # wrap
 --structthreshold 20 # organizeDeclarations
