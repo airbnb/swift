@@ -697,7 +697,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  // WRONG
+  // WRONG. These simple property wrappers should be written on the same line as the declaration. 
   struct SpaceshipDashboardView {
 
     @State
@@ -723,8 +723,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+  ```swift
+  // WRONG. These complex attached macros should be written on the previous line.
+  struct SolarSystemView {
+
+    @Query(sort: \.distance) var allPlanets: Planet
+
+    @Query(sort: \.age, order: .reverse) var moonsByAge: Moon
+
+  }
+
+  // RIGHT
+  struct SolarSystemView {
+
+    @Query(sort: \.distance)
+    var allPlanets: Planet
+
+    @Query(sort: \.age, order: .reverse)
+    var oldestMoons: Moon
+
+  }
   ```
-  // WRONG
+
+  ```
+  // WRONG. These long, complex attributes should be written on the previous line.
   struct RocketFactory {
 
     @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
