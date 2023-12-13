@@ -832,7 +832,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
   
-  This doesn't apply to complex attributes with named arguments, or multiple unnamed arguments. These arguments are visually complex and typically quite long, so feel cramped and unnecessarily long when written on a single line:
+  This doesn't apply to complex attributes with named arguments, or multiple unnamed arguments. These arguments are visually complex and typically encode a lot of information, so feel cramped and difficult to read when written on a single line:
 
   ```swift
   // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long: 
