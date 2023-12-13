@@ -655,7 +655,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place attributes for functions, types, and computed properties on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
 
@@ -663,18 +663,182 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   @objc class Spaceship {
 
-    @discardableResult func fly() -> Bool {
+    @ViewBuilder var controlPanel: some View {
+      // ...
     }
+
+    @discardableResult func fly() -> Bool {
+      // ...
+    }
+
   }
 
   // RIGHT
   @objc
   class Spaceship {
 
+    @ViewBuilder
+    var controlPanel: some View {
+      // ...
+    }
+
     @discardableResult
     func fly() -> Bool {
+      // ...
     }
+
   }
+  ```
+
+  </details>
+
+* <a id='simple-stored-property-attributes-on-same-line'></a>(<a href='#simple-stored-property-attributes-on-same-line'>link</a>) **Place simple attributes for stored properties on the same line as the rest of the declaration**. Complex attributes with named arguments, or more than one unnamed argument, should be placed on the previous line. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG. These simple property wrappers should be written on the same line as the declaration. 
+  struct SpaceshipDashboardView {
+
+    @State
+    private var warpDriveEnabled: Bool
+
+    @ObservedObject
+    private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) 
+    private var controlPanelStyle
+
+  }
+
+  // RIGHT
+  struct SpaceshipDashboardView {
+
+    @State private var warpDriveEnabled: Bool
+
+    @ObservedObject private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+
+  }
+  ```
+
+  ```swift
+  // WRONG. These complex attached macros should be written on the previous line.
+  struct SolarSystemView {
+
+    @Query(sort: \.distance) var allPlanets: [Planet]
+
+    @Query(sort: \.age, order: .reverse) var moonsByAge: [Moon]
+
+  }
+
+  // RIGHT
+  struct SolarSystemView {
+
+    @Query(sort: \.distance)
+    var allPlanets: [Planet]
+
+    @Query(sort: \.age, order: .reverse)
+    var oldestMoons: [Moon]
+
+  }
+  ```swift
+
+  ```
+  // WRONG. These long, complex attributes should be written on the previous line.
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
+
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
+
+  }
+
+  // RIGHT
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production")
+    var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030")
+    var atlas5Builder: Atlas5Builder
+    
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0)
+    var newGlennBuilder: NewGlennBuilder
+
+  }
+  ```
+  
+  #### Why?
+  
+  Unlike other types of declarations, which have braces and span multiple lines, stored property declarations are often only a single line of code. Stored properties are often written sequentially without any blank lines between them. This makes the code compact without hurting readability, and allows for related properties to be grouped together in blocks:
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State private var warpDriveEnabled: Bool
+    @State private var lifeSupportEnabled: Bool
+    @State private var artificialGravityEnabled: Bool
+    @State private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+    @Environment(\.toggleButtonStyle) private var toggleButtonStyle
+  }
+  ```
+  
+  If stored property attributes were written on the previous line (like other types of attributes), then the properties start to visually bleed together unless you add blank lines between them:
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State
+    private var warpDriveEnabled: Bool
+    @State
+    private var lifeSupportEnabled: Bool
+    @State
+    private var artificialGravityEnabled: Bool
+    @State
+    private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle)
+    private var controlPanelStyle
+    @Environment(\.toggleButtonStyle)
+    private var toggleButtonStyle
+  }
+  ```
+  
+  If you add blank lines, the list of properties becomes much longer and you lose the ability to group related properties together:  
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State
+    private var warpDriveEnabled: Bool
+    
+    @State
+    private var lifeSupportEnabled: Bool
+    
+    @State
+    private var artificialGravityEnabled: Bool
+    
+    @State
+    private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle)
+    private var controlPanelStyle
+    
+    @Environment(\.toggleButtonStyle)
+    private var toggleButtonStyle
+  }
+  ```
+  
+  This doesn't apply to complex attributes with named arguments, or multiple unnamed arguments. These arguments are visually complex and typically encode a lot of information, so feel cramped and difficult to read when written on a single line:
+
+  ```swift
+  // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long: 
+  @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
+  @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
+  @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
   ```
 
   </details>
