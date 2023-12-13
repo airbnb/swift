@@ -729,7 +729,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @Query(sort: \.distance) var allPlanets: [Planet]
 
-    @Query(sort: \.age, order: .reverse) var moonsByAge: Moon
+    @Query(sort: \.age, order: .reverse) var moonsByAge: [Moon]
 
   }
 
