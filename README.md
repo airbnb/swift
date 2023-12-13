@@ -767,7 +767,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var atlas5Builder: Atlas5Builder
     
     @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0)
-    var newRocketBuilder: NewRocketBuilder
+    var newGlennBuilder: NewGlennBuilder
 
   }
   ```
