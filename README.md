@@ -753,7 +753,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
 
-    @available(*, iOS 17.0, tvOS 17.0, macOS 14.0, watchOS 10.0) var newRocketBuilder: NewRocketBuilder
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
 
   }
 
@@ -766,7 +766,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     @available(*, deprecated, message: "To be retired by 2030")
     var atlas5Builder: Atlas5Builder
     
-    @available(*, iOS 17.0, tvOS 17.0, macOS 14.0, watchOS 10.0)
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0)
     var newRocketBuilder: NewRocketBuilder
 
   }
@@ -838,7 +838,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long: 
   @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
   @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
-  @available(*, iOS 17.0, tvOS 17.0, macOS 14.0, watchOS 10.0) var newRocketBuilder: NewRocketBuilder
+  @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
   ```
 
   </details>
