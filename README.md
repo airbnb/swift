@@ -727,7 +727,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG. These complex attached macros should be written on the previous line.
   struct SolarSystemView {
 
-    @Query(sort: \.distance) var allPlanets: Planet
+    @Query(sort: \.distance) var allPlanets: [Planet]
 
     @Query(sort: \.age, order: .reverse) var moonsByAge: Moon
 
