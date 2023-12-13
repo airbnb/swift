@@ -737,10 +737,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct SolarSystemView {
 
     @Query(sort: \.distance)
-    var allPlanets: Planet
+    var allPlanets: [Planet]
 
     @Query(sort: \.age, order: .reverse)
-    var oldestMoons: Moon
+    var oldestMoons: [Moon]
 
   }
   ```
