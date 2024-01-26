@@ -67,7 +67,7 @@ struct AirbnbSwiftFormatPlugin {
 
 }
 
-// MARK: CommandPlugin
+// MARK: - CommandPlugin
 
 extension AirbnbSwiftFormatPlugin: CommandPlugin {
 
