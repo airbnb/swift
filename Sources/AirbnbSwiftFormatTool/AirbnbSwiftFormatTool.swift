@@ -110,7 +110,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     }
 
     if let swiftVersion = swiftVersion {
-      arguments += ["--swiftversion", swiftVersion]
+      arguments += ["--swiftVersion", swiftVersion]
     }
 
     return Command(
@@ -145,7 +145,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
 
   private func log(_ string: String) {
     // swiftlint:disable:next no_direct_standard_out_logs
-    print("[AibnbSwiftFormatTool]", string)
+    print("[AirbnbSwiftFormatTool]", string)
   }
 
 }
