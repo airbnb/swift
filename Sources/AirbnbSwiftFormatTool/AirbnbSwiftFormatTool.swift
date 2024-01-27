@@ -110,7 +110,7 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     }
 
     if let swiftVersion = swiftVersion {
-      arguments += ["--swiftVersion", swiftVersion]
+      arguments += ["--swiftversion", swiftVersion]
     }
 
     return Command(
