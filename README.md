@@ -1240,7 +1240,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='blank-line-after-multiline-switch-case'></a>(<a href='#blank-line-after-multiline-switch-case'>link</a>) **Insert a blank line following a switch case with a multi-line body.** For consistency within a switch statement, if any case has a multi-line body then all cases should include a trailing blank line. The last switch case doesn't need a blank line, since it is already followed by a closing brace. [![SwiftFormat: blankLineAfterMultilineSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterMultilineSwitchCase-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLineAfterMultilineSwitchCase) [![SwiftFormat: consistentSwitchStatementSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchStatementSpacing-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consistentSwitchStatementSpacing)
+* <a id='blank-line-after-multiline-switch-case'></a>(<a href='#blank-line-after-multiline-switch-case'>link</a>) **Insert a blank line following a switch case with a multi-line body.** Spacing within an individual switch statement should be consistent. If any case has a multi-line body then all cases should include a trailing blank line. The last switch case doesn't need a blank line, since it is already followed by a closing brace. [![SwiftFormat: blankLineAfterMultilineSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterMultilineSwitchCase-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLineAfterMultilineSwitchCase) [![SwiftFormat: consistentSwitchStatementSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchStatementSpacing-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consistentSwitchStatementSpacing)
 
   <details>
 
@@ -1384,6 +1384,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case .enableArtificialGravity:
         artificialGravityEngine.enable(strength: .oneG)
 
+    case .scanPlanet(let planet):
+        scanner.scan(planet)
+
+    case .handleIncomingEnergyBlast:
+        energyShields.engage()
+    }
+  }
+
+  // WRONG. While it's fine to use blank lines to separate cases, spacing within a single switch statement should be consistent.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+        warpDrive.engage()
+    case .enableArtificialGravity:
+        artificialGravityEngine.enable(strength: .oneG)
     case .scanPlanet(let planet):
         scanner.scan(planet)
 
