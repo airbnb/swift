@@ -2155,16 +2155,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ### Examples
 
   ```swift
-  /// WRONG. Semicolons are not required and can be omitted.
+  // WRONG. Semicolons are not required and can be omitted.
   let mercury = planets[0];
   let venus = planets[1];
   let earth = planets[2];
 
-  /// WRONG. While you can use semicolons to place multiple statements on a single line,
+  // WRONG. While you can use semicolons to place multiple statements on a single line,
   // it is more common and preferred to separate them using newlines instead.
   let mercury = planets[0]; let venus = planets[1]; let earth = planets[2];
 
-  /// RIGHT
+  // RIGHT
   let mercury = planets[0]
   let venus = planets[1]
   let earth = planets[2]
