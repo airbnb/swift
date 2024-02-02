@@ -2148,6 +2148,44 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no-semicolons'></a>(<a href='#no-semicolons'>link</a>) **Avoid using semicolons.** Semicolons are not required at the end of a line, so should be omitted. While you can use semicolons to place two statements on the same line, it is more common and preferred to separate them using a newline instead. [![SwiftFormat: semicolons](https://img.shields.io/badge/SwiftFormat-semicolons-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#semicolons)
+
+  <details>
+
+  ### Examples
+
+  ```swift
+  /// WRONG. Semicolons are not required and can be omitted.
+  let mercury = planets[0];
+  let venus = planets[1];
+  let earth = planets[2];
+
+  /// WRONG. While you can use semicolons to place multiple statements on a single line,
+  // it is more common and preferred to separate them using newlines instead.
+  let mercury = planets[0]; let venus = planets[1]; let earth = planets[2];
+
+  /// RIGHT
+  let mercury = planets[0]
+  let venus = planets[1]
+  let earth = planets[2]
+
+  // WRONG
+  guard let moon = planet.moon else { completion(nil); return }
+
+  // WRONG
+  guard let moon = planet.moon else { 
+    completion(nil); return
+  }
+
+  // RIGHT
+  guard let moon = planet.moon else { 
+    completion(nil)
+    return
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Patterns
