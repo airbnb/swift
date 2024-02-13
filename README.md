@@ -1246,54 +1246,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Like with [declarations in a file](https://github.com/airbnb/swift#newline-between-scope-siblings), inserting a blank line between scopes makes them easier to visually differentiate.
+  Like with [declarations in a file](#newline-between-scope-siblings), inserting a blank line between scopes makes them easier to visually differentiate.
   
-  Switch statements with multi-lines lines can become visiually busy and cramped without blank lines between the cases. In this example, all of the cases start to bleed together, making it more difficult to read the code at a glance:
-
-  ```swift
-  func handle(_ action: SpaceshipAction) {
-    switch action {
-    case .engageWarpDrive:
-      navigationComputer.destination = targetedDestination
-      warpDrive.spinUp()
-      warpDrive.activate()
-    case .enableArtificialGravity:
-      artificialGravityEngine.enable(strength: .oneG)
-    case .scanPlanet(let planet):
-      scanner.target = planet
-      scanner.scanAtmosphere()
-      scanner.scanBiosphere()
-      scanner.scanForArtificialLife()
-    case .handleIncomingEnergyBlast:
-      energyShields.engage()
-    }
-  }
-  ```
-
-  Blank lines between the individual cases make the switch statement much easier to read:
-
-  ```swift
-  func handle(_ action: SpaceshipAction) {
-    switch action {
-    case .engageWarpDrive:
-      navigationComputer.destination = targetedDestination
-      warpDrive.spinUp()
-      warpDrive.activate()
-
-    case .enableArtificialGravity:
-      artificialGravityEngine.enable(strength: .oneG)
-
-    case .scanPlanet(let planet):
-      scanner.target = planet
-      scanner.scanAtmosphere()
-      scanner.scanBiosphere()
-      scanner.scanForArtificialLife()
-
-    case .handleIncomingEnergyBlast:
-      energyShields.engage()
-    }
-  }
-  ```
+  Complex switch statements are visually busy without blank lines between the cases, making it more difficult to read the code and harder to distinguish between individual cases at a glance. Blank lines between the individual cases make complex switch statements easier to read.
 
   #### Examples
 
