@@ -37,6 +37,7 @@
 --guardelse next-line #elseOnSameLine
 --onelineforeach convert #preferForLoop
 --shortoptionals always #typeSugar
+--semicolons never #semicolons
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
@@ -99,3 +100,4 @@
 --rules wrapMultilineConditionalAssignment
 --rules blankLineAfterMultilineSwitchCase
 --rules consistentSwitchStatementSpacing
+--rules semicolons
