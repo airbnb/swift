@@ -1240,6 +1240,131 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='blank-line-after-multiline-switch-case'></a>(<a href='#blank-line-after-multiline-switch-case'>link</a>) **Insert a blank line following a switch case with a multi-line body.** Spacing within an individual switch statement should be consistent. If any case has a multi-line body then all cases should include a trailing blank line. The last switch case doesn't need a blank line, since it is already followed by a closing brace. [![SwiftFormat: blankLineAfterMultilineSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterMultilineSwitchCase-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLineAfterMultilineSwitchCase) [![SwiftFormat: consistentSwitchStatementSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchStatementSpacing-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consistentSwitchStatementSpacing)
+
+  <details>
+
+  #### Why?
+
+  Like with [declarations in a file](#newline-between-scope-siblings), inserting a blank line between scopes makes them easier to visually differentiate.
+  
+  Complex switch statements are visually busy without blank lines between the cases, making it more difficult to read the code and harder to distinguish between individual cases at a glance. Blank lines between the individual cases make complex switch statements easier to read.
+
+  #### Examples
+
+  ```swift
+  // WRONG. These switch cases should be followed by a blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // WRONG. While the `.enableArtificialGravity` case isn't multi-line, the other cases are.
+  // For consistency, it should also include a trailing blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+      
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // RIGHT. All of the cases have a trailing blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+      
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // RIGHT. Since none of the cases are multi-line, blank lines are not required.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+        warpDrive.engage()
+    case .enableArtificialGravity:
+        artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+        scanner.scan(planet)
+    case .handleIncomingEnergyBlast:
+        energyShields.engage()
+    }
+  }
+
+  // ALSO RIGHT. Blank lines are still permitted after single-line switch cases if it helps with readability.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+        warpDrive.engage()
+
+    case .enableArtificialGravity:
+        artificialGravityEngine.enable(strength: .oneG)
+
+    case .scanPlanet(let planet):
+        scanner.scan(planet)
+
+    case .handleIncomingEnergyBlast:
+        energyShields.engage()
+    }
+  }
+
+  // WRONG. While it's fine to use blank lines to separate cases, spacing within a single switch statement should be consistent.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+        warpDrive.engage()
+    case .enableArtificialGravity:
+        artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+        scanner.scan(planet)
+
+    case .handleIncomingEnergyBlast:
+        energyShields.engage()
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
 
   <details>

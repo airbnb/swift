@@ -98,4 +98,6 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
+--rules blankLineAfterMultilineSwitchCase
+--rules consistentSwitchStatementSpacing
 --rules semicolons
