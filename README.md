@@ -1320,13 +1320,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func handle(_ action: SpaceshipAction) {
     switch action {
     case .engageWarpDrive:
-        warpDrive.engage()
+      warpDrive.engage()
     case .enableArtificialGravity:
-        artificialGravityEngine.enable(strength: .oneG)
+      artificialGravityEngine.enable(strength: .oneG)
     case .scanPlanet(let planet):
-        scanner.scan(planet)
+      scanner.scan(planet)
     case .handleIncomingEnergyBlast:
-        energyShields.engage()
+      energyShields.engage()
     }
   }
 
@@ -1334,16 +1334,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func handle(_ action: SpaceshipAction) {
     switch action {
     case .engageWarpDrive:
-        warpDrive.engage()
+      warpDrive.engage()
 
     case .enableArtificialGravity:
-        artificialGravityEngine.enable(strength: .oneG)
+      artificialGravityEngine.enable(strength: .oneG)
 
     case .scanPlanet(let planet):
-        scanner.scan(planet)
+      scanner.scan(planet)
 
     case .handleIncomingEnergyBlast:
-        energyShields.engage()
+      energyShields.engage()
     }
   }
 
@@ -1351,14 +1351,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func handle(_ action: SpaceshipAction) {
     switch action {
     case .engageWarpDrive:
-        warpDrive.engage()
+      warpDrive.engage()
     case .enableArtificialGravity:
-        artificialGravityEngine.enable(strength: .oneG)
+      artificialGravityEngine.enable(strength: .oneG)
     case .scanPlanet(let planet):
-        scanner.scan(planet)
+      scanner.scan(planet)
 
     case .handleIncomingEnergyBlast:
-        energyShields.engage()
+      energyShields.engage()
     }
   }
   ```
