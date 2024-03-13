@@ -1647,7 +1647,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-* <a id='doc-comments'></a>(<a href='#doc-comments'>link</a>) Use doc comments (`///`) before declarations, and regular comments (`//`) elsewhere. [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docComments)
+  </details>
+
+* <a id='doc-comments-before-declarations'></a>(<a href='#doc-comments-before-declarations'>link</a>) **Use doc comments (`///`) instead of regular comments (`//`) before declarations within type bodies or at the top level.** [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docComments)
 
   <details>
 
@@ -1656,17 +1658,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // A planet that exists somewhere in the universe.
   class Planet {
-    // Properties of a planet that are important for life
-    let atmosphere: Atmosphere
-    let oceans: [Ocean]
+    // Data about the composition and density of the planet's atmosphere if present.
+    var atmosphere: Atmosphere?
+
+    // Data about the size, location, and composition of large bodies of water on the planet's surface.
+    var oceans: [Ocean]
 
     // Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     func terraform() {
-      /// This gas concentration has a pretty good track record so far
-      let configuration = AtmosphereConfiguration(nitrogen: 0.78, oxygen: 0.22)
-      
-      /// Generate the atmosphere first, then the oceans
-      generateAtmosphere(using: configuration)
+      // This gas composition has a pretty good track record so far!
+      let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+      // Generate the atmosphere first, then the oceans. Otherwise, the water will just boil off immediately.
+      generateAtmosphere(using: composition)
       generateOceans()
     }
   }
@@ -1675,19 +1679,92 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   /// A planet that exists somewhere in the universe.
   class Planet {
-    /// Properties of a planet that are important for life
-    let atmosphere: Atmosphere
-    let oceans: [Ocean]
+    /// Data about the composition and density of the planet's atmosphere if present.
+    var atmosphere: Atmosphere?
+
+    /// Data about the size, location, and composition of large bodies of water on the planet's surface.
+    var oceans: [Ocean]
 
     /// Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     func terraform() {
-      // This gas concentration has a pretty good track record so far
-      let configuration = AtmosphereConfiguration(nitrogen: 0.78, oxygen: 0.22)
-      
-      // Generate the atmosphere first, then the oceans
-      generateAtmosphere(using: configuration)
+      // This gas composition has a pretty good track record so far!
+      let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+      // Generate the atmosphere first, then the oceans. Otherwise, the water will just boil off immediately.
+      generateAtmosphere(using: composition)
       generateOceans()
     }
+  }
+  
+  // ALSO RIGHT:
+
+  func terraform() {
+    /// This gas composition has a pretty good track record so far!
+    ///  - Doc comments are not required before local declarations in function scopes, but are permitted.
+    let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+    /// Generate the `atmosphere` first, **then** the `oceans`. Otherwise, the water will just boil off immediately.
+    ///  - Comments not preceeding declarations can use doc comments, and will not be autocorrected into regular comments.
+    ///    This can be useful because Xcode applies markdown styling to doc comments but not regular comments.
+    generateAtmosphere(using: composition)
+    generateOceans()
+  }
+  ```
+
+  Regular comments are permitted before declarations in some cases. 
+  
+  For example, comment directives like `// swiftformat:`, `// swiftlint:`, `// sourcery:`, `// MARK:` and `// TODO:` are typically required to use regular comments and don't work correctly with doc comments:
+
+  ```swift
+  // RIGHT
+
+  // swiftformat:sort
+  enum FeatureFlags {
+    case allowFasterThanLightTravel
+    case disableGravity
+    case enableDarkEnergy
+    case enableDarkMatter
+  }
+
+  // TODO: There are no more production consumers of this legacy model, so we
+  // should detangle the remaining code dependencies and clean it up.
+  struct LegacyGeocentricUniverseModel {
+    ...
+  }
+  ```
+
+  Regular comments are also allowed before a grouped block of delcarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
+
+  ```swift
+  // RIGHT
+
+  enum Planet {
+    // The inner planets
+    case mercury
+    case venus
+    case earth
+    case mars
+
+    // The outer planets
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
+  }
+
+  // ALSO RIGHT
+
+  enum Planet {
+    /// The smallest planet
+    case mercury
+    case venus
+    case earth
+    case mars
+    /// The largest planet
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
   }
   ```
 
