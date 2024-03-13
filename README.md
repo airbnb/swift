@@ -333,25 +333,72 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  let host: Host = Host()
+  let sun: Star = Star(mass: 1.989e30)
+  let earth: Planet = Planet.earth
 
   // RIGHT
-  let host = Host()
+  let sun = Star(mass: 1.989e30)
+  let earth = Planet.earth
+
+  // WRONG: Most literals provide a default type that can be inferred.
+  let enableGravity: Bool = true
+  let numberOfPlanets: Int = 8
+  let sunMass: Double = 1.989e30
+
+  // RIGHT
+  let enableGravity = true
+  let numberOfPlanets = 8
+  let sunMass = 1.989e30
+  
+  // WRONG: Types can be inferred from if/switch expressions as well if each branch has the same explicit type.
+  let smallestPlanet: Planet =
+    if treatPlutoAsPlanet {
+      Planet.pluto
+    } else {
+      Planet.mercury
+    }
+
+  // RIGHT
+  let smallestPlanet =
+    if treatPlutoAsPlanet {
+      Planet.pluto
+    } else {
+      Planet.mercury
+    }
   ```
 
+  </details>
+
+* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: preferInferredTypes](https://img.shields.io/badge/SwiftFormat-preferInferredTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#preferInferredTypes)
+
+  <details>
+
   ```swift
-  enum Direction {
-    case left
-    case right
-  }
+  // WRONG
+  let sun: Star = .init(mass: 1.989e30)
+  let earth: Planet = .earth
 
-  func someDirection() -> Direction {
-    // WRONG
-    return Direction.left
+  // RIGHT
+  let sun = Star(mass: 1.989e30)
+  let earth = Planet.earth
 
-    // RIGHT
-    return .left
-  }
+  // ALSO RIGHT: Explicit types are required when there is no right-hand-side value.
+  let sun: Star
+  let earth: Planet
+
+  // ALSO RIGHT: Explicit types can be necessary when the right-hand side has
+  // a different type from the one written explicitly on the left-hand side.
+  let nautralSatellite: PlanetaryBody? = Moon(mass: 7.347e22)
+  let moon: PlanetaryBody? = nil // nil literals are typeless
+  let numberOfPlanets: UInt = 8 // integer literals default to `Int`
+  let sunMass: CGFloat = 1.989e30 // floating-point literals default to `Double`
+  let planets: [Planet] = [] // empty collection literals are typeless
+
+  // ALSO RIGHT: Some of the examples above can also be written idiomatically without an explicit type on
+  // the left-hand-side, by instead giving the right-hand side value an explicit type. Either style is fine.
+  let numberOfPlanets = UInt(8)
+  let sunMass = CGFloat(1.989e30)
+  let planets = [Planet]()
   ```
 
   </details>
