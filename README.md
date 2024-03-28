@@ -388,7 +388,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // ALSO RIGHT: Explicit types can be necessary when the right-hand side has
   // a different type from the one written explicitly on the left-hand side.
-  let nautralSatellite: PlanetaryBody? = Moon(mass: 7.347e22)
+  let naturalSatellite: PlanetaryBody? = Moon(mass: 7.347e22)
   let moon: PlanetaryBody? = nil // nil literals are typeless
   let numberOfPlanets: UInt = 8 // integer literals default to `Int`
   let sunMass: CGFloat = 1.989e30 // floating-point literals default to `Double`
@@ -399,6 +399,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let numberOfPlanets = UInt(8)
   let sunMass = CGFloat(1.989e30)
   let planets = [Planet]()
+  ```
+  
+  There are some rarer cases where the inferred type syntax has a different meaning than the explicit type syntax. In these cases, the explicit type syntax is still permitted:
+  
+  ```swift
+  extension String {
+    static let earth = "Earth"
+  }
+
+  // RIGHT: If the property's type is optional, moving the optional type 
+  // to the right-hand side may result in invalid code.  
+  let planetName: String? = .earth
+  
+  // WRONG: fails with "error: type 'String?' has no member 'foo'"
+  let planetName = String?.earth
+  ```
+  
+  ```swift
+  struct SaturnOutline: ShapeStyle { ... }
+  
+  extension ShapeStyle where Self == SaturnOutline {
+    static var saturnOutline: SaturnOutline { 
+      SaturnOutline() 
+    }
+  }
+  
+  // RIGHT: If the property's type is an existential / protocol type, moving the type
+  // to the right-hand side will result in invalid code if the value is defined in an
+  // extension like `extension ShapeStyle where Self == SaturnOutline`.
+  // SwiftFormat autocorrect detects this case by checking for the existential `any` keyword.
+  let myShape1: any ShapeStyle = .saturnOutline
+  
+  // WRONG: fails with "error: static member 'saturnOutline' cannot be used on protocol metatype '(any ShapeStyle).Type'"
+  let myShape2 = (any ShapeStyle).myShape
   ```
 
   </details>
