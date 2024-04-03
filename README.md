@@ -19,7 +19,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 * We strive to make every rule lintable:
-  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect). 
+  * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect).
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
 
@@ -46,7 +46,7 @@ $ swift package format
 # Supported in Xcode 14+. Prompts for permission to write to the package directory.
 $ swift package format
 
-# When using the Xcode 13 toolchain, or a noninteractive shell, you must use: 
+# When using the Xcode 13 toolchain, or a noninteractive shell, you must use:
 $ swift package --allow-writing-to-package-directory format
 
 # To just lint without reformatting, you can use `--lint`:
@@ -64,6 +64,10 @@ $ swift package format --targets AirbnbSwiftFormatTool
 # in your `Package.swift`, but you can provide a custom value with `--swift-version`:
 $ swift package format --swift-version 5.3
 ```
+
+The package plugin returns a non-zero exit code if there is a lint failure that requires attention.
+ - In `--lint` mode, any lint failure from any tool will result in a non-zero exit code.
+ - In standard autocorrect mode without `--lint`, only failures from SwiftLint lint-only rules will result in a non-zero exit code.
 
 </details>
 
@@ -90,8 +94,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  Due to larger screen sizes, we have opted to choose a page guide greater than 80. 
-  
+  Due to larger screen sizes, we have opted to choose a page guide greater than 80.
+
   We currently only "strictly enforce" (lint / auto-format) a maximum column width of 130 characters to limit the cases where manual clean up is required for reformatted lines that fall slightly above the threshold.
 
   </details>
@@ -651,7 +655,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place function/type attributes on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+* <a id='attributes-on-prev-line'></a>(<a href='#attributes-on-prev-line'>link</a>) **Place attributes for functions, types, and computed properties on the line above the declaration**. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
 
@@ -659,18 +663,182 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   @objc class Spaceship {
 
-    @discardableResult func fly() -> Bool {
+    @ViewBuilder var controlPanel: some View {
+      // ...
     }
+
+    @discardableResult func fly() -> Bool {
+      // ...
+    }
+
   }
 
   // RIGHT
   @objc
   class Spaceship {
 
+    @ViewBuilder
+    var controlPanel: some View {
+      // ...
+    }
+
     @discardableResult
     func fly() -> Bool {
+      // ...
     }
+
   }
+  ```
+
+  </details>
+
+* <a id='simple-stored-property-attributes-on-same-line'></a>(<a href='#simple-stored-property-attributes-on-same-line'>link</a>) **Place simple attributes for stored properties on the same line as the rest of the declaration**. Complex attributes with named arguments, or more than one unnamed argument, should be placed on the previous line. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG. These simple property wrappers should be written on the same line as the declaration. 
+  struct SpaceshipDashboardView {
+
+    @State
+    private var warpDriveEnabled: Bool
+
+    @ObservedObject
+    private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) 
+    private var controlPanelStyle
+
+  }
+
+  // RIGHT
+  struct SpaceshipDashboardView {
+
+    @State private var warpDriveEnabled: Bool
+
+    @ObservedObject private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+
+  }
+  ```
+
+  ```swift
+  // WRONG. These complex attached macros should be written on the previous line.
+  struct SolarSystemView {
+
+    @Query(sort: \.distance) var allPlanets: [Planet]
+
+    @Query(sort: \.age, order: .reverse) var moonsByAge: [Moon]
+
+  }
+
+  // RIGHT
+  struct SolarSystemView {
+
+    @Query(sort: \.distance)
+    var allPlanets: [Planet]
+
+    @Query(sort: \.age, order: .reverse)
+    var oldestMoons: [Moon]
+
+  }
+  ```swift
+
+  ```
+  // WRONG. These long, complex attributes should be written on the previous line.
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
+
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
+
+  }
+
+  // RIGHT
+  struct RocketFactory {
+
+    @available(*, unavailable, message: "No longer in production")
+    var saturn5Builder: Saturn5Builder
+
+    @available(*, deprecated, message: "To be retired by 2030")
+    var atlas5Builder: Atlas5Builder
+    
+    @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0)
+    var newGlennBuilder: NewGlennBuilder
+
+  }
+  ```
+  
+  #### Why?
+  
+  Unlike other types of declarations, which have braces and span multiple lines, stored property declarations are often only a single line of code. Stored properties are often written sequentially without any blank lines between them. This makes the code compact without hurting readability, and allows for related properties to be grouped together in blocks:
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State private var warpDriveEnabled: Bool
+    @State private var lifeSupportEnabled: Bool
+    @State private var artificialGravityEnabled: Bool
+    @State private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+    @Environment(\.toggleButtonStyle) private var toggleButtonStyle
+  }
+  ```
+  
+  If stored property attributes were written on the previous line (like other types of attributes), then the properties start to visually bleed together unless you add blank lines between them:
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State
+    private var warpDriveEnabled: Bool
+    @State
+    private var lifeSupportEnabled: Bool
+    @State
+    private var artificialGravityEnabled: Bool
+    @State
+    private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle)
+    private var controlPanelStyle
+    @Environment(\.toggleButtonStyle)
+    private var toggleButtonStyle
+  }
+  ```
+  
+  If you add blank lines, the list of properties becomes much longer and you lose the ability to group related properties together:  
+  
+  ```swift
+  struct SpaceshipDashboardView {
+    @State
+    private var warpDriveEnabled: Bool
+    
+    @State
+    private var lifeSupportEnabled: Bool
+    
+    @State
+    private var artificialGravityEnabled: Bool
+    
+    @State
+    private var tractorBeamEnabled: Bool
+    
+    @Environment(\.controlPanelStyle)
+    private var controlPanelStyle
+    
+    @Environment(\.toggleButtonStyle)
+    private var toggleButtonStyle
+  }
+  ```
+  
+  This doesn't apply to complex attributes with named arguments, or multiple unnamed arguments. These arguments are visually complex and typically encode a lot of information, so feel cramped and difficult to read when written on a single line:
+
+  ```swift
+  // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long: 
+  @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
+  @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
+  @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
   ```
 
   </details>
@@ -684,7 +852,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let rowContent = [listingUrgencyDatesRowContent(),
                     listingUrgencyBookedRowContent(),
                     listingUrgencyBookedShortRowContent()]
-  
+
   // WRONG
   let rowContent = [
     listingUrgencyDatesRowContent(),
@@ -706,14 +874,40 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG (too long)
-  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding & PlanetBuilderProviding & CivilizationServiceProviding
+  public typealias Dependencies = CivilizationServiceProviding & LawsOfPhysicsProviding & PlanetBuilderProviding & UniverseBuilderProviding & UniverseSimulatorServiceProviding
 
   // WRONG (naive wrapping)
-  public typealias Dependencies = UniverseBuilderProviding & LawsOfPhysicsProviding & UniverseSimulatorServiceProviding &
-    PlanetBuilderProviding & CivilizationServiceProviding
+  public typealias Dependencies = CivilizationServiceProviding & LawsOfPhysicsProviding & PlanetBuilderProviding &
+    UniverseBuilderProviding & UniverseSimulatorServiceProviding
 
   // WRONG (unbalanced)
-  public typealias Dependencies = UniverseBuilderProviding
+  public typealias Dependencies = CivilizationServiceProviding
+    & LawsOfPhysicsProviding
+    & PlanetBuilderProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
+
+  // RIGHT
+  public typealias Dependencies
+    = CivilizationServiceProviding
+    & LawsOfPhysicsProviding
+    & PlanetBuilderProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
+  ```
+
+* <a id='sort-typealiases'></a>(<a href='#sort-typealiases'>link</a>) **Sort protocol composition type aliases alphabetically.** [![SwiftFormat: sortTypealiases](https://img.shields.io/badge/SwiftFormat-sortTypealiases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortTypealiases)
+
+  <details>
+
+  #### Why?
+
+  Protocol composition type aliases are an unordered list with no natural ordering. Sorting alphabetically keeps these lists more organized, which is especially valuable for long protocol compositions.
+
+  ```swift
+  // WRONG (not sorted)
+  public typealias Dependencies
+    = UniverseBuilderProviding
     & LawsOfPhysicsProviding
     & UniverseSimulatorServiceProviding
     & PlanetBuilderProviding
@@ -721,11 +915,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   public typealias Dependencies
-    = UniverseBuilderProviding
+    = CivilizationServiceProviding
     & LawsOfPhysicsProviding
-    & UniverseSimulatorServiceProviding
     & PlanetBuilderProviding
-    & CivilizationServiceProviding
+    & UniverseBuilderProviding
+    & UniverseSimulatorServiceProviding
   ```
 
 * <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name. [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantOptionalBinding)
@@ -758,6 +952,60 @@ _You can enable the following settings in Xcode by running [this script](resourc
     let galaxy,
     galaxy.name == "Milky Way"
   else { … }
+  ```
+
+* <a id='else-on-same-line'></a>(<a href='#else-on-same-line'>link</a>) **Else statements should start on the same line as the previous condition's closing brace, unless the conditions are separated by a blank line or comments.** [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
+
+  <details>
+
+  ```swift
+  // WRONG
+  if let galaxy {
+    …
+  }
+  else if let bigBangService {
+    …
+  }
+  else {
+    …
+  }
+
+  // RIGHT
+  if let galaxy {
+    …
+  } else if let bigBangService {
+    …
+  } else {
+    …
+  }
+
+  // RIGHT, because there are comments between the conditions
+  if let galaxy {
+    …
+  }
+  // If the galaxy hasn't been created yet, create it using the big bang service
+  else if let bigBangService {
+    …
+  }
+  // If the big bang service doesn't exist, fail gracefully
+  else {
+    …
+  }
+
+  // RIGHT, because there are blank lines between the conditions
+  if let galaxy {
+    …
+  }
+
+  else if let bigBangService {
+    // If the galaxy hasn't been created yet, create it using the big bang service
+    …
+  }
+
+  else {
+    // If the big bang service doesn't exist, fail gracefully
+    …
+  }
   ```
 
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
@@ -810,6 +1058,333 @@ _You can enable the following settings in Xcode by running [this script](resourc
   if let galaxy {
     …
   }
+
+  // RIGHT
+  guard let galaxy else {
+    …
+  }
+  ```
+  
+  </details>
+
+* <a id='wrap-multiline-conditional-assignment'></a>(<a href='#wrap-multiline-conditional-assignment'>link</a>) **Add a line break after the assignment operator (`=`) before a multi-line `if` or `switch` expression**, and indent the following `if` / `switch` expression. If the declaration fits on a single line, a line break is not required. [![SwiftFormat: wrapMultilineConditionalAssignment](https://img.shields.io/badge/SwiftFormat-wrapMultilineConditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapMultilineConditionalAssignment)
+
+  <details>
+
+  #### Why?
+  
+  This makes it so that `if` and `switch` expressions always have the same "shape" as standard `if` and `switch` statements, where:
+  1. The `if` / `switch` keyword is always the left-most token on a dedicated line of code.
+  2. The conditional branches are always to the right of and below the `if` / `switch` keyword.
+
+  This is most consistent with how the `if` / `switch` keywords are used for control flow, and thus makes it easier to recognize that the code is using an `if` or `switch` expression at a glance. 
+  
+  ```swift
+  // WRONG. Should have a line break after the first `=`. 
+  let planetLocation = if let star = planet.star {
+    "The \(star.name) system"
+   } else {
+    "Rogue planet"
+  }
+
+  // WRONG. The first `=` should be on the line of the variable being assigned.
+  let planetLocation 
+    = if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+
+  // WRONG. `switch` expression should be indented.
+  let planetLocation =
+  switch planet {
+  case .mercury, .venus, .earth, .mars:
+    .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    .gasGiant
+  }
+    
+  // RIGHT 
+  let planetLocation = 
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+    
+  // RIGHT
+  let planetType: PlanetType =
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
+    
+  // ALSO RIGHT. A line break is not required because the declaration fits on a single line. 
+  let moonName = if let moon = planet.moon { moon.name } else { "none" }
+
+  // ALSO RIGHT. A line break is permitted if it helps with readability.
+  let moonName =
+    if let moon = planet.moon { moon.name } else { "none" }
+  ```
+  
+  </details>
+
+* <a id='prefer-conditional-assignment-to-control-flow'></a>(<a href='#prefer-conditional-assignment-to-control-flow'>link</a>) **When initializing a new property with the result of a conditional statement (e.g. an `if` or `switch` statement), use a single `if`/`switch` expression where possible** rather than defining an uninitialized property and initializing it on every branch of the following conditional statement. [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#conditionalAssignment)
+
+  <details>
+
+  #### Why?
+
+  There are several benefits to using an `if`/`switch` expression over simply performing assignment on each branch of the following conditional statement:
+  1. In most cases, you no longer need to explicitly write a type annotation for the variable that is being assigned to.
+  2. The compiler will diagnose more cases where using a mutable `var` is unnecessary.
+  3. The resulting syntax is visually lighter because the property name being assigned doesn't need to be written on each branch.
+
+  ```swift
+  // BEFORE
+  // 1. An explicit type annotation is required for the uninitialized property.
+  // 2. `var` is unnecessary here because `planetLocation` is never modified after being initialized, but the compiler doesn't diagnose.
+  // 3. The `planetLocation` property name is written on each branch so is redundant and visually noisy.
+  var planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    planetLocation = "Rogue planet"
+  }
+
+  print(planetLocation)
+
+  // AFTER
+  // 1. No need to write an explicit `: String` type annotation.
+  // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead. 
+  // 3. Each conditional branch is simply the value being assigned.
+  var planetLocation =
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+
+  print(planetLocation)
+  ```
+
+  #### Examples
+
+  ```swift
+  // WRONG
+  let planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    planetLocation = "Rogue planet"
+  }
+
+  let planetType: PlanetType
+  switch planet {
+  case .mercury, .venus, .earth, .mars:
+    planetType = .terrestrial
+  case .jupiter, .saturn, .uranus, .neptune:
+    planetType = .gasGiant
+  }
+
+  let canBeTerraformed: Bool 
+  if 
+    let star = planet.star, 
+    !planet.isHabitable,
+    planet.isInHabitableZone(of: star) 
+  {
+    canBeTerraformed = true
+  } else {
+    canBeTerraformed = false
+  }
+
+  // RIGHT
+  let planetLocation =
+    if let star = planet.star {
+      "The \(star.name) system"
+    } else {
+      "Rogue planet"
+    }
+
+  let planetType: PlanetType =
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
+
+  let canBeTerraformed =
+    if 
+      let star = planet.star, 
+      !planet.isHabitable,
+      planet.isInHabitableZone(of: star) 
+    {
+      true
+    } else {
+      false
+    }
+
+  // ALSO RIGHT. This example cannot be converted to an if/switch expression
+  // because one of the branches is more than just a single expression.
+  let planetLocation: String
+  if let star = planet.star {
+    planetLocation = "The \(star.name) system"
+  } else {
+    let actualLocaton = galaxy.name ?? "the universe"
+    planetLocation = "Rogue planet somewhere in \(actualLocation)"
+  }
+  ```
+
+  </details>
+
+* <a id='blank-line-after-multiline-switch-case'></a>(<a href='#blank-line-after-multiline-switch-case'>link</a>) **Insert a blank line following a switch case with a multi-line body.** Spacing within an individual switch statement should be consistent. If any case has a multi-line body then all cases should include a trailing blank line. The last switch case doesn't need a blank line, since it is already followed by a closing brace. [![SwiftFormat: blankLineAfterMultilineSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterMultilineSwitchCase-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#blankLineAfterMultilineSwitchCase) [![SwiftFormat: consistentSwitchStatementSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchStatementSpacing-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#consistentSwitchStatementSpacing)
+
+  <details>
+
+  #### Why?
+
+  Like with [declarations in a file](#newline-between-scope-siblings), inserting a blank line between scopes makes them easier to visually differentiate.
+  
+  Complex switch statements are visually busy without blank lines between the cases, making it more difficult to read the code and harder to distinguish between individual cases at a glance. Blank lines between the individual cases make complex switch statements easier to read.
+
+  #### Examples
+
+  ```swift
+  // WRONG. These switch cases should be followed by a blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // WRONG. While the `.enableArtificialGravity` case isn't multi-line, the other cases are.
+  // For consistency, it should also include a trailing blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+      
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // RIGHT. All of the cases have a trailing blank line.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      navigationComputer.destination = targetedDestination
+      warpDrive.spinUp()
+      warpDrive.activate()
+
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+
+    case .scanPlanet(let planet):
+      scanner.target = planet
+      scanner.scanAtmosphere()
+      scanner.scanBiosphere()
+      scanner.scanForArtificialLife()
+      
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // RIGHT. Since none of the cases are multi-line, blank lines are not required.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      warpDrive.engage()
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.scan(planet)
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // ALSO RIGHT. Blank lines are still permitted after single-line switch cases if it helps with readability.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      warpDrive.engage()
+
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+
+    case .scanPlanet(let planet):
+      scanner.scan(planet)
+
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+
+  // WRONG. While it's fine to use blank lines to separate cases, spacing within a single switch statement should be consistent.
+  func handle(_ action: SpaceshipAction) {
+    switch action {
+    case .engageWarpDrive:
+      warpDrive.engage()
+    case .enableArtificialGravity:
+      artificialGravityEngine.enable(strength: .oneG)
+    case .scanPlanet(let planet):
+      scanner.scan(planet)
+
+    case .handleIncomingEnergyBlast:
+      energyShields.engage()
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#elseOnSameLine)
+
+  <details>
+
+  ```swift
+  // WRONG (else should be on its own line for multi-line guard statements)
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way" else
+  { … }
+
+  // WRONG (else should be on the same line for single-line guard statements)
+  guard let galaxy
+  else { … }
+
+  // RIGHT
+  guard
+    let galaxy,
+    galaxy.name == "Milky Way"
+  else { … }
 
   // RIGHT
   guard let galaxy else {
@@ -966,7 +1541,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default) 
+      oceanOptions: OceanOptions = .default)
     {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
@@ -1042,7 +1617,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
     */
     func terraform() {
-      /* 
+      /*
       Generate the atmosphere first, before generating the ocean.
       Otherwise, the water will just boil off immediately.
       */
@@ -1069,6 +1644,127 @@ _You can enable the following settings in Xcode by running [this script](resourc
       // Now that we have an atmosphere, it's safe to generate the ocean
       generateOceans()
     }
+  }
+  ```
+
+  </details>
+
+* <a id='doc-comments-before-declarations'></a>(<a href='#doc-comments-before-declarations'>link</a>) **Use doc comments (`///`) instead of regular comments (`//`) before declarations within type bodies or at the top level.** [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docComments)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  // A planet that exists somewhere in the universe.
+  class Planet {
+    // Data about the composition and density of the planet's atmosphere if present.
+    var atmosphere: Atmosphere?
+
+    // Data about the size, location, and composition of large bodies of water on the planet's surface.
+    var oceans: [Ocean]
+
+    // Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
+    func terraform() {
+      // This gas composition has a pretty good track record so far!
+      let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+      // Generate the atmosphere first, then the oceans. Otherwise, the water will just boil off immediately.
+      generateAtmosphere(using: composition)
+      generateOceans()
+    }
+  }
+
+  // RIGHT
+
+  /// A planet that exists somewhere in the universe.
+  class Planet {
+    /// Data about the composition and density of the planet's atmosphere if present.
+    var atmosphere: Atmosphere?
+
+    /// Data about the size, location, and composition of large bodies of water on the planet's surface.
+    var oceans: [Ocean]
+
+    /// Terraforms the planet, by adding an atmosphere and ocean that is hospitable for life.
+    func terraform() {
+      // This gas composition has a pretty good track record so far!
+      let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+      // Generate the atmosphere first, then the oceans. Otherwise, the water will just boil off immediately.
+      generateAtmosphere(using: composition)
+      generateOceans()
+    }
+  }
+  
+  // ALSO RIGHT:
+
+  func terraform() {
+    /// This gas composition has a pretty good track record so far!
+    ///  - Doc comments are not required before local declarations in function scopes, but are permitted.
+    let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
+
+    /// Generate the `atmosphere` first, **then** the `oceans`. Otherwise, the water will just boil off immediately.
+    ///  - Comments not preceeding declarations can use doc comments, and will not be autocorrected into regular comments.
+    ///    This can be useful because Xcode applies markdown styling to doc comments but not regular comments.
+    generateAtmosphere(using: composition)
+    generateOceans()
+  }
+  ```
+
+  Regular comments are permitted before declarations in some cases. 
+  
+  For example, comment directives like `// swiftformat:`, `// swiftlint:`, `// sourcery:`, `// MARK:` and `// TODO:` are typically required to use regular comments and don't work correctly with doc comments:
+
+  ```swift
+  // RIGHT
+
+  // swiftformat:sort
+  enum FeatureFlags {
+    case allowFasterThanLightTravel
+    case disableGravity
+    case enableDarkEnergy
+    case enableDarkMatter
+  }
+
+  // TODO: There are no more production consumers of this legacy model, so we
+  // should detangle the remaining code dependencies and clean it up.
+  struct LegacyGeocentricUniverseModel {
+    ...
+  }
+  ```
+
+  Regular comments are also allowed before a grouped block of delcarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
+
+  ```swift
+  // RIGHT
+
+  enum Planet {
+    // The inner planets
+    case mercury
+    case venus
+    case earth
+    case mars
+
+    // The outer planets
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
+  }
+
+  // ALSO RIGHT
+
+  enum Planet {
+    /// The smallest planet
+    case mercury
+    case venus
+    case earth
+    case mars
+    /// The largest planet
+    case jupiter
+    case saturn
+    case uranus
+    case neptune
   }
   ```
 
@@ -1127,6 +1823,62 @@ _You can enable the following settings in Xcode by running [this script](resourc
       get { spaceship.name }
       set { }
     }
+  }
+  ```
+
+  </details>
+
+* <a id='prefer-for-loop-over-forEach'></a>(<a href='#prefer-for-loop-over-forEach'>link</a>) **Prefer using `for` loops over the functional `forEach(…)` method**, unless using `forEach(…)` as the last element in a functional chain. [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#forLoop)
+
+  <details>
+
+  #### Why?
+  For loops are more idiomatic than the `forEach(…)` method, and are typically familiar to all developers who have experience with C-family languages. 
+
+  For loops are also more expressive than the `forEach(…)` method. For loops support the `return`, `continue`, and `break` control flow keywords, while `forEach(…)` only supports `return` (which has the same behavior as `continue` in a for loop).
+  
+  ```swift
+  // WRONG
+  planets.forEach { planet in
+    planet.terraform()
+  }
+
+  // WRONG
+  planets.forEach {
+    $0.terraform()
+  }
+
+  // RIGHT
+  for planet in planets {
+    planet.terraform()
+  }
+
+  // ALSO FINE, since forEach is useful when paired with other functional methods in a chain.
+  planets
+    .filter { !$0.isGasGiant }
+    .map { PlanetTerraformer(planet: $0) }
+    .forEach { $0.terraform() }
+  ```
+    
+  </details>
+
+* <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level. [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantInternal)
+
+  <details>
+
+  ```swift
+  // WRONG
+  internal class Spaceship {
+    internal init() { … }
+
+    internal func travel(to planet: Planet) { … }
+  }
+
+  // RIGHT, because internal access control is implied if no other access control level is specified.
+  class Spaceship {
+    init() { … }
+
+    func travel(to planet: Planet) { … }
   }
   ```
 
@@ -1198,7 +1950,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       count: Int,
       color: StarColor,
       withAverageDistance averageDistance: Float) async throws // these effects are easy to miss since they're visually associated with the last parameter
-      -> String 
+      -> String
     {
       populateUniverse()
     }
@@ -1400,20 +2152,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // WRONG
   let evenSquares = numbers
-    .filter{ 
-      $0.isMultiple(of: 2) 
+    .filter{
+      $0.isMultiple(of: 2)
     }
-    .map{ 
-      $0 * $0 
+    .map{
+      $0 * $0
     }
 
   // RIGHT
   let evenSquares = numbers
     .filter {
-      $0.isMultiple(of: 2) 
+      $0.isMultiple(of: 2)
     }
     .map {
-      $0 * $0 
+      $0 * $0
     }
   ```
 
@@ -1435,6 +2187,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+  </details>
+
 * <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
 
   <details>
@@ -1454,6 +2208,81 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // in cases where the parameter name is semantically meaningful.
   planets.first { $0.isGasGiant }
   ```
+
+  </details>
+
+* <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Avoid using `unowned` captures.** Instead prefer safer alternatives like `weak` captures, or capturing variables directly. [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
+
+  <details>
+  `unowned` captures are unsafe because they will cause the application to crash if the referenced object has been deallocated.
+
+  ```swift
+  // WRONG: Crashes if `self` has been deallocated when closures are called.
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [unowned self] in
+        planet.colonize()
+      })
+    }
+    
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [unowned self] in
+        planet.moons?.first
+      })
+    }
+  }
+  ```
+
+  `weak` captures are safer because they require the author to explicitly handle the case where the referenced object no longer exists.
+
+  ```swift
+  // RIGHT: Uses a `weak self` capture and explicitly handles the case where `self` has been deallocated
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [weak self] in
+        guard let self else { return }
+        planet.colonize()
+      })
+    }
+    
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [weak self] in
+        guard let self else { return nil }
+        return planet.moons?.first
+      })
+    }
+  }
+  ```
+
+  Alternatively, consider directly capturing the variables that are used in the closure. This lets you avoid having to handle the case where `self` is nil, since you don't even need to reference `self`:
+
+  ```swift
+  // RIGHT: Explicitly captures `planet` instead of capturing `self`
+  final class SpaceshipNavigationService {
+    let spaceship: Spaceship
+    let planet: Planet
+    
+    func colonizePlanet() {
+      spaceship.travel(to: planet, onArrival: { [planet] in
+        planet.colonize()
+      })
+    }
+    
+    func exploreSystem() {
+      spaceship.travel(to: planet, nextDestination: { [planet] in
+        planet.moons?.first
+      })
+    }
+  }
+  ```
+  
+  </details>
 
 ### Operators
 
@@ -1515,8 +2344,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   if
-    let star = planet.star, 
-    !planet.isHabitable 
+    let star = planet.star,
+    !planet.isHabitable
     && planet.isInHabitableZone(of: star)
   {
     planet.terraform()
@@ -1557,10 +2386,48 @@ _You can enable the following settings in Xcode by running [this script](resourc
   extension Collection<Universe> { … }
   extension StateStore<SpaceshipState, SpaceshipAction> { … }
 
-  // ALSO RIGHT -- there are multiple types that could satisfy this constraint
+  // ALSO RIGHT. There are multiple types that could satisfy this constraint
   // (e.g. [Planet], [Moon]), so this is not a "bound generic type" and isn't
   // eligible for the generic bracket syntax.
   extension Array where Element: PlanetaryBody { }
+  ```
+
+  </details>
+
+* <a id='no-semicolons'></a>(<a href='#no-semicolons'>link</a>) **Avoid using semicolons.** Semicolons are not required at the end of a line, so should be omitted. While you can use semicolons to place two statements on the same line, it is more common and preferred to separate them using a newline instead. [![SwiftFormat: semicolons](https://img.shields.io/badge/SwiftFormat-semicolons-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#semicolons)
+
+  <details>
+
+  ### Examples
+
+  ```swift
+  // WRONG. Semicolons are not required and can be omitted.
+  let mercury = planets[0];
+  let venus = planets[1];
+  let earth = planets[2];
+
+  // WRONG. While you can use semicolons to place multiple statements on a single line,
+  // it is more common and preferred to separate them using newlines instead.
+  let mercury = planets[0]; let venus = planets[1]; let earth = planets[2];
+
+  // RIGHT
+  let mercury = planets[0]
+  let venus = planets[1]
+  let earth = planets[2]
+
+  // WRONG
+  guard let moon = planet.moon else { completion(nil); return }
+
+  // WRONG
+  guard let moon = planet.moon else { 
+    completion(nil); return
+  }
+
+  // RIGHT
+  guard let moon = planet.moon else { 
+    completion(nil)
+    return
+  }
   ```
 
   </details>
@@ -1694,7 +2561,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // but extensions in the same file can access `private` members.
     fileprivate let engine: AntimatterEngine
 
-    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary. 
+    // WRONG: `hull` is not used by any other type, so `fileprivate` is unnecessary.
     fileprivate let hull: Hull
 
     // RIGHT: `navigation` is used in `extension Pilot` below,
@@ -1729,7 +2596,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       engine.start()
     }
   }
-  
+
   extension Pilot {
     public func chartCourse() {
       spaceship.navigation.course = .andromedaGalaxy
@@ -1780,23 +2647,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  struct Environment { 
-    static let earthGravity = 9.8 
-    static let moonGravity = 1.6 
+  struct Environment {
+    static let earthGravity = 9.8
+    static let moonGravity = 1.6
   }
-  
+
   // WRONG
   struct Environment {
-  
+
     struct Earth {
       static let gravity = 9.8
     }
-  
+
     struct Moon {
       static let gravity = 1.6
     }
   }
-  
+
   // RIGHT
   enum Environment {
 
@@ -2046,15 +2913,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Never use the `default` case when `switch`ing over an enum.**
+* <a id='switch-avoid-default'></a>(<a href='#switch-avoid-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
 
   <details>
 
   #### Why?
-  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added in the future.
 
   ```swift
-  // WRONG
+  // NOT PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
@@ -2062,12 +2929,52 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // Stop your vehicle
   }
 
-  // RIGHT
+  // PREFERRED
   switch trafficLight {
   case .greenLight:
     // Move your vehicle
   case .yellowLight, .redLight:
     // Stop your vehicle
+  }
+  
+  // COUNTEREXAMPLES
+
+  enum TaskState {
+    case pending
+    case running
+    case canceling
+    case success(Success)
+    case failure(Error)
+
+    // We expect that this property will remain valid if additional cases are added to the enumeration.
+    public var isRunning: Bool {
+      switch self {
+      case .running:
+        true
+      default:
+        false
+      }
+    }  
+  }
+
+  extension TaskState: Equatable {
+    // Explicitly listing each state would be too burdensome. Ideally this function could be implemented with a well-tested macro.
+    public static func == (lhs: TaskState, rhs: TaskState) -> Bool {
+      switch (lhs, rhs) {
+      case (.pending, .pending):
+        true
+      case (.running, .running):
+        true
+      case (.canceling, .canceling):
+        true
+      case (.success(let lhs), .success(let rhs)):
+        lhs == rhs
+      case (.failure(let lhs), .failure(let rhs)):
+        lhs == rhs
+      default:
+        false
+      }
+    }
   }
   ```
 
@@ -2117,6 +3024,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
       preferredStyle: .alert)
   }
 
+  var alertTitle: String {
+    if issue.severity == .critical {
+      return "💥 Critical Error"
+    } else {
+      return "ℹ️ Info"
+  }
+
+  func type(of planet: Planet) -> PlanetType {
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      return .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      return .gasGiant
+    }
+  }
+
   // RIGHT
   ["1", "2", "3"].compactMap { Int($0) }
 
@@ -2131,6 +3054,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
       title: "ℹ️ Info",
       message: message,
       preferredStyle: .alert)
+  }
+
+  var alertTitle: String {
+    if issue.severity == .critical {
+      "💥 Critical Error"
+    } else {
+      "ℹ️ Info"
+  }
+
+  func type(of planet: Planet) -> PlanetType {
+    switch planet {
+    case .mercury, .venus, .earth, .mars:
+      .terrestrial
+    case .jupiter, .saturn, .uranus, .neptune:
+      .gasGiant
+    }
   }
   ```
 
@@ -2204,14 +3143,38 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='no-file-literal'></a>(<a href='#no-file-literal'>link</a>) **Don't use `#file`. Use `#fileID` or `#filePath` as appropriate.**
+
+  <details>
+
+  #### Why?
+  The behavior of the `#file` literal (or macro as of Swift 5.9) has evolved from evaluating to the full source file path (the behavior as of `#filePath`) to a human-readable string containing module and file name (the behavior of `#fileID`). Use the literal (or macro) with the most appropriate behavior for your use case.
+
+  [Swift documentation](https://developer.apple.com/documentation/swift/file)
+
+  [Swift Evolution Proposal: Concise magic file names](https://github.com/apple/swift-evolution/blob/main/proposals/0274-magic-file.md)
+
+  </details>
+
+* <a id='no-filepath-literal'></a>(<a href='#no-filepath-literal'>link</a>) **Don't use `#filePath` in production code. Use `#fileID` instead.**
+
+  <details>
+
+  #### Why?
+  `#filePath` should only be used in non-production code where the full path of the source file provides useful information to developers. Because `#fileID` doesn’t embed the full path to the source file, it won't expose your file system and reduces the size of the compiled binary.
+
+  [#filePath documentation](https://developer.apple.com/documentation/swift/filepath#overview)
+
+  </details>
+
 * <a id='avoid-redundant-closures'></a>(<a href='#avoid-redundant-closures'>link</a>) **Avoid single-expression closures that are always called immediately**. Instead, prefer inlining the expression. [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantClosure)
 
   <details>
 
   ```swift
   // WRONG
-  lazy var universe: Universe = { 
-    Universe() 
+  lazy var universe: Universe = {
+    Universe()
   }()
 
   lazy var stars = {
@@ -2223,7 +3186,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }()
 
   // RIGHT
-  lazy var universe = Universe() 
+  lazy var universe = Universe()
 
   lazy var stars = universe.generateStars(
     at: location,
@@ -2290,13 +3253,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func generate(_ planets: some Collection<Planet>) {
       …
     }
-    
+
     // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
     // that two parameters in the type signature are of the same type:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
       …
     }
-    
+
     // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
       planetaryBody.generateAtmosphere(Body.idealAtmosphere)
@@ -2331,6 +3294,165 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ```
 
     `some Any` is somewhat unintuitive, and the named generic parameter is useful in this situation to compensate for the weak type information. Because of this, prefer using named generic parameters instead of `some Any`.
+
+    </details>
+
+* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Prefer to avoid using `@unchecked Sendable`**. Use a standard `Sendable` conformance instead where possible. If working with a type from a module that has not yet been updated to support Swift Concurrency, suppress concurrency-related errors using `@preconcurrency import`. 
+
+    <details>
+
+    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and instead unsafely suppresses compiler errors related to concurrency checking. 
+
+    There are typically other, safer methods for suppressing concurrency-related errors:
+
+    ### 1. Use `Sendable` instead of `@unchecked Sendable`, with `@MainActor` if appropriate
+
+    A `Sendable` conformance is the preferred way to declare that a type is thread-safe. The compiler will emit an error if a type conforming to `Sendable` is not thread-safe. For example, simple value types and immutable classes can always safely conform to `Sendable`, but mutable classes cannot:
+
+    ```swift
+    // RIGHT: Simple value types are thread-safe.
+    struct Planet: Sendable {
+      var mass: Double
+    }
+
+    // RIGHT: Immutable classes are thread-safe.
+    final class Planet: Sendable {
+      let mass: Double
+    }
+
+    // WRONG: Mutable classes are not thread-safe.
+    final class Planet: Sendable {
+      // ERROR: stored property 'mass' of 'Sendable'-conforming class 'Planet' is mutable
+      var mass: Double
+    }
+
+    // WRONG: @unchecked is unnecessary because the compiler can prove that the type is thread-safe.
+    struct Planet: @unchecked Sendable {
+      var mass: Double
+    }
+    ```
+
+    Mutable classes can be made `Sendable` and thread-safe if they are isolated to a single actor / thread / concurrency domain. Any mutable class can be made `Sendable` by isolating it to a global actor using an annotation like `@MainActor` (which isolates it to the main actor):
+
+    ```swift
+    // RIGHT: A mutable class isolated to the main actor is thread-safe.
+    @MainActor
+    final class Planet: Sendable {
+      var mass: Double
+    }
+
+    // WRONG: @unchecked Sendable is unsafe because mutable classes are not thread-safe.
+    struct Planet: @unchecked Sendable {
+      var mass: Double
+    }
+    ```
+
+    ### 2. Use `@preconcurrency import`
+
+    If working with a non-`Sendable` type from a module that hasn't yet adopted Swift concurrency, suppress concurrency-related errors using `@preconcurrency import`.
+
+    ```swift
+    /// Defined in `UniverseKit` module
+    class Planet: PlanetaryBody { 
+      var star: Star
+    }
+    ```
+
+    ```swift 
+    // WRONG: Unsafely marking a non-thread-safe class as Sendable only to suppress errors
+    import PlanetaryBody
+
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // RIGHT
+    @preconcurrency import PlanetaryBody
+    ```
+
+    ### 3. Restructure code so the compiler can verify that it is thread-safe
+
+    If possible, restructure code so that the compiler can verify that it is thread safe. This lets you use a `Sendable` conformance instead of an unsafe `@unchecked Sendable` conformance. 
+
+    When conforming to `Sendable`, the compiler will emit an error in the future if you attempt to make a change that is not thread-safe. This guarantee is lost when using `@unchecked Sendable`, which makes it easier to accidentally introduce changes which are not thread-safe.
+
+    For example, given this set of classes:
+
+    ```swift
+    class PlanetaryBody { 
+      let mass: Double  
+    }
+
+    class Planet: PlanetaryBody { 
+      let star: Star
+    }
+
+    // NOT IDEAL: no compiler-enforced thread safety.
+    extension PlanetaryBody: @unchecked Sendable { }
+    ```
+
+    the compiler can't verify `PlanetaryBody` is `Sendable` because it is not `final`. Instead of using `@unchecked Sendable`, you could restructure the code to not use subclassing:
+
+    ```swift
+    // BETTER: Compiler-enforced thread safety.
+    protocol PlanetaryBody: Sendable {
+      var mass: Double { get }
+    }
+
+    final class Planet: PlanetaryBody, Sendable {
+      let mass: Double
+      let star: Star
+    }
+    ```
+
+    ### Using `@unchecked Sendable` when necessary
+
+    Sometimes it is truly necessary to use `@unchecked Sendable`. In these cases, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with an explanation for how we know the type is thread-safe, and why we have to use `@unchecked Sendable` instead of `Sendable`.
+
+    A canonical, safe use case of `@unchecked Sendable` is a class where the mutable state is protected by some other thread-safe mechanism like a lock. This type is thread-safe, but the compiler cannot verify this.
+
+    ```swift
+    struct Atomic<Value> {
+      /// `value` is thread-safe because it is manually protected by a lock.
+      var value: Value { ... }
+    }
+
+    // WRONG: disallowed by linter
+    extension Atomic: @unchecked Sendable { }
+
+    // WRONG: suppressing lint error without an explanation
+    // swiftlint:disable:next no_unchecked_sendable
+    extension Atomic: @unchecked Sendable { }
+
+    // RIGHT: suppressing the linter with an explanation why the type is thread-safe
+    // Atomic is thread-safe because its underlying mutable state is protected by a lock.
+    // swiftlint:disable:next no_unchecked_sendable
+    extension Atomic: @unchecked Sendable { }
+    ```
+
+    It is also reasonable to use `@unchecked Sendable` for types that are thread-safe in existing usage but can't be refactored to support a proper `Sendable` conformance (e.g. due to backwards compatibility constraints):
+
+    ```swift
+    class PlanetaryBody { 
+      let mass: Double  
+    }
+
+    class Planet: PlanetaryBody { 
+      let star: Star
+    }
+
+    // WRONG: disallowed by linter
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // WRONG: suppressing lint error without an explanation
+    // swiftlint:disable:next no_unchecked_sendable
+    extension PlanetaryBody: @unchecked Sendable { }
+
+    // RIGHT: suppressing the linter with an explanation why the type is thread-safe
+    // PlanetaryBody cannot conform to Sendable because it is non-final and has subclasses.
+    // PlanetaryBody itself is safely Sendable because it only consists of immutable values.
+    // All subclasses of PlanetaryBody are also simple immutable values, so are safely Sendable as well.
+    // swiftlint:disable:next no_unchecked_sendable
+    extension PlanetaryBody: @unchecked Sendable { }
+    ```
 
     </details>
 
@@ -2504,7 +3626,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func terraform() {
       generateAtmosphere()
       generateOceans()
-    } 
+    }
   }
 
   // Also fine!
@@ -2551,6 +3673,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * `// MARK: Lifecycle` for `init` and `deinit` methods.
   * `// MARK: Open` for `open` properties and methods.
   * `// MARK: Public` for `public` properties and methods.
+  * `// MARK: Package` for `package` properties and methods.
   * `// MARK: Internal` for `internal` properties and methods.
   * `// MARK: Fileprivate` for `fileprivate` properties and methods.
   * `// MARK: Private` for `private` properties and methods.
