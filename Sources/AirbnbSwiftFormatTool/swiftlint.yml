@@ -19,6 +19,7 @@ only_rules:
   - function_body_length
   - function_parameter_count
   - type_name
+  - unused_import
 
 excluded:
   - Carthage
