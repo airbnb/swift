@@ -1,10 +1,9 @@
 import Foundation
 
+// MARK: - Command
+
 /// A single command line invocation
 struct Command {
-
-    // MARK: Internal
-
     /// This property can be overridden to provide a mock implementation in unit tests.
     static var runCommand: (Self) throws -> Int32 = { try $0.executeShellCommand() }
     
@@ -17,9 +16,11 @@ struct Command {
     func run() throws -> Int32 {
         try Self.runCommand(self)
     }
-    
-    // MARK: Private
+}
 
+// MARK: - Private
+
+extension Command {
     /// Synchronously runs this command and returns its exit code
     private func executeShellCommand() throws -> Int32 {
         let process = Process()
@@ -45,5 +46,4 @@ struct Command {
         // swiftlint:disable:next no_direct_standard_out_logs
         print("[AibnbSwiftFormatTool]", string)
     }
-    
 }

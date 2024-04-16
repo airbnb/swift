@@ -6,9 +6,6 @@ import XCTest
 // MARK: - RakuyoSwiftFormatToolTest
 
 final class RakuyoSwiftFormatToolTest: XCTestCase {
-
-    // MARK: Internal
-
     func testFormatWithNoViolations() {
         var ranSwiftFormat = false
         var ranSwiftLint = false
@@ -244,9 +241,11 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
         XCTAssertEqual(unexpectedSwiftFormatExitCode as? ExitCode, ExitCode(1234))
         XCTAssertEqual(unexpectedSwiftLintExitCode as? ExitCode, ExitCode(42))
     }
-    
-    // MARK: Private
+}
 
+// MARK: - Private
+
+extension RakuyoSwiftFormatToolTest {
     /// Runs `RakuyoSwiftFormatTool` with the `Command` calls mocked using the given mocks
     private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
         let existingRunCommandImplementation = Command.runCommand
