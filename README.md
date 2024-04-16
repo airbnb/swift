@@ -3709,7 +3709,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Objective-C Interoperability
 
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`. ![SwiftLint: no_objcMembers](https://img.shields.io/badge/SwiftLint-no_objcMembers-007A87.svg)
 
   <details>
 
