@@ -2,6 +2,8 @@
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/airbnb/swift)
 
+> This style guide was forked from [Airbnb](https://github.com/airbnb/swift), modified and extended, and the namespace was renamed `Rakuyo`.
+
 ## Goals
 
 Following this style guide should:
@@ -1537,8 +1539,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default)
-    {
+      oceanOptions: OceanOptions = .default
+    ) {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
     }
