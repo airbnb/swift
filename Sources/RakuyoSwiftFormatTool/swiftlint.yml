@@ -90,3 +90,21 @@ custom_rules:
     - typeidentifier
     message: "Instead of using `@unchecked Sendable`, consider a safe alternative like a standard `Sendable` conformance or using `@preconcurrency import`. If you really must use `@unchecked Sendable`, you can add a `// swiftlint:disable:next no_unchecked_sendable` annotation with an explanation for how we know the type is thread-safe, and why we have to use @unchecked Sendable instead of Sendable. More explanation and suggested safe alternatives are available at https://github.com/airbnb/swift#unchecked-sendable."
     severity: error
+
+  already_true:
+    included: ".*.swift"
+    regex: "== true"
+    message: "Don't compare to true, just use the bool value."
+    severity: error
+
+  already_bool:
+    included: ".*.swift"
+    regex: "== false"
+    message: "Don't compare to false, just use !value."
+    severity: error
+
+  line_break_after_super:
+    included: ".*.swift"
+    regex: '^\ *super\.[^\n]*\n\ *(?!(?:\}))[^\ \n]+'
+    message: "An empty line after `super.someMethod()` is preferred."
+    severity: warning
