@@ -21,7 +21,7 @@ excluded:
   - .build
 
 colon:
-  apply_to_dictionaries: false
+  severity: error
 
 operator_usage_whitespace:
   skip_aligned_constants: false
