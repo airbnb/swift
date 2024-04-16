@@ -65,9 +65,6 @@ struct RakuyoSwiftFormatPlugin {
 // MARK: CommandPlugin
 
 extension RakuyoSwiftFormatPlugin: CommandPlugin {
-
-    // MARK: Internal
-
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         var argumentExtractor = ArgumentExtractor(arguments)
         
@@ -106,8 +103,6 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
         )
     }
     
-    // MARK: Private
-
     /// Retrieves the list of paths that should be formatted / linted
     ///
     /// By default this tool runs on all subdirectories of the package's root directory,
@@ -129,7 +124,6 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
         let rootSwiftFiles = packageDirectoryContents.filter { $0.pathExtension.hasSuffix("swift") }
         return (subdirectories + rootSwiftFiles).map { $0.path }
     }
-    
 }
 
 #if canImport(XcodeProjectPlugin)
@@ -184,9 +178,6 @@ struct SwiftVersion: Comparable {
 }
 
 extension Package {
-
-    // MARK: Internal
-
     /// The minimum Swift version supported by this package
     var minimumSwiftVersion: SwiftVersion {
         guard let version = supportedSwiftVersions.min() else {
@@ -195,8 +186,6 @@ extension Package {
         return version
     }
     
-    // MARK: Private
-
     /// Swift versions supported by this package. Guaranteed to be non-empty.
     ///  - This includes the `swift-tools-version` from the `Package.swift`,
     ///    plus the Swift version of any additional version-specific Package manifest
@@ -241,7 +230,9 @@ extension Package {
             let major = string.popFirst().flatMap({ Int(String($0)) }),
             string.popFirst() == ".",
             let minor = string.popFirst().flatMap({ Int(String($0)) })
-        else { return nil }
+        else {
+            return nil
+        }
         
         return SwiftVersion(major: major, minor: minor)
     }

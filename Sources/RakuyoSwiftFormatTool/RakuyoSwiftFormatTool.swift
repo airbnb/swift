@@ -40,7 +40,7 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
     var swiftVersion: String?
 }
 
-// MARK: Main
+// MARK: - Main
 
 extension RakuyoSwiftFormatTool {
     func run() throws {
@@ -92,7 +92,7 @@ extension RakuyoSwiftFormatTool {
     }
 }
 
-// MARK: Private
+// MARK: - Private
 
 extension RakuyoSwiftFormatTool {
     /// Whether the command should autocorrect invalid code, or only emit lint errors
