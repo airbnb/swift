@@ -6,7 +6,7 @@
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
---trimwhitespace always # trailingSpace
+--trimwhitespace nonblank-lines # trailingSpace
 --indent 4 #indent
 --ifdef no-indent #indent
 --indentstrings true #indent
@@ -102,3 +102,4 @@
 --rules blankLineAfterMultilineSwitchCase
 --rules consistentSwitchStatementSpacing
 --rules semicolons
+--rules isEmpty

@@ -1,3 +1,4 @@
+# rule doc: # https://realm.github.io/SwiftLint/rule_name
 indentation: 4
 
 excluded:
@@ -21,35 +22,205 @@ only_rules:
   - vertical_whitespace
   - void_return
   - unowned_variable_capture
-
-colon:
-  severity: error
-
-fatal_error_message:
-  severity: error
-
-legacy_cggeometry_functions:
-  severity: error
-
-legacy_constant:
-  severity: error
+  - unused_import
+  - block_based_kvo
+  - reduce_boolean
+  - legacy_random
+  - legacy_hashing
+  - is_disjoint
+  - unused_enumerated
+  - unused_setter_value
+  - dynamic_inline
+  - shorthand_operator
+  - force_try
+  - force_cast
+  - force_unwrapping
+  - unhandled_throwing_task
+  - closure_parameter_position
+  - computed_accessors_order
+  - compiler_protocol_init
+  - discarded_notification_center_observer
+  - empty_string
+  - first_where
+  - last_where
+  - legacy_multiple
+  - flatmap_over_map_reduce
+  - implicit_return
+  - legacy_objc_type
+  - toggle_bool
+  - array_init
+  - typesafe_array_init
+  - weak_delegate
+  - overridden_super_call
+  - number_separator
+  - for_where
+  - static_operator
+  - sorted_first_last
+  - reduce_into
+  - prohibited_interface_builder
+  - private_subject
+  - unavailable_function
+  - superfluous_else
+  - modifier_order
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - empty_collection_literal
+  - file_name_no_space
+  - unavailable_condition
+  - comma_inheritance
+  - switch_case_alignment
+  - lower_acl_than_parent
+  - prefer_zero_over_explicit_init
+  - nsobject_prefer_isequal
+  - empty_parameters
+  - redundant_set_access_control
+  - ns_number_init_as_function_reference
+  - protocol_property_accessors_order
+  - duplicated_key_in_dictionary_literal
+  - discouraged_direct_init
+  - duplicate_conditions
+  - yoda_condition
+  - unused_control_flow_label
+  - unused_declaration
+  - discouraged_assert
+  - fallthrough
+  - unneeded_break_in_switch
+  - unneeded_synthesized_initializer
+  - unneeded_override
+  - redundant_discardable_let
+  - discouraged_none_name
+  - period_spacing
+  - blanket_disable_command
+  - invalid_swiftlint_command
+  - superfluous_disable_command
+  - prefer_self_type_over_type_of_self
+  - prefer_self_in_static_references
+  - optional_enum_case_matching
+  - multiline_function_chains
+  - untyped_error_in_catch
+  - identical_operands
+  - joined_default_parameter
+  - type_body_length
+  - function_body_length
+  - file_length
+  - closure_body_length
+  - cyclomatic_complexity
+  - type_contents_order
+  - nesting
+  - function_parameter_count
     
-legacy_nsgeometry_functions:
+force_try:
   severity: error
-    
-return_arrow_whitespace:
+  
+force_cast:
   severity: error
-    
-unowned_variable_capture:
+  
+force_unwrapping:
   severity: error
-    
-void_return:
+  
+prohibited_interface_builder:
   severity: error
-    
+  
 operator_usage_whitespace:
   skip_aligned_constants: false
   allowed_no_space_operators: [] # Contains "…" and "..<"
+  
+implicit_return:
+  included: [closure, getter]
+  
+nesting:
+  type_level: 3
+  function_level: 2
+  
+function_parameter_count:
+  warning: 6
+  error: 8
+  ignores_default_parameters: true
+  
+number_separator:
+  minimum_length: 5
+  minimum_fraction_length: 5
+  
+unused_import:
+  require_explicit_imports: true
+  allowed_transitive_imports: []
+  always_keep_imports: []
+  
+cyclomatic_complexity:
+  warning: 20
+  error: 30
+  ignores_case_statements: false
+  
+function_body_length:
+  warning: 80
+  error: 150
 
+closure_body_length:
+  warning: 30
+  error: 60
+
+file_length:
+  warning: 600
+  error: 1000
+  ignore_comment_only_lines: true
+  
+overridden_super_call:
+  severity: error
+  excluded: []
+  included: [
+    "viewDidLoad",
+    "viewWillAppear",
+    "viewIsAppearing",
+    "viewDidAppear",
+    "viewWillDisappear",
+    "viewDidDisappear",
+    "viewWillLayoutSubviews",
+    "viewDidLayoutSubviews",
+    "didReceiveMemoryWarning",
+    "setNeedsLayout",
+    "layoutIfNeeded",
+    "layoutSubviews",
+    "didMoveToWindow",
+    "didMoveToSuperview",
+    "prepareForReuse"
+  ]
+  
+type_contents_order:
+  severity: warning
+  order: [
+    [case],
+    [type_alias, associated_type],
+    [subtype],
+    [type_property],
+    [instance_property],
+    [ib_inspectable],
+    [ib_outlet],
+    [initializer],
+    [deinitializer],
+    [type_method],
+    [view_life_cycle_method],
+    [other_method],
+    [ib_action],
+    [subscript],
+  ]
+  
+modifier_order:
+  preferred_modifier_order: [
+    acl,
+    setterACL,
+    override,
+    dynamic,
+    mutators,
+    lazy,
+    final,
+    required,
+    convenience,
+    typeMethods,
+    owned
+  ]
+  
 custom_rules:
   no_objcMembers:
     name: "@objcMembers"
