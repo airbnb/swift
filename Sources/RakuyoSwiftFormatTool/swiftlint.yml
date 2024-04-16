@@ -15,7 +15,6 @@ only_rules:
   - legacy_constant
   - legacy_constructor
   - legacy_nsgeometry_functions
-  - operator_usage_whitespace
   - return_arrow_whitespace
   - trailing_newline
   - unused_optional_binding
@@ -69,7 +68,6 @@ only_rules:
   - empty_collection_literal
   - file_name_no_space
   - unavailable_condition
-  - comma_inheritance
   - switch_case_alignment
   - lower_acl_than_parent
   - prefer_zero_over_explicit_init
@@ -122,10 +120,6 @@ force_unwrapping:
   
 prohibited_interface_builder:
   severity: error
-  
-operator_usage_whitespace:
-  skip_aligned_constants: false
-  allowed_no_space_operators: [] # Contains "…" and "..<"
   
 implicit_return:
   included: [closure, getter]
