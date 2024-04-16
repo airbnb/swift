@@ -107,6 +107,9 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
 
     if lint {
       arguments += ["--lint"]
+    } else {
+      // Return a non-zero exit code when encountering unformatted changes
+      arguments += ["--strict"]
     }
 
     if let swiftVersion = swiftVersion {
