@@ -94,7 +94,6 @@
 --rules andOperator
 --rules opaqueGenericParameters
 --rules genericExtensions
---rules trailingClosures
 --rules elseOnSameLine
 --rules sortTypealiases
 --rules preferForLoop
