@@ -24,9 +24,6 @@
 --complexattrs prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --wrapternary before-operators # wrap
---structthreshold 20 # organizeDeclarations
---enumthreshold 20 # organizeDeclarations
---organizetypes class,struct,enum,extension,actor # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType
@@ -52,7 +49,6 @@
 --rules hoistPatternLet
 --rules indent
 --rules markTypes
---rules organizeDeclarations
 --rules redundantParens
 --rules redundantReturn
 --rules redundantSelf
