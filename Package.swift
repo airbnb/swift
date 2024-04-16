@@ -32,7 +32,7 @@ let package = Package(
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
       resources: [
-        .process("Rakuyo.swiftformat"),
+        .process("rakuyo.swiftformat"),
         .process("swiftlint.yml"),
       ]),
 
