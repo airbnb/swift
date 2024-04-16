@@ -2,11 +2,11 @@ import Foundation
 
 /// A single command line invocation
 struct Command {
-    
+
     // MARK: Internal
-    
+
     /// This property can be overridden to provide a mock implementation in unit tests.
-    static var runCommand: (Command) throws -> Int32 = { try $0.executeShellCommand() }
+    static var runCommand: (Self) throws -> Int32 = { try $0.executeShellCommand() }
     
     let log: Bool
     let launchPath: String
@@ -15,11 +15,11 @@ struct Command {
     /// Runs this command using the implementation of `Command.runCommand`
     ///  - By default, synchronously runs this command and returns its exit code
     func run() throws -> Int32 {
-        try Command.runCommand(self)
+        try Self.runCommand(self)
     }
     
     // MARK: Private
-    
+
     /// Synchronously runs this command and returns its exit code
     private func executeShellCommand() throws -> Int32 {
         let process = Process()

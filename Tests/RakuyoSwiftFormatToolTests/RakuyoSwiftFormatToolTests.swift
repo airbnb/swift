@@ -6,9 +6,9 @@ import XCTest
 // MARK: - RakuyoSwiftFormatToolTest
 
 final class RakuyoSwiftFormatToolTest: XCTestCase {
-    
+
     // MARK: Internal
-    
+
     func testFormatWithNoViolations() {
         var ranSwiftFormat = false
         var ranSwiftLint = false
@@ -27,7 +27,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                 swiftLintAutocorrect: {
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertNil(error)
         XCTAssertTrue(ranSwiftFormat)
@@ -54,7 +56,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                 swiftLintAutocorrect: {
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertNil(error)
         XCTAssertTrue(ranSwiftFormat)
@@ -88,7 +92,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                     // When autocorrecting SwiftLint returns EXIT_SUCCESS
                     // even if there were violations that were fixed
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertEqual(error as? ExitCode, ExitCode(SwiftFormatExitCode.lintFailure))
         XCTAssertTrue(ranSwiftFormat)
@@ -115,18 +121,20 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                         // If SwiftLint autocorrect has already run, then there are no more violations.
                         // This is the expected behavior.
                         return EXIT_SUCCESS
-                    } else {
-                        // If SwiftLint autocorrect hasn't run yet, then there are still violations.
-                        // This should not happen, because we run autocorrect first.
-                        return SwiftLintExitCode.lintFailure
                     }
+                    
+                    // If SwiftLint autocorrect hasn't run yet, then there are still violations.
+                    // This should not happen, because we run autocorrect first.
+                    return SwiftLintExitCode.lintFailure
                 },
                 swiftLintAutocorrect: {
                     // Assume that this SwiftLint autocorrect invocation applied a code change.
                     // In this case, SwiftLint still returns a zero exit code.
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         // Even though there was a SwiftLint failure, it was autocorrected so doesn't require attention.
         // The tool should not return an error (e.g. it should return a zero exit code).
@@ -156,7 +164,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                 swiftLintAutocorrect: {
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertEqual(error as? ExitCode, ExitCode.failure)
         XCTAssertTrue(ranSwiftFormat)
@@ -183,7 +193,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                 swiftLintAutocorrect: {
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertEqual(error as? ExitCode, ExitCode.failure)
         XCTAssertTrue(ranSwiftFormat)
@@ -210,7 +222,9 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
                 swiftLintAutocorrect: {
                     ranSwiftLintAutocorrect = true
                     return EXIT_SUCCESS
-                }))
+                }
+            )
+        )
         
         XCTAssertEqual(error as? ExitCode, ExitCode.failure)
         XCTAssertTrue(ranSwiftFormat)
@@ -220,17 +234,19 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
     
     func testHandlesUnexpectedErrorCode() {
         let unexpectedSwiftFormatExitCode = runFormatTool(
-            with: MockCommands(swiftFormat: { 1234 }))
+            with: MockCommands(swiftFormat: { 1234 })
+        )
         
         let unexpectedSwiftLintExitCode = runFormatTool(
-            with: MockCommands(swiftLint: { 42 }))
+            with: MockCommands(swiftLint: { 42 })
+        )
         
         XCTAssertEqual(unexpectedSwiftFormatExitCode as? ExitCode, ExitCode(1234))
         XCTAssertEqual(unexpectedSwiftLintExitCode as? ExitCode, ExitCode(42))
     }
     
     // MARK: Private
-    
+
     /// Runs `RakuyoSwiftFormatTool` with the `Command` calls mocked using the given mocks
     private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
         let existingRunCommandImplementation = Command.runCommand
@@ -238,15 +254,15 @@ final class RakuyoSwiftFormatToolTest: XCTestCase {
         Command.runCommand = mocks.mockRunCommand(_:)
         defer { Command.runCommand = existingRunCommandImplementation }
         
-        let formatTool = try! RakuyoSwiftFormatTool.parse([
-            "Sources",
-            "--swift-format-path",
-            "rakuyo.swiftformat",
-            "--swift-lint-path",
-            "swiftlint.yml",
-        ] + (arguments ?? []))
-        
         do {
+            let formatTool = try RakuyoSwiftFormatTool.parse([
+                "Sources",
+                "--swift-format-path",
+                "rakuyo.swiftformat",
+                "--swift-lint-path",
+                "swiftlint.yml",
+            ] + (arguments ?? []))
+            
             try formatTool.run()
             return nil
         } catch {
@@ -269,16 +285,13 @@ struct MockCommands {
             return swiftFormat?() ?? EXIT_SUCCESS
         }
         
-        else if command.launchPath.lowercased().contains("swiftlint") {
+        if command.launchPath.lowercased().contains("swiftlint") {
             if command.arguments.contains("--fix") {
                 return swiftLintAutocorrect?() ?? EXIT_SUCCESS
-            } else {
-                return swiftLint?() ?? EXIT_SUCCESS
             }
+            return swiftLint?() ?? EXIT_SUCCESS
         }
         
-        else {
-            fatalError("Unexpected command: \(command)")
-        }
+        fatalError("Unexpected command: \(command)")
     }
 }

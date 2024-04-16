@@ -7,9 +7,6 @@ import Foundation
 /// based on the Rakuyo Swift Style Guide
 @main
 struct RakuyoSwiftFormatTool: ParsableCommand {
-    
-    // MARK: Internal
-    
     @Argument(help: "The directories to format")
     var directories: [String]
     
@@ -33,13 +30,19 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
     
     @Option(help: "The absolute path to the SwiftFormat config file")
     var swiftFormatConfig = Bundle.module.path(forResource: "rakuyo", ofType: "swiftformat")!
+    // swiftlint:disable:previous force_unwrapping
     
     @Option(help: "The absolute path to the SwiftLint config file")
     var swiftLintConfig = Bundle.module.path(forResource: "swiftlint", ofType: "yml")!
+    // swiftlint:disable:previous force_unwrapping
     
     @Option(help: "The project's minimum Swift version")
     var swiftVersion: String?
-    
+}
+
+// MARK: Main
+
+extension RakuyoSwiftFormatTool {
     func run() throws {
         let swiftFormat = makeSwiftFormatCommand()
         let swiftLint = makeSwiftLintCommand(autocorrect: false)
@@ -65,8 +68,8 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
         
         if
             swiftFormatExitCode == SwiftFormatExitCode.lintFailure ||
-                swiftLintExitCode == SwiftLintExitCode.lintFailure ||
-                swiftLintAutocorrectExitCode == SwiftLintExitCode.lintFailure
+            swiftLintExitCode == SwiftLintExitCode.lintFailure ||
+            swiftLintAutocorrectExitCode == SwiftLintExitCode.lintFailure
         {
             throw ExitCode.failure
         }
@@ -87,13 +90,13 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
             throw ExitCode(swiftLintAutocorrectExitCode)
         }
     }
-    
-    // MARK: Private
-    
+}
+
+// MARK: Private
+
+extension RakuyoSwiftFormatTool {
     /// Whether the command should autocorrect invalid code, or only emit lint errors
-    private var lintOnly: Bool {
-        lint
-    }
+    private var lintOnly: Bool { lint }
     
     /// Builds a command that runs the SwiftFormat tool
     private func makeSwiftFormatCommand() -> Command {
@@ -116,7 +119,8 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
         return Command(
             log: log,
             launchPath: swiftFormatPath,
-            arguments: arguments)
+            arguments: arguments
+        )
     }
     
     /// Builds a command that runs the SwiftLint tool
@@ -140,7 +144,8 @@ struct RakuyoSwiftFormatTool: ParsableCommand {
         return Command(
             log: log,
             launchPath: swiftLintPath,
-            arguments: arguments)
+            arguments: arguments
+        )
     }
     
     private func log(_ string: String) {

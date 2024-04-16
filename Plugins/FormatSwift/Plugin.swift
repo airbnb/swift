@@ -11,22 +11,18 @@ import XcodeProjectPlugin
 /// to the Rakuyo Swift Style Guide.
 @main
 struct RakuyoSwiftFormatPlugin {
-    
     /// Calls the `RakuyoSwiftFormatTool` executable with the given arguments
     func performCommand(
         context: CommandContext,
         inputPaths: [String],
-        arguments: [String])
-    throws
-    {
+        arguments: [String]
+    ) throws {
         var argumentExtractor = ArgumentExtractor(arguments)
         
         // Filter out any excluded paths passed in with `--exclude`
         let excludedPaths = argumentExtractor.extractOption(named: "exclude")
         let inputPaths = inputPaths.filter { path in
-            !excludedPaths.contains(where: { excludedPath in
-                path.hasSuffix(excludedPath)
-            })
+            !excludedPaths.contains { path.hasSuffix($0) }
         }
         
         let launchPath = try context.tool(named: "RakuyoSwiftFormatTool").path.string
@@ -64,15 +60,14 @@ struct RakuyoSwiftFormatPlugin {
             throw CommandError.unknownError(exitCode: process.terminationStatus)
         }
     }
-    
 }
 
 // MARK: CommandPlugin
 
 extension RakuyoSwiftFormatPlugin: CommandPlugin {
-    
+
     // MARK: Internal
-    
+
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         var argumentExtractor = ArgumentExtractor(arguments)
         
@@ -97,7 +92,7 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
         // manually specify a swift version via the `--swift-version` argument.
         lazy var minimumSwiftVersion = context.package.minimumSwiftVersion
         let swiftVersion = argumentExtractor.extractOption(named: "swift-version").last
-        ?? "\(minimumSwiftVersion.major).\(minimumSwiftVersion.minor)"
+            ?? "\(minimumSwiftVersion.major).\(minimumSwiftVersion.minor)"
         
         let arguments = [
             "--swift-version",
@@ -107,11 +102,12 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
         try performCommand(
             context: context,
             inputPaths: inputPaths,
-            arguments: arguments)
+            arguments: arguments
+        )
     }
     
     // MARK: Private
-    
+
     /// Retrieves the list of paths that should be formatted / linted
     ///
     /// By default this tool runs on all subdirectories of the package's root directory,
@@ -126,7 +122,8 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
         let packageDirectoryContents = try FileManager.default.contentsOfDirectory(
             at: URL(fileURLWithPath: package.directory.string),
             includingPropertiesForKeys: nil,
-            options: [.skipsHiddenFiles])
+            options: [.skipsHiddenFiles]
+        )
         
         let subdirectories = packageDirectoryContents.filter { $0.hasDirectoryPath }
         let rootSwiftFiles = packageDirectoryContents.filter { $0.pathExtension.hasSuffix("swift") }
@@ -137,7 +134,6 @@ extension RakuyoSwiftFormatPlugin: CommandPlugin {
 
 #if canImport(XcodeProjectPlugin)
 extension RakuyoSwiftFormatPlugin: XcodeCommandPlugin {
-    
     func performCommand(context: XcodePluginContext, arguments: [String]) throws {
         var argumentExtractor = ArgumentExtractor(arguments)
         
@@ -155,7 +151,8 @@ extension RakuyoSwiftFormatPlugin: XcodeCommandPlugin {
         try performCommand(
             context: context,
             inputPaths: Array(inputPaths),
-            arguments: argumentExtractor.remainingArguments)
+            arguments: argumentExtractor.remainingArguments
+        )
     }
     
 }
@@ -174,31 +171,32 @@ struct SwiftVersion: Comparable {
     var major: Int
     var minor: Int
     
-    static func ==(_ lhs: SwiftVersion, _ rhs: SwiftVersion) -> Bool {
-        lhs.major == rhs.major
-        && lhs.minor == rhs.minor
+    static func == (_ lhs: Self, _ rhs: Self) -> Bool {
+        lhs.major == rhs.major && lhs.minor == rhs.minor
     }
     
-    static func <(_ lhs: SwiftVersion, _ rhs: SwiftVersion) -> Bool {
+    static func < (_ lhs: Self, _ rhs: Self) -> Bool {
         if lhs.major == rhs.major {
             return lhs.minor < rhs.minor
-        } else {
-            return lhs.major < rhs.major
         }
+        return lhs.major < rhs.major
     }
 }
 
 extension Package {
-    
+
     // MARK: Internal
-    
+
     /// The minimum Swift version supported by this package
     var minimumSwiftVersion: SwiftVersion {
-        supportedSwiftVersions.sorted().first!
+        guard let version = supportedSwiftVersions.min() else {
+            fatalError("Unable to find supported Swift version.")
+        }
+        return version
     }
     
     // MARK: Private
-    
+
     /// Swift versions supported by this package. Guaranteed to be non-empty.
     ///  - This includes the `swift-tools-version` from the `Package.swift`,
     ///    plus the Swift version of any additional version-specific Package manifest
@@ -213,7 +211,8 @@ extension Package {
         // Look for all of the package manifest files in the directory root
         let filesInRootDirectory = try? FileManager.default.contentsOfDirectory(
             at: projectDirectory,
-            includingPropertiesForKeys: nil)
+            includingPropertiesForKeys: nil
+        )
         
         for fileURL in filesInRootDirectory ?? [] {
             let fileName = fileURL.lastPathComponent
