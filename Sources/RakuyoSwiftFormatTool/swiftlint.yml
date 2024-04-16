@@ -31,6 +31,7 @@ custom_rules:
     regex: "@objcMembers"
     message: "Explicitly use @objc on each member you want to expose to Objective-C"
     severity: error
+    
   no_direct_standard_out_logs:
     name: "Writing log messages directly to standard out is disallowed"
     regex: "(\\bprint|\\bdebugPrint|\\bdump|Swift\\.print|Swift\\.debugPrint|Swift\\.dump)\\s*\\("
@@ -38,6 +39,7 @@ custom_rules:
     - identifier
     message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
     severity: error
+    
   no_file_literal:
     name: "#file is disallowed"
     regex: "(\\b#file\\b)"
@@ -45,6 +47,7 @@ custom_rules:
     - identifier
     message: "Instead of #file, use #fileID"
     severity: error
+    
   no_filepath_literal:
     name: "#filePath is disallowed"
     regex: "(\\b#filePath\\b)"
@@ -52,6 +55,7 @@ custom_rules:
     - identifier
     message: "Instead of #filePath, use #fileID."
     severity: error
+    
   no_unchecked_sendable:
     name: "`@unchecked Sendable` is discouraged."
     regex: "@unchecked Sendable"
