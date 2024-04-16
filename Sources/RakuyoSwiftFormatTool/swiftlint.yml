@@ -23,6 +23,27 @@ excluded:
 colon:
   severity: error
 
+fatal_error_message:
+  severity: error
+
+legacy_cggeometry_functions:
+  severity: error
+
+legacy_constant:
+  severity: error
+    
+legacy_nsgeometry_functions:
+  severity: error
+    
+return_arrow_whitespace:
+  severity: error
+    
+unowned_variable_capture:
+  severity: error
+    
+void_return:
+  severity: error
+    
 operator_usage_whitespace:
   skip_aligned_constants: false
   allowed_no_space_operators: [] # Contains "…" and "..<"
