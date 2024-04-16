@@ -2183,28 +2183,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
-
-  <details>
-
-  ```swift
-  // WRONG
-  planets.map({ $0.name })
-
-  // RIGHT
-  planets.map { $0.name }
-
-  // ALSO RIGHT, since this closure has a parameter name
-  planets.first(where: { $0.isGasGiant })
-
-  // ALSO FINE. Trailing closure syntax is still permitted for closures
-  // with parameter names. However, consider using non-trailing syntax
-  // in cases where the parameter name is semantically meaningful.
-  planets.first { $0.isGasGiant }
-  ```
-
-  </details>
-
 * <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Avoid using `unowned` captures.** Instead prefer safer alternatives like `weak` captures, or capturing variables directly. [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
 
   <details>
