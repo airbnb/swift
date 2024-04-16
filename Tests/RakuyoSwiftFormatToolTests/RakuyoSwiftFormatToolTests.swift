@@ -1,14 +1,11 @@
-// Created by Cal Stephens on 9/25/23.
-// Copyright © 2023 Airbnb Inc. All rights reserved.
-
 import ArgumentParser
 import XCTest
 
-@testable import AirbnbSwiftFormatTool
+@testable import RakuyoSwiftFormatTool
 
-// MARK: - AirbnbSwiftFormatToolTest
+// MARK: - RakuyoSwiftFormatToolTest
 
-final class AirbnbSwiftFormatToolTest: XCTestCase {
+final class RakuyoSwiftFormatToolTest: XCTestCase {
 
   // MARK: Internal
 
@@ -234,17 +231,17 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
   // MARK: Private
 
-  /// Runs `AirbnbSwiftFormatTool` with the `Command` calls mocked using the given mocks
+  /// Runs `RakuyoSwiftFormatTool` with the `Command` calls mocked using the given mocks
   private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
     let existingRunCommandImplementation = Command.runCommand
 
     Command.runCommand = mocks.mockRunCommand(_:)
     defer { Command.runCommand = existingRunCommandImplementation }
 
-    let formatTool = try! AirbnbSwiftFormatTool.parse([
+    let formatTool = try! RakuyoSwiftFormatTool.parse([
       "Sources",
       "--swift-format-path",
-      "airbnb.swiftformat",
+      "rakuyo.swiftformat",
       "--swift-lint-path",
       "swiftlint.yml",
     ] + (arguments ?? []))
@@ -261,7 +258,7 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
 // MARK: - MockCommands
 
-/// Mock implementations of the commands ran by `AirbnbSwiftFormatTool`
+/// Mock implementations of the commands ran by `RakuyoSwiftFormatTool`
 struct MockCommands {
   var swiftFormat: (() -> Int32)?
   var swiftLint: (() -> Int32)?

@@ -1,4 +1,4 @@
-# Airbnb Swift Style Guide
+# Rakuyo Swift Style Guide
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/airbnb/swift)
 
@@ -868,7 +868,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
-* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/RakuyoKit/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 

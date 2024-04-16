@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "AirbnbSwift",
+  name: "RakuyoSwift",
   platforms: [.macOS(.v10_13)],
   products: [
     .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
@@ -16,29 +16,29 @@ let package = Package(
       capability: .command(
         intent: .custom(
           verb: "format",
-          description: "Formats Swift source files according to the Airbnb Swift Style Guide"),
+          description: "Formats Swift source files according to the Rakuyo Swift Style Guide"),
         permissions: [
           .writeToPackageDirectory(reason: "Format Swift source files"),
         ]),
       dependencies: [
-        "AirbnbSwiftFormatTool",
+        "RakuyoSwiftFormatTool",
         "SwiftFormat",
         "SwiftLintBinary",
       ]),
 
     .executableTarget(
-      name: "AirbnbSwiftFormatTool",
+      name: "RakuyoSwiftFormatTool",
       dependencies: [
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
       resources: [
-        .process("airbnb.swiftformat"),
+        .process("Rakuyo.swiftformat"),
         .process("swiftlint.yml"),
       ]),
 
     .testTarget(
-      name: "AirbnbSwiftFormatToolTests",
-      dependencies: ["AirbnbSwiftFormatTool"]),
+      name: "RakuyoSwiftFormatToolTests",
+      dependencies: ["RakuyoSwiftFormatTool"]),
 
     .binaryTarget(
       name: "SwiftFormat",

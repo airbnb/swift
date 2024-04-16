@@ -4,15 +4,15 @@ import PackagePlugin
 import XcodeProjectPlugin
 #endif
 
-// MARK: - AirbnbSwiftFormatPlugin
+// MARK: - RakuyoSwiftFormatPlugin
 
 /// A Swift Package Manager `CommandPlugin` and `XcodeCommandPlugin` that executes
-/// `AirbnbSwiftFormatTool` to format source code in Swift package targets according
-/// to the Airbnb Swift Style Guide.
+/// `RakuyoSwiftFormatTool` to format source code in Swift package targets according
+/// to the Rakuyo Swift Style Guide.
 @main
-struct AirbnbSwiftFormatPlugin {
+struct RakuyoSwiftFormatPlugin {
 
-  /// Calls the `AirbnbSwiftFormatTool` executable with the given arguments
+  /// Calls the `RakuyoSwiftFormatTool` executable with the given arguments
   func performCommand(
     context: CommandContext,
     inputPaths: [String],
@@ -29,7 +29,7 @@ struct AirbnbSwiftFormatPlugin {
       })
     }
 
-    let launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
+    let launchPath = try context.tool(named: "RakuyoSwiftFormatTool").path.string
     let arguments = inputPaths + [
       "--swift-format-path",
       try context.tool(named: "swiftformat").path.string,
@@ -69,7 +69,7 @@ struct AirbnbSwiftFormatPlugin {
 
 // MARK: CommandPlugin
 
-extension AirbnbSwiftFormatPlugin: CommandPlugin {
+extension RakuyoSwiftFormatPlugin: CommandPlugin {
 
   // MARK: Internal
 
@@ -136,7 +136,7 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
 }
 
 #if canImport(XcodeProjectPlugin)
-extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
+extension RakuyoSwiftFormatPlugin: XcodeCommandPlugin {
 
   func performCommand(context: XcodePluginContext, arguments: [String]) throws {
     var argumentExtractor = ArgumentExtractor(arguments)
