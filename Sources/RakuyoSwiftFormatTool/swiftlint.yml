@@ -1,4 +1,12 @@
+indentation: 4
+
+excluded:
+  - Carthage
+  - Pods
+  - .build
+
 only_rules:
+  - custom_rules
   - colon
   - fatal_error_message
   - implicitly_unwrapped_optional
@@ -13,12 +21,6 @@ only_rules:
   - vertical_whitespace
   - void_return
   - unowned_variable_capture
-  - custom_rules
-
-excluded:
-  - Carthage
-  - Pods
-  - .build
 
 colon:
   severity: error
@@ -47,8 +49,6 @@ void_return:
 operator_usage_whitespace:
   skip_aligned_constants: false
   allowed_no_space_operators: [] # Contains "…" and "..<"
-
-indentation: 4
 
 custom_rules:
   no_objcMembers:
