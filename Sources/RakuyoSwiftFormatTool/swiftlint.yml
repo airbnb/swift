@@ -23,6 +23,10 @@ excluded:
 colon:
   apply_to_dictionaries: false
 
+operator_usage_whitespace:
+  skip_aligned_constants: false
+  allowed_no_space_operators: [] # Contains "…" and "..<"
+
 indentation: 4
 
 custom_rules:
