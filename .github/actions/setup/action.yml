@@ -1,5 +1,5 @@
 name: Setup
-description: Setup the rakuyo/swift CI Environment
+description: Setup the RakuyoKit/swift CI Environment
 inputs:
   xcode:
     description: The version of Xcode to select
