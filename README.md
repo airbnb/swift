@@ -1,6 +1,6 @@
 # Rakuyo Swift Style Guide
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/airbnb/swift)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/RakuyoKit/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/RakuyoKit/swift)
 
 > This style guide was forked from [Airbnb](https://github.com/airbnb/swift), modified and extended, and the namespace was renamed `Rakuyo`.
 
@@ -37,7 +37,7 @@ This repo includes a Swift Package Manager command plugin that you can use to au
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/airbnb/swift", from: "1.0.0"),
+  .package(url: "https://github.com/RakuyoKit/swift", from: "1.0.0"),
 ]
 ```
 
@@ -66,7 +66,7 @@ $ swift package format --exclude Tests
 
 # Alternatively you can explicitly list the set of paths and/or SPM targets:
 $ swift package format --paths Sources Tests Package.swift
-$ swift package format --targets AirbnbSwiftFormatTool
+$ swift package format --targets RakuyoSwiftFormatTool
 
 # The plugin infers your package's minimum Swift version from the `swift-tools-version`
 # in your `Package.swift`, but you can provide a custom value with `--swift-version`:
@@ -3450,7 +3450,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
   import DLSPrimitives
   import Constellation
@@ -3461,7 +3461,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import Constellation
@@ -3479,7 +3479,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import DLSPrimitives
@@ -3490,7 +3490,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import DLSPrimitives
@@ -3741,12 +3741,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-
-**[⬆ back to top](#table-of-contents)**
-
-## Contributors
-
-  - [View Contributors](https://github.com/airbnb/swift/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
 
