@@ -25,6 +25,12 @@ Note that brevity is not a primary goal. Code should be made more concise only i
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning or error.
   * Exceptions to these rules should be rare and heavily justified.
 
+## asdf/mise plugin
+
+[RakuyoKit/asdf-swift-style-guide](https://github.com/RakuyoKit/asdf-swift-style-guide) is an [asdf](https://github.com/asdf-vm/asdf) plugin (it also supports [mise](https://github.com/jdx/mise)).
+
+You can download lint, format and other configuration files through this plug-in, and then freely execute related commands in the way you like.
+
 ## Swift Package Manager command plugin
 
 This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
