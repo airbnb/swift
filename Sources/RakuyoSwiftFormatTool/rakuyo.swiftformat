@@ -19,9 +19,6 @@
 --closingparen balanced # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
---computedvarattrs prev-line # wrapAttributes
---storedvarattrs prev-line # wrapAttributes
---complexattrs prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --wrapternary before-operators # wrap
 --extensionacl on-declarations # extensionAccessControl
@@ -40,6 +37,12 @@
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
+
+# The remaining three options have not been released yet, use `varattributes` first
+--varattributes prev-line # wrapAttributes
+# --computedvarattrs prev-line # wrapAttributes
+# --storedvarattrs prev-line # wrapAttributes
+# --complexattrs prev-line # wrapAttributes
 
 # rules
 --rules anyObjectProtocol
@@ -96,8 +99,6 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
---rules blankLineAfterMultilineSwitchCase
---rules consistentSwitchStatementSpacing
 --rules semicolons
 --rules isEmpty
 --rules acronyms
@@ -106,3 +107,7 @@
 --rules assertionFailures
 --rules blankLinesAroundMark
 --rules blankLinesBetweenChainedFunctions
+
+# Not released yet, will be used after release
+# --rules blankLineAfterMultilineSwitchCase
+# --rules consistentSwitchStatementSpacing
