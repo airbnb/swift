@@ -84,7 +84,7 @@ extension RakuyoSwiftFormatTool {
         }
         
         if
-            let swiftLintAutocorrectExitCode = swiftLintAutocorrectExitCode,
+            let swiftLintAutocorrectExitCode,
             swiftLintAutocorrectExitCode != EXIT_SUCCESS
         {
             throw ExitCode(swiftLintAutocorrectExitCode)
@@ -104,7 +104,7 @@ extension RakuyoSwiftFormatTool {
             "--config", swiftFormatConfig,
         ]
         
-        if let swiftFormatCachePath = swiftFormatCachePath {
+        if let swiftFormatCachePath {
             arguments += ["--cache", swiftFormatCachePath]
         }
         
@@ -112,7 +112,7 @@ extension RakuyoSwiftFormatTool {
             arguments += ["--lint"]
         }
         
-        if let swiftVersion = swiftVersion {
+        if let swiftVersion {
             arguments += ["--swiftversion", swiftVersion]
         }
         
@@ -133,7 +133,7 @@ extension RakuyoSwiftFormatTool {
             "--strict",
         ]
         
-        if let swiftLintCachePath = swiftLintCachePath {
+        if let swiftLintCachePath {
             arguments += ["--cache-path", swiftLintCachePath]
         }
         
