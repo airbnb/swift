@@ -60,7 +60,6 @@ only_rules:
   - private_subject
   - unavailable_function
   - superfluous_else
-  - modifier_order
   - contains_over_filter_count
   - contains_over_filter_is_empty
   - contains_over_first_not_nil
@@ -198,21 +197,6 @@ type_contents_order:
     [other_method],
     [ib_action],
     [subscript],
-  ]
-  
-modifier_order:
-  preferred_modifier_order: [
-    acl,
-    setterACL,
-    override,
-    dynamic,
-    mutators,
-    lazy,
-    final,
-    required,
-    convenience,
-    typeMethods,
-    owned
   ]
   
 custom_rules:
