@@ -8,7 +8,7 @@ let package = Package(
         .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.3.1"),
     ],
     targets: [
         .plugin(
