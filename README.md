@@ -2091,7 +2091,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='remove-blank-lines-between-chained-functions'></a>(<a href='#remove-blank-lines-between-chained-functions'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) Remove blank lines between chained functions.**  [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#blanklinesbetweenchainedfunctions)
+* <a id='remove-blank-lines-between-chained-functions'></a>(<a href='#remove-blank-lines-between-chained-functions'>link</a>) **Remove blank lines between chained functions.** [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenChainedFunctions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#blanklinesbetweenchainedfunctions)
 
   <details>
 
