@@ -2095,19 +2095,29 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  #### Why?
+
+  Improves readability and maintainability, making it easier to see the sequence of functions that are applied to the object.
+
   ```swift
   // WRONG
-  [0, 1, 2]
-    .map { $0 * 2 }
+  let planets = ["Mercury", "Venus", "Earth", "Mars"]
 
-
-
-    .map { $0 * 3 }
+  var transformedPlanetNames: [String] {
+      planets
+        .map { $0.uppercased() } // Making names uppercase
+        
+        .map { $0 + "!" } // Adding excitement with an exclamation mark
+  }
 
   // RIGHT
-  [0, 1, 2]
-    .map { $0 * 2 }
-    .map { $0 * 3 }
+  let planets = ["Mercury", "Venus", "Earth", "Mars"]
+
+  var transformedPlanetNames: [String] {
+      planets
+        .map { $0.uppercased() } // Making names uppercase
+        .map { $0 + "!" } // Adding excitement with an exclamation mark
+  }
   ```
 
   </details>
