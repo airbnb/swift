@@ -103,3 +103,4 @@
 --rules blankLineAfterMultilineSwitchCase
 --rules consistentSwitchStatementSpacing
 --rules semicolons
+--rules blankLinesBetweenChainedFunctions
