@@ -2091,6 +2091,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='remove-blank-lines-between-chained-functions'></a>(<a href='#remove-blank-lines-between-chained-functions'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) Remove blank lines between chained functions.**  [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#blanklinesbetweenchainedfunctions)
+
+  <details>
+
+  ```swift
+  // WRONG
+  [0, 1, 2]
+    .map { $0 * 2 }
+
+
+
+    .map { $0 * 3 }
+
+  // RIGHT
+  [0, 1, 2]
+    .map { $0 * 2 }
+    .map { $0 * 3 }
+  ```
+
+  </details>
+
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://realm.github.io/SwiftLint/void_return)

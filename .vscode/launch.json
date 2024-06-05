@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:swift}",
+      "name": "Debug AirbnbSwiftFormatTool",
+      "program": "${workspaceFolder:swift}/.build/debug/AirbnbSwiftFormatTool",
+      "preLaunchTask": "swift: Build Debug AirbnbSwiftFormatTool"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:swift}",
+      "name": "Release AirbnbSwiftFormatTool",
+      "program": "${workspaceFolder:swift}/.build/release/AirbnbSwiftFormatTool",
+      "preLaunchTask": "swift: Build Release AirbnbSwiftFormatTool"
+    }
+  ]
+}
