@@ -376,7 +376,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: preferInferredTypes](https://img.shields.io/badge/SwiftFormat-preferInferredTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#preferInferredTypes)
+* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: propertyType](https://img.shields.io/badge/SwiftFormat-propertyType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#propertyType)
 
   <details>
 
