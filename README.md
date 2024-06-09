@@ -2101,22 +2101,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  let planets = ["Mercury", "Venus", "Earth", "Mars"]
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
 
-  var transformedPlanetNames: [String] {
-      planets
-        .map { $0.uppercased() } // Making names uppercase
-        
-        .map { $0 + "!" } // Adding excitement with an exclamation mark
+      .map { $0.name }
   }
 
   // RIGHT
-  let planets = ["Mercury", "Venus", "Earth", "Mars"]
-
-  var transformedPlanetNames: [String] {
-      planets
-        .map { $0.uppercased() } // Making names uppercase
-        .map { $0 + "!" } // Adding excitement with an exclamation mark
+   var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+      .map { $0.name }
   }
   ```
 
