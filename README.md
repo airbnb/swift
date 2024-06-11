@@ -333,25 +333,125 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  let host: Host = Host()
+  let sun: Star = Star(mass: 1.989e30)
+  let earth: Planet = Planet.earth
 
   // RIGHT
-  let host = Host()
+  let sun = Star(mass: 1.989e30)
+  let earth = Planet.earth
+
+  // NOT RECOMMENDED. However, since the linter doesn't have full type information, this is not enforced automatically.
+  let moon: Moon = earth.moon // returns `Moon`
+
+  // RIGHT
+  let moon = earth.moon
+  let moon: PlanetaryBody? = earth.moon
+
+  // WRONG: Most literals provide a default type that can be inferred.
+  let enableGravity: Bool = true
+  let numberOfPlanets: Int = 8
+  let sunMass: Double = 1.989e30
+
+  // RIGHT
+  let enableGravity = true
+  let numberOfPlanets = 8
+  let sunMass = 1.989e30
+  
+  // WRONG: Types can be inferred from if/switch expressions as well if each branch has the same explicit type.
+  let smallestPlanet: Planet =
+    if treatPlutoAsPlanet {
+      Planet.pluto
+    } else {
+      Planet.mercury
+    }
+
+  // RIGHT
+  let smallestPlanet =
+    if treatPlutoAsPlanet {
+      Planet.pluto
+    } else {
+      Planet.mercury
+    }
+  ```
+
+  </details>
+
+* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: propertyType](https://img.shields.io/badge/SwiftFormat-propertyType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#propertyType)
+
+  <details>
+
+  Prefer using inferred types when the right-hand-side value is a static member with a leading dot (e.g. an `init`, a `static` property / function, or an enum case). This applies to both local variables and property declarations:
+
+  ```swift
+  // WRONG
+  struct SolarSystemBuilder {
+    let sun: Star = .init(mass: 1.989e30)
+    let earth: Planet = .earth
+
+    func setUp() {
+      let galaxy: Galaxy = .andromeda
+      let system: SolarSystem = .init(sun, earth)
+      galaxy.add(system)
+    }
+  }
+  
+  // RIGHT
+  struct SolarSystemBuilder {
+    let sun = Star(mass: 1.989e30)
+    let earth = Planet.earth
+
+    func setUp() {
+      let galaxy = Galaxy.andromeda
+      let system = SolarSystem(sun, earth)
+      galaxy.add(system)
+    }
+  }
+  ```
+
+  Explicit types are still permitted in other cases:
+
+  ```swift
+  // RIGHT: There is no right-hand-side value, so an explicit type is required.
+  let sun: Star
+
+  // RIGHT: The right-hand-side is not a static member of the left-hand type.
+  let moon: PlantaryBody = earth.moon
+  let sunMass: Float = 1.989e30
+  let planets: [Planet] = []
+  let venusMoon: Moon? = nil
+  ```
+
+  There are some rare cases where the inferred type syntax has a different meaning than the explicit type syntax. In these cases, the explicit type syntax is still permitted:
+
+  ```swift
+  extension String {
+    static let earth = "Earth"
+  }
+
+  // WRONG: fails with "error: type 'String?' has no member 'earth'"
+  let planetName = String?.earth
+
+  // RIGHT
+  let planetName: String? = .earth
   ```
 
   ```swift
-  enum Direction {
-    case left
-    case right
+  struct SaturnOutline: ShapeStyle { ... }
+
+  extension ShapeStyle where Self == SaturnOutline {
+    static var saturnOutline: SaturnOutline { 
+      SaturnOutline() 
+    }
   }
 
-  func someDirection() -> Direction {
-    // WRONG
-    return Direction.left
+  // WRONG: fails with "error: static member 'saturnOutline' cannot be used on protocol metatype '(any ShapeStyle).Type'"
+  let myShape2 = (any ShapeStyle).myShape
 
-    // RIGHT
-    return .left
-  }
+  // RIGHT: If the property's type is an existential / protocol type, moving the type
+  // to the right-hand side will result in invalid code if the value is defined in an
+  // extension like `extension ShapeStyle where Self == SaturnOutline`.
+  // SwiftFormat autocorrect detects this case by checking for the existential `any` keyword.
+  let myShape1: any ShapeStyle = .saturnOutline
   ```
 
   </details>
