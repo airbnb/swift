@@ -17,8 +17,11 @@ jobs:
         - '13.4.1' # Swift 5.6
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Test Package Plugin
-        run: swift package --allow-writing-to-package-directory format --lint
+        run: bundle exec rake lint:swift
 
   test-package-plugin-macos-13:
     name: Test Package Plugin
@@ -32,8 +35,11 @@ jobs:
         - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Test Package Plugin
-        run: swift package --allow-writing-to-package-directory format --lint
+        run: bundle exec rake lint:swift
 
   unit-tests:
     name: Unit Tests
@@ -45,5 +51,8 @@ jobs:
         - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Run Unit Tests
         run: swift test

@@ -10,3 +10,6 @@ runs:
     run: sudo xcode-select --switch /Applications/Xcode_${{ inputs.xcode }}.app
     if: ${{ inputs.xcode }}
     shell: bash
+  - name: Install Ruby Gems
+    run: bundle install
+    shell: bash
