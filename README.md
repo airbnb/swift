@@ -2108,10 +2108,27 @@ _You can enable the following settings in Xcode by running [this script](resourc
       .map { $0.name }
   }
 
-  // RIGHT
-   var innerPlanetNames: [String] {
+  // WRONG
+  var innerPlanetNames: [String] {
     planets
       .filter { $0.isInnerPlanet }
+
+      // Gets the name of the inner planet
+      .map { $0.name }
+  }
+
+  // RIGHT
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+      .map { $0.name }
+  }
+
+  // RIGHT
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+      // Gets the name of the inner planet
       .map { $0.name }
   }
   ```
