@@ -40,12 +40,12 @@ namespace :update do
     
     updated_swift_format_reference = <<-EOS
     .binaryTarget(
-      name: "SwiftFormat",
+      name: "swiftformat",
       url: "https://github.com/calda/SwiftFormat/releases/download/#{latest_version_number}/SwiftFormat.artifactbundle.zip",
       checksum: "#{checksum.strip}"),
     EOS
     
-    regex = /[ ]*.binaryTarget\([\S\s]*name: "SwiftFormat"[\S\s]*?\),\s/
+    regex = /[ ]*.binaryTarget\([\S\s]*name: "swiftformat"[\S\s]*?\),\s/
     updated_package_manifest = package_manifest_content.gsub(regex, updated_swift_format_reference)
     File.open(package_manifest_path, "w") { |file| file.puts updated_package_manifest }
     
