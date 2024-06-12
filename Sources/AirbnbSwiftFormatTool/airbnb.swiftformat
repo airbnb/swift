@@ -100,7 +100,7 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
---rules blankLineAfterMultilineSwitchCase
---rules consistentSwitchStatementSpacing
+--rules blankLineAfterSwitchCase
+--rules consistentSwitchCaseSpacing
 --rules semicolons
 --rules propertyType
