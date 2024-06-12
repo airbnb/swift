@@ -3128,6 +3128,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       return "💥 Critical Error"
     } else {
       return "ℹ️ Info"
+    }
   }
 
   func type(of planet: Planet) -> PlanetType {
@@ -3160,6 +3161,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       "💥 Critical Error"
     } else {
       "ℹ️ Info"
+    }
   }
 
   func type(of planet: Planet) -> PlanetType {
