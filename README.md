@@ -3601,6 +3601,42 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='redundant-property'></a>(<a href='#redundant-property'>link</a>) **Avoid defining properties that are then returned immediately.** Instead, return the value directly. [![SwiftFormat: redundantProperty](https://img.shields.io/badge/SwiftFormat-redundantProperty-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantProperty)
+
+    <details>
+
+    ### Why?
+
+    Property declarations that are immediately returned are typically redundant and unnecessary. Sometimes these are unintentionally created as the byproduct of refactoring. Cleaning them up automatically simplifies the code. In some cases this also results in the `return` keyword itself being unnecessary, further simplifying the code.
+
+    ```swift
+    // WRONG
+    var spaceship: Spaceship {
+      let spaceship = spaceshipBuilder.build(warpDrive: warpDriveBuilder.build())
+      return spaceship
+    }
+
+    // RIGHT
+    var spaceship: Spaceship {
+      spaceshipBuilder.build(warpDrive: warpDriveBuilder.build())
+    }
+
+    // WRONG
+    var spaceship: Spaceship {
+      let warpDrive = warpDriveBuilder.build()
+      let spaceship = spaceshipBuilder.build(warpDrive: warpDrive)
+      return spaceship
+    }
+
+    // RIGHT
+    var spaceship: Spaceship {
+      let warpDrive = warpDriveBuilder.build()
+      return spaceshipBuilder.build(warpDrive: warpDrive)
+    }
+    ```
+
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
