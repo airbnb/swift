@@ -2191,6 +2191,50 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='remove-blank-lines-between-chained-functions'></a>(<a href='#remove-blank-lines-between-chained-functions'>link</a>) **Remove blank lines between chained functions.** [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenChainedFunctions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#blanklinesbetweenchainedfunctions)
+
+  <details>
+
+  #### Why?
+
+  Improves readability and maintainability, making it easier to see the sequence of functions that are applied to the object.
+
+  ```swift
+  // WRONG
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+
+      .map { $0.name }
+  }
+
+  // WRONG
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+
+      // Gets the name of the inner planet
+      .map { $0.name }
+  }
+
+  // RIGHT
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+      .map { $0.name }
+  }
+
+  // RIGHT
+  var innerPlanetNames: [String] {
+    planets
+      .filter { $0.isInnerPlanet }
+      // Gets the name of the inner planet
+      .map { $0.name }
+  }
+  ```
+
+  </details>
+
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://realm.github.io/SwiftLint/void_return)

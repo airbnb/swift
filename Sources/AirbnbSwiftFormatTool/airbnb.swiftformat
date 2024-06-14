@@ -104,3 +104,4 @@
 --rules consistentSwitchCaseSpacing
 --rules semicolons
 --rules propertyType
+--rules blankLinesBetweenChainedFunctions
