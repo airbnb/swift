@@ -50,9 +50,3 @@ let package = Package(
       url: "https://github.com/realm/SwiftLint/releases/download/0.55.1/SwiftLintBinary-macos.artifactbundle.zip",
       checksum: "722a705de1cf4e0e07f2b7d2f9f631f3a8b2635a0c84cce99f9677b38aa4a1d6"),
   ])
-
-// Emit an error on Linux, so Swift Package Manager's platform support detection doesn't say this package supports Linux
-// https://github.com/airbnb/swift/discussions/197#discussioncomment-4055303
-#if os(Linux)
-#error("Linux is currently not supported")
-#endif
