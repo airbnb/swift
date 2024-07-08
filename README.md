@@ -1833,7 +1833,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  Regular comments are also allowed before a grouped block of delcarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
+  Regular comments are also allowed before a grouped block of declarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
 
   ```swift
   // RIGHT
