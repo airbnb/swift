@@ -1804,7 +1804,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
 
     /// Generate the `atmosphere` first, **then** the `oceans`. Otherwise, the water will just boil off immediately.
-    ///  - Comments not preceeding declarations can use doc comments, and will not be autocorrected into regular comments.
+    ///  - Comments not preceding declarations can use doc comments, and will not be autocorrected into regular comments.
     ///    This can be useful because Xcode applies markdown styling to doc comments but not regular comments.
     generateAtmosphere(using: composition)
     generateOceans()
