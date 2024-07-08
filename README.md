@@ -1804,7 +1804,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     let composition = AtmosphereComposition(nitrogen: 0.78, oxygen: 0.22)
 
     /// Generate the `atmosphere` first, **then** the `oceans`. Otherwise, the water will just boil off immediately.
-    ///  - Comments not preceeding declarations can use doc comments, and will not be autocorrected into regular comments.
+    ///  - Comments not preceding declarations can use doc comments, and will not be autocorrected into regular comments.
     ///    This can be useful because Xcode applies markdown styling to doc comments but not regular comments.
     generateAtmosphere(using: composition)
     generateOceans()
@@ -1833,7 +1833,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  Regular comments are also allowed before a grouped block of delcarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
+  Regular comments are also allowed before a grouped block of declarations, since it's possible that the comment refers to the block as a whole rather than just the following declaration:
 
   ```swift
   // RIGHT
