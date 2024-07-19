@@ -27,6 +27,7 @@
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension,actor # organizeDeclarations
+--typeorder nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType, propertyType
