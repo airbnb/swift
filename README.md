@@ -3864,85 +3864,81 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-  - **Nested types and type aliases**: 
-  - **Static properties**: 
-  - **Static property with body**: 
-  - **Class properties with body**: 
-  - **SwiftUI dynamic properties (@State, @Environment, @Binding, etc)**: SwiftUI Dynamic properties should appear grouped since they share a common semantic meaning and cause a SwiftUI view to re-render its body.
-      
-      <details>
-      
-      ```swift
-      // WRONG
-    
-      struct CustomSlider: View {
-      
-        // Internal
-    
-        var body: some View {
-          ...
-        }
-    
-        // Private
-    
-        @Binding private var value: Value
-        private let range: ClosedRange<Double>
-        @Environment(\.DLSSliderStyle) private var style
-        private let step: Double.Stride
-        @Environment(\.layoutDirection) private var layoutDirection
+  * Nested types and type aliases
+  * Static properties
+  * Static property with body
+  * Class properties with body
+  * SwiftUI dynamic properties (@State, @Environment, @Binding, etc)
+  * Instance properties
+  * Instance properties with body
+  * Static methods
+  * Class methods
+  * Instance methods
+
+  <details>
+  
+    Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+
+    ```swift
+    // WRONG
+    var atmosphere: Atmosphere {
+      didSet {
+        print("oh my god, the atmosphere changed")
       }
-    
-      // RIGHT
-      
-        struct CustomSlider: View {
-        
-        // Internal
-    
-        var body: some View {
-          ...
-        }
-    
-        // Private
-    
-        @Environment(\.DLSSliderStyle) private var style
-        @Environment(\.layoutDirection) private var layoutDirection
-        @Binding private var value: Value
-        
-        private let range: ClosedRange<Double>
-        private let step: Double.Stride
+    }
+    var gravity: CGFloat
+    // RIGHT
+    var gravity: CGFloat
+    var atmosphere: Atmosphere {
+      didSet {
+        print("oh my god, the atmosphere changed")
       }
-      ```
+    }
+    ```
+
+    SwiftUI Properties are a special type of property that lives inside SwiftUI views. These views conform to the DynamicProperty protocol and cause the view's body to re-compute. Given this common functionality and also a similar syntax, it is preferred to group them.
+
+    ```swift
+    // WRONG
+
+    struct CustomSlider: View {
     
-      </details>
+      // MARK: Internal
 
-  - **Instance properties**: 
-  - **Instance properties with body**: Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+      var body: some View {
+        ...
+      }
 
-      <details>
+      // MARK: Private
 
-       ```swift
-       // WRONG
-       var atmosphere: Atmosphere {
-         didSet {
-           print("oh my god, the atmosphere changed")
-         }
-       }
-       var gravity: CGFloat
+      @Binding private var value: Value
+      private let range: ClosedRange<Double>
+      @Environment(\.sliderStyle) private var style
+      private let step: Double.Stride
+      @Environment(\.layoutDirection) private var layoutDirection
+    }
 
-       // RIGHT
-       var gravity: CGFloat
-       var atmosphere: Atmosphere {
-         didSet {
-           print("oh my god, the atmosphere changed")
-         }
-       }
-       ```
+    // RIGHT
 
-      </details>
+    struct CustomSlider: View {
+      
+      // MARK: Internal
 
-  - **Static methods**: 
-  - **Class methods**: 
-  - **Instance methods**: 
+      var body: some View {
+        ...
+      }
+
+      // MARK: Private
+
+      @Environment(\.sliderStyle) private var style
+      @Environment(\.layoutDirection) private var layoutDirection
+      @Binding private var value: Value
+
+      private let range: ClosedRange<Double>
+      private let step: Double.Stride
+    }
+    ```
+  </details>
 
 
 * <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
@@ -3960,30 +3956,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   static let gravityMoon: CGFloat = 1.6
 
   var gravity: CGFloat
-  ```
-
-  </details>
-
-**Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-
-  <details>
-
-  ```swift
-  // WRONG
-  var atmosphere: Atmosphere {
-    didSet {
-      print("oh my god, the atmosphere changed")
-    }
-  }
-  var gravity: CGFloat
-
-  // RIGHT
-  var gravity: CGFloat
-  var atmosphere: Atmosphere {
-    didSet {
-      print("oh my god, the atmosphere changed")
-    }
-  }
   ```
 
   </details>
