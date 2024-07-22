@@ -3866,7 +3866,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
   - **Nested types and type aliases**: 
   - **Static properties**: 
-  - **static property with body**: 
+  - **Static property with body**: 
   - **Class properties with body**: 
   - **SwiftUI dynamic properties (@State, @Environment, @Binding, etc)**: SwiftUI Dynamic properties should appear grouped since they share a common semantic meaning and cause a SwiftUI view to re-render its body.
       
