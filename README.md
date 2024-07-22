@@ -3864,13 +3864,86 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * If the type in question is a simple value type (e.g. fewer than 20 lines), it is OK to omit the `// MARK:`s, as it would hurt legibility.
 
 * <a id='subsection-organization'></a>(<a href='#subsection-organization'>link</a>) **Within each top-level section, place content in the following order.** This allows a new reader of your code to more easily find what they are looking for. [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
-  * Nested types and type aliases
-  * Static properties
-  * Class properties
-  * Instance properties
-  * Static methods
-  * Class methods
-  * Instance methods
+  - **Nested types and type aliases**: 
+  - **Static properties**: 
+  - **static property with body**: 
+  - **Class properties with body**: 
+  - **SwiftUI dynamic properties (@State, @Environment, @Binding, etc)**: SwiftUI Dynamic properties should appear grouped since they share a common semantic meaning and cause a SwiftUI view to re-render its body.
+      
+      <details>
+      
+      ```swift
+      // WRONG
+    
+      struct CustomSlider: View {
+      
+        // Internal
+    
+        var body: some View {
+          ...
+        }
+    
+        // Private
+    
+        @Binding private var value: Value
+        private let range: ClosedRange<Double>
+        @Environment(\.DLSSliderStyle) private var style
+        private let step: Double.Stride
+        @Environment(\.layoutDirection) private var layoutDirection
+      }
+    
+      // RIGHT
+      
+        struct CustomSlider: View {
+        
+        // Internal
+    
+        var body: some View {
+          ...
+        }
+    
+        // Private
+    
+        @Environment(\.DLSSliderStyle) private var style
+        @Environment(\.layoutDirection) private var layoutDirection
+        @Binding private var value: Value
+        
+        private let range: ClosedRange<Double>
+        private let step: Double.Stride
+      }
+      ```
+    
+      </details>
+
+  - **Instance properties**: 
+  - **Instance properties with body**: Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+
+      <details>
+
+       ```swift
+       // WRONG
+       var atmosphere: Atmosphere {
+         didSet {
+           print("oh my god, the atmosphere changed")
+         }
+       }
+       var gravity: CGFloat
+
+       // RIGHT
+       var gravity: CGFloat
+       var atmosphere: Atmosphere {
+         didSet {
+           print("oh my god, the atmosphere changed")
+         }
+       }
+       ```
+
+      </details>
+
+  - **Static methods**: 
+  - **Class methods**: 
+  - **Instance methods**: 
+
 
 * <a id='newline-between-subsections'></a>(<a href='#newline-between-subsections'>link</a>) **Add empty lines between property declarations of different kinds.** (e.g. between static properties and instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
 
@@ -3891,7 +3964,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='computed-properties-at-end'></a>(<a href='#computed-properties-at-end'>link</a>) **Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+**Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind.** (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
 
   <details>
 
