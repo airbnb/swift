@@ -1870,6 +1870,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-declarations'>link</a>) **Place doc comments for a declaration before any attributes.** [![SwiftFormat: docCommentsBeforeAttributes](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docCommentsBeforeAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  @MainActor
+  /// A spacecraft with everything you need to explore the universe.
+  struct Spaceship { … }
+
+  // RIGHT
+
+  /// A spacecraft with everything you need to explore the universe.
+  @MainActor
+  struct Spaceship { … }
+  ```
+
+  </details>
+
 * <a id='whitespace-around-comment-delimiters'></a>(<a href='#whitespace-around-comment-delimiters'>link</a>) Include spaces or newlines before and after comment delimiters (`//`, `///`, `/*`, and `*/`) [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#spaceInsideComments)
 
   <details>
