@@ -3884,35 +3884,33 @@ _You can enable the following settings in Xcode by running [this script](resourc
     class PlanetView: UIView {
     
       static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
-    
+
       var atmosphere: Atmosphere {
          didSet {
            print("oh my god, the atmosphere changed")
          }
        }
-    
+
       override class var layerClass: AnyClass {
         PlanetLayer.self
       }
-    
+
       var gravity: CGFloat
-    
-      static var speedOfLight: CGFloat = 300_000
+
+      static let speedOfLight: CGFloat = 300_000
     }
-    
+
     // RIGHT
     class PlanetView: UIView {
     
-      static var speedOfLight: CGFloat = 300_000
-      
+      static let speedOfLight: CGFloat = 300_000
       static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
-      
+
       override class var layerClass: AnyClass {
         PlanetLayer.self
       }
-      
+
       var gravity: CGFloat
-      
       var atmosphere: Atmosphere {
          didSet {
            print("oh my god, the atmosphere changed")
