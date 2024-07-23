@@ -3877,26 +3877,51 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
   
-    Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.) [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#organizeDeclarations)
+    Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.)
 
     ```swift
     // WRONG
-    var atmosphere: Atmosphere {
-      didSet {
-        print("oh my god, the atmosphere changed")
+    class PlanetView: UIView {
+    
+      static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
+    
+      var atmosphere: Atmosphere {
+         didSet {
+           print("oh my god, the atmosphere changed")
+         }
+       }
+    
+      override class var layerClass: AnyClass {
+        PlanetLayer.self
       }
+    
+      var gravity: CGFloat
+    
+      static var speedOfLight: CGFloat = 300_000
     }
-    var gravity: CGFloat
+    
     // RIGHT
-    var gravity: CGFloat
-    var atmosphere: Atmosphere {
-      didSet {
-        print("oh my god, the atmosphere changed")
+    class PlanetView: UIView {
+    
+      static var speedOfLight: CGFloat = 300_000
+      
+      static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
+      
+      override class var layerClass: AnyClass {
+        PlanetLayer.self
       }
+      
+      var gravity: CGFloat
+      
+      var atmosphere: Atmosphere {
+         didSet {
+           print("oh my god, the atmosphere changed")
+         }
+       }
     }
     ```
 
-    SwiftUI Properties are a special type of property that lives inside SwiftUI views. These views conform to the DynamicProperty protocol and cause the view's body to re-compute. Given this common functionality and also a similar syntax, it is preferred to group them.
+    SwiftUI Properties are a special type of property that lives inside SwiftUI views. These views conform to the [`DynamicProperty`](https://developer.apple.com/documentation/swiftui/dynamicproperty) protocol and cause the view's body to re-compute. Given this common functionality and also a similar syntax, it is preferred to group them.
 
     ```swift
     // WRONG
