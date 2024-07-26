@@ -1870,7 +1870,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-declarations'>link</a>) **Place doc comments for a declaration before any attributes.** [![SwiftFormat: docCommentsBeforeAttributes](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docCommentsBeforeAttributes)
+* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-attributes'>link</a>) **Place doc comments for a declaration before any attributes.** [![SwiftFormat: docCommentsBeforeAttributes](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docCommentsBeforeAttributes)
 
   <details>
 
