@@ -843,9 +843,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var oldestMoons: [Moon]
 
   }
-  ```swift
-
   ```
+
+  ```swift
   // WRONG. These long, complex attributes should be written on the previous line.
   struct RocketFactory {
 
