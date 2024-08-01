@@ -89,6 +89,7 @@
 --rules enumNamespaces
 --rules blockComments
 --rules docComments
+--rules docCommentsBeforeAttributes
 --rules spaceAroundComments
 --rules spaceInsideComments
 --rules blankLinesAtStartOfScope

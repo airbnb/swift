@@ -843,9 +843,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var oldestMoons: [Moon]
 
   }
-  ```swift
-
   ```
+
+  ```swift
   // WRONG. These long, complex attributes should be written on the previous line.
   struct RocketFactory {
 
@@ -1866,6 +1866,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case uranus
     case neptune
   }
+  ```
+
+  </details>
+
+* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-attributes'>link</a>) **Place doc comments for a declaration before any attributes.** [![SwiftFormat: docCommentsBeforeAttributes](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#docCommentsBeforeAttributes)
+
+  <details>
+
+  ```swift
+  // WRONG
+
+  @MainActor
+  /// A spacecraft with everything you need to explore the universe.
+  struct Spaceship { … }
+
+  // RIGHT
+
+  /// A spacecraft with everything you need to explore the universe.
+  @MainActor
+  struct Spaceship { … }
   ```
 
   </details>
