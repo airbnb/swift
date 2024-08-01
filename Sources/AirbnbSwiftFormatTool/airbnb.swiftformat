@@ -28,7 +28,7 @@
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension,actor # organizeDeclarations
 --visibilityorder beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
---typeorder nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
+--typeorder nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType, propertyType
