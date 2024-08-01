@@ -4002,6 +4002,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty, non-conforming, extensions.** [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyExtension)
+
+  <details>
+
+  #### Why?
+  Improves readability since the code has no effect and should be removed for clarity.
+  
+  ```swift
+  // WRONG
+  extension String {}
+  
+  extension [Foo: Bar] {}
+  
+  extension Array where Element: Foo {}
+  
+  extension String: Equatable {}
+  
+  @GenerateBoilerPlate
+  extension Foo {}
+
+  // RIGHT
+  extension String: Equatable {}
+  
+  @GenerateBoilerPlate
+  extension Foo {}
+  ```
+
+  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
