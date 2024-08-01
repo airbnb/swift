@@ -4011,23 +4011,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Improves readability since the code has no effect and should be removed for clarity.
   
   ```swift
-  // WRONG
-  extension String {}
+  // WRONG: The first extension is empty and redundant.
+  extension Planet {}
   
-  extension [Foo: Bar] {}
-  
-  extension Array where Element: Foo {}
-  
-  extension String: Equatable {}
-  
-  @GenerateBoilerPlate
-  extension Foo {}
+  extension Planet: Equatable {}
 
-  // RIGHT
-  extension String: Equatable {}
-  
-  @GenerateBoilerPlate
-  extension Foo {}
+  // RIGHT: Empty extensions that add a protocol conformance aren't redundant.
+  extension Planet: Equatable {}
   ```
 
   </details>
