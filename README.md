@@ -4012,30 +4012,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
   Improves readability since the code has no effect and should be removed for clarity.
   
   ```swift
-  // WRONG: Unused private property is unused and redundant
+  // WRONG: Includes private declarations that are unused
   struct Planet {
-    private var mass: Double
+    var ageInBillionYears: Double {
+      ageInMillionYears / 1000
+    }
     
-    var age: Double
-  }
-
-  // WRONG: Unused private function is unused and redundant
-  struct Planet {
-    private func distance(to: Planet) { }
-    
-    var age: Double
-  }
-
-  // WRONG. Unused private typealias is unused and redundant
-  struct Planet {
-    private typealias Dependencies = UniverseBuilderProviding
-    
-    var age: Double
+    private var ageInMillionsOfYears: Double
+    private typealias Dependencies = UniverseBuilderProviding // unused
+    private var mass: Double // unused
+    private func distance(to: Planet) { } // unused
   }
     
   // RIGHT
   struct Planet {
-    var age: Double
+    var ageInBillionsOfYears: Double {
+      ageInMillionYears / 1000
+    }
+
+    private var ageInMillionYears: Double
   }
   ```
   
