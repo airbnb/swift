@@ -4031,6 +4031,44 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+* <a id='unused-private-declaration'></a>(<a href='#unused-private-declaration'>link</a>) **Remove unused private and fileprivate properties, functions, and typealiases** [![SwiftFormat: unusedPrivateDeclaration](https://img.shields.io/badge/SwiftFormat-unusedPrivateDeclaration-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedPrivateDeclaration)
+
+  <details>
+
+  #### Why?
+  
+  Improves readability since the code has no effect and should be removed for clarity.
+  
+  ```swift
+  // WRONG: Unused private property is unused and redundant
+  struct Planet {
+    private var mass: Double
+    
+    var age: Double
+  }
+
+  // WRONG: Unused private function is unused and redundant
+  struct Planet {
+    private func distance(to: Planet) { }
+    
+    var age: Double
+  }
+
+  // WRONG. Unused private typealias is unused and redundant
+  struct Planet {
+    private typealias Dependencies = UniverseBuilderProviding
+    
+    var age: Double
+  }
+    
+  // RIGHT
+  struct Planet {
+    var age: Double
+  }
+  ```
+  
+  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
