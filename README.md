@@ -4003,7 +4003,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
   
-* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty, non-conforming, extensions.** Does not affect empty extensions that are appended by a macro. [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyExtension)
+* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyExtension)
 
   <details>
 
