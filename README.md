@@ -4002,35 +4002,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-
-**[⬆ back to top](#table-of-contents)**
-
-## Objective-C Interoperability
-
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
-
-  <details>
-
-  ```swift
-  class PriceBreakdownViewController {
-
-    private let acceptButton = UIButton()
-
-    private func setUpAcceptButton() {
-      acceptButton.addTarget(
-        self,
-        action: #selector(didTapAcceptButton),
-        forControlEvents: .touchUpInside)
-    }
-
-    @objc
-    private func didTapAcceptButton() {
-      // ...
-    }
-  }
-  ```
-
-  </details>
   
 * <a id='unused-private-declaration'></a>(<a href='#unused-private-declaration'>link</a>) **Remove unused private and fileprivate properties, functions, and typealiases** [![SwiftFormat: unusedPrivateDeclaration](https://img.shields.io/badge/SwiftFormat-unusedPrivateDeclaration-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedPrivateDeclaration)
 
@@ -4068,6 +4039,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
   
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
+## Objective-C Interoperability
+
+* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+
+  <details>
+
+  ```swift
+  class PriceBreakdownViewController {
+
+    private let acceptButton = UIButton()
+
+    private func setUpAcceptButton() {
+      acceptButton.addTarget(
+        self,
+        action: #selector(didTapAcceptButton),
+        forControlEvents: .touchUpInside)
+    }
+
+    @objc
+    private func didTapAcceptButton() {
+      // ...
+    }
+  }
+  ```
+
   </details>
 
 **[⬆ back to top](#table-of-contents)**
