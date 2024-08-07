@@ -4002,6 +4002,39 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+      
+* <a id='unused-private-declaration'></a>(<a href='#unused-private-declaration'>link</a>) **Remove unused private and fileprivate properties, functions, and typealiases** [![SwiftFormat: unusedPrivateDeclaration](https://img.shields.io/badge/SwiftFormat-unusedPrivateDeclaration-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedPrivateDeclaration)
+
+  <details>
+
+  #### Why?
+  
+  Improves readability since the code has no effect and should be removed for clarity.
+  
+  ```swift
+  // WRONG: Includes private declarations that are unused
+  struct Planet {
+    var ageInBillionYears: Double {
+      ageInMillionYears / 1000
+    }
+    
+    private var ageInMillionsOfYears: Double
+    private typealias Dependencies = UniverseBuilderProviding // unused
+    private var mass: Double // unused
+    private func distance(to: Planet) { } // unused
+  }
+    
+  // RIGHT
+  struct Planet {
+    var ageInBillionsOfYears: Double {
+      ageInMillionYears / 1000
+    }
+
+    private var ageInMillionYears: Double
+  }
+  ```
+  
+  </details>
   
 * <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyExtension)
 
