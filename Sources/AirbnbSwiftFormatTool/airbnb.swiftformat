@@ -110,3 +110,4 @@
 --rules propertyType
 --rules blankLinesBetweenChainedFunctions
 --rules unusedPrivateDeclaration
+--rules emptyExtension
