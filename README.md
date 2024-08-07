@@ -4002,6 +4002,25 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+  
+* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-008489.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#emptyExtension)
+
+  <details>
+
+  #### Why?
+  Improves readability since the code has no effect and should be removed for clarity.
+  
+  ```swift
+  // WRONG: The first extension is empty and redundant.
+  extension Planet {}
+  
+  extension Planet: Equatable {}
+
+  // RIGHT: Empty extensions that add a protocol conformance aren't redundant.
+  extension Planet: Equatable {}
+  ```
+
+  </details>
 
 **[⬆ back to top](#table-of-contents)**
 

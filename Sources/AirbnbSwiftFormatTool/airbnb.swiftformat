@@ -109,3 +109,4 @@
 --rules semicolons
 --rules propertyType
 --rules blankLinesBetweenChainedFunctions
+--rules emptyExtension
