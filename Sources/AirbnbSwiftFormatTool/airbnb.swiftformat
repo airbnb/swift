@@ -34,6 +34,7 @@
 --redundanttype inferred # redundantType, propertyType
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
+--operatorfunc no-space # spaceAroundOperators
 --someAny disabled # opaqueGenericParameters
 --elseposition same-line # elseOnSameLine
 --guardelse next-line # elseOnSameLine

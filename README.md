@@ -2450,24 +2450,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ### Operators
 
-* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
+* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Infix operators should have a single space on either side.** However, in operator definitions, omit the trailing space between the operator and the open parenthesis. This rule does not apply to range operators (e.g. `1...3`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://realm.github.io/SwiftLint/operator_usage_whitespace)
 
   <details>
 
   ```swift
   // WRONG
   let capacity = 1+2
-  let capacity = currentCapacity   ?? 0
-  let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
+  let capacity = currentCapacity??0
   let capacity=newCapacity
-  let latitude = region.center.latitude - region.span.latitudeDelta/2.0
+  let latitude = region.center.latitude-region.span.latitudeDelta/2.0
 
   // RIGHT
   let capacity = 1 + 2
   let capacity = currentCapacity ?? 0
-  let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
   let capacity = newCapacity
-  let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
+  let latitude = region.center.latitude - region.span.latitudeDelta / 2.0
+  ```
+
+  ```swift
+  // WRONG
+  static func == (_ lhs: MyView, _ rhs: MyView) -> Bool {
+    lhs.id == rhs.id
+  }
+
+  // RIGHT
+  static func ==(_ lhs: MyView, _ rhs: MyView) -> Bool {
+    lhs.id == rhs.id
+  }
   ```
 
   </details>
