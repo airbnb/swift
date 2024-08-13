@@ -20,9 +20,6 @@ excluded:
   - Pods
   - .build
 
-colon:
-  apply_to_dictionaries: false
-
 indentation: 2
 
 custom_rules:
