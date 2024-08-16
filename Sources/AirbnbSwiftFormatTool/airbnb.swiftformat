@@ -34,6 +34,8 @@
 --redundanttype inferred # redundantType, propertyType
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
+--operatorfunc no-space # spaceAroundOperators
+--ranges preserve # spaceAroundOperators
 --someAny disabled # opaqueGenericParameters
 --elseposition same-line # elseOnSameLine
 --guardelse next-line # elseOnSameLine
@@ -49,6 +51,7 @@
 --rules anyObjectProtocol
 --rules blankLinesBetweenScopes
 --rules consecutiveSpaces
+--rules consecutiveBlankLines
 --rules duplicateImports
 --rules extensionAccessControl
 --rules hoistPatternLet
@@ -68,6 +71,7 @@
 --rules strongifiedSelf
 --rules trailingCommas
 --rules trailingSpace
+--rules linebreakAtEndOfFile
 --rules typeSugar
 --rules wrap
 --rules wrapMultilineStatementBraces
@@ -86,6 +90,7 @@
 --rules spaceAroundBraces
 --rules spaceInsideParens
 --rules spaceAroundParens
+--rules spaceAroundOperators
 --rules enumNamespaces
 --rules blockComments
 --rules docComments
