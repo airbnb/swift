@@ -6,7 +6,6 @@ only_rules:
   - legacy_constructor
   - legacy_nsgeometry_functions
   - unused_optional_binding
-  - void_return # TODO: Replace with SwiftFormat void rule
   - unowned_variable_capture
   - custom_rules
 

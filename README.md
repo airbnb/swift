@@ -3677,6 +3677,39 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='generic-void'></a>(<a href='#generic-void'>link</a>) **Avoid using `()` as a generic type**. Prefer `Void`.
+
+  <details>
+
+  ```swift
+  struct Wrapper<T> { ... }
+  // WRONG
+  let wrapper = Wrapper<()>()
+
+  // RIGHT
+  let wrapper = Wrapper<Void>()
+  ```
+  </details>
+
+* <a id='void-instance'></a>(<a href='#void-instance'>link</a>) **Avoid using `Void()` as an instance of `Void`**. Prefer `()`.
+
+  <details>
+
+  ```swift
+  struct Resolver<T> { 
+    func resolve(T) { ... }
+  }
+
+  let resolver = Resolver()
+
+  // WRONG
+  resolver.resolve(Void())
+
+  // RIGHT
+  resolver.resolve(())
+  ```
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
