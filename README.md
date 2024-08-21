@@ -593,37 +593,47 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Place the colon immediately after an identifier, followed by a space.** [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spacearoundoperators)
+* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Colons should always be followed by a space, but not preceded by a space**. [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spacearoundoperators)
 
   <details>
 
   ```swift
   // WRONG
-  var something : Double = 0
+  let planet:CelestialObject = sun.planets[0]
+  let planet : CelestialObject = sun.planets[0]
 
   // RIGHT
-  var something: Double = 0
+  let planet: CelestialObject = sun.planets[0]
   ```
 
   ```swift
   // WRONG
-  class MyClass : SuperClass {
+  class Planet : CelestialObject {
     // ...
   }
 
   // RIGHT
-  class MyClass: SuperClass {
+  class Planet: CelestialObject {
     // ...
   }
   ```
 
   ```swift
   // WRONG
-  var dict = [KeyType:ValueType]()
-  var dict = [KeyType : ValueType]()
+  let moons: [Planet : Moon] = [
+    mercury : [], 
+    venus : [], 
+    earth : [theMoon], 
+    mars : [phobos,deimos],
+  ]
 
   // RIGHT
-  var dict = [KeyType: ValueType]()
+  let moons: [Planet: Moon] = [
+    mercury: [], 
+    venus: [], 
+    earth: [theMoon], 
+    mars: [phobos,deimos],
+  ]
   ```
 
   </details>
