@@ -4002,7 +4002,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     ```
 
-    Additioanlly, after grouping SwiftUI properties, its prefered that propeties are sorted by their dynamic property type. The order is determined by the first time a type appears:
+    Additioanlly, after grouping SwiftUI properties, its preferred that properties are sorted by their dynamic property type. The order is determined by the first time a type appears:
 
     ```swift
     // WRONG

@@ -25,6 +25,7 @@
 --typeattributes prev-line # wrapAttributes
 --wrapternary before-operators # wrap
 --structthreshold 20 # organizeDeclarations
+--sortswiftuiprops first-appearance-sort
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension,actor # organizeDeclarations
 --visibilityorder beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
