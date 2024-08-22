@@ -3908,7 +3908,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Static properties
   * Static property with body
   * Class properties with body
-  * SwiftUI dynamic properties (@State, @Environment, @Binding, etc)
+  * SwiftUI dynamic properties (@State, @Environment, @Binding, etc), grouped by type
   * Instance properties
   * Instance properties with body
   * Static methods
@@ -4002,7 +4002,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
     ```
 
-    Additioanlly, after grouping SwiftUI properties, its preferred that properties are sorted by their dynamic property type. The order is determined by the first time a type appears:
+    Additionally, within the grouping of SwiftUI properties, it is preferred that the properties are also grouped by their dynamic property type. The group order applied by the formatter is determined by the first time a type appears:
 
     ```swift
     // WRONG
