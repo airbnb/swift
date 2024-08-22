@@ -4001,6 +4001,37 @@ _You can enable the following settings in Xcode by running [this script](resourc
       private let step: Double.Stride
     }
     ```
+
+    Additioanlly, after grouping SwiftUI properties, its prefered that propeties are sorted by their dynamic property type. The order is determined by the first time a type appears:
+
+    ```swift
+    // WRONG
+    struct CustomSlider: View {
+
+      @Binding private var value: Value
+      @State private var foo = Foo()
+      @Environment(\.sliderStyle) private var style
+      @State private var bar = Bar()
+      @Environment(\.layoutDirection) private var layoutDirection
+
+      private let range: ClosedRange<Double>
+      private let step: Double.Stride
+    }
+
+    // RIGHT
+    struct CustomSlider: View {
+
+      @Binding private var value: Value
+      @State private var foo = Foo()
+      @State private var bar = Bar()
+      @Environment(\.sliderStyle) private var style
+      @Environment(\.layoutDirection) private var layoutDirection
+
+      private let range: ClosedRange<Double>
+      private let step: Double.Stride
+    }
+    ```
+
   </details>
 
 
