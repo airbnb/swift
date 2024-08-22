@@ -3677,17 +3677,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='generic-void'></a>(<a href='#generic-void'>link</a>) **Avoid using `()` as a generic type**. Prefer `Void`.
+* <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
 
   <details>
 
   ```swift
-  struct Wrapper<T> { ... }
   // WRONG
-  let wrapper = Wrapper<()>()
+  let result: Result<(), Error>
 
   // RIGHT
-  let wrapper = Wrapper<Void>()
+  let result: Result<Void, Error>
   ```
   </details>
 
@@ -3696,17 +3695,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  struct Resolver<T> { 
-    func resolve(T) { ... }
-  }
-
-  let resolver = Resolver()
+  let completion: (Result<Void, Error>) -> Void 
 
   // WRONG
-  resolver.resolve(Void())
-
+  completion(.success(Void()))
+  
   // RIGHT
-  resolver.resolve(())
+  completion(.success(()))
   ```
   </details>
 
