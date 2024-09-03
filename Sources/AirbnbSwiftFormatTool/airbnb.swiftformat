@@ -109,6 +109,7 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
+--rules void
 --rules blankLineAfterSwitchCase
 --rules consistentSwitchCaseSpacing
 --rules semicolons

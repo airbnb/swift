@@ -3677,6 +3677,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
+
+  <details>
+
+  ```swift
+  // WRONG
+  let result: Result<(), Error>
+
+  // RIGHT
+  let result: Result<Void, Error>
+  ```
+  </details>
+
+* <a id='void-instance'></a>(<a href='#void-instance'>link</a>) **Avoid using `Void()` as an instance of `Void`**. Prefer `()`.
+
+  <details>
+
+  ```swift
+  let completion: (Result<Void, Error>) -> Void 
+
+  // WRONG
+  completion(.success(Void()))
+  
+  // RIGHT
+  completion(.success(()))
+  ```
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
