@@ -67,6 +67,7 @@
 --rules redundantGet
 --rules redundantFileprivate
 --rules redundantRawValues
+--rules redundantEquatable
 --rules sortImports
 --rules sortDeclarations
 --rules strongifiedSelf
