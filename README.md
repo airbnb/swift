@@ -3751,7 +3751,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     ### Why?
 
-    Manually-implemented environment keys are verbose, and keeping them up-to-date is error-prone.
+    Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
 
     ```swift
     /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
@@ -3771,7 +3771,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       @Entry var isSelected: Bool = false
     }
     ```
-    
+
     </details>
 
 * <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
