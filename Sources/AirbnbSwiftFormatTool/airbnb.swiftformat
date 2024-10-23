@@ -56,6 +56,7 @@
 --rules consecutiveBlankLines
 --rules duplicateImports
 --rules extensionAccessControl
+--rules environmentEntry
 --rules hoistPatternLet
 --rules indent
 --rules markTypes
