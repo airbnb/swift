@@ -3745,6 +3745,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
+* <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironemtnValues`, prefer using the compiler-synthesized property implementation when possible. [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
+
+    <details>
+
+    ### Why?
+
+    Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
+
+    ```swift
+    /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
+    struct IsSelectedEnvironmentKey: EnvironmentKey {
+      static var defaultValue: Bool { false }
+    }
+    
+    extension EnvironmentValues {
+      var isSelected: Bool {
+       get { self[IsSelectedEnvironmentKey.self] }
+       set { self[IsSelectedEnvironmentKey.self] = newValue }
+      }
+    }
+
+    /// RIGHT: The `EnvironmentValues` property uses the @Entry macro 
+    extension EnvironmentValues {
+      @Entry var isSelected: Bool = false
+    }
+    ```
+
+    </details>
+
 * <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
 
   <details>
