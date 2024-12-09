@@ -121,3 +121,4 @@
 --rules blankLinesBetweenChainedFunctions
 --rules unusedPrivateDeclaration
 --rules emptyExtension
+--rules preferCountWhere
