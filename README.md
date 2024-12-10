@@ -3809,6 +3809,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
+* <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { … })` over `filter { … }.count`**.
+
+  <details>
+
+  Swift 6.0 ([finally!](https://forums.swift.org/t/accepted-again-se-0220-count-where/66659)) added a `count(where:)` method to the standard library. Prefer using the `count(where:)` method over using the `filter(_:)` method followed by a `count` call.
+
+  ```swift
+  // WRONG
+  let planetsWithMoons = planets.filter { !$0.moons.isEmpty }.count
+
+  // RIGHT
+  let planetsWithMoons = planets.count(where: { !$0.moons.isEmpty })
+  ```
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
