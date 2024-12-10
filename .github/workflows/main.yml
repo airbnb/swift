@@ -7,23 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test-package-plugin-macos-12:
-    name: Test Package Plugin
-    runs-on: macos-12
-    strategy:
-      fail-fast: false
-      matrix:
-        xcode:
-        - '13.4.1' # Swift 5.6
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
-      - name: Test Package Plugin
-        run: bundle exec rake lint:swift
-
-  test-package-plugin-macos-13:
+  test-package-plugin:
     name: Test Package Plugin
     runs-on: macos-13
     strategy:

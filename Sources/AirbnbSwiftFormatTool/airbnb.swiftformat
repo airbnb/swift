@@ -33,7 +33,7 @@
 --sortswiftuiprops first-appearance-sort #organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
---redundanttype inferred # redundantType, propertyType
+--propertytypes inferred # redundantType, propertyTypes
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
 --ranges preserve # spaceAroundOperators
@@ -98,7 +98,7 @@
 --rules enumNamespaces
 --rules blockComments
 --rules docComments
---rules docCommentsBeforeAttributes
+--rules docCommentsBeforeModifiers
 --rules spaceAroundComments
 --rules spaceInsideComments
 --rules blankLinesAtStartOfScope
@@ -117,7 +117,7 @@
 --rules blankLineAfterSwitchCase
 --rules consistentSwitchCaseSpacing
 --rules semicolons
---rules propertyType
+--rules propertyTypes
 --rules blankLinesBetweenChainedFunctions
---rules unusedPrivateDeclaration
---rules emptyExtension
+--rules unusedPrivateDeclarations
+--rules emptyExtensions

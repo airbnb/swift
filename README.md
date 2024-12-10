@@ -376,7 +376,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: propertyType](https://img.shields.io/badge/SwiftFormat-propertyType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#propertyType)
+* <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.** [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#propertyTypes)
 
   <details>
 
@@ -1880,7 +1880,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-attributes'>link</a>) **Place doc comments for a declaration before any attributes.** [![SwiftFormat: docCommentsBeforeAttributes](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#docCommentsBeforeAttributes)
+* <a id='doc-comments-before-attributes'></a>(<a href='#doc-comments-before-attributes'>link</a>) **Place doc comments for a declaration before any attributes or modifiers.** [![SwiftFormat: docCommentsBeforeModifiers](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeModifiers-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#docCommentsBeforeModifiers)
 
   <details>
 
@@ -1891,11 +1891,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
   /// A spacecraft with everything you need to explore the universe.
   struct Spaceship { … }
 
+  public
+  /// A spacecraft with everything you need to explore the universe.
+  struct Spaceship { … }
+
   // RIGHT
 
   /// A spacecraft with everything you need to explore the universe.
   @MainActor
   struct Spaceship { … }
+
+  /// A spacecraft with everything you need to explore the universe.
+  public struct Spaceship { … }
   ```
 
   </details>
@@ -3758,7 +3765,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     struct IsSelectedEnvironmentKey: EnvironmentKey {
       static var defaultValue: Bool { false }
     }
-    
+
     extension EnvironmentValues {
       var isSelected: Bool {
        get { self[IsSelectedEnvironmentKey.self] }
@@ -4179,7 +4186,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
       
-* <a id='unused-private-declaration'></a>(<a href='#unused-private-declaration'>link</a>) **Remove unused private and fileprivate properties, functions, and typealiases** [![SwiftFormat: unusedPrivateDeclaration](https://img.shields.io/badge/SwiftFormat-unusedPrivateDeclaration-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#unusedPrivateDeclaration)
+* <a id='unused-private-declaration'></a>(<a href='#unused-private-declaration'>link</a>) **Remove unused private and fileprivate properties, functions, and typealiases** [![SwiftFormat: unusedPrivateDeclarations](https://img.shields.io/badge/SwiftFormat-unusedPrivateDeclarations-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#unusedPrivateDeclarations)
 
   <details>
 
@@ -4212,7 +4219,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
   </details>
   
-* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtension](https://img.shields.io/badge/SwiftFormat-emptyExtension-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#emptyExtension)
+* <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtensions](https://img.shields.io/badge/SwiftFormat-emptyExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#emptyExtensions)
 
   <details>
 
