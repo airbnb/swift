@@ -24,10 +24,10 @@ custom_rules:
     severity: error
   no_direct_standard_out_logs:
     name: "Writing log messages directly to standard out is disallowed"
-    regex: "(\\bprint|\\bdebugPrint|\\bdump|Swift\\.print|Swift\\.debugPrint|Swift\\.dump)\\s*\\("
+    regex: "(\\bprint|\\bdebugPrint|\\bdump|Swift\\.print|Swift\\.debugPrint|Swift\\.dump|_printChanges)\\s*\\("
     match_kinds:
     - identifier
-    message: "Don't commit `print(…)`, `debugPrint(…)`, or `dump(…)` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
+    message: "Don't commit `print(…)`, `debugPrint(…)`, `dump(…)`, or `_printChanges()` as they write to standard out in release. Either log to a dedicated logging system or silence this warning in debug-only scenarios explicitly using `// swiftlint:disable:next no_direct_standard_out_logs`"
     severity: error
   no_file_literal:
     name: "#file is disallowed"
