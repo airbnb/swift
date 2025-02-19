@@ -3781,7 +3781,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
+* <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`. [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#void)
 
   <details>
 
@@ -3794,7 +3794,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='void-instance'></a>(<a href='#void-instance'>link</a>) **Avoid using `Void()` as an instance of `Void`**. Prefer `()`.
+* <a id='void-instance'></a>(<a href='#void-instance'>link</a>) **Avoid using `Void()` as an instance of `Void`**. Prefer `()`. [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#void)
 
   <details>
 
@@ -3809,7 +3809,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { … })` over `filter { … }.count`**.
+* <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { … })` over `filter { … }.count`**. [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferCountWhere)
 
   <details>
 
@@ -3821,6 +3821,37 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   let planetsWithMoons = planets.count(where: { !$0.moons.isEmpty })
+  ```
+  </details>
+
+* <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".** [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
+
+  <details>
+
+  ### Why?
+
+  Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
+
+  ```swift
+  import Testing
+  
+  /// WRONG
+  struct SpaceshipTests {
+    @Test
+    func testWarpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func testArtificialGravityMatchesEarthGravity() { ... }
+  }
+
+  /// RIGHT
+  struct SpaceshipTests {
+    @Test
+    func warpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func artificialGravityMatchesEarthGravity() { ... }
+  }
   ```
   </details>
 
