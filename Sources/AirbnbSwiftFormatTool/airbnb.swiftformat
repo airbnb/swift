@@ -122,3 +122,4 @@
 --rules unusedPrivateDeclarations
 --rules emptyExtensions
 --rules preferCountWhere
+--rules swiftTestingTestCaseNames
