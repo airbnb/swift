@@ -54,7 +54,9 @@ $ swift package format --lint
 
 # By default the command plugin runs on the entire package directory.
 # You can exclude directories using `exclude`:
-$ swift package format --exclude Tests
+$ swift package format --exclude "/Tests" # Only exclude the `Tests` directory under the root directory
+$ swift package format --exclude "Tests/" # Exclude all directories named `Tests` and their contents
+$ swift package format --exclude "*.tmp" # Exclude all files ending with `.tmp`
 
 # Alternatively you can explicitly list the set of paths and/or SPM targets:
 $ swift package format --paths Sources Tests Package.swift

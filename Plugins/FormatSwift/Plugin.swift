@@ -12,6 +12,8 @@ import XcodeProjectPlugin
 @main
 struct AirbnbSwiftFormatPlugin {
 
+  // MARK: Internal
+
   /// Calls the `AirbnbSwiftFormatTool` executable with the given arguments
   func performCommand(
     context: CommandContext,
@@ -22,11 +24,30 @@ struct AirbnbSwiftFormatPlugin {
     var argumentExtractor = ArgumentExtractor(arguments)
 
     // Filter out any excluded paths passed in with `--exclude`
-    let excludedPaths = argumentExtractor.extractOption(named: "exclude")
+    let excludedPatterns = argumentExtractor.extractOption(named: "exclude")
     let inputPaths = inputPaths.filter { path in
-      !excludedPaths.contains(where: { excludedPath in
-        path.hasSuffix(excludedPath)
-      })
+      !excludedPatterns.contains { pattern in
+        // Process root directory path mode
+        if pattern.hasPrefix("/") {
+          let rootPattern = String(pattern.dropFirst())
+          let components = path.split(separator: "/").map(String.init)
+          // Checks if the first component matches the pattern
+          guard !components.isEmpty else { return false }
+          return matchesPattern(rootPattern, string: components[0])
+        }
+
+        // Process directory path mode
+        if pattern.hasSuffix("/") {
+          let dirPattern = String(pattern.dropLast())
+          // Check if the path contains this directory
+          return path.contains("/\(dirPattern)/") || path.hasSuffix("/\(dirPattern)")
+        }
+
+        // Process normal file/directory mode
+        // Checks if any part of the path matches
+        let components = path.split(separator: "/").map(String.init)
+        return components.contains { matchesPattern(pattern, string: $0) }
+      }
     }
 
     let launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
@@ -65,6 +86,21 @@ struct AirbnbSwiftFormatPlugin {
     }
   }
 
+  // MARK: Private
+
+  private func matchesPattern(_ pattern: String, string: String) -> Bool {
+    let regex = pattern
+      .replacingOccurrences(of: ".", with: "\\.")
+      .replacingOccurrences(of: "*", with: ".*")
+      .replacingOccurrences(of: "?", with: ".")
+
+    guard let regex = try? NSRegularExpression(pattern: "^" + regex + "$", options: []) else {
+      return false
+    }
+
+    let range = NSRange(location: 0, length: string.utf16.count)
+    return regex.firstMatch(in: string, options: [], range: range) != nil
+  }
 }
 
 // MARK: CommandPlugin
