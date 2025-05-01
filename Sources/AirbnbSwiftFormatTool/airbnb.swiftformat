@@ -119,7 +119,6 @@
 --rules semicolons
 --rules propertyTypes
 --rules blankLinesBetweenChainedFunctions
---rules unusedPrivateDeclarations
 --rules emptyExtensions
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
