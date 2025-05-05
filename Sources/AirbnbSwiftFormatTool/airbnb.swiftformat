@@ -18,6 +18,7 @@
 --wrapreturntype never #wrapArguments
 --wrapeffects never #wrapArguments
 --closingparen balanced # wrapArguments
+--callsiteparens same-line # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --computedvarattrs prev-line # wrapAttributes
