@@ -160,17 +160,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
     public func executeRequest(
       _ request: URLRequest,
       onSuccess: @escaping (ModelType, Bool) -> Void,
-      onFailure: @escaping (Error) -> Void)
-      -> URLSessionCancellable
-    {
+      onFailure: @escaping (Error) -> Void
+    ) -> URLSessionCancellable {
       return _executeRequest(request, onSuccess, onFailure)
     }
 
     private let _executeRequest: (
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
-      @escaping (Error) -> Void)
-      -> URLSessionCancellable
+      @escaping (Error) -> Void
+    ) -> URLSessionCancellable
   }
   ```
 
@@ -2041,7 +2040,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the return signature or any effects (`async`, `throws`).** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces) 
 
   <details>
 
@@ -2097,9 +2096,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float)
-      -> String
-    {
+      withAverageDistance averageDistance: Float
+    ) -> String {
       populateUniverse()
     }
 
@@ -2108,9 +2106,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float)
-      async throws -> String
-    {
+      withAverageDistance averageDistance: Float
+    ) async throws -> String {
       populateUniverse()
     }
   }
@@ -3427,9 +3424,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // WRONG
     func spaceshipDashboard<WarpDriveView: View, CaptainsLogView: View>(
       warpDrive: WarpDriveView,
-      captainsLog: CaptainsLogView)
-      -> some View
-    { … }
+      captainsLog: CaptainsLogView
+    ) -> some View {
+      …
+    }
 
     func generate<Planets>(_ planets: Planets) where Planets: Collection, Planets.Element == Planet {
       …
@@ -3438,9 +3436,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // RIGHT
     func spaceshipDashboard(
       warpDrive: some View,
-      captainsLog: some View)
-      -> some View
-    { … }
+      captainsLog: some View
+    ) -> some View {
+      …
+    }
 
     func generate(_ planets: some Collection<Planet>) {
       …
@@ -3453,7 +3452,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
     // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
-    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body)  {
+    func terraform<Body: PlanetaryBody>(_ planetaryBody: Body) {
       planetaryBody.generateAtmosphere(Body.idealAtmosphere)
     }
     ```
@@ -3466,8 +3465,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func assertFailure<Value>(
       _ result: Result<Value, Error>,
       file: StaticString = #filePath,
-      line: UInt = #line)
-    {
+      line: UInt = #line
+    ) {
       if case .failure(let error) = result {
         XCTFail(error.localizedDescription, file: file, line: line)
       }
@@ -3477,8 +3476,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func assertFailure(
       _ result: Result<some Any, Error>,
       file: StaticString = #filePath,
-      line: UInt = #line)
-    {
+      line: UInt = #line
+    ) {
       if case .failure(let error) = result {
         XCTFail(error.localizedDescription, file: file, line: line)
       }
