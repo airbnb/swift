@@ -1633,7 +1633,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default) {
+      oceanOptions: OceanOptions = .default
+    ) {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
     }
@@ -1650,8 +1651,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default)
-    {
+      oceanOptions: OceanOptions = .default
+    ) {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
     }
@@ -2115,7 +2116,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
+* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function calls should also break on each argument.** Put the closing parenthesis on its own line. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
 
   <details>
 
@@ -2134,8 +2135,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     at: location,
     count: 5,
     color: starColor,
-    withAverageDistance: 4
-  )
+    withAverageDistance: 4)
 
   // WRONG
   universe.generate(5,
@@ -2147,13 +2147,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
     at: location,
     count: 5,
     color: starColor,
-    withAverageDistance: 4)
+    withAverageDistance: 4
+  )
 
   // RIGHT
   universe.generate(
     5,
     .stars,
-    at: location)
+    at: location
+  )
   ```
 
   </details>
@@ -2184,13 +2186,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float)
-    {
+      withAverageDistance averageDistance: Float
+    ) {
       let universe = generateUniverse()
       universe.generateStars(
         at: location,
         count: count,
-        withAverageDistance: averageDistance)
+        withAverageDistance: averageDistance
+      )
     }
     ```
 
@@ -2213,13 +2216,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color _: StarColor,
-      withAverageDistance averageDistance: Float)
-    {
+      withAverageDistance averageDistance: Float
+    ) {
       let universe = generateUniverse()
       universe.generateStars(
         at: location,
         count: count,
-        withAverageDistance: averageDistance)
+        withAverageDistance: averageDistance
+      )
     }
     ```
 
@@ -2424,16 +2428,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
     
     func colonizePlanet() {
       spaceship.travel(to: planet, onArrival: { [weak self] in
-        guard let self else { return }
-        planet.colonize()
-      })
+          guard let self else { return }
+          planet.colonize()
+        }
+      )
     }
     
     func exploreSystem() {
       spaceship.travel(to: planet, nextDestination: { [weak self] in
-        guard let self else { return nil }
-        return planet.moons?.first
-      })
+          guard let self else { return nil }
+          return planet.moons?.first
+        }
+      )
     }
   }
   ```
@@ -2448,14 +2454,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
     
     func colonizePlanet() {
       spaceship.travel(to: planet, onArrival: { [planet] in
-        planet.colonize()
-      })
+          planet.colonize()
+        }
+      )
     }
     
     func exploreSystem() {
       spaceship.travel(to: planet, nextDestination: { [planet] in
-        planet.moons?.first
-      })
+          planet.moons?.first
+        }
+      )
     }
   }
   ```
@@ -3201,14 +3209,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   var size: CGSize {
     return CGSize(
       width: 100.0,
-      height: 100.0)
+      height: 100.0
+    )
   }
 
   func makeInfoAlert(message: String) -> UIAlertController {
     return UIAlertController(
       title: "ℹ️ Info",
       message: message,
-      preferredStyle: .alert)
+      preferredStyle: .alert
+    )
   }
 
   var alertTitle: String {
@@ -3234,14 +3244,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   var size: CGSize {
     CGSize(
       width: 100.0,
-      height: 100.0)
+      height: 100.0
+    )
   }
 
   func makeInfoAlert(message: String) -> UIAlertController {
     UIAlertController(
       title: "ℹ️ Info",
       message: message,
-      preferredStyle: .alert)
+      preferredStyle: .alert
+    )
   }
 
   var alertTitle: String {
@@ -3371,7 +3383,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at: location,
       count: 5,
       color: starColor,
-      withAverageDistance: 4)
+      withAverageDistance: 4
+    )
   }()
 
   // RIGHT
@@ -3381,7 +3394,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     at: location,
     count: 5,
     color: starColor,
-    withAverageDistance: 4)
+    withAverageDistance: 4
+  )
   ```
 
   </details>
@@ -4267,7 +4281,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       acceptButton.addTarget(
         self,
         action: #selector(didTapAcceptButton),
-        forControlEvents: .touchUpInside)
+        forControlEvents: .touchUpInside
+      )
     }
 
     @objc
