@@ -116,7 +116,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     return Command(
       log: log,
       launchPath: swiftFormatPath,
-      arguments: arguments)
+      arguments: arguments
+    )
   }
 
   /// Builds a command that runs the SwiftLint tool
@@ -140,7 +141,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
     return Command(
       log: log,
       launchPath: swiftLintPath,
-      arguments: arguments)
+      arguments: arguments
+    )
   }
 
   private func log(_ string: String) {
