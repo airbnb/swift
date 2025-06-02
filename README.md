@@ -959,18 +959,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   public struct Spaceship {
-    public
-    var controlPanel: some View { … }
-
     nonisolated
     public func fly() { … }
+
+    @MainActor
+    public
+    func fly() { … }
   }
 
   // RIGHT
   public struct Spaceship {
-    public var controlPanel: some View { … }
-
     nonisolated public func fly() { … }
+
+    @MainActor
+    public func fly() { … }
   }
   ```
 
