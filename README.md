@@ -960,25 +960,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   public struct Spaceship {
     public
-    var controlPanel: some View {
-      // ...
-    }
+    var controlPanel: some View { … }
 
     nonisolated
-    public func fly() {
-      // ...
-    }
+    public func fly() { … }
   }
 
   // RIGHT
   public struct Spaceship {
-    public var controlPanel: some View {
-      // ...
-    }
+    public var controlPanel: some View { … }
 
-    nonisolated public func fly() {
-      // ...
-    }
+    nonisolated public func fly() { … }
   }
   ```
 
