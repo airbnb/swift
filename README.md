@@ -2007,14 +2007,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   internal class Spaceship {
     internal init() { … }
-
     internal func travel(to planet: Planet) { … }
   }
 
   // RIGHT, because internal access control is implied if no other access control level is specified.
   class Spaceship {
     init() { … }
+    func travel(to planet: Planet) { … }
+  }
+  ```
 
+  </details>
+
+* <a id='omit-redundant-public'></a>(<a href='#omit-redundant-public'>link</a>) **Avoid using `public` access control in `internal` types.** In this case the `public` modifier is redundant and has no effect. [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
+
+  <details>
+
+  ```swift
+  // WRONG: Public declarations in internal types are internal, not public.
+  class Spaceship {
+    public init() { … }
+    public func travel(to planet: Planet) { … }
+  }
+
+  // RIGHT
+  class Spaceship {
+    init() { … }
     func travel(to planet: Planet) { … }
   }
   ```
