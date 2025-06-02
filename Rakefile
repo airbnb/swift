@@ -42,7 +42,8 @@ namespace :update do
     .binaryTarget(
       name: "swiftformat",
       url: "https://github.com/calda/SwiftFormat-nightly/releases/download/#{latest_version_number}/SwiftFormat.artifactbundle.zip",
-      checksum: "#{checksum.strip}"),
+      checksum: "#{checksum.strip}"
+    ),
     EOS
     
     regex = /[ ]*.binaryTarget\([\S\s]*name: "swiftformat"[\S\s]*?\),\s/
