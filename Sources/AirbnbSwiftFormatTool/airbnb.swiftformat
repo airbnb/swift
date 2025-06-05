@@ -124,3 +124,4 @@
 --rules emptyExtensions
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
+--rules modifiersOnSameLine

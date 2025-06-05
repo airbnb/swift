@@ -952,6 +952,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='modifiers-on-same-line'></a>(<a href='#modifiers-on-same-line'>link</a>) **Place modifiers for a declaration on the same line as the rest of the declaration**. [![SwiftFormat: modifiersOnSameLine](https://img.shields.io/badge/SwiftFormat-modifiersOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#modifiersOnSameLine)
+
+  <details>
+
+  ```swift
+  // WRONG
+  public struct Spaceship {
+    nonisolated
+    public func fly() { … }
+
+    @MainActor
+    public
+    func fly() { … }
+  }
+
+  // RIGHT
+  public struct Spaceship {
+    nonisolated public func fly() { … }
+
+    @MainActor
+    public func fly() { … }
+  }
+  ```
+
+  </details>
+
 * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
 
   <details>
