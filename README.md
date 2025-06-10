@@ -3809,7 +3809,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironemtnValues`, prefer using the compiler-synthesized property implementation when possible. [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
+* <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible. [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
 
     <details>
 
