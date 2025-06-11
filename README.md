@@ -4369,7 +4369,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     @Test
     func something() throws {
       // RIGHT:
-      let value = #require(optinalValue)
+      let value = try #require(optionalValue)
 
       // WRONG:
       guard let value = optionalValue {
