@@ -952,6 +952,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='modifiers-on-same-line'></a>(<a href='#modifiers-on-same-line'>link</a>) **Place modifiers for a declaration on the same line as the rest of the declaration**. [![SwiftFormat: modifiersOnSameLine](https://img.shields.io/badge/SwiftFormat-modifiersOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#modifiersOnSameLine)
+
+  <details>
+
+  ```swift
+  // WRONG
+  public struct Spaceship {
+    nonisolated
+    public func fly() { … }
+
+    @MainActor
+    public
+    func fly() { … }
+  }
+
+  // RIGHT
+  public struct Spaceship {
+    nonisolated public func fly() { … }
+
+    @MainActor
+    public func fly() { … }
+  }
+  ```
+
+  </details>
+
 * <a id='multi-line-array'></a>(<a href='#multi-line-array'>link</a>) **Multi-line arrays should have each bracket on a separate line.** Put the opening and closing brackets on separate lines from any of the elements of the array. Also add a trailing comma on the last element. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
 
   <details>
@@ -2007,14 +2033,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   internal class Spaceship {
     internal init() { … }
-
     internal func travel(to planet: Planet) { … }
   }
 
   // RIGHT, because internal access control is implied if no other access control level is specified.
   class Spaceship {
     init() { … }
+    func travel(to planet: Planet) { … }
+  }
+  ```
 
+  </details>
+
+* <a id='omit-redundant-public'></a>(<a href='#omit-redundant-public'>link</a>) **Avoid using `public` access control in `internal` types.** In this case the `public` modifier is redundant and has no effect. [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
+
+  <details>
+
+  ```swift
+  // WRONG: Public declarations in internal types are internal, not public.
+  class Spaceship {
+    public init() { … }
+    public func travel(to planet: Planet) { … }
+  }
+
+  // RIGHT
+  class Spaceship {
+    init() { … }
     func travel(to planet: Planet) { … }
   }
   ```
@@ -3765,7 +3809,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironemtnValues`, prefer using the compiler-synthesized property implementation when possible. [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
+* <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible. [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
 
     <details>
 
