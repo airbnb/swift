@@ -82,6 +82,7 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
 1. [Objective-C Interoperability](#objective-c-interoperability)
+1. [Testing](#testing)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
