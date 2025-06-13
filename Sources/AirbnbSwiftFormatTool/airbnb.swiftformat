@@ -126,3 +126,5 @@
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
 --rules modifiersOnSameLine
+--rules throwingTests
+--rules noGuardInTests

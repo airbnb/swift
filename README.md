@@ -4342,7 +4342,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Testing
 
-* <a id='prefer-unwrapping-apis'></a>(<a href='#prefer-unwrapping-apis'>link</a>) **Prefer Test APIs for unwrapping optionals over `if let`.** XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself.
+* <a id='avoid-guard-in-tests'></a>(<a href='#avoid-guard-in-tests'>link</a>) **Avoid `guard` statements in unit tests**. XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself. Use assertions instead of guarding on boolean conditions. [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
 
   <details>
 
@@ -4352,12 +4352,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   final class SomeTestCase: XCTestCase {
     func test_something() throws {
       // WRONG:
-      guard let value = optionalValue else { 
+      guard let value = optionalValue, value.matchesCondition else {
         XCTFail()
+        return
       }
 
       // RIGHT:
       let value = try XCTUnwrap(optionalValue)
+      XCTAssert(value.matchesCondition)
     }
   }
   ```
@@ -4369,17 +4371,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
     @Test
     func something() throws {
       // WRONG:
-      guard let value = optionalValue {
+      guard let value = optionalValue, value.matchesCondition {
         return
       }
 
       // RIGHT:
       let value = try #require(optionalValue)
+      #expect(value.matchesCondition)
     }
   }
   ```
 
-* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-throwingTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#throwingTests)
+* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: throwingTests](https://img.shields.io/badge/SwiftFormat-throwingTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#throwingTests)
 
   <details>
 
