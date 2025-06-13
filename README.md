@@ -3881,37 +3881,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".** [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
-
-  <details>
-
-  ### Why?
-
-  Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
-
-  ```swift
-  import Testing
-  
-  /// WRONG
-  struct SpaceshipTests {
-    @Test
-    func testWarpDriveEnablesFTLTravel() { ... }
-
-    @Test
-    func testArtificialGravityMatchesEarthGravity() { ... }
-  }
-
-  /// RIGHT
-  struct SpaceshipTests {
-    @Test
-    func warpDriveEnablesFTLTravel() { ... }
-
-    @Test
-    func artificialGravityMatchesEarthGravity() { ... }
-  }
-  ```
-  </details>
-
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
@@ -4341,6 +4310,37 @@ _You can enable the following settings in Xcode by running [this script](resourc
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing
+
+* <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".** [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
+
+  <details>
+
+  ### Why?
+
+  Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
+
+  ```swift
+  import Testing
+  
+  /// WRONG
+  struct SpaceshipTests {
+    @Test
+    func testWarpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func testArtificialGravityMatchesEarthGravity() { ... }
+  }
+
+  /// RIGHT
+  struct SpaceshipTests {
+    @Test
+    func warpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func artificialGravityMatchesEarthGravity() { ... }
+  }
+  ```
+  </details>
 
 * <a id='avoid-guard-in-tests'></a>(<a href='#avoid-guard-in-tests'>link</a>) **Avoid `guard` statements in unit tests**. XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself. Use assertions instead of guarding on boolean conditions. [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
 
