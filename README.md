@@ -4343,21 +4343,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
 ## Testing
 
 * <a id='prefer-unwrapping-apis'></a>(<a href='#prefer-unwrapping-apis'>link</a>) **Prefer Test APIs for unwrapping optionals over `if let`.** XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself.
+
   <details>
 
   ```swift
   import XCTest
 
   final class SomeTestCase: XCTestCase {
-
     func test_something() throws {
-      // RIGHT:
-      let value = try XCTUnwrap(optionalValue)
-
       // WRONG:
       guard let value = optionalValue else { 
         XCTFail()
       }
+
+      // RIGHT:
+      let value = try XCTUnwrap(optionalValue)
     }
   }
   ```
@@ -4368,17 +4368,54 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct SomeTests {
     @Test
     func something() throws {
-      // RIGHT:
-      let value = try #require(optionalValue)
-
       // WRONG:
       guard let value = optionalValue {
         return
       }
+
+      // RIGHT:
+      let value = try #require(optionalValue)
     }
   }
   ```
 
+* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-throwingTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#throwingTests)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SomeTestCase: XCTestCase {
+    // WRONG:
+    func test_something() {
+      try! Something().doSomething()
+    }
+
+    // RIGHT:
+    func test_something() throws {
+      try Something().doSomething()
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SomeTests {
+    // WRONG:
+    @Test
+    func something() {
+      try! Something().doSomething()
+    }
+
+    // RIGHT:
+    @Test
+    func something() throws {
+      try Something().doSomething()
+    }
+  }
+  ```
   </details>
 
 **[⬆ back to top](#table-of-contents)**
