@@ -4340,6 +4340,49 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 **[⬆ back to top](#table-of-contents)**
 
+## Testing
+
+* <a id='prefer-unwrapping-apis'></a>(<a href='#prefer-unwrapping-apis'>link</a>) **Prefer Test APIs for unwrapping optionals over `if let`.** XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself.
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SomeTestCase: XCTestCase {
+
+    func test_something() throws {
+      // RIGHT:
+      let value = try XCTUnwrap(optionalValue)
+
+      // WRONG:
+      guard let value = optionalValue else { 
+        XCTFail()
+      }
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SomeTests {
+    @Test
+    func something() throws {
+      // RIGHT:
+      let value = try #require(optionalValue)
+
+      // WRONG:
+      guard let value = optionalValue {
+        return
+      }
+    }
+  }
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
 ## Contributors
 
   - [View Contributors](https://github.com/airbnb/swift/graphs/contributors)
