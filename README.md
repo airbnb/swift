@@ -2709,6 +2709,50 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
+* <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
+
+  <details>
+
+  #### Why?
+  Removing redundant memberwise initializers reduces boilerplate and makes the code more concise. The compiler-synthesized initializers are equivalent to the explicit ones, so there's no functional difference.
+
+  ```swift
+  // WRONG
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+
+    init(name: String, mass: Double, radius: Double) {
+      self.name = name
+      self.mass = mass
+      self.radius = radius
+    }
+  }
+
+  // RIGHT
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+  }
+
+  // ALSO RIGHT: Custom logic in initializer makes it non-redundant
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+
+    init(name: String, mass: Double, radius: Double) {
+      self.name = name.capitalized
+      self.mass = max(0, mass)
+      self.radius = max(0, radius)
+    }
+  }
+  ```
+
+  </details>
+
 * <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
   <details>
