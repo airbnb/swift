@@ -91,7 +91,6 @@
 --rules redundantInternal
 --rules redundantPublic
 --rules redundantProperty
---rules redundantMemberwiseInit
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
