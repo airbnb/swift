@@ -3882,7 +3882,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **Prefer the configured `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**. [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#urlMacro)
+* <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**. [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#urlMacro)
 
     <details>
 
@@ -3895,7 +3895,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
     let url = URL(string: "https://example.com")!
 
     // RIGHT
-    import URLFoundation
     let url = #URL("https://example.com")
     ```
     </details>
