@@ -3882,6 +3882,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
+* <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **Prefer the configured `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**. [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#urlMacro)
+
+    <details>
+
+    #### Why?
+
+    The `#URL` macro provides compile-time validation of URL strings, eliminating runtime crashes from invalid URLs while maintaining clean syntax for static URL creation.
+
+    ```swift
+    // WRONG
+    let url = URL(string: "https://example.com")!
+
+    // RIGHT
+    import URLFoundation
+    let url = #URL("https://example.com")
+    ```
+    </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
