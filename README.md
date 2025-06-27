@@ -2709,7 +2709,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-* <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
+* <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. Note that this only applies to `internal`, `fileprivate` and `private` initializers, since compiler-synthesized memberwise initializers are always internal. [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
   <details>
 
@@ -2747,6 +2747,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
       self.name = name.capitalized
       self.mass = max(0, mass)
       self.radius = max(0, radius)
+    }
+  }
+
+  // ALSO RIGHT: Public initializer is not redundant since compiler-synthesized 
+  // memberwise initializers are always internal
+  public struct Planet {
+    public let name: String
+    public let mass: Double
+    public let radius: Double
+
+    public init(name: String, mass: Double, radius: Double) {
+      self.name = name
+      self.mass = mass
+      self.radius = radius
     }
   }
   ```
