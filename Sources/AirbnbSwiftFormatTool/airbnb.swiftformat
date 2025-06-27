@@ -128,3 +128,4 @@
 --rules modifiersOnSameLine
 --rules throwingTests
 --rules noGuardInTests
+--rules redundantMemberwiseInit
