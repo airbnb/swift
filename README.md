@@ -1657,32 +1657,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
     planet.terraform()
   }
 
-  class Planet {
-    func terraform(
-      atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default
-    ) {
-      generateAtmosphere(atmosphereOptions)
-      generateOceans(oceanOptions)
-    }
-  }
-
   // RIGHT
   if
     let star = planet.nearestStar(),
     planet.isInHabitableZone(of: star)
   {
     planet.terraform()
-  }
-
-  class Planet {
-    func terraform(
-      atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default
-    ) {
-      generateAtmosphere(atmosphereOptions)
-      generateOceans(oceanOptions)
-    }
   }
   ```
 
