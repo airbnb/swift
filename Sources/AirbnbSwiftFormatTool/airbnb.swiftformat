@@ -2,54 +2,54 @@
 --exclude Carthage,Pods,.build
 
 # options
---swiftversion 6.0
---languagemode 5
+--swift-version 6.0
+--language-mode 5
 --self remove # redundantSelf
---importgrouping testable-bottom # sortedImports
---commas always # trailingCommas
---trimwhitespace always # trailingSpace
+--import-grouping testable-bottom # sortedImports
+--trailing-commas always # trailingCommas
+--trim-whitespace always # trailingSpace
 --indent 2 #indent
 --ifdef no-indent #indent
---indentstrings true #indent
---wraparguments before-first # wrapArguments
---wrapparameters before-first # wrapArguments
---wrapcollections before-first # wrapArguments
---wrapconditions before-first # wrapArguments
---wrapreturntype never #wrapArguments
---wrapeffects never #wrapArguments
---closingparen balanced # wrapArguments
---callsiteparen balanced # wrapArguments
---wraptypealiases before-first # wrapArguments
---funcattributes prev-line # wrapAttributes
---computedvarattrs prev-line # wrapAttributes
---storedvarattrs same-line # wrapAttributes
---complexattrs prev-line # wrapAttributes
---typeattributes prev-line # wrapAttributes
---wrapternary before-operators # wrap
---wrapstringinterpolation preserve # wrap
---structthreshold 20 # organizeDeclarations
---enumthreshold 20 # organizeDeclarations
---organizetypes class,struct,enum,extension,actor # organizeDeclarations
---visibilityorder beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
---typeorder nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
---sortswiftuiprops first-appearance-sort #organizeDeclarations
---extensionacl on-declarations # extensionAccessControl
---patternlet inline # hoistPatternLet
---propertytypes inferred # redundantType, propertyTypes
---typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
---emptybraces spaced # emptyBraces
+--indent-strings true #indent
+--wrap-arguments before-first # wrapArguments
+--wrap-parameters before-first # wrapArguments
+--wrap-collections before-first # wrapArguments
+--wrap-conditions before-first # wrapArguments
+--wrap-return-type never #wrapArguments
+--wrap-effects never #wrapArguments
+--closing-paren balanced # wrapArguments
+--call-site-paren balanced # wrapArguments
+--wrap-type-aliases before-first # wrapArguments
+--func-attributes prev-line # wrapAttributes
+--computed-var-attributes prev-line # wrapAttributes
+--stored-var-attributes same-line # wrapAttributes
+--complex-attributes prev-line # wrapAttributes
+--type-attributes prev-line # wrapAttributes
+--wrap-ternary before-operators # wrap
+--wrap-string-interpolation preserve # wrap
+--struct-threshold 20 # organizeDeclarations
+--enum-threshold 20 # organizeDeclarations
+--organize-types class,struct,enum,extension,actor # organizeDeclarations
+--visibility-order beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
+--type-order nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
+--sort-swiftui-properties first-appearance-sort #organizeDeclarations
+--extension-acl on-declarations # extensionAccessControl
+--pattern-let inline # hoistPatternLet
+--property-types inferred # redundantType, propertyTypes
+--type-blank-lines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
+--empty-braces spaced # emptyBraces
 --ranges preserve # spaceAroundOperators
---operatorfunc no-space # spaceAroundOperators
---someAny disabled # opaqueGenericParameters
---elseposition same-line # elseOnSameLine
---guardelse next-line # elseOnSameLine
---onelineforeach convert # preferForLoop
---shortoptionals always # typeSugar
+--operator-func no-space # spaceAroundOperators
+--some-any disabled # opaqueGenericParameters
+--else-position same-line # elseOnSameLine
+--guard-else next-line # elseOnSameLine
+--single-line-for-each convert # preferForLoop
+--short-optionals always # typeSugar
 --semicolons never # semicolons
---doccomments preserve # docComments
+--doc-comments preserve # docComments
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
---maxwidth 130 # wrap
+--max-width 130 # wrap
 
 # rules
 --rules anyObjectProtocol
