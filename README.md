@@ -2066,32 +2066,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='omit-redundant-typed-throws'></a>(<a href='#omit-redundant-typed-throws'>link</a>) **Omit redundant typed `throws` annotations from function definitions.** [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantTypedThrows)
-
-  <details>
-
-  ```swift
-  // WRONG
-  func doSomething() throws(Never) -> Int {
-    return 0
-  }
-
-  func doSomethingElse() throws(any Error) -> Int {
-    throw MyError.failed
-  }
-
-  // RIGHT
-  func doSomething() -> Int {
-    return 0
-  }
-
-  func doSomethingElse() throws -> Int {
-    throw MyError.failed
-  }
-  ```
-
-  </details>
-
 * <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces) 
 
   <details>
@@ -2319,6 +2293,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
       .filter { $0.isInnerPlanet }
       // Gets the name of the inner planet
       .map { $0.name }
+  }
+  ```
+
+  </details>
+
+* <a id='omit-redundant-typed-throws'></a>(<a href='#omit-redundant-typed-throws'>link</a>) **Omit redundant typed `throws` annotations from function definitions.** [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantTypedThrows)
+
+  <details>
+
+  #### Why?
+  `throws(Never)` is equivalent to a non-throwing function, and `throws(Error)` is equivalent to non-typed `throws`. These redundant annotations add unnecessary complexity to function signatures.
+
+  ```swift
+  // WRONG
+  func doSomething() throws(Never) -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws(Error) -> Int {
+    throw MyError.failed
+  }
+
+  // RIGHT
+  func doSomething() -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws -> Int {
+    throw MyError.failed
   }
   ```
 
