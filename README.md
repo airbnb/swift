@@ -1501,6 +1501,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='omit-redundant-break'></a>(<a href='#omit-redundant-break'>link</a>) **Omit redundant `break` statements in switch cases.** [![SwiftFormat: redundantBreak](https://img.shields.io/badge/SwiftFormat-redundantBreak-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantBreak)
+
+  <details>
+
+  #### Why?
+  Swift automatically breaks out of a switch case after executing its code, so explicit `break` statements are usually unnecessary and add visual clutter.
+
+  ```swift
+  // WRONG
+  switch spaceship.warpDriveState {
+  case .engaged:
+    navigator.engageWarpDrive()
+    break
+  case .disengaged:
+    navigator.disengageWarpDrive()
+    break
+  }
+
+  // RIGHT  
+  switch spaceship.warpDriveState {
+  case .engaged:
+    navigator.engageWarpDrive()
+  case .disengaged:
+    navigator.disengageWarpDrive()
+  }
+  ```
+
+  </details>
+
 * <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#elseOnSameLine)
 
   <details>
