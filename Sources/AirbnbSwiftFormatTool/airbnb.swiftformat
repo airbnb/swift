@@ -129,3 +129,4 @@
 --rules throwingTests
 --rules noGuardInTests
 --rules redundantMemberwiseInit
+--rules redundantTypedThrows
