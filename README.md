@@ -2327,6 +2327,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='omit-redundant-typed-throws'></a>(<a href='#omit-redundant-typed-throws'>link</a>) **Omit redundant typed `throws` annotations from function definitions.** [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantTypedThrows)
+
+  <details>
+
+  #### Why?
+  `throws(Never)` is equivalent to a non-throwing function, and `throws(Error)` is equivalent to non-typed `throws`. These redundant annotations add unnecessary complexity to function signatures.
+
+  ```swift
+  // WRONG
+  func doSomething() throws(Never) -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws(Error) -> Int {
+    throw MyError.failed
+  }
+
+  // RIGHT
+  func doSomething() -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws -> Int {
+    throw MyError.failed
+  }
+  ```
+
+  </details>
+
 ### Closures
 
 * <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#void)
