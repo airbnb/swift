@@ -5,10 +5,10 @@ let package = Package(
   name: "AirbnbSwift",
   platforms: [.macOS(.v10_13)],
   products: [
-    .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
+    .plugin(name: "FormatSwift", targets: ["FormatSwift"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3"),
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3")
   ],
   targets: [
     .plugin(
@@ -19,7 +19,7 @@ let package = Package(
           description: "Formats Swift source files according to the Airbnb Swift Style Guide"
         ),
         permissions: [
-          .writeToPackageDirectory(reason: "Format Swift source files"),
+          .writeToPackageDirectory(reason: "Format Swift source files")
         ]
       ),
       dependencies: [
@@ -32,7 +32,7 @@ let package = Package(
     .executableTarget(
       name: "AirbnbSwiftFormatTool",
       dependencies: [
-        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+        .product(name: "ArgumentParser", package: "swift-argument-parser")
       ],
       resources: [
         .process("airbnb.swiftformat"),
