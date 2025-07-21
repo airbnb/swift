@@ -526,25 +526,77 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#trailingCommas)
+* <a id='trailing-commas'></a>(<a href='#trailing-commas'>link</a>) **Add a trailing comma after the last element of multi-line, multi-element comma-separated lists.* This includes arrays, dictionaries, function declarations, function calls, etc. Don't include a trailing comma if the list spans only a single line, or contains only a single element. [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#trailingCommas)
 
   <details>
 
   ```swift
   // WRONG
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent()
+  let terrestrialPlanets = [
+    mercury,
+    venus,
+    earth,
+    mars
   ]
 
+  func buildSolarSystem(
+    innerPlanets: [Planet],
+    outerPlanets: [Planet]
+  ) { ... }
+
+  buildSolarSystem(
+    innertPlanets: terrestrialPlanets,
+    outerPlanets: gasGiants
+  )
+
   // RIGHT
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent(),
+  let terrestrialPlanets = [
+    mercury,
+    venus,
+    earth,
+    mars,
   ]
+
+  func buildSolarSystem(
+    innerPlanets: [Planet],
+    outerPlanets: [Planet],
+  ) { ... }
+
+  buildSolarSystem(
+    innertPlanets: terrestrialPlanets,
+    outerPlanets: gasGiants,
+  )
   ```
+
+  ```swift
+  // WRONG: Omit the trailing comma in single-element lists.
+  let planetsWithLife = [
+    earth,
+  ]
+
+  func buildSolarSystem(
+    _ planets: [Planet],
+  )
+
+  buildSolarSystem(
+    terrestrialPlanets + gasGiants,
+  )
+
+  // RIGHT
+  let planetsWithLife = [
+    earth
+  ]
+
+  func buildSolarSystem(
+    _ planets: [Planet]
+  ) { ... }
+
+  buildSolarSystem(
+    terrestrialPlanets + gasGiants
+  )
+  ```
+
+  </details>
 
 * <a id='no-space-inside-collection-brackets'></a>(<a href='#no-space-inside-brackets'>link</a>) **There should be no spaces inside the brackets of collection literals.** [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spaceInsideBrackets)
 
