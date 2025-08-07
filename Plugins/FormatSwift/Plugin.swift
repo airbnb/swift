@@ -209,7 +209,7 @@ extension Package {
     guard let projectDirectory = URL(string: directory.string) else { return [] }
 
     var supportedSwiftVersions = [
-      SwiftVersion(major: toolsVersion.major, minor: toolsVersion.minor),
+      SwiftVersion(major: toolsVersion.major, minor: toolsVersion.minor)
     ]
 
     // Look for all of the package manifest files in the directory root
