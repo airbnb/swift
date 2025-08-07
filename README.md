@@ -4423,6 +4423,47 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+* <a id='single-propery-per-line'></a>(<a href='#single-propery-per-line'>link</a>) **Only define a single property or enum case per line.** [![SwiftFormat: singlePropertyPerLine](https://img.shields.io/badge/SwiftFormat-singlePropertyPerLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#singlePropertyPerLine) [![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapEnumCases)
+
+  <details>
+
+  #### Why?
+   - Declarations that define a single property are much more common, and more idiomatic.
+   - Only using the standard form of property declarations makes it easier to write and maintain tools that operate on source code, like macros, lint rules, and code autocorrect.
+
+  ```swift
+  // WRONG
+  let mercury, venus: Planet
+
+  let earth = planets[2], mars = planets[3]
+
+  let (jupiter, saturn) = (planets[4], planets[5])
+
+  enum IceGiants {
+    case neptune, uranus
+  }
+
+  // RIGHT
+  let mercury: Planet
+  let venus: Planet
+
+  let earth = planets[2]
+  let mars = planets[3]
+
+  let jupiter = planets[4]
+  let saturn = planets[5]
+
+  enum IceGiants {
+    case neptune
+    case uranus
+  }
+  
+  // ALSO RIGHT: Tuple destructing is fine for values like function call results.
+  let (ceres, pluto) = findAndClassifyDwarfPlanets()
+  ```
+
+  </details>
   
 * <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtensions](https://img.shields.io/badge/SwiftFormat-emptyExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#emptyExtensions)
 

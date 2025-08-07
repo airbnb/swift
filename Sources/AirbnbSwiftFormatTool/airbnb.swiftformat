@@ -27,9 +27,9 @@
 --type-attributes prev-line # wrapAttributes
 --wrap-ternary before-operators # wrap
 --wrap-string-interpolation preserve # wrap
---struct-threshold 20 # organizeDeclarations
---enum-threshold 20 # organizeDeclarations
---organize-types class,struct,enum,extension,actor # organizeDeclarations
+--mark-struct-threshold 20 # organizeDeclarations
+--mark-enum-threshold 20 # organizeDeclarations
+--organize-types class,struct,enum,extension,actor,protocol # organizeDeclarations
 --visibility-order beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
 --type-order nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
 --sort-swiftui-properties first-appearance-sort #organizeDeclarations
@@ -83,6 +83,8 @@
 --rules wrapMultilineStatementBraces
 --rules wrapArguments
 --rules wrapAttributes
+--rules wrapEnumCases
+--rules singlePropertyPerLine
 --rules braces
 --rules redundantClosure
 --rules redundantInit
