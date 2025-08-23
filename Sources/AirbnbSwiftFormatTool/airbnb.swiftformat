@@ -20,6 +20,7 @@
 --closing-paren balanced # wrapArguments
 --call-site-paren balanced # wrapArguments
 --wrap-type-aliases before-first # wrapArguments
+--allow-partial-wrapping false # wrapArguments
 --func-attributes prev-line # wrapAttributes
 --computed-var-attributes prev-line # wrapAttributes
 --stored-var-attributes same-line # wrapAttributes
@@ -33,6 +34,7 @@
 --visibility-order beforeMarks,instanceLifecycle,open,public,package,internal,fileprivate,private # organizeDeclarations
 --type-order nestedType,staticProperty,staticPropertyWithBody,classPropertyWithBody,swiftUIPropertyWrapper,instanceProperty,instancePropertyWithBody,staticMethod,classMethod,instanceMethod # organizeDeclarations
 --sort-swiftui-properties first-appearance-sort #organizeDeclarations
+--type-body-marks remove #organizeDeclarations
 --extension-acl on-declarations # extensionAccessControl
 --pattern-let inline # hoistPatternLet
 --property-types inferred # redundantType, propertyTypes

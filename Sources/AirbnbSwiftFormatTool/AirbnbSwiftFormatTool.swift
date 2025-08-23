@@ -98,7 +98,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   /// Builds a command that runs the SwiftFormat tool
   private func makeSwiftFormatCommand() -> Command {
     var arguments = directories + [
-      "--config", swiftFormatConfig,
+      "--config",
+      swiftFormatConfig,
     ]
 
     if let swiftFormatCachePath = swiftFormatCachePath {
@@ -125,7 +126,8 @@ struct AirbnbSwiftFormatTool: ParsableCommand {
   ///    When autocorrecting, SwiftLint doesn't emit any lint warnings.
   private func makeSwiftLintCommand(autocorrect: Bool) -> Command {
     var arguments = directories + [
-      "--config", swiftLintConfig,
+      "--config",
+      swiftLintConfig,
       // Required for SwiftLint to emit a non-zero exit code on lint failure
       "--strict",
     ]
