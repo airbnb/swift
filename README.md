@@ -3280,23 +3280,68 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
+* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.** [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFinalClasses)
 
   <details>
 
-  #### Why?
-  If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
-
   ```swift
   // WRONG
-  class SettingsRepository {
+  public class SpacecraftEngine {
     // ...
   }
 
   // RIGHT
-  final class SettingsRepository {
+  public final class SpacecraftEngine {
     // ...
   }
+  
+  // ALSO RIGHT: Marked as `open`, explicitly intended to be subclassed.
+  open class SpacecraftEngine {
+    // ...
+  }
+  ```
+
+  Most classes are never overridden, and composition is generally preferred over inheritance.
+  
+  If a class does need to be subclassed, use one of these approaches to indicate to the linter that the class should not be marked `final`:
+  
+  1. If the class is already `public`, mark the class as `open`. `open` access control indicates that the class is allowed to be subclassed:
+  
+  ```swift
+  open class SpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  2. Include _"Base"_ in the class name to indicate that the class is a base class intended to be subclassed:
+  
+  ```swift
+  class BaseSpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  3. Include a doc comment mentioning that the class is a base class intended to be subclassed:
+  
+  ```swift
+  /// Base class for various spacecraft engine varieties
+  class SpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  4. Implement the subclass in the same file as the base class:
+  
+  ```swift
+  class SpacecraftEngine {
+    // ...
+  }
+  
+  #if DEBUG
+  class MockSpacecraftEngine: SpacecraftEngine {
+    // ...
+  }
+  #endif
   ```
 
   </details>
