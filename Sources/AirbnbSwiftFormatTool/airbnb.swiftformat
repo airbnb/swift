@@ -132,6 +132,7 @@
 --rules modifiersOnSameLine
 --rules noForceTryInTests
 --rules noForceUnwrapInTests
+--rules redundantThrows
 --rules noGuardInTests
 --rules redundantMemberwiseInit
 --rules redundantBreak
