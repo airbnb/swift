@@ -4589,7 +4589,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: throwingTests](https://img.shields.io/badge/SwiftFormat-throwingTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#throwingTests)
+* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
   <details>
 
@@ -4623,6 +4623,57 @@ _You can enable the following settings in Xcode by running [this script](resourc
     @Test
     func something() throws {
       try Something().doSomething()
+    }
+  }
+  ```
+  </details>
+
+* <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests** Force-unwrapping (`!`) will crash your test suite. Use `try XCTUnwrap` or `try #require` to unwrap values safely, which will throw an error instead. [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SomeTestCase: XCTestCase {
+    // WRONG
+    func testCanLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      XCTAssertTrue(spaceship.hasLaunched)
+    }
+
+    // RIGHT
+    func testCanLaunchSpaceship() throws {
+      let spaceship = try XCTUnwrap((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try XCTUnwrap(nearestPlanet()))
+      XCTAssertTrue(spaceship.hasLaunched)
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SomeTests {
+    // WRONG
+    @Test
+    func canLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      #expect(spaceship.hasLaunched)
+    }
+
+    // RIGHT
+    @Test
+    func canLaunchSpaceship() throws {
+      let spaceship = try #require((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try #require(nearestPlanet()))
+      #expect(spaceship.hasLaunched)
     }
   }
   ```
