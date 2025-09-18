@@ -4628,7 +4628,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests**. Force-unwrapping (`!`) will crash your test suite. Use `try XCTUnwrap` or `try #require` to unwrap values safely, which will throw an error instead. [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
+* <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests**. Force-unwrapping (`!`) will crash your test suite. Use safe alternatives like `try XCTUnwrap` or `try #require`, which will throw an error instead, or standard optional unwrapping (`?`). [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
 
   <details>
 
@@ -4641,7 +4641,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
       spaceship.engine!.prepare()
       spaceship.launch(to: nearestPlanet()!)
+      
       XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination! as! Planet, nearestPlanet())
     }
 
     // RIGHT
@@ -4649,7 +4651,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = try XCTUnwrap((dependencies?.shipyardService as? DefaultShipyardService)?.build())
       spaceship.engine?.prepare()
       spaceship.launch(to: try XCTUnwrap(nearestPlanet()))
+      
       XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination as? Planet, nearestPlanet())
     }
   }
   ```
@@ -4664,7 +4668,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
       spaceship.engine!.prepare()
       spaceship.launch(to: nearestPlanet()!)
+      
       #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination! as! Planet) == nearestPlanet())
     }
 
     // RIGHT
@@ -4673,7 +4679,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = try #require((dependencies?.shipyardService as? DefaultShipyardService)?.build())
       spaceship.engine?.prepare()
       spaceship.launch(to: try #require(nearestPlanet()))
+      
       #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination as? Planet) == nearestPlanet())
     }
   }
   ```
