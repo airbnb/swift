@@ -4679,7 +4679,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='remove-redundant-throws-in-tests'></a>(<a href='#remove-redundant-throws-in-tests'>link</a>) **Remove redundant `throws` from test methods that don't throw any errors.** [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows)
+* <a id='remove-redundant-effects-in-tests'></a>(<a href='#remove-redundant-effects-in-tests'>link</a>) **Remove redundant `throws` and `async` effects from test cases**. If a test case doesn't throw any errors, or doesn't `await` any `async` method calls, then `throws` and `async` are redundant. [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
 
   <details>
 
@@ -4688,7 +4688,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   final class PlanetTests: XCTestCase {
     // WRONG
-    func test_habitability() throws {
+    func test_habitability() async throws {
       XCTAssertTrue(earth.isHabitable)
       XCTAssertFalse(mars.isHabitable)
     }
@@ -4707,7 +4707,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct PlanetTests {
     // WRONG
     @Test
-    func habitability() throws {
+    func habitability() async throws {
       #expect(earth.isHabitable)
       #expect(!mars.isHabitable)
     }
