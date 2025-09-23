@@ -2,7 +2,7 @@
 --exclude Carthage,Pods,.build
 
 # options
---swift-version 6.1
+--swift-version 6.2
 --language-mode 5
 --self remove # redundantSelf
 --import-grouping testable-bottom # sortedImports
