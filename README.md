@@ -4634,7 +4634,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`** `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: throwingTests](https://img.shields.io/badge/SwiftFormat-throwingTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#throwingTests)
+* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`**. `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
   <details>
 
@@ -4642,12 +4642,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import XCTest
 
   final class SomeTestCase: XCTestCase {
-    // WRONG:
+    // WRONG
     func test_something() {
       try! Something().doSomething()
     }
 
-    // RIGHT:
+    // RIGHT
     func test_something() throws {
       try Something().doSomething()
     }
@@ -4658,16 +4658,118 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import Testing
 
   struct SomeTests {
-    // WRONG:
+    // WRONG
     @Test
     func something() {
       try! Something().doSomething()
     }
 
-    // RIGHT:
+    // RIGHT
     @Test
     func something() throws {
       try Something().doSomething()
+    }
+  }
+  ```
+  </details>
+
+* <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests**. Force-unwrapping (`!`) will crash your test suite. Use safe alternatives like `try XCTUnwrap` or `try #require`, which will throw an error instead, or standard optional unwrapping (`?`). [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SpaceshipTests: XCTestCase {
+    // WRONG
+    func testCanLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      
+      XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination! as! Planet, nearestPlanet())
+    }
+
+    // RIGHT
+    func testCanLaunchSpaceship() throws {
+      let spaceship = try XCTUnwrap((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try XCTUnwrap(nearestPlanet()))
+      
+      XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination as? Planet, nearestPlanet())
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SpaceshipTests {
+    // WRONG
+    @Test
+    func canLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      
+      #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination! as! Planet) == nearestPlanet())
+    }
+
+    // RIGHT
+    @Test
+    func canLaunchSpaceship() throws {
+      let spaceship = try #require((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try #require(nearestPlanet()))
+      
+      #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination as? Planet) == nearestPlanet())
+    }
+  }
+  ```
+  </details>
+
+* <a id='remove-redundant-effects-in-tests'></a>(<a href='#remove-redundant-effects-in-tests'>link</a>) **Remove redundant `throws` and `async` effects from test cases**. If a test case doesn't throw any errors, or doesn't `await` any `async` method calls, then `throws` and `async` are redundant. [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class PlanetTests: XCTestCase {
+    // WRONG
+    func test_habitability() async throws {
+      XCTAssertTrue(earth.isHabitable)
+      XCTAssertFalse(mars.isHabitable)
+    }
+
+    // RIGHT
+    func test_habitability() {
+      XCTAssertTrue(earth.isHabitable)
+      XCTAssertFalse(mars.isHabitable)
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct PlanetTests {
+    // WRONG
+    @Test
+    func habitability() async throws {
+      #expect(earth.isHabitable)
+      #expect(!mars.isHabitable)
+    }
+
+    // RIGHT
+    @Test
+    func habitability() {
+      #expect(earth.isHabitable)
+      #expect(!mars.isHabitable)
     }
   }
   ```

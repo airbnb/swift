@@ -130,7 +130,10 @@
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
 --rules modifiersOnSameLine
---rules throwingTests
+--rules noForceTryInTests
+--rules noForceUnwrapInTests
+--rules redundantThrows
+--rules redundantAsync
 --rules noGuardInTests
 --rules redundantMemberwiseInit
 --rules redundantBreak
