@@ -138,3 +138,4 @@
 --rules redundantMemberwiseInit
 --rules redundantBreak
 --rules redundantTypedThrows
+--rules preferFinalClasses
