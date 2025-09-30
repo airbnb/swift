@@ -82,6 +82,7 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
 1. [Objective-C Interoperability](#objective-c-interoperability)
+1. [Testing](#testing)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
@@ -525,25 +526,77 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#trailingCommas)
+* <a id='trailing-commas'></a>(<a href='#trailing-commas'>link</a>) **Add a trailing comma after the last element of multi-line, multi-element comma-separated lists.* This includes arrays, dictionaries, function declarations, function calls, etc. Don't include a trailing comma if the list spans only a single line, or contains only a single element. [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#trailingCommas)
 
   <details>
 
   ```swift
   // WRONG
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent()
+  let terrestrialPlanets = [
+    mercury,
+    venus,
+    earth,
+    mars
   ]
 
+  func buildSolarSystem(
+    innerPlanets: [Planet],
+    outerPlanets: [Planet]
+  ) { ... }
+
+  buildSolarSystem(
+    innertPlanets: terrestrialPlanets,
+    outerPlanets: gasGiants
+  )
+
   // RIGHT
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent(),
+  let terrestrialPlanets = [
+    mercury,
+    venus,
+    earth,
+    mars,
   ]
+
+  func buildSolarSystem(
+    innerPlanets: [Planet],
+    outerPlanets: [Planet],
+  ) { ... }
+
+  buildSolarSystem(
+    innertPlanets: terrestrialPlanets,
+    outerPlanets: gasGiants,
+  )
   ```
+
+  ```swift
+  // WRONG: Omit the trailing comma in single-element lists.
+  let planetsWithLife = [
+    earth,
+  ]
+
+  func buildSolarSystem(
+    _ planets: [Planet],
+  )
+
+  buildSolarSystem(
+    terrestrialPlanets + gasGiants,
+  )
+
+  // RIGHT
+  let planetsWithLife = [
+    earth
+  ]
+
+  func buildSolarSystem(
+    _ planets: [Planet]
+  ) { ... }
+
+  buildSolarSystem(
+    terrestrialPlanets + gasGiants
+  )
+  ```
+
+  </details>
 
 * <a id='no-space-inside-collection-brackets'></a>(<a href='#no-space-inside-brackets'>link</a>) **There should be no spaces inside the brackets of collection literals.** [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spaceInsideBrackets)
 
@@ -1500,6 +1553,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='omit-redundant-break'></a>(<a href='#omit-redundant-break'>link</a>) **Omit redundant `break` statements in switch cases.** [![SwiftFormat: redundantBreak](https://img.shields.io/badge/SwiftFormat-redundantBreak-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantBreak)
+
+  <details>
+
+  #### Why?
+  Swift automatically breaks out of a switch case after executing its code, so explicit `break` statements are usually unnecessary and add visual clutter.
+
+  ```swift
+  // WRONG
+  switch spaceship.warpDriveState {
+  case .engaged:
+    navigator.engageWarpDrive()
+    break
+  case .disengaged:
+    navigator.disengageWarpDrive()
+    break
+  }
+
+  // RIGHT  
+  switch spaceship.warpDriveState {
+  case .engaged:
+    navigator.engageWarpDrive()
+  case .disengaged:
+    navigator.disengageWarpDrive()
+  }
+  ```
+
+  </details>
+
 * <a id='wrap-guard-else'></a>(<a href='#wrap-guard-else'>link</a>) **Add a line break before the `else` keyword in a multi-line guard statement.** For single-line guard statements, keep the `else` keyword on the same line as the `guard` keyword. The open brace should immediately follow the `else` keyword. [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#elseOnSameLine)
 
   <details>
@@ -1656,32 +1738,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
     planet.terraform()
   }
 
-  class Planet {
-    func terraform(
-      atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default
-    ) {
-      generateAtmosphere(atmosphereOptions)
-      generateOceans(oceanOptions)
-    }
-  }
-
   // RIGHT
   if
     let star = planet.nearestStar(),
     planet.isInHabitableZone(of: star)
   {
     planet.terraform()
-  }
-
-  class Planet {
-    func terraform(
-      atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default
-    ) {
-      generateAtmosphere(atmosphereOptions)
-      generateOceans(oceanOptions)
-    }
   }
   ```
 
@@ -2085,7 +2147,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces) 
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`).** [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces) 
 
   <details>
 
@@ -2312,6 +2374,35 @@ _You can enable the following settings in Xcode by running [this script](resourc
       .filter { $0.isInnerPlanet }
       // Gets the name of the inner planet
       .map { $0.name }
+  }
+  ```
+
+  </details>
+
+* <a id='omit-redundant-typed-throws'></a>(<a href='#omit-redundant-typed-throws'>link</a>) **Omit redundant typed `throws` annotations from function definitions.** [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantTypedThrows)
+
+  <details>
+
+  #### Why?
+  `throws(Never)` is equivalent to a non-throwing function, and `throws(Error)` is equivalent to non-typed `throws`. These redundant annotations add unnecessary complexity to function signatures.
+
+  ```swift
+  // WRONG
+  func doSomething() throws(Never) -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws(Error) -> Int {
+    throw MyError.failed
+  }
+
+  // RIGHT
+  func doSomething() -> Int {
+    return 0
+  }
+
+  func doSomethingElse() throws -> Int {
+    throw MyError.failed
   }
   ```
 
@@ -2707,6 +2798,64 @@ _You can enable the following settings in Xcode by running [this script](resourc
   </details>
 
 * <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
+
+* <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. Note that this only applies to `internal`, `fileprivate` and `private` initializers, since compiler-synthesized memberwise initializers are only generated for those access controls. [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
+
+  <details>
+
+  #### Why?
+  Removing redundant memberwise initializers reduces boilerplate and makes the code more concise. The compiler-synthesized initializers are equivalent to the explicit ones, so there's no functional difference.
+
+  ```swift
+  // WRONG
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+
+    init(name: String, mass: Double, radius: Double) {
+      self.name = name
+      self.mass = mass
+      self.radius = radius
+    }
+  }
+
+  // RIGHT
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+  }
+
+  // ALSO RIGHT: Custom logic in initializer makes it non-redundant
+  struct Planet {
+    let name: String
+    let mass: Double
+    let radius: Double
+
+    init(name: String, mass: Double, radius: Double) {
+      self.name = name.capitalized
+      self.mass = max(0, mass)
+      self.radius = max(0, radius)
+    }
+  }
+
+  // ALSO RIGHT: Public initializer is not redundant since compiler-synthesized 
+  // memberwise initializers are always internal
+  public struct Planet {
+    public let name: String
+    public let mass: Double
+    public let radius: Double
+
+    public init(name: String, mass: Double, radius: Double) {
+      self.name = name
+      self.mass = mass
+      self.radius = radius
+    }
+  }
+  ```
+
+  </details>
 
 * <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
@@ -3131,23 +3280,68 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
+* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.** [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFinalClasses)
 
   <details>
 
-  #### Why?
-  If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
-
   ```swift
   // WRONG
-  class SettingsRepository {
+  public class SpacecraftEngine {
     // ...
   }
 
   // RIGHT
-  final class SettingsRepository {
+  public final class SpacecraftEngine {
     // ...
   }
+  
+  // ALSO RIGHT: Marked as `open`, explicitly intended to be subclassed.
+  open class SpacecraftEngine {
+    // ...
+  }
+  ```
+
+  Most classes are never overridden, and composition is generally preferred over inheritance.
+  
+  If a class does need to be subclassed, use one of these approaches to indicate to the linter that the class should not be marked `final`:
+  
+  1. If the class is already `public`, mark the class as `open`. `open` access control indicates that the class is allowed to be subclassed:
+  
+  ```swift
+  open class SpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  2. Include _"Base"_ in the class name to indicate that the class is a base class intended to be subclassed:
+  
+  ```swift
+  class BaseSpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  3. Include a doc comment mentioning that the class is a base class intended to be subclassed:
+  
+  ```swift
+  /// Base class for various spacecraft engine varieties
+  class SpacecraftEngine {
+    // ...
+  }
+  ```
+  
+  4. Implement the subclass in the same file as the base class:
+  
+  ```swift
+  class SpacecraftEngine {
+    // ...
+  }
+  
+  #if DEBUG
+  class MockSpacecraftEngine: SpacecraftEngine {
+    // ...
+  }
+  #endif
   ```
 
   </details>
@@ -3881,36 +4075,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".** [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
+* <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**. [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#urlMacro)
 
-  <details>
+    <details>
 
-  ### Why?
+    #### Why?
 
-  Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
+    The `#URL` macro provides compile-time validation of URL strings, eliminating runtime crashes from invalid URLs while maintaining clean syntax for static URL creation.
 
-  ```swift
-  import Testing
-  
-  /// WRONG
-  struct SpaceshipTests {
-    @Test
-    func testWarpDriveEnablesFTLTravel() { ... }
+    ```swift
+    // WRONG
+    let url = URL(string: "https://example.com")!
 
-    @Test
-    func testArtificialGravityMatchesEarthGravity() { ... }
-  }
-
-  /// RIGHT
-  struct SpaceshipTests {
-    @Test
-    func warpDriveEnablesFTLTravel() { ... }
-
-    @Test
-    func artificialGravityMatchesEarthGravity() { ... }
-  }
-  ```
-  </details>
+    // RIGHT
+    let url = #URL("https://example.com")
+    ```
+    </details>
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -4288,6 +4468,47 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
+
+* <a id='single-propery-per-line'></a>(<a href='#single-propery-per-line'>link</a>) **Only define a single property or enum case per line.** [![SwiftFormat: singlePropertyPerLine](https://img.shields.io/badge/SwiftFormat-singlePropertyPerLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#singlePropertyPerLine) [![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapEnumCases)
+
+  <details>
+
+  #### Why?
+   - Declarations that define a single property are much more common, and more idiomatic.
+   - Only using the standard form of property declarations makes it easier to write and maintain tools that operate on source code, like macros, lint rules, and code autocorrect.
+
+  ```swift
+  // WRONG
+  let mercury, venus: Planet
+
+  let earth = planets[2], mars = planets[3]
+
+  let (jupiter, saturn) = (planets[4], planets[5])
+
+  enum IceGiants {
+    case neptune, uranus
+  }
+
+  // RIGHT
+  let mercury: Planet
+  let venus: Planet
+
+  let earth = planets[2]
+  let mars = planets[3]
+
+  let jupiter = planets[4]
+  let saturn = planets[5]
+
+  enum IceGiants {
+    case neptune
+    case uranus
+  }
+  
+  // ALSO RIGHT: Tuple destructing is fine for values like function call results.
+  let (ceres, pluto) = findAndClassifyDwarfPlanets()
+  ```
+
+  </details>
   
 * <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtensions](https://img.shields.io/badge/SwiftFormat-emptyExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#emptyExtensions)
 
@@ -4342,22 +4563,55 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Testing
 
-* <a id='prefer-unwrapping-apis'></a>(<a href='#prefer-unwrapping-apis'>link</a>) **Prefer Test APIs for unwrapping optionals over `if let`.** XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself.
+* <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".** [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
+
+  <details>
+
+  ### Why?
+
+  Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
+
+  ```swift
+  import Testing
+  
+  /// WRONG
+  struct SpaceshipTests {
+    @Test
+    func testWarpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func testArtificialGravityMatchesEarthGravity() { ... }
+  }
+
+  /// RIGHT
+  struct SpaceshipTests {
+    @Test
+    func warpDriveEnablesFTLTravel() { ... }
+
+    @Test
+    func artificialGravityMatchesEarthGravity() { ... }
+  }
+  ```
+  </details>
+
+* <a id='avoid-guard-in-tests'></a>(<a href='#avoid-guard-in-tests'>link</a>) **Avoid `guard` statements in unit tests**. XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself. Use assertions instead of guarding on boolean conditions. [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
+
   <details>
 
   ```swift
   import XCTest
 
   final class SomeTestCase: XCTestCase {
-
     func test_something() throws {
+      // WRONG:
+      guard let value = optionalValue, value.matchesCondition else {
+        XCTFail()
+        return
+      }
+
       // RIGHT:
       let value = try XCTUnwrap(optionalValue)
-
-      // WRONG:
-      guard let value = optionalValue else { 
-        XCTFail()
-      }
+      XCTAssert(value.matchesCondition)
     }
   }
   ```
@@ -4368,17 +4622,157 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct SomeTests {
     @Test
     func something() throws {
-      // RIGHT:
-      let value = try #require(optionalValue)
-
       // WRONG:
-      guard let value = optionalValue {
+      guard let value = optionalValue, value.matchesCondition {
         return
       }
+
+      // RIGHT:
+      let value = try #require(optionalValue)
+      #expect(value.matchesCondition)
     }
   }
   ```
 
+* <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`**. `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SomeTestCase: XCTestCase {
+    // WRONG
+    func test_something() {
+      try! Something().doSomething()
+    }
+
+    // RIGHT
+    func test_something() throws {
+      try Something().doSomething()
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SomeTests {
+    // WRONG
+    @Test
+    func something() {
+      try! Something().doSomething()
+    }
+
+    // RIGHT
+    @Test
+    func something() throws {
+      try Something().doSomething()
+    }
+  }
+  ```
+  </details>
+
+* <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests**. Force-unwrapping (`!`) will crash your test suite. Use safe alternatives like `try XCTUnwrap` or `try #require`, which will throw an error instead, or standard optional unwrapping (`?`). [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class SpaceshipTests: XCTestCase {
+    // WRONG
+    func testCanLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      
+      XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination! as! Planet, nearestPlanet())
+    }
+
+    // RIGHT
+    func testCanLaunchSpaceship() throws {
+      let spaceship = try XCTUnwrap((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try XCTUnwrap(nearestPlanet()))
+      
+      XCTAssertTrue(spaceship.hasLaunched)
+      XCTAssertEqual(spaceship.destination as? Planet, nearestPlanet())
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct SpaceshipTests {
+    // WRONG
+    @Test
+    func canLaunchSpaceship() {
+      let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
+      spaceship.engine!.prepare()
+      spaceship.launch(to: nearestPlanet()!)
+      
+      #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination! as! Planet) == nearestPlanet())
+    }
+
+    // RIGHT
+    @Test
+    func canLaunchSpaceship() throws {
+      let spaceship = try #require((dependencies?.shipyardService as? DefaultShipyardService)?.build())
+      spaceship.engine?.prepare()
+      spaceship.launch(to: try #require(nearestPlanet()))
+      
+      #expect(spaceship.hasLaunched)
+      #expect((spaceship.destination as? Planet) == nearestPlanet())
+    }
+  }
+  ```
+  </details>
+
+* <a id='remove-redundant-effects-in-tests'></a>(<a href='#remove-redundant-effects-in-tests'>link</a>) **Remove redundant `throws` and `async` effects from test cases**. If a test case doesn't throw any errors, or doesn't `await` any `async` method calls, then `throws` and `async` are redundant. [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
+
+  <details>
+
+  ```swift
+  import XCTest
+
+  final class PlanetTests: XCTestCase {
+    // WRONG
+    func test_habitability() async throws {
+      XCTAssertTrue(earth.isHabitable)
+      XCTAssertFalse(mars.isHabitable)
+    }
+
+    // RIGHT
+    func test_habitability() {
+      XCTAssertTrue(earth.isHabitable)
+      XCTAssertFalse(mars.isHabitable)
+    }
+  }
+  ```
+
+  ```swift
+  import Testing
+
+  struct PlanetTests {
+    // WRONG
+    @Test
+    func habitability() async throws {
+      #expect(earth.isHabitable)
+      #expect(!mars.isHabitable)
+    }
+
+    // RIGHT
+    @Test
+    func habitability() {
+      #expect(earth.isHabitable)
+      #expect(!mars.isHabitable)
+    }
+  }
+  ```
   </details>
 
 **[⬆ back to top](#table-of-contents)**
