@@ -2939,18 +2939,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='modifier-order'></a>(<a href='#modifier-order'>link</a>) **Use consistent ordering for modifiers.** `public` comes before `final`. [![SwiftFormat: modifierOrder](https://img.shields.io/badge/SwiftFormat-modifierOrder-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#modifierOrder)
+* <a id='modifier-order'></a>(<a href='#modifier-order'>link</a>) **Use consistent ordering for modifiers.** Access modifiers like `public` and `private` come before other modifiers like `final` or `static`. [![SwiftFormat: modifierOrder](https://img.shields.io/badge/SwiftFormat-modifierOrder-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#modifierOrder)
 
   <details>
 
   ```swift
   // WRONG
-  final public Spaceship {}
+  final public class Spaceship {}
   ```
 
   ```swift
   // RIGHT
-  public final Spaceship {}
+  public final class Spaceship {}
   ```
 
   </details>
