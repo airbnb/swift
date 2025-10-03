@@ -2939,6 +2939,22 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='modifier-order'></a>(<a href='#modifier-order'>link</a>) **Use consistent ordering for modifiers.** Access modifiers like `public` and `private` come before other modifiers like `final` or `static`. [![SwiftFormat: modifierOrder](https://img.shields.io/badge/SwiftFormat-modifierOrder-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#modifierOrder)
+
+  <details>
+
+  ```swift
+  // WRONG
+  final public class Spaceship {}
+  ```
+
+  ```swift
+  // RIGHT
+  public final class Spaceship {}
+  ```
+
+  </details>
+
 * <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantFileprivate)
 
   <details>
