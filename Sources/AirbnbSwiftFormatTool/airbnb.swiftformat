@@ -138,6 +138,7 @@
 --rules redundantThrows
 --rules redundantAsync
 --rules noGuardInTests
+--rules validateTestCases
 --rules redundantMemberwiseInit
 --rules redundantBreak
 --rules redundantTypedThrows
