@@ -4689,9 +4689,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='test-suite-access-control'></a>(<a href='#test-suite-access-control'>link</a>) **Test case functions should be `internal`, and helper methods and properties should be `private`**. This ensures test cases are accessible to the test runner while keeping test implementation details encapsulated. [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
+* <a id='test-suite-access-control'></a>(<a href='#test-suite-access-control'>link</a>) **In test suites, test cases should be `internal`, and helper methods and properties should be `private`**. [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
 
   <details>
+
+  #### Why?
+  Test suites and test cases don't need to be `public` to be picked up by XCTest / Swift Testing, so should be `internal`.
+
+  Helpers and stored properties should be `private` since they are not accessed outside of the test suite.
 
   ```swift
   import Testing
