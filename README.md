@@ -3275,6 +3275,44 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+* <a id='simplify-generic-constraints'></a>(<a href='#simplify-generic-constraints'>link</a>) **Convert where clause generic constraints to inline angle bracket constraints for simple protocol conformances.** [![SwiftFormat: simplifyGenericConstraints](https://img.shields.io/badge/SwiftFormat-simplifyGenericConstraints-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#simplifyGenericConstraints)
+
+  <details>
+
+  #### Why?
+  Inline generic constraints (`<T: Protocol>`) are more concise and idiomatic than where clauses (`<T> where T: Protocol`) for simple protocol conformances. Using inline constraints for simple cases makes generic declarations easier to read at a glance. Where clauses are reserved for complex constraints that cannot be expressed inline, like associated type constraints (`T.Element == Star`) or concrete type equality.
+
+  ```swift
+  // WRONG
+  struct Spacecraft<T, U> where T: Hashable, U: Codable {}
+
+  class Mission<Payload> where Payload: Equatable {
+    // ...
+  }
+
+  enum Planet<Value, Error> where Value: Decodable, Error: Swift.Error {}
+
+  func launch<T>(_ rocket: T) where T: Sendable {}
+
+  // RIGHT
+  struct Spacecraft<T: Hashable, U: Codable> {}
+
+  class Mission<Payload: Equatable> {
+    // ...
+  }
+
+  enum Planet<Value: Decodable, Error: Swift.Error> {}
+
+  func launch<T: Sendable>(_ rocket: T) {}
+
+  // ALSO RIGHT: Complex constraints remain in where clause
+  struct Galaxy<T: Collection> where T.Element == Star {}
+
+  func terraform<T>(_ planet: T) where T: PlanetaryBody, T.Element == Moon {}
+  ```
+
+  </details>
+
 * <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **Default type methods to `static`.**
 
   <details>

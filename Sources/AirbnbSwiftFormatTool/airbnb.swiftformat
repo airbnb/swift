@@ -143,3 +143,4 @@
 --rules redundantBreak
 --rules redundantTypedThrows
 --rules preferFinalClasses
+--rules simplifyGenericConstraints
