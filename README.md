@@ -3275,7 +3275,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='simplify-generic-constraints'></a>(<a href='#simplify-generic-constraints'>link</a>) **Convert where clause generic constraints to inline angle bracket constraints for simple protocol conformances.** [![SwiftFormat: simplifyGenericConstraints](https://img.shields.io/badge/SwiftFormat-simplifyGenericConstraints-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#simplifyGenericConstraints)
+* <a id='simplify-generic-constraints'></a>(<a href='#simplify-generic-constraints'>link</a>) **Prefer defining simple generic constraints in the generic parameter list rather than in the where clause.** [![SwiftFormat: simplifyGenericConstraints](https://img.shields.io/badge/SwiftFormat-simplifyGenericConstraints-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#simplifyGenericConstraints)
 
   <details>
 
