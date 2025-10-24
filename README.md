@@ -3284,31 +3284,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  struct Spacecraft<T, U> where T: Hashable, U: Codable {}
-
-  class Mission<Payload> where Payload: Equatable {
-    // ...
+  struct SpaceshipDashboard<Left, Right>: View
+    where Left: View, Right: View
+  {
+    ...
   }
-
-  enum Planet<Value, Error> where Value: Decodable, Error: Swift.Error {}
-
-  func launch<T>(_ rocket: T) where T: Sendable {}
 
   // RIGHT
-  struct Spacecraft<T: Hashable, U: Codable> {}
-
-  class Mission<Payload: Equatable> {
-    // ...
+  struct SpaceshipDashboard<Left: View, Right: View>: View {
+    ...
   }
-
-  enum Planet<Value: Decodable, Error: Swift.Error> {}
-
-  func launch<T: Sendable>(_ rocket: T) {}
-
-  // ALSO RIGHT: Complex constraints remain in where clause
-  struct Galaxy<T: Collection> where T.Element == Star {}
-
-  func terraform<T>(_ planet: T) where T: PlanetaryBody, T.Element == Moon {}
   ```
 
   </details>
