@@ -3290,10 +3290,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ...
   }
 
+  func launch<T>(_ rocket: T) where T: Sendable {}
+
   // RIGHT
   struct SpaceshipDashboard<Left: View, Right: View>: View {
     ...
   }
+
+  func launch<T: Sendable>(_ rocket: T) {}
+
+  // ALSO RIGHT: Complex constraints remain in where clause
+  struct Galaxy<T: Collection> where T.Element == Star {}
   ```
 
   </details>
