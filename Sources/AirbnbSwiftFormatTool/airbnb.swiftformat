@@ -138,6 +138,7 @@
 --rules redundantThrows
 --rules redundantAsync
 --rules noGuardInTests
+--rules testSuiteAccessControl
 --rules validateTestCases
 --rules redundantMemberwiseInit
 --rules redundantBreak

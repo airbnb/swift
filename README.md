@@ -4689,6 +4689,95 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
+* <a id='test-suite-access-control'></a>(<a href='#test-suite-access-control'>link</a>) **In test suites, test cases should be `internal`, and helper methods and properties should be `private`**. [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
+
+  <details>
+
+  #### Why?
+  Test suites and test cases don't need to be `public` to be picked up by XCTest / Swift Testing, so should be `internal`.
+
+  Helpers and stored properties should be `private` since they are not accessed outside of the test suite.
+
+  ```swift
+  import Testing
+
+  // WRONG
+  struct SpaceshipTests {
+    let spaceship = Spaceship()
+
+    func launchSpaceship() {
+      spaceship.launch()
+    }
+
+    @Test
+    func spaceshipCanLaunch() {
+      launchSpaceship()
+      #expect(spaceship.hasLaunched)
+    }
+  }
+
+  // RIGHT
+  struct SpaceshipTests {
+
+    // MARK: Internal
+
+    @Test
+    func spaceshipCanLaunch() {
+      launchSpaceship()
+      #expect(spaceship.hasLaunched)
+    }
+
+    // MARK: Private
+
+    private let spaceship = Spaceship()
+
+    private func launchSpaceship() {
+      spaceship.launch()
+    }
+
+  }
+  ```
+
+  ```swift
+  import XCTest
+
+  // WRONG
+  final class SpaceshipTests: XCTestCase {
+    let spaceship = Spaceship()
+
+    func launchSpaceship() {
+      spaceship.launch()
+    }
+
+    func testSpaceshipCanLaunch() {
+      launchSpaceship()
+      XCTAssertTrue(spaceship.hasLaunched)
+    }
+  }
+
+  // RIGHT
+  final class SpaceshipTests: XCTestCase {
+
+    // MARK: Internal
+
+    func testSpaceshipCanLaunch() {
+      launchSpaceship()
+      XCTAssertTrue(spaceship.hasLaunched)
+    }
+
+    // MARK: Private
+
+    private let spaceship = Spaceship()
+
+    private func launchSpaceship() {
+      spaceship.launch()
+    }
+
+  }
+  ```
+
+  </details>
+
 * <a id='avoid-force-unwrap-in-tests'></a>(<a href='#avoid-force-unwrap-in-tests'>link</a>) **Avoid force-unwrapping in unit tests**. Force-unwrapping (`!`) will crash your test suite. Use safe alternatives like `try XCTUnwrap` or `try #require`, which will throw an error instead, or standard optional unwrapping (`?`). [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
 
   <details>
