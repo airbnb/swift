@@ -3290,14 +3290,28 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ...
   }
 
-  func launch<T>(_ rocket: T) where T: Sendable {}
+  extension Spaceship {
+    func fly<Destination>(
+      to: Destination,
+      didArrive: (Destination) -> Void
+    ) where Destination: PlanetaryBody {
+      ...
+    }
+  }
 
   // RIGHT
   struct SpaceshipDashboard<Left: View, Right: View>: View {
     ...
   }
 
-  func launch<T: Sendable>(_ rocket: T) {}
+  extension Spaceship {
+    func fly<Destination: PlanetaryBody>(
+      to: Destination,
+      didArrive: (Destination) -> Void
+    ) {
+      ...
+    }
+  }
 
   // ALSO RIGHT: Complex constraints remain in where clause
   struct Galaxy<T: Collection> where T.Element == Star {}
