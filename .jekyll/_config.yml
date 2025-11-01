@@ -1,0 +1,24 @@
+# Jekyll configuration for Airbnb Swift Style Guide
+
+# Basic settings
+title: Airbnb Swift Style Guide
+description: Official Swift style guide for Airbnb
+baseurl: "/swift"
+url: "https://bachand.github.io"
+
+# Syntax highlighting
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: swift
+  parse_block_html: true
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - README.md

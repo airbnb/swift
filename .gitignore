@@ -2,3 +2,7 @@
 .swiftpm
 .DS_Store
 .vscode
+
+# Jekyll
+_site
+.jekyll/index.md

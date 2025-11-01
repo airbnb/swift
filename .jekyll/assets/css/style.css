@@ -1,0 +1,96 @@
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+}
+
+:root {
+  --rausch: #FF5A5F;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+  border-left: 3px solid var(--rausch);
+  padding-left: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+header a {
+  color: var(--rausch);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 90%;
+}
+
+pre {
+  background: #f8f8f8;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  font-family: 'SF Mono', Monaco, Menlo, 'Courier New', monospace;
+}
+
+footer {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  margin-top: 60px;
+  text-align: center;
+  color: #666;
+}
+
+details {
+  margin: 20px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  margin-bottom: 16px;
+}
+
+details[open] summary {
+  margin-bottom: 16px;
+}
+
+details pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+details pre:last-child {
+  margin-bottom: 0;
+}
+
+
