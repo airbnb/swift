@@ -55,5 +55,8 @@ namespace :update do
 end
 
 namespace :site do
+  desc 'Serves the site to support previewing its content during development'
+  task :serve do
 
+  end
 end
