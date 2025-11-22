@@ -1,7 +1,4 @@
 GEM
-  specs:
-
-GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.8.7)
@@ -85,8 +82,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jekyll (~> 4.4.1)!
-  rake (~> 13.0.0)!
+  jekyll (~> 4.4.1)
+  rake (~> 13.0.0)
 
 BUNDLED WITH
    2.5.4
