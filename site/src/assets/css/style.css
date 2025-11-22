@@ -6,13 +6,13 @@ body {
   max-width: 900px;
 }
 
-code,
-pre {
+pre,
+code {
   font-family: 'SF Mono', Monaco, Menlo, 'Courier New', monospace;
-  background: #f5f5f5;
 }
 
-code {
+:not(pre) > code {
+  background: #f5f5f5;
   padding: 0.1rem 0.35rem;
   border-radius: 3px;
   font-size: 0.9em;
@@ -22,11 +22,6 @@ pre {
   margin: 1.5rem 0;
   padding: 1rem;
   overflow-x: auto;
-}
-
-pre code {
-  background: transparent;
-  padding: 0;
 }
 
 footer {
@@ -40,9 +35,4 @@ footer {
 footer a {
   color: #555;
   text-decoration: none;
-}
-
-footer a:hover {
-  color: #000;
-  text-decoration: underline;
 }
