@@ -6,7 +6,7 @@ class SiteContent
   attr_reader :readme_path, :index_path, :syntax_css_path
 
   def initialize()
-    site_dir = File.expand_path(__dir__)
+    site_dir = File.expand_path('src', __dir__)
     @readme_path = File.expand_path('../README.md', __dir__)
     @index_path = File.join(site_dir, 'index.md')
     @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
@@ -18,7 +18,7 @@ class SiteContent
 
   # Write index.md file.
   def write_index
-    File.write(index_path, generate_front_matter + process_readme_content)
+    File.write(index_path, generate_front_matter + filter_readme)
   end
 
   # Write syntax.css file.
@@ -38,10 +38,6 @@ class SiteContent
       ---
 
     FRONT
-  end
-
-  def process_readme_content
-    filter_readme.gsub('<details>', '<details markdown="1">')
   end
 
   def filter_readme_lines

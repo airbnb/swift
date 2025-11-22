@@ -1,0 +1,6 @@
+title: Airbnb Swift Style Guide
+github_url: https://github.com/airbnb/swift
+markdown: kramdown
+kramdown:
+  input: GFM
+  parse_block_html: true
