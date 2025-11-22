@@ -55,6 +55,12 @@ namespace :update do
 end
 
 namespace :site do
+  desc 'Prints the README content used to build the site'
+  task :filter_readme do
+    require_relative 'site/site_content'
+    puts SiteContent.new.filter_readme
+  end
+
   desc 'Serves the site to support previewing its content during development'
   task :serve do
 
