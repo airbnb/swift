@@ -1056,6 +1056,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
+  </details>
+
 * <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
 
   <details>
@@ -1084,6 +1086,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     & UniverseSimulatorServiceProviding
   ```
 
+  </details>
+
 * <a id='sort-typealiases'></a>(<a href='#sort-typealiases'>link</a>) **Sort protocol composition type aliases alphabetically.** [![SwiftFormat: sortTypealiases](https://img.shields.io/badge/SwiftFormat-sortTypealiases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#sortTypealiases)
 
   <details>
@@ -1109,6 +1113,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     & UniverseBuilderProviding
     & UniverseSimulatorServiceProviding
   ```
+
+  </details>
 
 * <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name. [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantOptionalBinding)
 
@@ -1141,6 +1147,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     galaxy.name == "Milky Way"
   else { … }
   ```
+
+  </details>
 
 * <a id='else-on-same-line'></a>(<a href='#else-on-same-line'>link</a>) **Else statements should start on the same line as the previous condition's closing brace, unless the conditions are separated by a blank line or comments.** [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#elseOnSameLine)
 
@@ -1195,6 +1203,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     …
   }
   ```
+
+  </details>
 
 * <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments)
 
@@ -1609,6 +1619,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+  </details>
+
 * <a id='indent-multiline-string-literals'></a>(<a href='#indent-multiline-string-literals'>link</a>) **Indent the body and closing triple-quote of multiline string literals**, unless the string literal begins on its own line in which case the string literal contents and closing triple-quote should have the same indentation as the opening triple-quote. [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#indent)
 
   <details>
@@ -1778,6 +1790,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     …
   }
   ```
+
+  </details>
 
 * <a id='no-spaces-around-function-parens'></a>(<a href='#no-spaces-around-parens'>link</a>) For function calls and declarations, there should be no spaces before or inside the parentheses of the argument list. [![SwiftFormat: spaceInsideParens](https://img.shields.io/badge/SwiftFormat-spaceInsideParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spaceInsideParens) [![SwiftFormat: spaceAroundParens](https://img.shields.io/badge/SwiftFormat-spaceAroundParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#spaceAroundParens)
 
@@ -3009,6 +3023,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
   ```
+
+  </details>
 
 * <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
@@ -4693,6 +4709,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
   ```
+
+  </details>
 
 * <a id='prefer-throwing-tests'></a>(<a href='#prefer-throwing-tests'>link</a>) **Prefer throwing tests to `try!`**. `try!` will crash your test suite like a force-unwrapped optional. XCTest and Swift Testing support throwing test methods, so use that instead. [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
