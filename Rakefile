@@ -55,12 +55,6 @@ namespace :update do
 end
 
 namespace :site do
-  desc 'Prints the README content used to build the site'
-  task :filter_readme do
-    require_relative 'site/site_content'
-    puts SiteContent.new.filter_readme
-  end
-
   desc 'Prepares index.md and syntax highlighting assets'
   task :prepare do
     require_relative 'site/site_content'
@@ -80,5 +74,11 @@ namespace :site do
   task serve: :prepare do
     env = { 'JEKYLL_ENV' => 'development' }
     sh env, 'bundle exec jekyll serve --source site/src'
+  end
+
+  desc 'Enables validating the README content used to build the site during local development'
+  task :filter_readme do
+    require_relative 'site/site_content'
+    puts SiteContent.new.filter_readme
   end
 end

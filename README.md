@@ -356,7 +356,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let enableGravity = true
   let numberOfPlanets = 8
   let sunMass = 1.989e30
-  
+
   // WRONG: Types can be inferred from if/switch expressions as well if each branch has the same explicit type.
   let smallestPlanet: Planet =
     if treatPlutoAsPlanet {
@@ -394,7 +394,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       galaxy.add(system)
     }
   }
-  
+
   // RIGHT
   struct SolarSystemBuilder {
     let sun = Star(mass: 1.989e30)
@@ -439,8 +439,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct SaturnOutline: ShapeStyle { ... }
 
   extension ShapeStyle where Self == SaturnOutline {
-    static var saturnOutline: SaturnOutline { 
-      SaturnOutline() 
+    static var saturnOutline: SaturnOutline {
+      SaturnOutline()
     }
   }
 
@@ -673,17 +673,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   let moons: [Planet : Moon] = [
-    mercury : [], 
-    venus : [], 
-    earth : [theMoon], 
+    mercury : [],
+    venus : [],
+    earth : [theMoon],
     mars : [phobos,deimos],
   ]
 
   // RIGHT
   let moons: [Planet: Moon] = [
-    mercury: [], 
-    venus: [], 
-    earth: [theMoon], 
+    mercury: [],
+    venus: [],
+    earth: [theMoon],
     mars: [phobos,deimos],
   ]
   ```
@@ -859,7 +859,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  // WRONG. These simple property wrappers should be written on the same line as the declaration. 
+  // WRONG. These simple property wrappers should be written on the same line as the declaration.
   struct SpaceshipDashboardView {
 
     @State
@@ -868,7 +868,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     @ObservedObject
     private var lifeSupportService: LifeSupportService
 
-    @Environment(\.controlPanelStyle) 
+    @Environment(\.controlPanelStyle)
     private var controlPanelStyle
 
   }
@@ -927,31 +927,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @available(*, deprecated, message: "To be retired by 2030")
     var atlas5Builder: Atlas5Builder
-    
+
     @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0)
     var newGlennBuilder: NewGlennBuilder
 
   }
   ```
-  
+
   #### Why?
-  
+
   Unlike other types of declarations, which have braces and span multiple lines, stored property declarations are often only a single line of code. Stored properties are often written sequentially without any blank lines between them. This makes the code compact without hurting readability, and allows for related properties to be grouped together in blocks:
-  
+
   ```swift
   struct SpaceshipDashboardView {
     @State private var warpDriveEnabled: Bool
     @State private var lifeSupportEnabled: Bool
     @State private var artificialGravityEnabled: Bool
     @State private var tractorBeamEnabled: Bool
-    
+
     @Environment(\.controlPanelStyle) private var controlPanelStyle
     @Environment(\.toggleButtonStyle) private var toggleButtonStyle
   }
   ```
-  
+
   If stored property attributes were written on the previous line (like other types of attributes), then the properties start to visually bleed together unless you add blank lines between them:
-  
+
   ```swift
   struct SpaceshipDashboardView {
     @State
@@ -962,42 +962,42 @@ _You can enable the following settings in Xcode by running [this script](resourc
     private var artificialGravityEnabled: Bool
     @State
     private var tractorBeamEnabled: Bool
-    
+
     @Environment(\.controlPanelStyle)
     private var controlPanelStyle
     @Environment(\.toggleButtonStyle)
     private var toggleButtonStyle
   }
   ```
-  
-  If you add blank lines, the list of properties becomes much longer and you lose the ability to group related properties together:  
-  
+
+  If you add blank lines, the list of properties becomes much longer and you lose the ability to group related properties together:
+
   ```swift
   struct SpaceshipDashboardView {
     @State
     private var warpDriveEnabled: Bool
-    
+
     @State
     private var lifeSupportEnabled: Bool
-    
+
     @State
     private var artificialGravityEnabled: Bool
-    
+
     @State
     private var tractorBeamEnabled: Bool
-    
+
     @Environment(\.controlPanelStyle)
     private var controlPanelStyle
-    
+
     @Environment(\.toggleButtonStyle)
     private var toggleButtonStyle
   }
   ```
-  
+
   This doesn't apply to complex attributes with named arguments, or multiple unnamed arguments. These arguments are visually complex and typically encode a lot of information, so feel cramped and difficult to read when written on a single line:
 
   ```swift
-  // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long: 
+  // Despite being less than 100 characters long, these lines are very complex and feel unnecessarily long:
   @available(*, unavailable, message: "No longer in production") var saturn5Builder: Saturn5Builder
   @available(*, deprecated, message: "To be retired by 2030") var atlas5Builder: Atlas5Builder
   @available(*, iOS 18.0, tvOS 18.0, macOS 15.0, watchOS 11.0) var newGlennBuilder: NewGlennBuilder
@@ -1262,7 +1262,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     …
   }
   ```
-  
+
   </details>
 
 * <a id='wrap-multiline-conditional-assignment'></a>(<a href='#wrap-multiline-conditional-assignment'>link</a>) **Add a line break after the assignment operator (`=`) before a multi-line `if` or `switch` expression**, and indent the following `if` / `switch` expression. If the declaration fits on a single line, a line break is not required. [![SwiftFormat: wrapMultilineConditionalAssignment](https://img.shields.io/badge/SwiftFormat-wrapMultilineConditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapMultilineConditionalAssignment)
@@ -1270,15 +1270,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  
+
   This makes it so that `if` and `switch` expressions always have the same "shape" as standard `if` and `switch` statements, where:
   1. The `if` / `switch` keyword is always the left-most token on a dedicated line of code.
   2. The conditional branches are always to the right of and below the `if` / `switch` keyword.
 
-  This is most consistent with how the `if` / `switch` keywords are used for control flow, and thus makes it easier to recognize that the code is using an `if` or `switch` expression at a glance. 
-  
+  This is most consistent with how the `if` / `switch` keywords are used for control flow, and thus makes it easier to recognize that the code is using an `if` or `switch` expression at a glance.
+
   ```swift
-  // WRONG. Should have a line break after the first `=`. 
+  // WRONG. Should have a line break after the first `=`.
   let planetLocation = if let star = planet.star {
     "The \(star.name) system"
    } else {
@@ -1286,7 +1286,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // WRONG. The first `=` should be on the line of the variable being assigned.
-  let planetLocation 
+  let planetLocation
     = if let star = planet.star {
       "The \(star.name) system"
     } else {
@@ -1301,15 +1301,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
   case .jupiter, .saturn, .uranus, .neptune:
     .gasGiant
   }
-    
-  // RIGHT 
-  let planetLocation = 
+
+  // RIGHT
+  let planetLocation =
     if let star = planet.star {
       "The \(star.name) system"
     } else {
       "Rogue planet"
     }
-    
+
   // RIGHT
   let planetType: PlanetType =
     switch planet {
@@ -1318,15 +1318,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case .jupiter, .saturn, .uranus, .neptune:
       .gasGiant
     }
-    
-  // ALSO RIGHT. A line break is not required because the declaration fits on a single line. 
+
+  // ALSO RIGHT. A line break is not required because the declaration fits on a single line.
   let moonName = if let moon = planet.moon { moon.name } else { "none" }
 
   // ALSO RIGHT. A line break is permitted if it helps with readability.
   let moonName =
     if let moon = planet.moon { moon.name } else { "none" }
   ```
-  
+
   </details>
 
 * <a id='prefer-conditional-assignment-to-control-flow'></a>(<a href='#prefer-conditional-assignment-to-control-flow'>link</a>) **When initializing a new property with the result of a conditional statement (e.g. an `if` or `switch` statement), use a single `if`/`switch` expression where possible** rather than defining an uninitialized property and initializing it on every branch of the following conditional statement. [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#conditionalAssignment)
@@ -1356,7 +1356,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // AFTER
   // 1. No need to write an explicit `: String` type annotation.
-  // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead. 
+  // 2. The compiler correctly diagnoses that the `var` is unnecessary and emits a warning suggesting to use `let` instead.
   // 3. Each conditional branch is simply the value being assigned.
   var planetLocation =
     if let star = planet.star {
@@ -1387,11 +1387,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     planetType = .gasGiant
   }
 
-  let canBeTerraformed: Bool 
-  if 
-    let star = planet.star, 
+  let canBeTerraformed: Bool
+  if
+    let star = planet.star,
     !planet.isHabitable,
-    planet.isInHabitableZone(of: star) 
+    planet.isInHabitableZone(of: star)
   {
     canBeTerraformed = true
   } else {
@@ -1415,10 +1415,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
 
   let canBeTerraformed =
-    if 
-      let star = planet.star, 
+    if
+      let star = planet.star,
       !planet.isHabitable,
-      planet.isInHabitableZone(of: star) 
+      planet.isInHabitableZone(of: star)
     {
       true
     } else {
@@ -1445,7 +1445,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   #### Why?
 
   Like with [declarations in a file](#newline-between-scope-siblings), inserting a blank line between scopes makes them easier to visually differentiate.
-  
+
   Complex switch statements are visually busy without blank lines between the cases, making it more difficult to read the code and harder to distinguish between individual cases at a glance. Blank lines between the individual cases make complex switch statements easier to read.
 
   #### Examples
@@ -1486,7 +1486,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       scanner.scanAtmosphere()
       scanner.scanBiosphere()
       scanner.scanForArtificialLife()
-      
+
     case .handleIncomingEnergyBlast:
       energyShields.engage()
     }
@@ -1508,7 +1508,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       scanner.scanAtmosphere()
       scanner.scanBiosphere()
       scanner.scanForArtificialLife()
-      
+
     case .handleIncomingEnergyBlast:
       energyShields.engage()
     }
@@ -1581,7 +1581,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     break
   }
 
-  // RIGHT  
+  // RIGHT
   switch spaceship.warpDriveState {
   case .engaged:
     navigator.engageWarpDrive()
@@ -1907,7 +1907,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       generateOceans()
     }
   }
-  
+
   // ALSO RIGHT:
 
   func terraform() {
@@ -1923,8 +1923,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-  Regular comments are permitted before declarations in some cases. 
-  
+  Regular comments are permitted before declarations in some cases.
+
   For example, comment directives like `// swiftformat:`, `// swiftlint:`, `// sourcery:`, `// MARK:` and `// TODO:` are typically required to use regular comments and don't work correctly with doc comments:
 
   ```swift
@@ -2072,10 +2072,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   #### Why?
-  For loops are more idiomatic than the `forEach(…)` method, and are typically familiar to all developers who have experience with C-family languages. 
+  For loops are more idiomatic than the `forEach(…)` method, and are typically familiar to all developers who have experience with C-family languages.
 
   For loops are also more expressive than the `forEach(…)` method. For loops support the `return`, `continue`, and `break` control flow keywords, while `forEach(…)` only supports `return` (which has the same behavior as `continue` in a for loop).
-  
+
   ```swift
   // WRONG
   planets.forEach { planet in
@@ -2098,7 +2098,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     .map { PlanetTerraformer(planet: $0) }
     .forEach { $0.terraform() }
   ```
-    
+
   </details>
 
 * <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level. [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantInternal)
@@ -2161,7 +2161,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`).** [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces) 
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`).** [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#braces)
 
   <details>
 
@@ -2552,13 +2552,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   final class SpaceshipNavigationService {
     let spaceship: Spaceship
     let planet: Planet
-    
+
     func colonizePlanet() {
       spaceship.travel(to: planet, onArrival: { [unowned self] in
         planet.colonize()
       })
     }
-    
+
     func exploreSystem() {
       spaceship.travel(to: planet, nextDestination: { [unowned self] in
         planet.moons?.first
@@ -2574,7 +2574,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   final class SpaceshipNavigationService {
     let spaceship: Spaceship
     let planet: Planet
-    
+
     func colonizePlanet() {
       spaceship.travel(to: planet, onArrival: { [weak self] in
           guard let self else { return }
@@ -2582,7 +2582,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
         }
       )
     }
-    
+
     func exploreSystem() {
       spaceship.travel(to: planet, nextDestination: { [weak self] in
           guard let self else { return nil }
@@ -2600,14 +2600,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   final class SpaceshipNavigationService {
     let spaceship: Spaceship
     let planet: Planet
-    
+
     func colonizePlanet() {
       spaceship.travel(to: planet, onArrival: { [planet] in
           planet.colonize()
         }
       )
     }
-    
+
     func exploreSystem() {
       spaceship.travel(to: planet, nextDestination: { [planet] in
           planet.moons?.first
@@ -2616,7 +2616,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
   ```
-  
+
   </details>
 
 ### Operators
@@ -2764,12 +2764,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   guard let moon = planet.moon else { completion(nil); return }
 
   // WRONG
-  guard let moon = planet.moon else { 
+  guard let moon = planet.moon else {
     completion(nil); return
   }
 
   // RIGHT
-  guard let moon = planet.moon else { 
+  guard let moon = planet.moon else {
     completion(nil)
     return
   }
@@ -2854,7 +2854,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     }
   }
 
-  // ALSO RIGHT: Public initializer is not redundant since compiler-synthesized 
+  // ALSO RIGHT: Public initializer is not redundant since compiler-synthesized
   // memberwise initializers are always internal
   public struct Planet {
     public let name: String
@@ -3370,7 +3370,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   public final class SpacecraftEngine {
     // ...
   }
-  
+
   // ALSO RIGHT: Marked as `open`, explicitly intended to be subclassed.
   open class SpacecraftEngine {
     // ...
@@ -3378,41 +3378,41 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   Most classes are never overridden, and composition is generally preferred over inheritance.
-  
+
   If a class does need to be subclassed, use one of these approaches to indicate to the linter that the class should not be marked `final`:
-  
+
   1. If the class is already `public`, mark the class as `open`. `open` access control indicates that the class is allowed to be subclassed:
-  
+
   ```swift
   open class SpacecraftEngine {
     // ...
   }
   ```
-  
+
   2. Include _"Base"_ in the class name to indicate that the class is a base class intended to be subclassed:
-  
+
   ```swift
   class BaseSpacecraftEngine {
     // ...
   }
   ```
-  
+
   3. Include a doc comment mentioning that the class is a base class intended to be subclassed:
-  
+
   ```swift
   /// Base class for various spacecraft engine varieties
   class SpacecraftEngine {
     // ...
   }
   ```
-  
+
   4. Implement the subclass in the same file as the base class:
-  
+
   ```swift
   class SpacecraftEngine {
     // ...
   }
-  
+
   #if DEBUG
   class MockSpacecraftEngine: SpacecraftEngine {
     // ...
@@ -3445,7 +3445,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   case .yellowLight, .redLight:
     // Stop your vehicle
   }
-  
+
   // COUNTEREXAMPLES
 
   enum TaskState {
@@ -3463,7 +3463,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       default:
         false
       }
-    }  
+    }
   }
 
   extension TaskState: Equatable {
@@ -3816,11 +3816,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Prefer to avoid using `@unchecked Sendable`**. Use a standard `Sendable` conformance instead where possible. If working with a type from a module that has not yet been updated to support Swift Concurrency, suppress concurrency-related errors using `@preconcurrency import`. 
+* <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Prefer to avoid using `@unchecked Sendable`**. Use a standard `Sendable` conformance instead where possible. If working with a type from a module that has not yet been updated to support Swift Concurrency, suppress concurrency-related errors using `@preconcurrency import`.
 
     <details>
 
-    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and instead unsafely suppresses compiler errors related to concurrency checking. 
+    `@unchecked Sendable` provides no guarantees about the thread safety of a type, and instead unsafely suppresses compiler errors related to concurrency checking.
 
     There are typically other, safer methods for suppressing concurrency-related errors:
 
@@ -3872,12 +3872,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     ```swift
     /// Defined in `UniverseKit` module
-    class Planet: PlanetaryBody { 
+    class Planet: PlanetaryBody {
       var star: Star
     }
     ```
 
-    ```swift 
+    ```swift
     // WRONG: Unsafely marking a non-thread-safe class as Sendable only to suppress errors
     import PlanetaryBody
 
@@ -3889,18 +3889,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     ### 3. Restructure code so the compiler can verify that it is thread-safe
 
-    If possible, restructure code so that the compiler can verify that it is thread safe. This lets you use a `Sendable` conformance instead of an unsafe `@unchecked Sendable` conformance. 
+    If possible, restructure code so that the compiler can verify that it is thread safe. This lets you use a `Sendable` conformance instead of an unsafe `@unchecked Sendable` conformance.
 
     When conforming to `Sendable`, the compiler will emit an error in the future if you attempt to make a change that is not thread-safe. This guarantee is lost when using `@unchecked Sendable`, which makes it easier to accidentally introduce changes which are not thread-safe.
 
     For example, given this set of classes:
 
     ```swift
-    class PlanetaryBody { 
-      let mass: Double  
+    class PlanetaryBody {
+      let mass: Double
     }
 
-    class Planet: PlanetaryBody { 
+    class Planet: PlanetaryBody {
       let star: Star
     }
 
@@ -3950,11 +3950,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     It is also reasonable to use `@unchecked Sendable` for types that are thread-safe in existing usage but can't be refactored to support a proper `Sendable` conformance (e.g. due to backwards compatibility constraints):
 
     ```swift
-    class PlanetaryBody { 
-      let mass: Double  
+    class PlanetaryBody {
+      let mass: Double
     }
 
-    class Planet: PlanetaryBody { 
+    class Planet: PlanetaryBody {
       let star: Star
     }
 
@@ -4040,7 +4040,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let rotation: Double
     }
 
-    /// ALSO RIGHT: The `static func ==` implementation differs from the implementation that 
+    /// ALSO RIGHT: The `static func ==` implementation differs from the implementation that
     /// would be synthesized by the compiler and compared all properties, so is not redundant.
     struct CelestialBody: Equatable {
       let id: UUID
@@ -4100,7 +4100,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       }
     }
 
-    /// RIGHT: The `EnvironmentValues` property uses the @Entry macro 
+    /// RIGHT: The `EnvironmentValues` property uses the @Entry macro
     extension EnvironmentValues {
       @Entry var isSelected: Bool = false
     }
@@ -4126,11 +4126,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   <details>
 
   ```swift
-  let completion: (Result<Void, Error>) -> Void 
+  let completion: (Result<Void, Error>) -> Void
 
   // WRONG
   completion(.success(Void()))
-  
+
   // RIGHT
   completion(.success(()))
   ```
@@ -4407,13 +4407,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   * Instance methods
 
   <details>
-  
+
     Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.)
 
     ```swift
     // WRONG
     class PlanetView: UIView {
-    
+
       static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
 
       var atmosphere: Atmosphere {
@@ -4433,7 +4433,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     // RIGHT
     class PlanetView: UIView {
-    
+
       static let speedOfLight: CGFloat = 300_000
       static var startOfTime { -CGFloat.greatestFiniteMagnitude / 0 }
 
@@ -4456,7 +4456,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // WRONG
 
     struct CustomSlider: View {
-    
+
       // MARK: Internal
 
       var body: some View {
@@ -4475,7 +4475,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // RIGHT
 
     struct CustomSlider: View {
-      
+
       // MARK: Internal
 
       var body: some View {
@@ -4579,24 +4579,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
     case neptune
     case uranus
   }
-  
+
   // ALSO RIGHT: Tuple destructing is fine for values like function call results.
   let (ceres, pluto) = findAndClassifyDwarfPlanets()
   ```
 
   </details>
-  
+
 * <a id='remove-empty-extensions'></a>(<a href='#remove-empty-extensions'>link</a>) **Remove empty extensions that define no properties, functions, or conformances.** [![SwiftFormat: emptyExtensions](https://img.shields.io/badge/SwiftFormat-emptyExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#emptyExtensions)
 
   <details>
 
   #### Why?
   Improves readability since the code has no effect and should be removed for clarity.
-  
+
   ```swift
   // WRONG: The first extension is empty and redundant.
   extension Planet {}
-  
+
   extension Planet: Equatable {}
 
   // RIGHT: Empty extensions that add a protocol conformance aren't redundant.
@@ -4649,7 +4649,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   import Testing
-  
+
   /// WRONG
   struct SpaceshipTests {
     @Test
@@ -4853,7 +4853,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
       spaceship.engine!.prepare()
       spaceship.launch(to: nearestPlanet()!)
-      
+
       XCTAssertTrue(spaceship.hasLaunched)
       XCTAssertEqual(spaceship.destination! as! Planet, nearestPlanet())
     }
@@ -4863,7 +4863,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = try XCTUnwrap((dependencies?.shipyardService as? DefaultShipyardService)?.build())
       spaceship.engine?.prepare()
       spaceship.launch(to: try XCTUnwrap(nearestPlanet()))
-      
+
       XCTAssertTrue(spaceship.hasLaunched)
       XCTAssertEqual(spaceship.destination as? Planet, nearestPlanet())
     }
@@ -4880,7 +4880,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = (dependencies!.shipyardService as! DefaultShipyardService).build()
       spaceship.engine!.prepare()
       spaceship.launch(to: nearestPlanet()!)
-      
+
       #expect(spaceship.hasLaunched)
       #expect((spaceship.destination! as! Planet) == nearestPlanet())
     }
@@ -4891,7 +4891,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
       let spaceship = try #require((dependencies?.shipyardService as? DefaultShipyardService)?.build())
       spaceship.engine?.prepare()
       spaceship.launch(to: try #require(nearestPlanet()))
-      
+
       #expect(spaceship.hasLaunched)
       #expect((spaceship.destination as? Planet) == nearestPlanet())
     }
