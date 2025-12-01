@@ -40,3 +40,16 @@ jobs:
           xcode: ${{ matrix.xcode }}
       - name: Run Unit Tests
         run: swift test
+
+  site-build:
+    name: Site Build
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Build site
+        run: bundle exec rake site:build
+        env:
+          JEKYLL_ENV: production

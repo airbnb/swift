@@ -1,0 +1,38 @@
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  max-width: 900px;
+}
+
+pre,
+code {
+  font-family: 'SF Mono', Monaco, Menlo, 'Courier New', monospace;
+}
+
+:not(pre) > code {
+  background: #f5f5f5;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-weight: 600;
+}
+
+footer a {
+  color: #555;
+  text-decoration: none;
+}
