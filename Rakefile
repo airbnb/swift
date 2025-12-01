@@ -76,7 +76,7 @@ namespace :site do
     sh env, 'bundle exec jekyll serve --source site/src'
   end
 
-  desc 'Enables validating the README content used to build the site in local developement'
+  desc 'Enables validating the README content used to build the site during local developement'
   task :filter_readme do
     require_relative 'site/site_content'
     puts SiteContent.new.filter_readme
