@@ -42,7 +42,7 @@ jobs:
         run: swift test
 
   site-build:
-    name: Site Build
+    name: Build Site
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v6
