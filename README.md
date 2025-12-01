@@ -22,6 +22,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
   * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect).
   * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
   * Exceptions to these rules should be rare and heavily justified.
+* Format rules should be non-destructive.
 
 ## Swift Package Manager command plugin
 
