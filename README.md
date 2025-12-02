@@ -2390,7 +2390,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='unused-function-parameter-naming'></a>(<a href='#unused-function-parameter-naming'>link</a>) **Name unused function parameters as underscores (`_`).**
 
-    <details>
+  <details>
 
   [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#unusedArguments)
 
@@ -2458,7 +2458,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='remove-blank-lines-between-chained-functions'></a>(<a href='#remove-blank-lines-between-chained-functions'>link</a>) **Remove blank lines between chained functions.**
 
@@ -2562,7 +2562,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Name unused closure parameters as underscores (`_`).**
 
-    <details>
+  <details>
 
   [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#unusedArguments)
 
@@ -2583,7 +2583,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Closures should have a single space or newline inside each brace.** Trailing closures should additionally have a single space or newline outside each brace.
 
@@ -3896,7 +3896,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='redundant-get'></a>(<a href='#redundant-get'>link</a>) **Omit the `get` clause from a computed property declaration that doesn't also have a `set`, `willSet`, or `didSet` clause.**
 
-    <details>
+  <details>
 
   [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantGet)
 
@@ -3920,11 +3920,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='prefer-opaque-generic-parameters'></a>(<a href='#prefer-opaque-generic-parameters'>link</a>) **Prefer using opaque generic parameters (with `some`) over verbose named generic parameter syntax where possible.**
 
-    <details>
+  <details>
 
   [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#opaqueGenericParameters)
 
@@ -3998,11 +3998,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   `some Any` is somewhat unintuitive, and the named generic parameter is useful in this situation to compensate for the weak type information. Because of this, prefer using named generic parameters instead of `some Any`.
 
-    </details>
+  </details>
 
 - <a id='unchecked-sendable'></a>(<a href='#unchecked-sendable'>link</a>) **Prefer to avoid using `@unchecked Sendable`**. Use a standard `Sendable` conformance instead where possible. If working with a type from a module that has not yet been updated to support Swift Concurrency, suppress concurrency-related errors using `@preconcurrency import`.
 
-    <details>
+  <details>
 
   `@unchecked Sendable` provides no guarantees about the thread safety of a type, and instead unsafely suppresses compiler errors related to concurrency checking.
 
@@ -4157,11 +4157,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   extension PlanetaryBody: @unchecked Sendable { }
   ```
 
-    </details>
+  </details>
 
 - <a id='redundant-property'></a>(<a href='#redundant-property'>link</a>) **Avoid defining properties that are then returned immediately.** Instead, return the value directly.
 
-    <details>
+  <details>
 
   [![SwiftFormat: redundantProperty](https://img.shields.io/badge/SwiftFormat-redundantProperty-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantProperty)
 
@@ -4195,11 +4195,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='redundant-equatable-implementation'></a>(<a href='#redundant-equatable-implementation'>link</a>) **Prefer using a generated Equatable implementation when comparing all properties of a type.** For structs, prefer using the compiler-synthesized Equatable implementation when possible.
 
-    <details>
+  <details>
 
   [![SwiftFormat: redundantEquatable](https://img.shields.io/badge/SwiftFormat-redundantEquatable-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantEquatable)
 
@@ -4265,11 +4265,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible.
 
-    <details>
+  <details>
 
   [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
 
@@ -4296,7 +4296,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-    </details>
+  </details>
 
 - <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
 
@@ -4352,7 +4352,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**.
 
-    <details>
+  <details>
 
   [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#urlMacro)
 
@@ -4368,7 +4368,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let url = #URL("https://example.com")
   ```
 
-    </details>
+  </details>
 
 **[⬆ back to top](#table-of-contents)**
 
