@@ -68,6 +68,8 @@ h3 {
 pre,
 code {
   font-family: 'SF Mono', Monaco, Menlo, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 :not(pre) > code {
