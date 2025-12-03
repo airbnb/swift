@@ -116,24 +116,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   protocol SpaceThing {
-    // ...
+    ...
   }
 
   class SpaceFleet: SpaceThing {
 
     enum Formation {
-      // ...
+      ...
     }
 
     class Spaceship {
-      // ...
+      ...
     }
 
     var ships: [Spaceship] = []
     static let worldName: String = "Earth"
 
     func addShip(_ ship: Spaceship) {
-      // ...
+      ...
     }
   }
 
@@ -201,11 +201,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class UrlValidator {
 
     func isValidUrl(_ URL: URL) -> Bool {
-      // ...
+      ...
     }
 
     func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
-      // ...
+      ...
     }
   }
 
@@ -216,11 +216,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class URLValidator {
 
     func isValidURL(_ url: URL) -> Bool {
-      // ...
+      ...
     }
 
     func isProfileURL(_ url: URL, for userID: String) -> Bool {
-      // ...
+      ...
     }
   }
 
@@ -275,11 +275,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class ExperiencesViewController {
 
     private func handleBookButtonTap() {
-      // ...
+      ...
     }
 
     private func modelChanged() {
-      // ...
+      ...
     }
   }
 
@@ -287,11 +287,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class ExperiencesViewController {
 
     private func didTapBookButton() {
-      // ...
+      ...
     }
 
     private func modelDidChange() {
-      // ...
+      ...
     }
   }
   ```
@@ -305,12 +305,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class AIRAccount {
-    // ...
+    ...
   }
 
   // RIGHT
   class Account {
-    // ...
+    ...
   }
   ```
 
@@ -662,12 +662,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class Planet : CelestialObject {
-    // ...
+    ...
   }
 
   // RIGHT
   class Planet: CelestialObject {
-    // ...
+    ...
   }
   ```
 
@@ -698,24 +698,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   func doSomething()->String {
-    // ...
+    ...
   }
 
   // RIGHT
   func doSomething() -> String {
-    // ...
+    ...
   }
   ```
 
   ```swift
   // WRONG
   func doSomething(completion: ()->Void) {
-    // ...
+    ...
   }
 
   // RIGHT
   func doSomething(completion: () -> Void) {
-    // ...
+    ...
   }
   ```
 
@@ -773,9 +773,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // WRONG
     switch result {
     case let .success(value):
-      // ...
+      ...
     case let .error(errorCode, errorReason):
-      // ...
+      ...
     }
 
     // WRONG
@@ -786,9 +786,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // RIGHT
     switch result {
     case .success(let value):
-      // ...
+      ...
     case .error(let errorCode, let errorReason):
-      // ...
+      ...
     }
 
     // RIGHT
@@ -827,11 +827,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   @objc class Spaceship {
 
     @ViewBuilder var controlPanel: some View {
-      // ...
+      ...
     }
 
     @discardableResult func fly() -> Bool {
-      // ...
+      ...
     }
 
   }
@@ -842,12 +842,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @ViewBuilder
     var controlPanel: some View {
-      // ...
+      ...
     }
 
     @discardableResult
     func fly() -> Bool {
-      // ...
+      ...
     }
 
   }
@@ -1014,19 +1014,19 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   public struct Spaceship {
     nonisolated
-    public func fly() { … }
+    public func fly() { ... }
 
     @MainActor
     public
-    func fly() { … }
+    func fly() { ... }
   }
 
   // RIGHT
   public struct Spaceship {
-    nonisolated public func fly() { … }
+    nonisolated public func fly() { ... }
 
     @MainActor
-    public func fly() { … }
+    public func fly() { ... }
   }
   ```
 
@@ -1130,23 +1130,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
   if
     let galaxy = galaxy,
     galaxy.name == "Milky Way"
-  { … }
+  { ... }
 
   guard
     let galaxy = galaxy,
     galaxy.name == "Milky Way"
-  else { … }
+  else { ... }
 
   // RIGHT
   if
     let galaxy,
     galaxy.name == "Milky Way"
-  { … }
+  { ... }
 
   guard
     let galaxy,
     galaxy.name == "Milky Way"
-  else { … }
+  else { ... }
   ```
 
   </details>
@@ -1158,50 +1158,50 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   if let galaxy {
-    …
+    ...
   }
   else if let bigBangService {
-    …
+    ...
   }
   else {
-    …
+    ...
   }
 
   // RIGHT
   if let galaxy {
-    …
+    ...
   } else if let bigBangService {
-    …
+    ...
   } else {
-    …
+    ...
   }
 
   // RIGHT, because there are comments between the conditions
   if let galaxy {
-    …
+    ...
   }
   // If the galaxy hasn't been created yet, create it using the big bang service
   else if let bigBangService {
-    …
+    ...
   }
   // If the big bang service doesn't exist, fail gracefully
   else {
-    …
+    ...
   }
 
   // RIGHT, because there are blank lines between the conditions
   if let galaxy {
-    …
+    ...
   }
 
   else if let bigBangService {
     // If the galaxy hasn't been created yet, create it using the big bang service
-    …
+    ...
   }
 
   else {
     // If the big bang service doesn't exist, fail gracefully
-    …
+    ...
   }
   ```
 
@@ -1219,31 +1219,31 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   if let galaxy,
     galaxy.name == "Milky Way" // Indenting by two spaces fights Xcode's ^+I indentation behavior
-  { … }
+  { ... }
 
   // WRONG
   guard let galaxy,
         galaxy.name == "Milky Way" // Variable width indentation (6 spaces)
-  else { … }
+  else { ... }
 
   // WRONG
   guard let earth = universe.find(
     .planet,
     named: "Earth"),
     earth.isHabitable // Blends in with previous condition's method arguments
-  else { … }
+  else { ... }
 
   // RIGHT
   if
     let galaxy,
     galaxy.name == "Milky Way"
-  { … }
+  { ... }
 
   // RIGHT
   guard
     let galaxy,
     galaxy.name == "Milky Way"
-  else { … }
+  else { ... }
 
   // RIGHT
   guard
@@ -1251,16 +1251,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
       .planet,
       named: "Earth"),
     earth.isHabitable
-  else { … }
+  else { ... }
 
   // RIGHT
   if let galaxy {
-    …
+    ...
   }
 
   // RIGHT
   guard let galaxy else {
-    …
+    ...
   }
   ```
 
@@ -1602,21 +1602,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
   guard
     let galaxy,
     galaxy.name == "Milky Way" else
-  { … }
+  { ... }
 
   // WRONG (else should be on the same line for single-line guard statements)
   guard let galaxy
-  else { … }
+  else { ... }
 
   // RIGHT
   guard
     let galaxy,
     galaxy.name == "Milky Way"
-  else { … }
+  else { ... }
 
   // RIGHT
   guard let galaxy else {
-    …
+    ...
   }
   ```
 
@@ -1769,26 +1769,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   struct Planet{
-    …
+    ...
   }
 
   // WRONG
   if condition{
-    …
+    ...
   }else{
-    …
+    ...
   }
 
   // RIGHT
   struct Planet {
-    …
+    ...
   }
 
   // RIGHT
   if condition {
-    …
+    ...
   } else {
-    …
+    ...
   }
   ```
 
@@ -1992,20 +1992,20 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   @MainActor
   /// A spacecraft with everything you need to explore the universe.
-  struct Spaceship { … }
+  struct Spaceship { ... }
 
   public
   /// A spacecraft with everything you need to explore the universe.
-  struct Spaceship { … }
+  struct Spaceship { ... }
 
   // RIGHT
 
   /// A spacecraft with everything you need to explore the universe.
   @MainActor
-  struct Spaceship { … }
+  struct Spaceship { ... }
 
   /// A spacecraft with everything you need to explore the universe.
-  public struct Spaceship { … }
+  public struct Spaceship { ... }
   ```
 
   </details>
@@ -2109,14 +2109,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   internal class Spaceship {
-    internal init() { … }
-    internal func travel(to planet: Planet) { … }
+    internal init() { ... }
+    internal func travel(to planet: Planet) { ... }
   }
 
   // RIGHT, because internal access control is implied if no other access control level is specified.
   class Spaceship {
-    init() { … }
-    func travel(to planet: Planet) { … }
+    init() { ... }
+    func travel(to planet: Planet) { ... }
   }
   ```
 
@@ -2129,14 +2129,14 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG: Public declarations in internal types are internal, not public.
   class Spaceship {
-    public init() { … }
-    public func travel(to planet: Planet) { … }
+    public init() { ... }
+    public func travel(to planet: Planet) { ... }
   }
 
   // RIGHT
   class Spaceship {
-    init() { … }
-    func travel(to planet: Planet) { … }
+    init() { ... }
+    func travel(to planet: Planet) { ... }
   }
   ```
 
@@ -2719,18 +2719,18 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   // WRONG
-  extension Array where Element == Star { … }
-  extension Optional where Wrapped == Spaceship { … }
-  extension Dictionary where Key == Moon, Element == Planet { … }
-  extension Collection where Element == Universe { … }
-  extension StateStore where State == SpaceshipState, Action == SpaceshipAction { … }
+  extension Array where Element == Star { ... }
+  extension Optional where Wrapped == Spaceship { ... }
+  extension Dictionary where Key == Moon, Element == Planet { ... }
+  extension Collection where Element == Universe { ... }
+  extension StateStore where State == SpaceshipState, Action == SpaceshipAction { ... }
 
   // RIGHT
-  extension [Star] { … }
-  extension Spaceship? { … }
-  extension [Moon: Planet] { … }
-  extension Collection<Universe> { … }
-  extension StateStore<SpaceshipState, SpaceshipAction> { … }
+  extension [Star] { ... }
+  extension Spaceship? { ... }
+  extension [Moon: Planet] { ... }
+  extension Collection<Universe> { ... }
+  extension StateStore<SpaceshipState, SpaceshipAction> { ... }
 
   // ALSO RIGHT. There are multiple types that could satisfy this constraint
   // (e.g. [Planet], [Moon]), so this is not a "bound generic type" and isn't
@@ -3034,11 +3034,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   func age(of person: Person, bornAt: TimeInterval) -> Int {
-    // ...
+    ...
   }
 
   func jump(person: Person) {
-    // ...
+    ...
   }
 
   // RIGHT
@@ -3046,11 +3046,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var bornAt: TimeInterval
 
     var age: Int {
-      // ...
+      ...
     }
 
     func jump() {
-      // ...
+      ...
     }
   }
   ```
@@ -3230,12 +3230,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   enum Fonts {
-    static var title = UIFont(…)
+    static var title = UIFont(...)
   }
 
   // RIGHT
   enum Fonts {
-    static let title = UIFont(…)
+    static let title = UIFont(...)
   }
   ```
 
@@ -3272,13 +3272,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
       assertionFailure("Unexpected empty string")
       return
     }
-    // ...
+    ...
   }
 
   func transformedItem(atIndex index: Int, from items: [Item]) -> Item {
     precondition(index >= 0 && index < items.count)
     // It's impossible to continue executing if the precondition has failed.
-    // ...
+    ...
   }
 
   func makeImage(name: String) -> UIImage {
@@ -3364,17 +3364,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   public class SpacecraftEngine {
-    // ...
+    ...
   }
 
   // RIGHT
   public final class SpacecraftEngine {
-    // ...
+    ...
   }
 
   // ALSO RIGHT: Marked as `open`, explicitly intended to be subclassed.
   open class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3386,7 +3386,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   open class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3394,7 +3394,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   class BaseSpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3403,7 +3403,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   /// Base class for various spacecraft engine varieties
   class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3411,12 +3411,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   class SpacecraftEngine {
-    // ...
+    ...
   }
 
   #if DEBUG
   class MockSpacecraftEngine: SpacecraftEngine {
-    // ...
+    ...
   }
   #endif
   ```
@@ -3755,11 +3755,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
       warpDrive: WarpDriveView,
       captainsLog: CaptainsLogView
     ) -> some View {
-      …
+      ...
     }
 
     func generate<Planets>(_ planets: Planets) where Planets: Collection, Planets.Element == Planet {
-      …
+      ...
     }
 
     // RIGHT
@@ -3767,17 +3767,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
       warpDrive: some View,
       captainsLog: some View
     ) -> some View {
-      …
+      ...
     }
 
     func generate(_ planets: some Collection<Planet>) {
-      …
+      ...
     }
 
     // Also fine, since there isn't an equivalent opaque parameter syntax for expressing
     // that two parameters in the type signature are of the same type:
     func terraform<Body: PlanetaryBody>(_ planetaryBody: Body, into terraformedBody: Body) {
-      …
+      ...
     }
 
     // Also fine, since the generic parameter name is referenced in the function body so can't be removed:
@@ -4137,7 +4137,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
   </details>
 
-* <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { … })` over `filter { … }.count`**. [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferCountWhere)
+* <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { ... })` over `filter { ... }.count`**. [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferCountWhere)
 
   <details>
 
@@ -4280,39 +4280,39 @@ _You can enable the following settings in Xcode by running [this script](resourc
   // WRONG
   struct SolarSystem {
     var numberOfPlanets: Int {
-      …
+      ...
     }
     func distance(to: SolarSystem) -> AstronomicalUnit {
-      …
+      ...
     }
   }
   struct Galaxy {
     func distance(to: Galaxy) -> AstronomicalUnit {
-      …
+      ...
     }
     func contains(_ solarSystem: SolarSystem) -> Bool {
-      …
+      ...
     }
   }
 
   // RIGHT
   struct SolarSystem {
     var numberOfPlanets: Int {
-      …
+      ...
     }
 
     func distance(to: SolarSystem) -> AstronomicalUnit {
-      …
+      ...
     }
   }
 
   struct Galaxy {
     func distance(to: Galaxy) -> AstronomicalUnit {
-      …
+      ...
     }
 
     func contains(_ solarSystem: SolarSystem) -> Bool {
-      …
+      ...
     }
   }
   ```
@@ -4369,15 +4369,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // MARK: - GalaxyView
 
-  final class GalaxyView: UIView { … }
+  final class GalaxyView: UIView { ... }
 
   // MARK: ContentConfigurableView
 
-  extension GalaxyView: ContentConfigurableView { … }
+  extension GalaxyView: ContentConfigurableView { ... }
 
   // MARK: - Galaxy + SpaceThing, NamedObject
 
-  extension Galaxy: SpaceThing, NamedObject { … }
+  extension Galaxy: SpaceThing, NamedObject { ... }
   ```
 
   </details>
@@ -4629,7 +4629,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @objc
     private func didTapAcceptButton() {
-      // ...
+      ...
     }
   }
   ```
