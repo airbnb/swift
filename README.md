@@ -116,24 +116,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   protocol SpaceThing {
-    // ...
+    ...
   }
 
   class SpaceFleet: SpaceThing {
 
     enum Formation {
-      // ...
+      ...
     }
 
     class Spaceship {
-      // ...
+      ...
     }
 
     var ships: [Spaceship] = []
     static let worldName: String = "Earth"
 
     func addShip(_ ship: Spaceship) {
-      // ...
+      ...
     }
   }
 
@@ -201,11 +201,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class UrlValidator {
 
     func isValidUrl(_ URL: URL) -> Bool {
-      // ...
+      ...
     }
 
     func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
-      // ...
+      ...
     }
   }
 
@@ -216,11 +216,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class URLValidator {
 
     func isValidURL(_ url: URL) -> Bool {
-      // ...
+      ...
     }
 
     func isProfileURL(_ url: URL, for userID: String) -> Bool {
-      // ...
+      ...
     }
   }
 
@@ -275,11 +275,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class ExperiencesViewController {
 
     private func handleBookButtonTap() {
-      // ...
+      ...
     }
 
     private func modelChanged() {
-      // ...
+      ...
     }
   }
 
@@ -287,11 +287,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class ExperiencesViewController {
 
     private func didTapBookButton() {
-      // ...
+      ...
     }
 
     private func modelDidChange() {
-      // ...
+      ...
     }
   }
   ```
@@ -305,12 +305,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class AIRAccount {
-    // ...
+    ...
   }
 
   // RIGHT
   class Account {
-    // ...
+    ...
   }
   ```
 
@@ -662,12 +662,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class Planet : CelestialObject {
-    // ...
+    ...
   }
 
   // RIGHT
   class Planet: CelestialObject {
-    // ...
+    ...
   }
   ```
 
@@ -698,24 +698,24 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   func doSomething()->String {
-    // ...
+    ...
   }
 
   // RIGHT
   func doSomething() -> String {
-    // ...
+    ...
   }
   ```
 
   ```swift
   // WRONG
   func doSomething(completion: ()->Void) {
-    // ...
+    ...
   }
 
   // RIGHT
   func doSomething(completion: () -> Void) {
-    // ...
+    ...
   }
   ```
 
@@ -773,9 +773,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // WRONG
     switch result {
     case let .success(value):
-      // ...
+      ...
     case let .error(errorCode, errorReason):
-      // ...
+      ...
     }
 
     // WRONG
@@ -786,9 +786,9 @@ _You can enable the following settings in Xcode by running [this script](resourc
     // RIGHT
     switch result {
     case .success(let value):
-      // ...
+      ...
     case .error(let errorCode, let errorReason):
-      // ...
+      ...
     }
 
     // RIGHT
@@ -827,11 +827,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   @objc class Spaceship {
 
     @ViewBuilder var controlPanel: some View {
-      // ...
+      ...
     }
 
     @discardableResult func fly() -> Bool {
-      // ...
+      ...
     }
 
   }
@@ -842,12 +842,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @ViewBuilder
     var controlPanel: some View {
-      // ...
+      ...
     }
 
     @discardableResult
     func fly() -> Bool {
-      // ...
+      ...
     }
 
   }
@@ -3034,11 +3034,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   func age(of person: Person, bornAt: TimeInterval) -> Int {
-    // ...
+    ...
   }
 
   func jump(person: Person) {
-    // ...
+    ...
   }
 
   // RIGHT
@@ -3046,11 +3046,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
     var bornAt: TimeInterval
 
     var age: Int {
-      // ...
+      ...
     }
 
     func jump() {
-      // ...
+      ...
     }
   }
   ```
@@ -3272,13 +3272,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
       assertionFailure("Unexpected empty string")
       return
     }
-    // ...
+    ...
   }
 
   func transformedItem(atIndex index: Int, from items: [Item]) -> Item {
     precondition(index >= 0 && index < items.count)
     // It's impossible to continue executing if the precondition has failed.
-    // ...
+    ...
   }
 
   func makeImage(name: String) -> UIImage {
@@ -3364,17 +3364,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   public class SpacecraftEngine {
-    // ...
+    ...
   }
 
   // RIGHT
   public final class SpacecraftEngine {
-    // ...
+    ...
   }
 
   // ALSO RIGHT: Marked as `open`, explicitly intended to be subclassed.
   open class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3386,7 +3386,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   open class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3394,7 +3394,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   class BaseSpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3403,7 +3403,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   /// Base class for various spacecraft engine varieties
   class SpacecraftEngine {
-    // ...
+    ...
   }
   ```
 
@@ -3411,12 +3411,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   class SpacecraftEngine {
-    // ...
+    ...
   }
 
   #if DEBUG
   class MockSpacecraftEngine: SpacecraftEngine {
-    // ...
+    ...
   }
   #endif
   ```
@@ -4629,7 +4629,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @objc
     private func didTapAcceptButton() {
-      // ...
+      ...
     }
   }
   ```
