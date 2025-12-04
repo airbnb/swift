@@ -156,11 +156,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   let myFleet = SpaceFleet()
   ```
 
-  </details>
-
   _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level._
-
-  <details>
 
   #### Why?
 
@@ -552,7 +548,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='trailing-commas'></a>(<a href='#trailing-commas'>link</a>) \*_Add a trailing comma after the last element of multi-line, multi-element comma-separated lists._ This includes arrays, dictionaries, function declarations, function calls, etc. Don't include a trailing comma if the list spans only a single line, or contains only a single element.
+- <a id='trailing-commas'></a>(<a href='#trailing-commas'>link</a>) **Add a trailing comma after the last element of multi-line, multi-element comma-separated lists.** This includes arrays, dictionaries, function declarations, function calls, etc. Don't include a trailing comma if the list spans only a single line, or contains only a single element.
 
   <details>
 
@@ -1105,7 +1101,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`.
+- <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) **[Long](#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`.**
 
   <details>
 
@@ -1167,7 +1163,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name.
+- <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) **Omit the right-hand side of the expression when unwrapping an optional property to a non-optional property with the same name.**
 
   <details>
 
@@ -1261,7 +1257,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs).
+- <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](#spaces-over-tabs).
 
   <details>
 
@@ -1269,7 +1265,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Breaking after the leading keyword resets indentation to the standard [2-space grid](https://github.com/airbnb/swift#spaces-over-tabs),
+  Breaking after the leading keyword resets indentation to the standard [2-space grid](#spaces-over-tabs),
   which helps avoid fighting Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 
   ```swift
@@ -1780,7 +1776,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='single-line-expression-braces'></a>(<a href='#single-line-expression-braces'>link</a>) The opening brace following a single-line expression should be on the same line as the rest of the statement.
+- <a id='single-line-expression-braces'></a>(<a href='#single-line-expression-braces'>link</a>) **The opening brace following a single-line expression should be on the same line as the rest of the statement.**
 
   <details>
 
@@ -1817,7 +1813,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='multi-line-expression-braces'></a>(<a href='#multi-line-expression-braces'>link</a>) The opening brace following a multi-line expression should wrap to a new line.
+- <a id='multi-line-expression-braces'></a>(<a href='#multi-line-expression-braces'>link</a>) **The opening brace following a multi-line expression should wrap to a new line.**
 
   <details>
 
@@ -1876,7 +1872,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='no-spaces-around-function-parens'></a>(<a href='#no-spaces-around-parens'>link</a>) For function calls and declarations, there should be no spaces before or inside the parentheses of the argument list.
+- <a id='no-spaces-around-function-parens'></a>(<a href='#no-spaces-around-parens'>link</a>) **For function calls and declarations, there should be no spaces before or inside the parentheses of the argument list.**
 
   <details>
 
@@ -2100,7 +2096,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='whitespace-around-comment-delimiters'></a>(<a href='#whitespace-around-comment-delimiters'>link</a>) Include spaces or newlines before and after comment delimiters (`//`, `///`, `/*`, and `*/`)
+- <a id='whitespace-around-comment-delimiters'></a>(<a href='#whitespace-around-comment-delimiters'>link</a>) **Include spaces or newlines before and after comment delimiters** (`//`, `///`, `/*`, and `*/`)
 
   <details>
 
@@ -2132,7 +2128,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='space-in-empty-braces'></a>(<a href='#space-in-empty-braces'>link</a>) Include a single space in an empty set of braces (`{ }`).
+- <a id='space-in-empty-braces'></a>(<a href='#space-in-empty-braces'>link</a>) **Include a single space in an empty set of braces** (`{ }`).
 
   <details>
 
@@ -2265,7 +2261,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`).**
+- <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](#column-width) function declarations with line breaks before each argument label, and before the closing parenthesis (`)`).**
 
   <details>
 
@@ -2342,7 +2338,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function calls should also break on each argument.** Put the closing parenthesis on its own line.
+- <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#column-width) function calls should also break on each argument.** Put the closing parenthesis on its own line.
 
   <details>
 
@@ -2785,7 +2781,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='long-ternary-operator-expressions'></a>(<a href='#long-ternary-operator-expressions'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) ternary operator expressions should wrap before the `?` and before the `:`**, putting each conditional branch on a separate line.
+- <a id='long-ternary-operator-expressions'></a>(<a href='#long-ternary-operator-expressions'>link</a>) **[Long](#column-width) ternary operator expressions should wrap before the `?` and before the `:`**, putting each conditional branch on a separate line.
 
   <details>
 
@@ -2812,7 +2808,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='use-commas-in-and-conditions'></a>(<a href='#use-commas-in-and-conditions'>link</a>) In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.
+- <a id='use-commas-in-and-conditions'></a>(<a href='#use-commas-in-and-conditions'>link</a>) **In conditional statements (`if`, `guard`, `while`), separate boolean conditions using commas (`,`) instead of `&&` operators.**
 
   <details>
 
@@ -2848,7 +2844,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='prefer-bound-generic-extension-shorthand'></a>(<a href='#prefer-bound-generic-extension-shorthand'>link</a>) When extending bound generic types, prefer using generic bracket syntax (`extension Collection<Planet>`), or sugared syntax for applicable standard library types (`extension [Planet]`) instead of generic type constraints.
+- <a id='prefer-bound-generic-extension-shorthand'></a>(<a href='#prefer-bound-generic-extension-shorthand'>link</a>) **When extending bound generic types, prefer using generic bracket syntax (`extension Collection<Planet>`), or sugared syntax for applicable standard library types (`extension [Planet]`) instead of generic type constraints.**
 
   <details>
 
@@ -3207,13 +3203,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
   </details>
 
 - <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.**
-  - Avoid creating non-namespaced global constants and functions.
-  - Feel free to nest namespaces where it adds clarity.
-  - `private` globals are permitted, since they are scoped to a single file and do not pollute the global namespace. Consider placing private globals in an `enum` namespace to match the guidelines for other declaration types.
 
   <details>
 
   [![SwiftFormat: enumNamespaces](https://img.shields.io/badge/SwiftFormat-enumNamespaces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#enumNamespaces)
+  - Avoid creating non-namespaced global constants and functions.
+  - Feel free to nest namespaces where it adds clarity.
+  - `private` globals are permitted, since they are scoped to a single file and do not pollute the global namespace. Consider placing private globals in an `enum` namespace to match the guidelines for other declaration types.
 
   #### Why?
 
@@ -3587,7 +3583,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='switch-avoid-default'></a>(<a href='#switch-avoid-default'>link</a>) When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.
+- <a id='switch-avoid-default'></a>(<a href='#switch-avoid-default'>link</a>) **When switching over an enum, generally prefer enumerating all cases rather than using the `default` case.**
 
   <details>
 
@@ -4350,7 +4346,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer`**.
+- <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
 
@@ -4374,7 +4370,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## File Organization
 
-- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file. Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.**
+- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.
 
   <details>
 
@@ -4407,11 +4403,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   import Foundation
   ```
 
-  </details>
-
   _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
-
-  <details>
 
   ```swift
   // WRONG
