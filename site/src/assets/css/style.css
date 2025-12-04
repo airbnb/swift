@@ -1,9 +1,39 @@
+@font-face {
+  font-family: 'Cereal';
+  src: url('Cereal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 body {
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
+  font-family: 'Cereal', system-ui, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  font-synthesis: weight;
   margin: 0 auto;
   padding: 3rem 2rem 2rem;
   max-width: 900px;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+a {
+  color: black;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 
 pre,
