@@ -8,12 +8,51 @@ namespace :lint do
   task :swift do
     sh 'swift package --allow-writing-to-package-directory format --lint'
   end
+
+  desc 'Lints README.md'
+  task :markdown do
+    unless system('which npx > /dev/null 2>&1')
+      puts "Error: npx is not installed. Please run: brew install node"
+      exit 1
+    end
+
+    readme_path = 'README.md'
+    check_result = system('npx --yes prettier --check README.md')
+
+    unless check_result
+      puts ""
+      puts "README.md has unformatted changes."
+      puts "Please run `bundle exec rake format:markdown` and commit the result."
+      exit 1
+    end
+  end
 end
 
 namespace :format do
   desc 'Formats swift files'
   task :swift do
     sh 'swift package --allow-writing-to-package-directory format'
+  end
+
+  desc 'Formats README.md'
+  task :markdown do
+    unless system('which npx > /dev/null 2>&1')
+      puts "Error: npx is not installed. Please run: brew install node"
+      exit 1
+    end
+
+    readme_path = 'README.md'
+
+    # Check if there would be changes by running prettier in check mode
+    check_result = system('npx --yes prettier --check README.md > /dev/null 2>&1')
+
+    if check_result
+      puts "No changes"
+    else
+      # Format the file
+      sh 'npx --yes prettier --write README.md'
+      puts "Formatted README.md"
+    end
   end
 end
 

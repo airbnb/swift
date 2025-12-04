@@ -41,6 +41,18 @@ jobs:
       - name: Run Unit Tests
         run: swift test
 
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+      - name: Lint README.md
+        run: bundle exec rake lint:markdown
+
   site-build:
     name: Build Site
     runs-on: macos-15
