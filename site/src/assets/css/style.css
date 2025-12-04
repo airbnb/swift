@@ -27,7 +27,6 @@ a {
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: none;
@@ -36,9 +35,41 @@ a {
   text-underline-position: from-font;
 }
 
+h1 {
+  color: black;
+  font-family: 'Cereal', system-ui, sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -1.2px;
+}
+
+h2 {
+  color: black;
+  font-family: 'Cereal', system-ui, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.52px;
+}
+
+h3 {
+  color: black;
+  font-family: 'Cereal', system-ui, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.44px;
+}
+
 pre,
 code {
   font-family: 'SF Mono', Monaco, Menlo, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 :not(pre) > code {
