@@ -569,7 +569,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ) { ... }
 
   buildSolarSystem(
-    innertPlanets: terrestrialPlanets,
+    innerPlanets: terrestrialPlanets,
     outerPlanets: gasGiants
   )
 
@@ -587,7 +587,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ) { ... }
 
   buildSolarSystem(
-    innertPlanets: terrestrialPlanets,
+    innerPlanets: terrestrialPlanets,
     outerPlanets: gasGiants,
   )
   ```
