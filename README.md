@@ -2951,7 +2951,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. Note that this only applies to `internal`, `fileprivate` and `private` initializers, since compiler-synthesized memberwise initializers are only generated for those access controls.
+- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler synthesizes `internal` memberwise initializers for structs, so explicit `internal` initializers equivalent to the synthesized initializer should be omitted. For `internal` structs, prefer defining `internal` properties rather than `private` properties so the synthesized memberwise initializer can be used.
 
   <details>
 
@@ -2959,19 +2959,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Removing redundant memberwise initializers reduces boilerplate and makes the code more concise. The compiler-synthesized initializers are equivalent to the explicit ones, so there's no functional difference.
+  Removing redundant memberwise initializers reduces boilerplate and makes it easier to add more properties in the future.
 
   ```swift
   // WRONG
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
 
-    init(name: String, mass: Double, radius: Double) {
+    init(name: String, mass: Double) {
       self.name = name
       self.mass = mass
-      self.radius = radius
     }
   }
 
@@ -2979,19 +2977,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
   }
 
   // ALSO RIGHT: Custom logic in initializer makes it non-redundant
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
 
-    init(name: String, mass: Double, radius: Double) {
+    init(name: String, mass: Double) {
       self.name = name.capitalized
       self.mass = max(0, mass)
-      self.radius = max(0, radius)
     }
   }
 
@@ -3000,13 +2995,60 @@ _You can enable the following settings in Xcode by running [this script](resourc
   public struct Planet {
     public let name: String
     public let mass: Double
-    public let radius: Double
 
-    public init(name: String, mass: Double, radius: Double) {
+    public init(name: String, mass: Double) {
       self.name = name
       self.mass = mass
-      self.radius = radius
     }
+  }
+  ```
+
+  For `internal` structs, prefer declaring `internal` properties rather than `private` properties, so that the synthesized memberwise initializer can be used instead of writing a redundant explicit initializer.
+
+  ```swift
+  // WRONG
+  struct PlanetView: View {
+
+    // MARK: Lifecycle
+
+    init(planet: Planet, star: Star) {
+      self.planet = planet
+      self.star = star
+    }
+
+    // MARK: Internal
+
+    var body: some View {
+      ...
+    }
+
+    // MARK: Private
+
+    @State private var isRotating = false
+    @Environment(\.dismiss) private var dismiss
+
+    private let planet: Planet
+    private let star: Star
+
+  }
+
+  // RIGHT
+  struct PlanetView: View {
+
+    // MARK: Internal
+
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+
+    // MARK: Private
+
+    @State private var isRotating = false
+    @Environment(\.dismiss) private var dismiss
+
   }
   ```
 
