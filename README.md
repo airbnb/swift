@@ -3024,14 +3024,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     // MARK: Private
 
-    @State private var isRotating = false
-    @Environment(\.dismiss) private var dismiss
-
     private let planet: Planet
     private let star: Star
 
   }
 
+  ```swift
+  // RIGHT
+  struct PlanetView: View {
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+  }
+  ```
+
+  This doesn't apply to SwiftUI dynamic properties, which should always be left private.
+
+  ```swift
   // RIGHT
   struct PlanetView: View {
 
