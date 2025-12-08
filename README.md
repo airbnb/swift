@@ -83,8 +83,9 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
    1. [Operators](#operators)
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
-1. [Objective-C Interoperability](#objective-c-interoperability)
+1. [SwiftUI](#swiftui)
 1. [Testing](#testing)
+1. [Objective-C Interoperability](#objective-c-interoperability)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
@@ -2951,7 +2952,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler synthesizes `internal` memberwise initializers for structs, so explicit `internal` initializers equivalent to the synthesized initializer should be omitted. For `internal` structs, prefer defining `internal` properties rather than `private` properties so the synthesized memberwise initializer can be used.
+- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler synthesizes `internal` memberwise initializers for structs, so explicit `internal` initializers equivalent to the synthesized initializer should be omitted.
 
   <details>
 
@@ -3000,67 +3001,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
       self.name = name
       self.mass = mass
     }
-  }
-  ```
-
-  For `internal` structs, prefer declaring `internal` properties rather than `private` properties, so that the synthesized memberwise initializer can be used instead of writing a redundant explicit initializer.
-
-  ```swift
-  // WRONG
-  struct PlanetView: View {
-
-    // MARK: Lifecycle
-
-    init(planet: Planet, star: Star) {
-      self.planet = planet
-      self.star = star
-    }
-
-    // MARK: Internal
-
-    var body: some View {
-      ...
-    }
-
-    // MARK: Private
-
-    private let planet: Planet
-    private let star: Star
-
-  }
-
-  ```swift
-  // RIGHT
-  struct PlanetView: View {
-    let planet: Planet
-    let star: Star
-
-    var body: some View {
-      ...
-    }
-  }
-  ```
-
-  This doesn't apply to SwiftUI dynamic properties, which should always be left private.
-
-  ```swift
-  // RIGHT
-  struct PlanetView: View {
-
-    // MARK: Internal
-
-    let planet: Planet
-    let star: Star
-
-    var body: some View {
-      ...
-    }
-
-    // MARK: Private
-
-    @State private var isRotating = false
-    @Environment(\.dismiss) private var dismiss
-
   }
   ```
 
@@ -4317,37 +4257,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible.
-
-  <details>
-
-  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
-
-  ### Why?
-
-  Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
-
-  ```swift
-  /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
-  struct IsSelectedEnvironmentKey: EnvironmentKey {
-    static var defaultValue: Bool { false }
-  }
-
-  extension EnvironmentValues {
-    var isSelected: Bool {
-     get { self[IsSelectedEnvironmentKey.self] }
-     set { self[IsSelectedEnvironmentKey.self] = newValue }
-    }
-  }
-
-  /// RIGHT: The `EnvironmentValues` property uses the @Entry macro
-  extension EnvironmentValues {
-    @Entry var isSelected: Bool = false
-  }
-  ```
-
-  </details>
-
 - <a id='void-type'></a>(<a href='#void-type'>link</a>) **Avoid using `()` as a type**. Prefer `Void`.
 
   <details>
@@ -4884,29 +4793,104 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 **[⬆ back to top](#table-of-contents)**
 
-## Objective-C Interoperability
+## SwiftUI
 
-- <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties.
 
   <details>
 
+  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
+
+  #### Why?
+
+  Using `internal` properties allows the compiler to synthesize a memberwise initializer, reducing boilerplate.
+
   ```swift
-  class PriceBreakdownViewController {
+  // WRONG
+  struct PlanetView: View {
 
-    private let acceptButton = UIButton()
+    // MARK: Lifecycle
 
-    private func setUpAcceptButton() {
-      acceptButton.addTarget(
-        self,
-        action: #selector(didTapAcceptButton),
-        forControlEvents: .touchUpInside
-      )
+    init(planet: Planet, star: Star) {
+      self.planet = planet
+      self.star = star
     }
 
-    @objc
-    private func didTapAcceptButton() {
+    // MARK: Internal
+
+    var body: some View {
       ...
     }
+
+    // MARK: Private
+
+    private let planet: Planet
+    private let star: Star
+
+  }
+
+  // RIGHT
+  struct PlanetView: View {
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+  }
+  ```
+
+  This doesn't apply to SwiftUI dynamic properties, which should always be left private.
+
+  ```swift
+  // RIGHT
+  struct PlanetView: View {
+
+    // MARK: Internal
+
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+
+    // MARK: Private
+
+    @State private var isRotating = false
+    @Environment(\.dismiss) private var dismiss
+
+  }
+  ```
+
+  </details>
+
+- <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible.
+
+  <details>
+
+  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
+
+  ### Why?
+
+  Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
+
+  ```swift
+  /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
+  struct IsSelectedEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Bool { false }
+  }
+
+  extension EnvironmentValues {
+    var isSelected: Bool {
+     get { self[IsSelectedEnvironmentKey.self] }
+     set { self[IsSelectedEnvironmentKey.self] = newValue }
+    }
+  }
+
+  /// RIGHT: The `EnvironmentValues` property uses the @Entry macro
+  extension EnvironmentValues {
+    @Entry var isSelected: Bool = false
   }
   ```
 
@@ -5230,6 +5214,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func habitability() {
       #expect(earth.isHabitable)
       #expect(!mars.isHabitable)
+    }
+  }
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
+## Objective-C Interoperability
+
+- <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+
+  <details>
+
+  ```swift
+  class PriceBreakdownViewController {
+
+    private let acceptButton = UIButton()
+
+    private func setUpAcceptButton() {
+      acceptButton.addTarget(
+        self,
+        action: #selector(didTapAcceptButton),
+        forControlEvents: .touchUpInside
+      )
+    }
+
+    @objc
+    private func didTapAcceptButton() {
+      ...
     }
   }
   ```
