@@ -46,6 +46,7 @@
 --else-position same-line # elseOnSameLine
 --guard-else next-line # elseOnSameLine
 --single-line-for-each convert # preferForLoop
+--optional-for-each convert # preferForLoop
 --short-optionals always # typeSugar
 --semicolons never # semicolons
 --doc-comments preserve # docComments
