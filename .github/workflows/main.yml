@@ -9,14 +9,14 @@ on:
 jobs:
   test-package-plugin:
     name: Test Package Plugin
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
         xcode:
-        - '14.2' # Swift 5.7
-        - '14.3' # Swift 5.8
-        - '15.0' # Swift 5.9
+        - '16.0' # Swift 6.0
+        - '16.4' # Swift 6.1
+        - '26.0.1' # Swift 6.2
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -27,12 +27,12 @@ jobs:
 
   unit-tests:
     name: Unit Tests
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
         xcode:
-        - '15.0' # Swift 5.9
+        - '26.0.1' # Swift 6.2
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
