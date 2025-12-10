@@ -2196,50 +2196,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level.
-
-  <details>
-
-  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantInternal)
-
-  ```swift
-  // WRONG
-  internal class Spaceship {
-    internal init() { ... }
-    internal func travel(to planet: Planet) { ... }
-  }
-
-  // RIGHT, because internal access control is implied if no other access control level is specified.
-  class Spaceship {
-    init() { ... }
-    func travel(to planet: Planet) { ... }
-  }
-  ```
-
-  </details>
-
-- <a id='omit-redundant-public'></a>(<a href='#omit-redundant-public'>link</a>) **Avoid using `public` access control in `internal` types.** In this case the `public` modifier is redundant and has no effect.
-
-  <details>
-
-  [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
-
-  ```swift
-  // WRONG: Public declarations in internal types are internal, not public.
-  class Spaceship {
-    public init() { ... }
-    public func travel(to planet: Planet) { ... }
-  }
-
-  // RIGHT
-  class Spaceship {
-    init() { ... }
-    func travel(to planet: Planet) { ... }
-  }
-  ```
-
-  </details>
-
 ### Functions
 
 - <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.**
@@ -3107,11 +3063,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+- <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. Avoid using `public` in `internal` types.
 
   <details>
 
-  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantFileprivate)
+  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantFileprivate) [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
 
   ```swift
   // WRONG
@@ -3161,6 +3117,98 @@ _You can enable the following settings in Xcode by running [this script](resourc
       spaceship.navigation.course = .andromedaGalaxy
       spaceship.blastOff()
     }
+  }
+  ```
+
+  ```swift
+  // WRONG: Public declarations in internal types are internal, not public.
+  class Spaceship {
+    public init() { ... }
+    public func travel(to planet: Planet) { ... }
+  }
+
+  // RIGHT
+  class Spaceship {
+    init() { ... }
+    func travel(to planet: Planet) { ... }
+  }
+  ```
+
+  However, you can use `internal` access control instead of `private` access control to enable the use of the [compiler-synthesized memberwise initializer](#omit-redundant-memberwise-init).
+
+  ```swift
+  // ALSO RIGHT: Using `internal` access control instead of `private`
+  // to enable the synthesized memberwise init.
+  struct PlanetView: View {
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+  }
+  ```
+
+  </details>
+
+- <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level.
+
+  <details>
+
+  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantInternal)
+
+  ```swift
+  // WRONG
+  internal class Spaceship {
+    internal init() { ... }
+    internal func travel(to planet: Planet) { ... }
+  }
+
+  // RIGHT, because internal access control is implied if no other access control level is specified.
+  class Spaceship {
+    init() { ... }
+    func travel(to planet: Planet) { ... }
+  }
+  ```
+
+  </details>
+
+- <a id='extension-access-control'></a>(<a href='#extension-access-control'>link</a>) **Specify the access control for each declaration in an extension individually.**
+
+  <details>
+
+  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#extensionaccesscontrol)
+
+  #### Why?
+
+  Specifying the access control on the declaration itself helps engineers more quickly determine the access control level of an individual declaration.
+
+  ```swift
+  // WRONG
+  public extension Universe {
+    // This declaration doesn't have an explicit access control level.
+    // In all other scopes, this would be an internal function,
+    // but because this is in a public extension, it's actually a public function.
+    func generateGalaxy() { }
+  }
+
+  // WRONG
+  private extension Spaceship {
+    func enableHyperdrive() { }
+  }
+
+  // RIGHT
+  extension Universe {
+    // It is immediately obvious that this is a public function,
+    // even if the start of the `extension Universe` scope is off-screen.
+    public func generateGalaxy() { }
+  }
+
+  // RIGHT
+  extension Spaceship {
+    // Recall that a private extension actually has fileprivate semantics,
+    // so a declaration in a private extension is fileprivate by default.
+    fileprivate func enableHyperdrive() { }
   }
   ```
 
@@ -3769,47 +3817,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
   protocol Foo: AnyObject { }
-  ```
-
-  </details>
-
-- <a id='extension-access-control'></a>(<a href='#extension-access-control'>link</a>) **Specify the access control for each declaration in an extension individually.**
-
-  <details>
-
-  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#extensionaccesscontrol)
-
-  #### Why?
-
-  Specifying the access control on the declaration itself helps engineers more quickly determine the access control level of an individual declaration.
-
-  ```swift
-  // WRONG
-  public extension Universe {
-    // This declaration doesn't have an explicit access control level.
-    // In all other scopes, this would be an internal function,
-    // but because this is in a public extension, it's actually a public function.
-    func generateGalaxy() { }
-  }
-
-  // WRONG
-  private extension Spaceship {
-    func enableHyperdrive() { }
-  }
-
-  // RIGHT
-  extension Universe {
-    // It is immediately obvious that this is a public function,
-    // even if the start of the `extension Universe` scope is off-screen.
-    public func generateGalaxy() { }
-  }
-
-  // RIGHT
-  extension Spaceship {
-    // Recall that a private extension actually has fileprivate semantics,
-    // so a declaration in a private extension is fileprivate by default.
-    fileprivate func enableHyperdrive() { }
-  }
   ```
 
   </details>
