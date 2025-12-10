@@ -83,8 +83,9 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
    1. [Operators](#operators)
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
-1. [Objective-C Interoperability](#objective-c-interoperability)
+1. [SwiftUI](#swiftui)
 1. [Testing](#testing)
+1. [Objective-C Interoperability](#objective-c-interoperability)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
@@ -2195,50 +2196,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level.
-
-  <details>
-
-  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantInternal)
-
-  ```swift
-  // WRONG
-  internal class Spaceship {
-    internal init() { ... }
-    internal func travel(to planet: Planet) { ... }
-  }
-
-  // RIGHT, because internal access control is implied if no other access control level is specified.
-  class Spaceship {
-    init() { ... }
-    func travel(to planet: Planet) { ... }
-  }
-  ```
-
-  </details>
-
-- <a id='omit-redundant-public'></a>(<a href='#omit-redundant-public'>link</a>) **Avoid using `public` access control in `internal` types.** In this case the `public` modifier is redundant and has no effect.
-
-  <details>
-
-  [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
-
-  ```swift
-  // WRONG: Public declarations in internal types are internal, not public.
-  class Spaceship {
-    public init() { ... }
-    public func travel(to planet: Planet) { ... }
-  }
-
-  // RIGHT
-  class Spaceship {
-    init() { ... }
-    func travel(to planet: Planet) { ... }
-  }
-  ```
-
-  </details>
-
 ### Functions
 
 - <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.**
@@ -2951,7 +2908,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler can synthesize memberwise initializers for structs, so explicit initializers that only assign parameters to properties with the same names should be omitted. Note that this only applies to `internal`, `fileprivate` and `private` initializers, since compiler-synthesized memberwise initializers are only generated for those access controls.
+- <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler synthesizes `internal` memberwise initializers for structs, so explicit `internal` initializers equivalent to the synthesized initializer should be omitted.
 
   <details>
 
@@ -2959,19 +2916,17 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Removing redundant memberwise initializers reduces boilerplate and makes the code more concise. The compiler-synthesized initializers are equivalent to the explicit ones, so there's no functional difference.
+  Removing redundant memberwise initializers reduces boilerplate and makes it easier to add more properties in the future.
 
   ```swift
   // WRONG
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
 
-    init(name: String, mass: Double, radius: Double) {
+    init(name: String, mass: Double) {
       self.name = name
       self.mass = mass
-      self.radius = radius
     }
   }
 
@@ -2979,19 +2934,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
   }
 
   // ALSO RIGHT: Custom logic in initializer makes it non-redundant
   struct Planet {
     let name: String
     let mass: Double
-    let radius: Double
 
-    init(name: String, mass: Double, radius: Double) {
+    init(name: String, mass: Double) {
       self.name = name.capitalized
       self.mass = max(0, mass)
-      self.radius = max(0, radius)
     }
   }
 
@@ -3000,12 +2952,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
   public struct Planet {
     public let name: String
     public let mass: Double
-    public let radius: Double
 
-    public init(name: String, mass: Double, radius: Double) {
+    public init(name: String, mass: Double) {
       self.name = name
       self.mass = mass
-      self.radius = radius
     }
   }
   ```
@@ -3113,11 +3063,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
+- <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior. Avoid using `public` in `internal` types.
 
   <details>
 
-  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantFileprivate)
+  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantFileprivate) [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantPublic)
 
   ```swift
   // WRONG
@@ -3167,6 +3117,98 @@ _You can enable the following settings in Xcode by running [this script](resourc
       spaceship.navigation.course = .andromedaGalaxy
       spaceship.blastOff()
     }
+  }
+  ```
+
+  ```swift
+  // WRONG: Public declarations in internal types are internal, not public.
+  class Spaceship {
+    public init() { ... }
+    public func travel(to planet: Planet) { ... }
+  }
+
+  // RIGHT
+  class Spaceship {
+    init() { ... }
+    func travel(to planet: Planet) { ... }
+  }
+  ```
+
+  However, you can use `internal` access control instead of `private` access control to enable the use of the [compiler-synthesized memberwise initializer](#omit-redundant-memberwise-init).
+
+  ```swift
+  // ALSO RIGHT: Using `internal` access control instead of `private`
+  // to enable the synthesized memberwise init.
+  struct PlanetView: View {
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+  }
+  ```
+
+  </details>
+
+- <a id='omit-internal-keyword'></a>(<a href='#omit-internal-keyword'>link</a>) **Omit the `internal` keyword** when defining types, properties, or functions with an internal access control level.
+
+  <details>
+
+  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantInternal)
+
+  ```swift
+  // WRONG
+  internal class Spaceship {
+    internal init() { ... }
+    internal func travel(to planet: Planet) { ... }
+  }
+
+  // RIGHT, because internal access control is implied if no other access control level is specified.
+  class Spaceship {
+    init() { ... }
+    func travel(to planet: Planet) { ... }
+  }
+  ```
+
+  </details>
+
+- <a id='extension-access-control'></a>(<a href='#extension-access-control'>link</a>) **Specify the access control for each declaration in an extension individually.**
+
+  <details>
+
+  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#extensionaccesscontrol)
+
+  #### Why?
+
+  Specifying the access control on the declaration itself helps engineers more quickly determine the access control level of an individual declaration.
+
+  ```swift
+  // WRONG
+  public extension Universe {
+    // This declaration doesn't have an explicit access control level.
+    // In all other scopes, this would be an internal function,
+    // but because this is in a public extension, it's actually a public function.
+    func generateGalaxy() { }
+  }
+
+  // WRONG
+  private extension Spaceship {
+    func enableHyperdrive() { }
+  }
+
+  // RIGHT
+  extension Universe {
+    // It is immediately obvious that this is a public function,
+    // even if the start of the `extension Universe` scope is off-screen.
+    public func generateGalaxy() { }
+  }
+
+  // RIGHT
+  extension Spaceship {
+    // Recall that a private extension actually has fileprivate semantics,
+    // so a declaration in a private extension is fileprivate by default.
+    fileprivate func enableHyperdrive() { }
   }
   ```
 
@@ -3779,47 +3821,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='extension-access-control'></a>(<a href='#extension-access-control'>link</a>) **Specify the access control for each declaration in an extension individually.**
-
-  <details>
-
-  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#extensionaccesscontrol)
-
-  #### Why?
-
-  Specifying the access control on the declaration itself helps engineers more quickly determine the access control level of an individual declaration.
-
-  ```swift
-  // WRONG
-  public extension Universe {
-    // This declaration doesn't have an explicit access control level.
-    // In all other scopes, this would be an internal function,
-    // but because this is in a public extension, it's actually a public function.
-    func generateGalaxy() { }
-  }
-
-  // WRONG
-  private extension Spaceship {
-    func enableHyperdrive() { }
-  }
-
-  // RIGHT
-  extension Universe {
-    // It is immediately obvious that this is a public function,
-    // even if the start of the `extension Universe` scope is off-screen.
-    public func generateGalaxy() { }
-  }
-
-  // RIGHT
-  extension Spaceship {
-    // Recall that a private extension actually has fileprivate semantics,
-    // so a declaration in a private extension is fileprivate by default.
-    fileprivate func enableHyperdrive() { }
-  }
-  ```
-
-  </details>
-
 - <a id='no-direct-standard-out-logs'></a>(<a href='#no-direct-standard-out-logs'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `debugPrint(…)`, or `dump(…)`.**
 
   <details>
@@ -4258,37 +4259,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
     let mass: Double
     let orbit: OrbitalElements
     let rotation: Double
-  }
-  ```
-
-  </details>
-
-- <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible.
-
-  <details>
-
-  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
-
-  ### Why?
-
-  Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
-
-  ```swift
-  /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
-  struct IsSelectedEnvironmentKey: EnvironmentKey {
-    static var defaultValue: Bool { false }
-  }
-
-  extension EnvironmentValues {
-    var isSelected: Bool {
-     get { self[IsSelectedEnvironmentKey.self] }
-     set { self[IsSelectedEnvironmentKey.self] = newValue }
-    }
-  }
-
-  /// RIGHT: The `EnvironmentValues` property uses the @Entry macro
-  extension EnvironmentValues {
-    @Entry var isSelected: Bool = false
   }
   ```
 
@@ -4830,29 +4800,104 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 **[⬆ back to top](#table-of-contents)**
 
-## Objective-C Interoperability
+## SwiftUI
 
-- <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties.
 
   <details>
 
+  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
+
+  #### Why?
+
+  Using `internal` properties allows the compiler to synthesize a memberwise initializer, reducing boilerplate.
+
   ```swift
-  class PriceBreakdownViewController {
+  // WRONG
+  struct PlanetView: View {
 
-    private let acceptButton = UIButton()
+    // MARK: Lifecycle
 
-    private func setUpAcceptButton() {
-      acceptButton.addTarget(
-        self,
-        action: #selector(didTapAcceptButton),
-        forControlEvents: .touchUpInside
-      )
+    init(planet: Planet, star: Star) {
+      self.planet = planet
+      self.star = star
     }
 
-    @objc
-    private func didTapAcceptButton() {
+    // MARK: Internal
+
+    var body: some View {
       ...
     }
+
+    // MARK: Private
+
+    private let planet: Planet
+    private let star: Star
+
+  }
+
+  // RIGHT
+  struct PlanetView: View {
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+  }
+  ```
+
+  This doesn't apply to SwiftUI dynamic properties, which should always be left private.
+
+  ```swift
+  // RIGHT
+  struct PlanetView: View {
+
+    // MARK: Internal
+
+    let planet: Planet
+    let star: Star
+
+    var body: some View {
+      ...
+    }
+
+    // MARK: Private
+
+    @State private var isRotating = false
+    @Environment(\.dismiss) private var dismiss
+
+  }
+  ```
+
+  </details>
+
+- <a id='redundant-environment-key-implementation'></a>(<a href='#redundant-environment-key-implementation'>link</a>) **Prefer using the `@Entry` macro to define properties inside `EnvironmentValues`**. When adding properties to SwiftUI `EnvironmentValues`, prefer using the compiler-synthesized property implementation when possible.
+
+  <details>
+
+  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/develop/Rules.md#environmentEntry)
+
+  ### Why?
+
+  Manually-implemented environment keys are verbose and it is considered a legacy pattern. `@Entry` was specifically intended to be a replacement considering it was backported to iOS 13.
+
+  ```swift
+  /// WRONG: The `EnvironmentValues` property depends on `IsSelectedEnvironmentKey`
+  struct IsSelectedEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Bool { false }
+  }
+
+  extension EnvironmentValues {
+    var isSelected: Bool {
+     get { self[IsSelectedEnvironmentKey.self] }
+     set { self[IsSelectedEnvironmentKey.self] = newValue }
+    }
+  }
+
+  /// RIGHT: The `EnvironmentValues` property uses the @Entry macro
+  extension EnvironmentValues {
+    @Entry var isSelected: Bool = false
   }
   ```
 
@@ -5176,6 +5221,36 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func habitability() {
       #expect(earth.isHabitable)
       #expect(!mars.isHabitable)
+    }
+  }
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
+## Objective-C Interoperability
+
+- <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+
+  <details>
+
+  ```swift
+  class PriceBreakdownViewController {
+
+    private let acceptButton = UIButton()
+
+    private func setUpAcceptButton() {
+      acceptButton.addTarget(
+        self,
+        action: #selector(didTapAcceptButton),
+        forControlEvents: .touchUpInside
+      )
+    }
+
+    @objc
+    private func didTapAcceptButton() {
+      ...
     }
   }
   ```
