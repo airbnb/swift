@@ -4802,7 +4802,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## SwiftUI
 
-- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties.
+- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For internal SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties.
 
   <details>
 
@@ -4810,7 +4810,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   #### Why?
 
-  Using `internal` properties allows the compiler to synthesize a memberwise initializer, reducing boilerplate.
+  Using `internal` properties allows the compiler to synthesize the default internal memberwise initializer, reducing boilerplate.
 
   ```swift
   // WRONG
