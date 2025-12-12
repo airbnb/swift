@@ -2200,7 +2200,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  [![SwiftFormat: wrapSingleLineDeclarationBodies](https://img.shields.io/badge/SwiftFormat-wrapSingleLineDeclarationBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSingleLineDeclarationBodies)
+  [![SwiftFormat: wrapSingleLineBodies](https://img.shields.io/badge/SwiftFormat-wrapSingleLineBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSingleLineBodies)
 
   ```swift
   // WRONG
