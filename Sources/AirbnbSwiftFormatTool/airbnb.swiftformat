@@ -124,6 +124,7 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
+--rules wrapSingleLineDeclarationBodies
 --rules void
 --rules blankLineAfterSwitchCase
 --rules consistentSwitchCaseSpacing
