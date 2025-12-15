@@ -4903,6 +4903,62 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+- <a id='redundant-viewbuilder'></a>(<a href='#redundant-viewbuilder'>link</a>) **Omit `@ViewBuilder` when it is not required.** `@ViewBuilder` is implicit on `View.body` properties and `ViewModifier.body(content:)` functions, and is unnecessary on single-expression properties or functions.
+
+  <details>
+
+  [![SwiftFormat: redundantViewBuilder](https://img.shields.io/badge/SwiftFormat-redundantViewBuilder-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantViewBuilder)
+
+  #### Why?
+
+  `@ViewBuilder` is automatically applied by the compiler to `View.body` and `ViewModifier.body(content:)`, so adding it explicitly is redundant. Similarly, single-expression properties and functions don't need `@ViewBuilder` since there's only one view being returned.
+
+  ```swift
+  // WRONG
+  struct PlanetView: View {
+    @ViewBuilder
+    var body: some View {
+      Text("Hello, World!")
+    }
+
+    @ViewBuilder
+    var subtitle: some View {
+      Text("Subtitle")
+    }
+  }
+
+  // RIGHT
+  struct PlanetView: View {
+    var body: some View {
+      Text("Hello, World!")
+    }
+
+    var subtitle: some View {
+      Text("Subtitle")
+    }
+  }
+
+  // ALSO RIGHT: @ViewBuilder is necessary for conditionals
+  struct ConditionalView: View {
+    var showDetails: Bool
+
+    var body: some View {
+      title
+    }
+
+    @ViewBuilder
+    var title: some View {
+      if showDetails {
+        Text("Details")
+      } else {
+        Text("Summary")
+      }
+    }
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing
