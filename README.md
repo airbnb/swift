@@ -2299,7 +2299,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  [![SwiftFormat: wrapSingleLineBodies](https://img.shields.io/badge/SwiftFormat-wrapSingleLineBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSingleLineBodies)
+  [![SwiftFormat: wrapFunctionBodies](https://img.shields.io/badge/SwiftFormat-wrapFunctionBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapFunctionBodies) [![SwiftFormat: wrapPropertyBodies](https://img.shields.io/badge/SwiftFormat-wrapPropertyBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapPropertyBodies)
 
   ```swift
   // WRONG
