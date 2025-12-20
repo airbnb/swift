@@ -2295,6 +2295,52 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
+- <a id='wrap-single-line-declaration-bodies'></a>(<a href='#wrap-single-line-declaration-bodies'>link</a>) **Always wrap function and property bodies onto multiple lines.**
+
+  <details>
+
+  [![SwiftFormat: wrapFunctionBodies](https://img.shields.io/badge/SwiftFormat-wrapFunctionBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapFunctionBodies) [![SwiftFormat: wrapPropertyBodies](https://img.shields.io/badge/SwiftFormat-wrapPropertyBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapPropertyBodies)
+
+  ```swift
+  // WRONG
+  var galaxy: String { "Milky Way" }
+
+  func launchRocket() { print("Launching") }
+
+  init() { self.value = 0 }
+
+  subscript(index: Int) -> Int { array[index] }
+
+  // RIGHT
+  var galaxy: String {
+    "Milky Way"
+  }
+
+  func launchRocket() {
+    print("Launching")
+  }
+
+  init() {
+    self.value = 0
+  }
+
+  subscript(index: Int) -> Int {
+    array[index]
+  }
+  ```
+
+  _Exception: This rule does not affect protocol definitions._
+
+  ```swift
+  // RIGHT
+  protocol SpaceshipEngine {
+    func engage() -> Bool
+    var fuelLevel: Double { get }
+  }
+  ```
+
+  </details>
+
 - <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](#column-width) function calls should also break on each argument.** Put the closing parenthesis on its own line.
 
   <details>
