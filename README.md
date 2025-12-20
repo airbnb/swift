@@ -2196,52 +2196,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='wrap-single-line-declaration-bodies'></a>(<a href='#wrap-single-line-declaration-bodies'>link</a>) **Wrap single-line function, init, subscript, and computed property bodies onto multiple lines.**
-
-  <details>
-
-  [![SwiftFormat: wrapSingleLineBodies](https://img.shields.io/badge/SwiftFormat-wrapSingleLineBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSingleLineBodies)
-
-  ```swift
-  // WRONG
-  func foo() { print("bar") }
-
-  init() { self.value = 0 }
-
-  subscript(index: Int) -> Int { array[index] }
-
-  var bar: String { "bar" }
-
-  // RIGHT
-  func foo() {
-    print("bar")
-  }
-
-  init() {
-    self.value = 0
-  }
-
-  subscript(index: Int) -> Int {
-    array[index]
-  }
-
-  var bar: String {
-    "bar"
-  }
-  ```
-
-  _Exception: This rule does not affect protocol definitions._
-
-  ```swift
-  // RIGHT
-  protocol SpaceshipEngine {
-    func engage() -> Bool
-    var fuelLevel: Double { get }
-  }
-  ```
-
-  </details>
-
 ### Functions
 
 - <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Omit `Void` return types from function definitions.**
@@ -2336,6 +2290,52 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ) async throws -> String {
       populateUniverse()
     }
+  }
+  ```
+
+  </details>
+
+- <a id='wrap-single-line-declaration-bodies'></a>(<a href='#wrap-single-line-declaration-bodies'>link</a>) **Always wrap function and property bodies onto multiple lines.**
+
+  <details>
+
+  [![SwiftFormat: wrapSingleLineBodies](https://img.shields.io/badge/SwiftFormat-wrapSingleLineBodies-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSingleLineBodies)
+
+  ```swift
+  // WRONG
+  var galaxy: String { "Milky Way" }
+
+  func launchRocket() { print("Launching") }
+
+  init() { self.value = 0 }
+
+  subscript(index: Int) -> Int { array[index] }
+
+  // RIGHT
+  var galaxy: String {
+    "Milky Way"
+  }
+
+  func launchRocket() {
+    print("Launching")
+  }
+
+  init() {
+    self.value = 0
+  }
+
+  subscript(index: Int) -> Int {
+    array[index]
+  }
+  ```
+
+  _Exception: This rule does not affect protocol definitions._
+
+  ```swift
+  // RIGHT
+  protocol SpaceshipEngine {
+    func engage() -> Bool
+    var fuelLevel: Double { get }
   }
   ```
 
