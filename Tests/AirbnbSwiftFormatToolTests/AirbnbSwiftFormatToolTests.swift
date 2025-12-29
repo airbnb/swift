@@ -12,12 +12,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
   // MARK: Internal
 
-  func testFormatWithNoViolations() {
+  func testFormatWithNoViolations() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       with: MockCommands(
         swiftFormat: {
           ranSwiftFormat = true
@@ -40,12 +40,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertTrue(ranSwiftLintAutocorrect)
   }
 
-  func testLintWithNoViolations() {
+  func testLintWithNoViolations() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       arguments: ["--lint"],
       with: MockCommands(
         swiftFormat: {
@@ -71,12 +71,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertFalse(ranSwiftLintAutocorrect)
   }
 
-  func testFormatWithViolations() {
+  func testFormatWithViolations() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       with: MockCommands(
         swiftFormat: {
           ranSwiftFormat = true
@@ -105,12 +105,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertTrue(ranSwiftLintAutocorrect)
   }
 
-  func testFormatWithOnlySwiftLintAutocorrectedViolation() {
+  func testFormatWithOnlySwiftLintAutocorrectedViolation() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       with: MockCommands(
         swiftFormat: {
           ranSwiftFormat = true
@@ -148,12 +148,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertTrue(ranSwiftLintAutocorrect)
   }
 
-  func testLintWithViolations() {
+  func testLintWithViolations() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       arguments: ["--lint"],
       with: MockCommands(
         swiftFormat: {
@@ -177,12 +177,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertFalse(ranSwiftLintAutocorrect)
   }
 
-  func testLintWithOnlySwiftLintViolation() {
+  func testLintWithOnlySwiftLintViolation() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       arguments: ["--lint"],
       with: MockCommands(
         swiftFormat: {
@@ -206,12 +206,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertFalse(ranSwiftLintAutocorrect)
   }
 
-  func testLintWithOnlySwiftFormatViolation() {
+  func testLintWithOnlySwiftFormatViolation() async {
     var ranSwiftFormat = false
     var ranSwiftLint = false
     var ranSwiftLintAutocorrect = false
 
-    let error = runFormatTool(
+    let error = await runFormatTool(
       arguments: ["--lint"],
       with: MockCommands(
         swiftFormat: {
@@ -235,12 +235,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertFalse(ranSwiftLintAutocorrect)
   }
 
-  func testHandlesUnexpectedErrorCode() {
-    let unexpectedSwiftFormatExitCode = runFormatTool(
+  func testHandlesUnexpectedErrorCode() async {
+    let unexpectedSwiftFormatExitCode = await runFormatTool(
       with: MockCommands(swiftFormat: { 1234 })
     )
 
-    let unexpectedSwiftLintExitCode = runFormatTool(
+    let unexpectedSwiftLintExitCode = await runFormatTool(
       with: MockCommands(swiftLint: { 42 })
     )
 
@@ -248,25 +248,235 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
     XCTAssertEqual(unexpectedSwiftLintExitCode as? ExitCode, ExitCode(42))
   }
 
+  func testParallelDirectoryProcessing() async {
+    let lock = NSLock()
+    var processedDirectories = Set<String>()
+
+    let error = await runFormatTool(
+      directories: ["DirA", "DirB", "DirC"],
+      with: MockCommands(
+        swiftFormatHandler: { command in
+          let directory = command.arguments.first ?? ""
+          lock.lock()
+          processedDirectories.insert(directory)
+          lock.unlock()
+          return EXIT_SUCCESS
+        },
+        swiftLintHandler: { _ in EXIT_SUCCESS },
+        swiftLintAutocorrectHandler: { _ in EXIT_SUCCESS }
+      )
+    )
+
+    XCTAssertNil(error)
+    XCTAssertEqual(processedDirectories, ["DirA", "DirB", "DirC"])
+  }
+
+  func testParallelDirectoryProcessing_allDirectoriesProcessedEvenWhenOneFails() async {
+    let lock = NSLock()
+    var processedDirectories = Set<String>()
+
+    let error = await runFormatTool(
+      directories: ["DirA", "DirB", "DirC"],
+      with: MockCommands(
+        swiftFormatHandler: { command in
+          let directory = command.arguments.first ?? ""
+          lock.lock()
+          processedDirectories.insert(directory)
+          lock.unlock()
+          return EXIT_SUCCESS
+        },
+        swiftLintHandler: { command in
+          let directory = command.arguments.first ?? ""
+          // Only DirB has lint failures
+          return directory == "DirB" ? SwiftLintExitCode.lintFailure : EXIT_SUCCESS
+        },
+        swiftLintAutocorrectHandler: { _ in EXIT_SUCCESS }
+      )
+    )
+
+    // Should fail due to lint failure in DirB
+    XCTAssertEqual(error as? ExitCode, ExitCode.failure)
+    // All directories should still have been processed (not cancelled early)
+    XCTAssertEqual(processedDirectories, ["DirA", "DirB", "DirC"])
+  }
+
+  func testParallelDirectoryProcessing_multipleDirectoriesWithLintFailures() async {
+    let lock = NSLock()
+    var processedDirectories = Set<String>()
+
+    let error = await runFormatTool(
+      directories: ["DirA", "DirB", "DirC"],
+      with: MockCommands(
+        swiftFormatHandler: { command in
+          let directory = command.arguments.first ?? ""
+          lock.lock()
+          processedDirectories.insert(directory)
+          lock.unlock()
+          return EXIT_SUCCESS
+        },
+        swiftLintHandler: { command in
+          let directory = command.arguments.first ?? ""
+          // DirA and DirC have lint failures, DirB succeeds
+          return directory == "DirB" ? EXIT_SUCCESS : SwiftLintExitCode.lintFailure
+        },
+        swiftLintAutocorrectHandler: { _ in EXIT_SUCCESS }
+      )
+    )
+
+    // Should fail due to lint failures
+    XCTAssertEqual(error as? ExitCode, ExitCode.failure)
+    // All directories should still have been processed
+    XCTAssertEqual(processedDirectories, ["DirA", "DirB", "DirC"])
+  }
+
+  func testParallelDirectoryProcessing_unexpectedExitCodeInOneDirectory() async {
+    let lock = NSLock()
+    var processedDirectories = Set<String>()
+
+    let error = await runFormatTool(
+      directories: ["DirA", "DirB"],
+      with: MockCommands(
+        swiftFormatHandler: { command in
+          let directory = command.arguments.first ?? ""
+          lock.lock()
+          processedDirectories.insert(directory)
+          lock.unlock()
+          // DirB returns unexpected exit code
+          return directory == "DirB" ? 99 : EXIT_SUCCESS
+        },
+        swiftLintHandler: { _ in EXIT_SUCCESS },
+        swiftLintAutocorrectHandler: { _ in EXIT_SUCCESS }
+      )
+    )
+
+    // Should fail with the unexpected exit code
+    XCTAssertEqual(error as? ExitCode, ExitCode(99))
+    // Both directories should have been processed
+    XCTAssertEqual(processedDirectories, ["DirA", "DirB"])
+  }
+
+  func testEmptyDirectoryIsSkipped() async {
+    var ranSwiftFormat = false
+    var ranSwiftLint = false
+    var ranSwiftLintAutocorrect = false
+
+    let error = await runFormatTool(
+      directories: ["EmptyDir"],
+      swiftFilesCheck: { _ in false },
+      with: MockCommands(
+        swiftFormat: {
+          ranSwiftFormat = true
+          return EXIT_SUCCESS
+        },
+        swiftLint: {
+          ranSwiftLint = true
+          return EXIT_SUCCESS
+        },
+        swiftLintAutocorrect: {
+          ranSwiftLintAutocorrect = true
+          return EXIT_SUCCESS
+        }
+      )
+    )
+
+    // Should succeed (empty directories are not an error)
+    XCTAssertNil(error)
+    // No tools should have been run on an empty directory
+    XCTAssertFalse(ranSwiftFormat)
+    XCTAssertFalse(ranSwiftLint)
+    XCTAssertFalse(ranSwiftLintAutocorrect)
+  }
+
+  func testMixedEmptyAndNonEmptyDirectories() async {
+    let lock = NSLock()
+    var processedDirectories = Set<String>()
+
+    let error = await runFormatTool(
+      directories: ["Sources", "EmptyDir", "Tests"],
+      swiftFilesCheck: { directory in
+        // Only Sources and Tests have Swift files
+        directory != "EmptyDir"
+      },
+      with: MockCommands(
+        swiftFormatHandler: { command in
+          let directory = command.arguments.first ?? ""
+          lock.lock()
+          processedDirectories.insert(directory)
+          lock.unlock()
+          return EXIT_SUCCESS
+        },
+        swiftLintHandler: { _ in EXIT_SUCCESS },
+        swiftLintAutocorrectHandler: { _ in EXIT_SUCCESS }
+      )
+    )
+
+    XCTAssertNil(error)
+    // Only non-empty directories should have been processed
+    XCTAssertEqual(processedDirectories, ["Sources", "Tests"])
+  }
+
+  func testEmptyDirectoryWithLintMode() async {
+    var ranSwiftFormat = false
+    var ranSwiftLint = false
+    var ranSwiftLintAutocorrect = false
+
+    let error = await runFormatTool(
+      arguments: ["--lint"],
+      directories: ["EmptyDir"],
+      swiftFilesCheck: { _ in false },
+      with: MockCommands(
+        swiftFormat: {
+          ranSwiftFormat = true
+          return EXIT_SUCCESS
+        },
+        swiftLint: {
+          ranSwiftLint = true
+          return EXIT_SUCCESS
+        },
+        swiftLintAutocorrect: {
+          ranSwiftLintAutocorrect = true
+          return EXIT_SUCCESS
+        }
+      )
+    )
+
+    // Should succeed in lint mode too
+    XCTAssertNil(error)
+    XCTAssertFalse(ranSwiftFormat)
+    XCTAssertFalse(ranSwiftLint)
+    XCTAssertFalse(ranSwiftLintAutocorrect)
+  }
+
   // MARK: Private
 
   /// Runs `AirbnbSwiftFormatTool` with the `Command` calls mocked using the given mocks
-  private func runFormatTool(arguments: [String]? = nil, with mocks: MockCommands) -> Error? {
+  private func runFormatTool(
+    arguments: [String]? = nil,
+    directories: [String] = ["Sources"],
+    swiftFilesCheck: ((String) -> Bool)? = nil,
+    with mocks: MockCommands
+  ) async -> Error? {
     let existingRunCommandImplementation = Command.runCommand
+    let existingSwiftFilesCheck = AirbnbSwiftFormatTool.checkForSwiftFiles
 
     Command.runCommand = mocks.mockRunCommand(_:)
-    defer { Command.runCommand = existingRunCommandImplementation }
+    AirbnbSwiftFormatTool.checkForSwiftFiles = swiftFilesCheck ?? { _ in true }
+    defer {
+      Command.runCommand = existingRunCommandImplementation
+      AirbnbSwiftFormatTool.checkForSwiftFiles = existingSwiftFilesCheck
+    }
 
-    let formatTool = try! AirbnbSwiftFormatTool.parse([
-      "Sources",
-      "--swift-format-path",
-      "airbnb.swiftformat",
-      "--swift-lint-path",
-      "swiftlint.yml",
-    ] + (arguments ?? []))
+    let formatTool = try! AirbnbSwiftFormatTool.parse(
+      directories + [
+        "--swift-format-path",
+        "airbnb.swiftformat",
+        "--swift-lint-path",
+        "swiftlint.yml",
+      ] + (arguments ?? [])
+    )
 
     do {
-      try formatTool.run()
+      try await formatTool.run()
       return nil
     } catch {
       return error
@@ -279,20 +489,47 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
 /// Mock implementations of the commands ran by `AirbnbSwiftFormatTool`
 struct MockCommands {
-  var swiftFormat: (() -> Int32)?
-  var swiftLint: (() -> Int32)?
-  var swiftLintAutocorrect: (() -> Int32)?
+
+  // MARK: Lifecycle
+
+  /// Convenience initializer for simple mocks that don't need command details
+  init(
+    swiftFormat: (() -> Int32)? = nil,
+    swiftLint: (() -> Int32)? = nil,
+    swiftLintAutocorrect: (() -> Int32)? = nil
+  ) {
+    swiftFormatHandler = swiftFormat.map { closure in { _ in closure() } }
+    swiftLintHandler = swiftLint.map { closure in { _ in closure() } }
+    swiftLintAutocorrectHandler = swiftLintAutocorrect.map { closure in { _ in closure() } }
+  }
+
+  /// Initializer for mocks that need access to command details (e.g., directory)
+  init(
+    swiftFormatHandler: ((Command) -> Int32)? = nil,
+    swiftLintHandler: ((Command) -> Int32)? = nil,
+    swiftLintAutocorrectHandler: ((Command) -> Int32)? = nil
+  ) {
+    self.swiftFormatHandler = swiftFormatHandler
+    self.swiftLintHandler = swiftLintHandler
+    self.swiftLintAutocorrectHandler = swiftLintAutocorrectHandler
+  }
+
+  // MARK: Internal
+
+  var swiftFormatHandler: ((Command) -> Int32)?
+  var swiftLintHandler: ((Command) -> Int32)?
+  var swiftLintAutocorrectHandler: ((Command) -> Int32)?
 
   func mockRunCommand(_ command: Command) -> Int32 {
     if command.launchPath.lowercased().contains("swiftformat") {
-      return swiftFormat?() ?? EXIT_SUCCESS
+      return swiftFormatHandler?(command) ?? EXIT_SUCCESS
     }
 
     else if command.launchPath.lowercased().contains("swiftlint") {
       if command.arguments.contains("--fix") {
-        return swiftLintAutocorrect?() ?? EXIT_SUCCESS
+        return swiftLintAutocorrectHandler?(command) ?? EXIT_SUCCESS
       } else {
-        return swiftLint?() ?? EXIT_SUCCESS
+        return swiftLintHandler?(command) ?? EXIT_SUCCESS
       }
     }
 

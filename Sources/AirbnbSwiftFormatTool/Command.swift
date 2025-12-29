@@ -21,6 +21,15 @@ struct Command {
     try Command.runCommand(self)
   }
 
+  /// Async variant that runs the command in a detached background Task
+  ///  - Uses Task.detached to ensure true parallel execution on background threads
+  ///  - Enables concurrent processing of multiple commands without serialization
+  func runAsync() async throws -> Int32 {
+    try await Task.detached {
+      try run()
+    }.value
+  }
+
   // MARK: Private
 
   /// Synchronously runs this command and returns its exit code

@@ -3,12 +3,12 @@ import PackageDescription
 
 let package = Package(
   name: "AirbnbSwift",
-  platforms: [.macOS(.v10_13)],
+  platforms: [.macOS(.v10_15)],
   products: [
     .plugin(name: "FormatSwift", targets: ["FormatSwift"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.3")
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0")
   ],
   targets: [
     .plugin(
