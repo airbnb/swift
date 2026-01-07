@@ -3006,6 +3006,32 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
+  Parameters using result builders like `@ViewBuilder` can be replaced with the equivalent behavior by adding the result builder attribute to the stored property:
+
+  ```swift
+  /// WRONG
+  struct DashboardView<Instrument: View>: View {
+    let instrument: Instrument
+
+    init(@ViewBuilder instrument: () -> Instrument) {
+      instrument = instrument()
+    }
+
+    var content: some View {
+      instrument
+    }
+  }
+
+  // RIGHT
+  struct DashboardView<Instrument: View>: View {
+    @ViewBuilder let instrument: Instrument
+
+    var content: some View {
+      instrument
+    }
+  }
+  ```
+
   </details>
 
 - <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
