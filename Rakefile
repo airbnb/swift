@@ -97,10 +97,15 @@ namespace :site do
   desc 'Prepares index.md and syntax highlighting assets'
   task :prepare do
     require_relative 'site/site_content'
+    site_content = SiteContent.new
     puts '📋 Generating index.md from README.md with frontmatter...'
-    SiteContent.new.write_index
+    site_content.write_index
+    puts '🤖 Generating CLAUDE.md from README.md with frontmatter...'
+    site_content.write_claude_md
+    puts '📄 Generating raw CLAUDE.md...'
+    site_content.write_claude_md_raw
     puts '🎨 Generating syntax highlighting CSS...'
-    SiteContent.new.generate_syntax_css
+    site_content.generate_syntax_css
   end
 
   desc 'Builds the static site into _site/'
