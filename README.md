@@ -346,6 +346,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantType)
 
   ```swift
@@ -396,6 +398,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='infer-property-types'></a>(<a href='#infer-property-types'>link</a>) **Prefer letting the type of a variable or property be inferred from the right-hand-side value rather than writing the type explicitly on the left-hand side.**
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#propertyTypes)
 
@@ -478,6 +482,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Don't use `self` unless it's necessary for disambiguation or required by the language.**
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantSelf)
 
@@ -2163,6 +2169,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#forLoop)
 
   #### Why?
@@ -2851,6 +2859,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#genericExtensions)
 
   ```swift
@@ -2957,6 +2967,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='omit-redundant-memberwise-init'></a>(<a href='#omit-redundant-memberwise-init'>link</a>) **Omit redundant memberwise initializers.** The compiler synthesizes `internal` memberwise initializers for structs, so explicit `internal` initializers equivalent to the synthesized initializer should be omitted.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -3634,6 +3646,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFinalClasses)
 
   ```swift
@@ -3995,6 +4009,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#opaqueGenericParameters)
 
   #### Why?
@@ -4270,6 +4286,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: redundantEquatable](https://img.shields.io/badge/SwiftFormat-redundantEquatable-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantEquatable)
 
   ### Why?
@@ -4391,6 +4409,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#urlMacro)
 
@@ -4874,9 +4894,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## SwiftUI
 
-- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For internal SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties.
+- <a id='swiftui-synthesized-init'></a>(<a href='#swiftui-synthesized-init'>link</a>) **For internal SwiftUI views, prefer using the synthesized memberwise init** by defining internal properties rather than private properties. However, SwiftUI dynamic properties like `@State` should stay private.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -5039,6 +5061,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
 
   ### Why?
@@ -5072,6 +5096,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='avoid-guard-in-tests'></a>(<a href='#avoid-guard-in-tests'>link</a>) **Avoid `guard` statements in unit tests**. XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself. Use assertions instead of guarding on boolean conditions.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
 
@@ -5117,6 +5143,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
   ```swift
@@ -5158,6 +5186,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='test-suite-access-control'></a>(<a href='#test-suite-access-control'>link</a>) **In test suites, test cases should be `internal`, and helper methods and properties should be `private`**.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
 
@@ -5251,6 +5281,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
+  <!-- claude-include -->
+
   [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
 
   ```swift
@@ -5312,6 +5344,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='remove-redundant-effects-in-tests'></a>(<a href='#remove-redundant-effects-in-tests'>link</a>) **Remove redundant `throws` and `async` effects from test cases**. If a test case doesn't throw any errors, or doesn't `await` any `async` method calls, then `throws` and `async` are redundant.
 
   <details>
+
+  <!-- claude-include -->
 
   [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
 

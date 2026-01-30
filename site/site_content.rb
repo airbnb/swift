@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require 'open3'
+require 'set'
 
 class SiteContent
   attr_reader :readme_path, :index_path, :claude_md_path, :claude_md_raw_path, :syntax_css_path
@@ -31,7 +32,8 @@ class SiteContent
       filter_xcode_formatting: false,
       filter_contributors: true,
       filter_amendments: true,
-      filter_rule_details: false
+      filter_rule_details: false,
+      filter_autocorrectable_rules: false
     )
     File.write(index_path, front_matter + content)
   end
@@ -49,6 +51,8 @@ class SiteContent
       # CLAUDE.md
 
       CLAUDE.md file that summarizes the Airbnb Swift Style Guide.
+
+      Excludes rules that are fully autocorrected and are enforced automatically.
 
       Raw CLAUDE.md can be downloaded [here](/raw/CLAUDE.md).
 
@@ -72,7 +76,8 @@ class SiteContent
       filter_xcode_formatting: true,
       filter_contributors: true,
       filter_amendments: true,
-      filter_rule_details: true
+      filter_rule_details: true,
+      filter_autocorrectable_rules: true
     )
   end
 
@@ -95,7 +100,8 @@ class SiteContent
     filter_xcode_formatting:,
     filter_contributors:,
     filter_amendments:,
-    filter_rule_details:
+    filter_rule_details:,
+    filter_autocorrectable_rules:
   )
     lines = File.readlines(readme_path, chomp: true)
 
@@ -109,6 +115,8 @@ class SiteContent
     sections_to_filter << 'Amendments' if filter_amendments
 
     lines = filter_sections(lines, sections_to_filter)
+    lines = filter_autocorrectable_rules(lines) if filter_autocorrectable_rules
+    lines = filter_empty_sections(lines)
     lines = filter_details_blocks(lines) if filter_rule_details
 
     # Exclude the badges from the site.
@@ -141,6 +149,80 @@ class SiteContent
     filtered
   end
 
+  def filter_empty_sections(lines)
+    # First pass: identify which sections/subsections have rules
+    sections_with_rules = Set.new
+    current_section_start = nil
+    current_subsection_start = nil
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('## ')
+        current_section_start = index
+        current_subsection_start = nil
+      elsif line.start_with?('### ')
+        current_subsection_start = index
+      elsif line.start_with?('- ')
+        sections_with_rules.add(current_section_start) if current_section_start
+        sections_with_rules.add(current_subsection_start) if current_subsection_start
+      end
+    end
+
+    # Second pass: filter out empty sections/subsections
+    filtered = []
+    skip_until_next_section = false
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('## ') || line.start_with?('### ')
+        skip_until_next_section = !sections_with_rules.include?(index)
+      end
+
+      filtered << line unless skip_until_next_section
+    end
+
+    filtered
+  end
+
+  def filter_autocorrectable_rules(lines)
+    # First pass: identify which rules have SwiftFormat badges and/or <!-- claude-include -->
+    rules_with_badges = Set.new
+    rules_with_include = Set.new
+    current_rule_start = nil
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('- ')
+        current_rule_start = index
+      elsif current_rule_start
+        if line.include?('img.shields.io/badge/SwiftFormat')
+          rules_with_badges.add(current_rule_start)
+        end
+        if line.include?('<!-- claude-include -->')
+          rules_with_include.add(current_rule_start)
+        end
+      end
+      if line.start_with?('## ') || line.start_with?('**[')
+        current_rule_start = nil
+      end
+    end
+
+    # Second pass: filter out rules with badges unless they have <!-- claude-include -->
+    filtered = []
+    skip_until_next_rule = false
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('- ')
+        has_badge = rules_with_badges.include?(index)
+        has_include = rules_with_include.include?(index)
+        skip_until_next_rule = has_badge && !has_include
+      elsif line.start_with?('## ') || line.start_with?('**[')
+        skip_until_next_rule = false
+      end
+
+      filtered << line unless skip_until_next_rule
+    end
+
+    filtered
+  end
+
   def filter_details_blocks(lines)
     filtered = []
     inside_details = false
@@ -166,6 +248,9 @@ class SiteContent
 
       # Remove bold/italic markers
       line = line.gsub('**', '')
+
+      # Remove markdown links, keeping just the link text (but not image links like [![](img)](url))
+      line = line.gsub(/\[(?!\!\[)([^\]]+)\]\([^)]+\)/, '\1')
 
       filtered << line
     end
