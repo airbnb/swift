@@ -183,7 +183,7 @@ class SiteContent
   end
 
   def filter_autocorrectable_rules(lines)
-    # First pass: identify which rules have SwiftFormat badges and/or <!-- claude-include -->
+    # First pass: identify which rules have SwiftFormat/SwiftLint badges and/or <!-- claude-include -->
     rules_with_badges = Set.new
     rules_with_include = Set.new
     current_rule_start = nil
@@ -192,7 +192,7 @@ class SiteContent
       if line.start_with?('- ')
         current_rule_start = index
       elsif current_rule_start
-        if line.include?('img.shields.io/badge/SwiftFormat')
+        if line.include?('img.shields.io/badge/SwiftFormat') || line.include?('img.shields.io/badge/SwiftLint')
           rules_with_badges.add(current_rule_start)
         end
         if line.include?('<!-- claude-include -->')
