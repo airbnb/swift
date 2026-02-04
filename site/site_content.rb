@@ -24,7 +24,11 @@ class SiteContent
       ---
 
     FRONT
-    content = filter_readme(
+    File.write(index_path, front_matter + index_content)
+  end
+
+  def index_content
+    filter_readme(
       filter_goals: false,
       filter_guiding_tenets: false,
       filter_spm_plugin: true,
@@ -35,7 +39,6 @@ class SiteContent
       filter_rule_details: false,
       filter_autocorrectable_rules: false
     )
-    File.write(index_path, front_matter + content)
   end
 
   # Write SKILL.md file (https://airbnb.swift.tech/SKILL.md)
@@ -67,7 +70,7 @@ class SiteContent
     frontmatter = <<~FRONT
       ---
       name: swift
-      description: ALWAYS USE WHEN CREATING AND EDITING SWIFT FILES (*.swift)
+      description: Always use when creating and editing Swift files (*.swift)
       ---
 
     FRONT
@@ -190,7 +193,7 @@ class SiteContent
   end
 
   def filter_autocorrectable_rules(lines)
-    # First pass: identify which rules have SwiftFormat/SwiftLint badges and/or <!-- claude-include -->
+    # First pass: identify which rules have SwiftFormat/SwiftLint badges and/or <!-- ai-skill-include -->
     rules_with_badges = Set.new
     rules_with_include = Set.new
     current_rule_start = nil
@@ -202,7 +205,7 @@ class SiteContent
         if line.include?('img.shields.io/badge/SwiftFormat') || line.include?('img.shields.io/badge/SwiftLint')
           rules_with_badges.add(current_rule_start)
         end
-        if line.include?('<!-- claude-include -->')
+        if line.include?('<!-- ai-skill-include -->')
           rules_with_include.add(current_rule_start)
         end
       end
@@ -211,7 +214,7 @@ class SiteContent
       end
     end
 
-    # Second pass: filter out rules with badges unless they have <!-- claude-include -->
+    # Second pass: filter out rules with badges unless they have <!-- ai-skill-include -->
     filtered = []
     skip_until_next_rule = false
 

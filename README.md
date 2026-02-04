@@ -346,7 +346,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantType)
 
@@ -399,7 +399,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#propertyTypes)
 
@@ -483,7 +483,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantSelf)
 
@@ -2169,7 +2169,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#forLoop)
 
@@ -2859,7 +2859,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#genericExtensions)
 
@@ -2968,7 +2968,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -3646,7 +3646,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFinalClasses)
 
@@ -4009,7 +4009,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#opaqueGenericParameters)
 
@@ -4286,7 +4286,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantEquatable](https://img.shields.io/badge/SwiftFormat-redundantEquatable-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantEquatable)
 
@@ -4410,7 +4410,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#urlMacro)
 
@@ -4898,7 +4898,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -5061,7 +5061,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
 
@@ -5097,7 +5097,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
 
@@ -5143,7 +5143,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
@@ -5187,7 +5187,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
 
@@ -5281,7 +5281,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
 
@@ -5345,7 +5345,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- claude-include -->
+  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
 

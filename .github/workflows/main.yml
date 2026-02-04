@@ -61,6 +61,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Test site content
+        run: bundle exec rake site:test
       - name: Build site
         run: bundle exec rake site:build
         env:

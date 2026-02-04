@@ -125,4 +125,9 @@ namespace :site do
     require_relative 'site/site_content'
     puts SiteContent.new.filter_readme
   end
+
+  desc 'Runs integration tests for site content'
+  task :test do
+    sh 'bundle exec rspec site/site_content_spec.rb'
+  end
 end
