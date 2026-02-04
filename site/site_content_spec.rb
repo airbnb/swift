@@ -33,6 +33,10 @@ RSpec.describe SiteContent do
     let(:skill_content) { site_content.skill_md_content }
     let(:readme_content) { File.read(site_content.readme_path) }
 
+    it 'includes frontmatter with description' do
+      expect(skill_content).to include('description: Always use when creating and editing Swift files')
+    end
+
     it 'has at least 6 ## sections' do
       section_count = skill_content.scan(/^## /).count
       expect(section_count).to be >= 6

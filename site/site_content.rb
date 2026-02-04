@@ -9,11 +9,11 @@ class SiteContent
 
   def initialize()
     site_dir = File.expand_path('src', __dir__)
+    @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
     @readme_path = File.expand_path('../README.md', __dir__)
     @index_path = File.join(site_dir, 'index.md')
     @skill_md_path = File.join(site_dir, 'SKILL.md')
     @skill_md_raw_path = File.join(site_dir, 'raw', 'SKILL.md')
-    @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
   end
   
   # Write index.md file (https://airbnb.swift.tech)
@@ -64,9 +64,19 @@ class SiteContent
     File.write(skill_md_path, front_matter + wrapped_content)
   end
 
-  # Write raw SKILL.md file (https://airbnb.swift.tech/raw/SKILL.md)
+  # Write raw SKILL.md file (https://airbnb.swift.tech/SKILL.md.raw)
   def write_skill_md_raw
     FileUtils.mkdir_p(File.dirname(skill_md_raw_path))
+    jekyll_front_matter = <<~FRONT
+      ---
+      layout: raw
+      permalink: /raw/SKILL.md
+      ---
+    FRONT
+    File.write(skill_md_raw_path, jekyll_front_matter + skill_md_content)
+  end
+
+  def skill_md_content
     frontmatter = <<~FRONT
       ---
       name: swift
@@ -74,11 +84,7 @@ class SiteContent
       ---
 
     FRONT
-    File.write(skill_md_raw_path, frontmatter + skill_md_content)
-  end
-
-  def skill_md_content
-    filter_readme(
+    frontmatter + filter_readme(
       filter_goals: true,
       filter_guiding_tenets: true,
       filter_spm_plugin: true,
