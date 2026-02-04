@@ -54,7 +54,7 @@ jobs:
         run: bundle exec rake lint:markdown
 
   site-build:
-    name: Build Site
+    name: Test Site
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v6
