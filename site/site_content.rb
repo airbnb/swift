@@ -5,14 +5,14 @@ require 'open3'
 require 'set'
 
 class SiteContent
-  attr_reader :readme_path, :index_path, :claude_md_path, :claude_md_raw_path, :syntax_css_path
+  attr_reader :readme_path, :index_path, :skill_md_path, :skill_md_raw_path, :syntax_css_path
 
   def initialize()
     site_dir = File.expand_path('src', __dir__)
     @readme_path = File.expand_path('../README.md', __dir__)
     @index_path = File.join(site_dir, 'index.md')
-    @claude_md_path = File.join(site_dir, 'CLAUDE.md')
-    @claude_md_raw_path = File.join(site_dir, 'raw', 'CLAUDE.md')
+    @skill_md_path = File.join(site_dir, 'SKILL.md')
+    @skill_md_raw_path = File.join(site_dir, 'raw', 'SKILL.md')
     @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
   end
   
@@ -38,36 +38,43 @@ class SiteContent
     File.write(index_path, front_matter + content)
   end
 
-  # Write CLAUDE.md file (https://airbnb.swift.tech/CLAUDE.md)
-  def write_claude_md
+  # Write SKILL.md file (https://airbnb.swift.tech/SKILL.md)
+  def write_skill_md
     front_matter = <<~FRONT
       ---
       layout: default
-      permalink: /CLAUDE.md
+      permalink: /SKILL.md
       ---
 
     FRONT
     header = <<~HEADER
-      # CLAUDE.md
+      # SKILL.md
 
-      CLAUDE.md file that summarizes the Airbnb Swift Style Guide.
+      AI skill for working with Swift code.
 
-      Excludes rules that are fully autocorrected and are enforced automatically.
+      Summarizes the Airbnb Swift Style Guide, but excludes rules that are enforced automatically with formatting or linting.
 
-      Raw CLAUDE.md can be downloaded [here](/raw/CLAUDE.md).
+      Raw `SKILL.md` can be downloaded [here](/raw/SKILL.md).
 
     HEADER
-    wrapped_content = "#{header}````markdown\n#{claude_md_content}\n````\n"
-    File.write(claude_md_path, front_matter + wrapped_content)
+    wrapped_content = "#{header}````markdown\n#{skill_md_content}\n````\n"
+    File.write(skill_md_path, front_matter + wrapped_content)
   end
 
-  # Write raw CLAUDE.md file (https://airbnb.swift.tech/raw/CLAUDE.md)
-  def write_claude_md_raw
-    FileUtils.mkdir_p(File.dirname(claude_md_raw_path))
-    File.write(claude_md_raw_path, claude_md_content)
+  # Write raw SKILL.md file (https://airbnb.swift.tech/raw/SKILL.md)
+  def write_skill_md_raw
+    FileUtils.mkdir_p(File.dirname(skill_md_raw_path))
+    frontmatter = <<~FRONT
+      ---
+      name: swift
+      description: ALWAYS USE WHEN CREATING AND EDITING SWIFT FILES (*.swift)
+      ---
+
+    FRONT
+    File.write(skill_md_raw_path, frontmatter + skill_md_content)
   end
 
-  def claude_md_content
+  def skill_md_content
     filter_readme(
       filter_goals: true,
       filter_guiding_tenets: true,

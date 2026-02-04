@@ -100,10 +100,10 @@ namespace :site do
     site_content = SiteContent.new
     puts '📋 Generating index.md from README.md with frontmatter...'
     site_content.write_index
-    puts '🤖 Generating CLAUDE.md from README.md with frontmatter...'
-    site_content.write_claude_md
-    puts '📄 Generating raw CLAUDE.md...'
-    site_content.write_claude_md_raw
+    puts '🤖 Generating SKILL.md from README.md with frontmatter...'
+    site_content.write_skill_md
+    puts '📄 Generating raw SKILL.md...'
+    site_content.write_skill_md_raw
     puts '🎨 Generating syntax highlighting CSS...'
     site_content.generate_syntax_css
   end

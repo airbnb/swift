@@ -8,8 +8,8 @@ module WEBrick
       alias_method :original_mime_type, :mime_type
 
       def mime_type(filename, mime_tab)
-        # Only serve /CLAUDE.md as HTML, keep /raw/CLAUDE.md as markdown
-        if filename.end_with?('/CLAUDE.md') && !filename.include?('/raw/')
+        # Only serve /SKILL.md as HTML, keep /raw/SKILL.md as markdown
+        if filename.end_with?('/SKILL.md') && !filename.include?('/raw/')
           return 'text/html'
         end
         original_mime_type(filename, mime_tab)
