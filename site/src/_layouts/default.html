@@ -13,5 +13,13 @@
   <main class="content">
     {{ content }}
   </main>
+  <script>
+    function updateNavHeight() {
+      const nav = document.querySelector('.top-nav');
+      document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 15 + 'px');
+    }
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+  </script>
 </body>
 </html>

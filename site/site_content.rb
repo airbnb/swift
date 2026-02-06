@@ -169,8 +169,8 @@ class SiteContent
   end
 
   def filter_empty_sections(lines)
-    # First pass: identify which sections/subsections have rules
-    sections_with_rules = Set.new
+    # First pass: identify which sections/subsections have content
+    sections_with_content = Set.new
     current_section_start = nil
     current_subsection_start = nil
 
@@ -180,9 +180,9 @@ class SiteContent
         current_subsection_start = nil
       elsif line.start_with?('### ')
         current_subsection_start = index
-      elsif line.start_with?('- ')
-        sections_with_rules.add(current_section_start) if current_section_start
-        sections_with_rules.add(current_subsection_start) if current_subsection_start
+      elsif !line.strip.empty?
+        sections_with_content.add(current_section_start) if current_section_start
+        sections_with_content.add(current_subsection_start) if current_subsection_start
       end
     end
 
@@ -192,7 +192,7 @@ class SiteContent
 
     lines.each_with_index do |line, index|
       if line.start_with?('## ') || line.start_with?('### ')
-        skip_until_next_section = !sections_with_rules.include?(index)
+        skip_until_next_section = !sections_with_content.include?(index)
       end
 
       filtered << line unless skip_until_next_section
