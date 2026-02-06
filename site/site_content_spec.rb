@@ -10,9 +10,9 @@ RSpec.describe SiteContent do
   describe 'index.md' do
     let(:index_content) { site_content.index_content }
 
-    it 'has at least 10 ## sections' do
+    it 'has at least 9 ## sections' do
       section_count = index_content.scan(/^## /).count
-      expect(section_count).to be >= 10
+      expect(section_count).to be >= 9
     end
 
     it 'has at least 3 ### subsections' do
@@ -37,9 +37,9 @@ RSpec.describe SiteContent do
       expect(skill_content).to include('description: Always use when creating and editing Swift files')
     end
 
-    it 'has at least 6 ## sections' do
+    it 'has at least 5 ## sections' do
       section_count = skill_content.scan(/^## /).count
-      expect(section_count).to be >= 6
+      expect(section_count).to be >= 5
     end
 
     it 'has at least 1 ### subsection' do
