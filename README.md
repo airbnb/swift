@@ -346,7 +346,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantType)
 
@@ -399,7 +399,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#propertyTypes)
 
@@ -483,7 +483,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantSelf)
 
@@ -2169,7 +2169,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable (e.g. forEach over an optional array) -->
 
   [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#forLoop)
 
@@ -2859,7 +2859,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable (SwiftFormat doesn't know if the extension is of a concrete type or a protocol) -->
 
   [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#genericExtensions)
 
@@ -2968,7 +2968,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable (e.g. have to preserve existing init parameter ordering to not break build) -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -4898,7 +4898,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable (e.g. have to preserve existing init parameter ordering to not break build) -->
 
   [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantMemberwiseInit)
 
@@ -5061,7 +5061,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
   [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#swiftTestingTestCaseNames)
 
@@ -5097,7 +5097,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noGuardInTests)
 
@@ -5143,8 +5143,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
-
   [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceTryInTests)
 
   ```swift
@@ -5187,7 +5185,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#testSuiteAccessControl)
 
@@ -5281,7 +5279,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   <details>
 
-  <!-- ai-skill-include -->
+  <!-- ai-skill-include: not fully autocorrectable -->
 
   [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#noForceUnwrapInTests)
 
@@ -5344,8 +5342,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 - <a id='remove-redundant-effects-in-tests'></a>(<a href='#remove-redundant-effects-in-tests'>link</a>) **Remove redundant `throws` and `async` effects from test cases**. If a test case doesn't throw any errors, or doesn't `await` any `async` method calls, then `throws` and `async` are redundant.
 
   <details>
-
-  <!-- ai-skill-include -->
 
   [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantAsync)
 

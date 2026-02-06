@@ -211,7 +211,7 @@ class SiteContent
         if line.include?('img.shields.io/badge/SwiftFormat') || line.include?('img.shields.io/badge/SwiftLint')
           rules_with_badges.add(current_rule_start)
         end
-        if line.include?('<!-- ai-skill-include -->')
+        if line.match?(/<!-- ai-skill-include(:.*)? -->/)
           rules_with_include.add(current_rule_start)
         end
       end
