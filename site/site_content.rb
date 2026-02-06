@@ -1,24 +1,102 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'open3'
+require 'set'
 
 class SiteContent
-  attr_reader :readme_path, :index_path, :syntax_css_path
+  attr_reader :readme_path, :index_path, :skill_md_path, :skill_md_raw_path, :syntax_css_path
 
   def initialize()
     site_dir = File.expand_path('src', __dir__)
+    @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
     @readme_path = File.expand_path('../README.md', __dir__)
     @index_path = File.join(site_dir, 'index.md')
-    @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
+    @skill_md_path = File.join(site_dir, 'SKILL.md')
+    @skill_md_raw_path = File.join(site_dir, 'raw', 'SKILL.md')
   end
-
-  def filter_readme
-    (filter_readme_lines + ['']).join("\n")
-  end
-
-  # Write index.md file.
+  
+  # Write index.md file (https://airbnb.swift.tech)
   def write_index
-    File.write(index_path, generate_front_matter + filter_readme)
+    front_matter = <<~FRONT
+      ---
+      layout: default
+      ---
+
+    FRONT
+    File.write(index_path, front_matter + index_content)
+  end
+
+  def index_content
+    filter_readme(
+      filter_goals: false,
+      filter_guiding_tenets: false,
+      filter_spm_plugin: true,
+      filter_table_of_contents: false,
+      filter_xcode_formatting: false,
+      filter_contributors: true,
+      filter_amendments: true,
+      filter_rule_details: false,
+      filter_autocorrectable_rules: false,
+      filter_links: false
+    )
+  end
+
+  # Write SKILL.md file (https://airbnb.swift.tech/SKILL.md)
+  def write_skill_md
+    front_matter = <<~FRONT
+      ---
+      layout: default
+      permalink: /SKILL.md
+      ---
+
+    FRONT
+    header = <<~HEADER
+      # SKILL.md
+
+      AI skill for working with Swift code.
+
+      Summarizes the Airbnb Swift Style Guide, but excludes rules that are automatically enforced with code formatting.
+
+      Raw `SKILL.md` can be downloaded [here](/raw/SKILL.md).
+
+    HEADER
+    wrapped_content = "#{header}````markdown\n#{skill_md_content}\n````\n"
+    File.write(skill_md_path, front_matter + wrapped_content)
+  end
+
+  # Write raw SKILL.md file (https://airbnb.swift.tech/SKILL.md.raw)
+  def write_skill_md_raw
+    FileUtils.mkdir_p(File.dirname(skill_md_raw_path))
+    jekyll_front_matter = <<~FRONT
+      ---
+      layout: raw
+      permalink: /raw/SKILL.md
+      ---
+    FRONT
+    File.write(skill_md_raw_path, jekyll_front_matter + skill_md_content)
+  end
+
+  def skill_md_content
+    frontmatter = <<~FRONT
+      ---
+      name: swift
+      description: Always use when creating and editing Swift files (*.swift)
+      ---
+
+    FRONT
+    frontmatter + filter_readme(
+      filter_goals: true,
+      filter_guiding_tenets: true,
+      filter_spm_plugin: true,
+      filter_table_of_contents: true,
+      filter_xcode_formatting: true,
+      filter_contributors: true,
+      filter_amendments: true,
+      filter_rule_details: true,
+      filter_autocorrectable_rules: true,
+      filter_links: true
+    )
   end
 
   # Write syntax.css file.
@@ -31,46 +109,182 @@ class SiteContent
 
   private
 
-  def generate_front_matter
-    <<~FRONT
-      ---
-      layout: default
-      ---
+  # Process the README.md by filtering out the given content
+  def filter_readme(
+    filter_goals:,
+    filter_guiding_tenets:,
+    filter_spm_plugin:,
+    filter_table_of_contents:,
+    filter_xcode_formatting:,
+    filter_contributors:,
+    filter_amendments:,
+    filter_rule_details:,
+    filter_autocorrectable_rules:,
+    filter_links:
+  )
+    lines = File.readlines(readme_path, chomp: true)
 
-    FRONT
+    sections_to_filter = []
+    sections_to_filter << 'Goals' if filter_goals
+    sections_to_filter << 'Guiding Tenets' if filter_guiding_tenets
+    sections_to_filter << 'Swift Package Manager command plugin' if filter_spm_plugin
+    sections_to_filter << 'Table of Contents' if filter_table_of_contents
+    sections_to_filter << 'Xcode Formatting' if filter_xcode_formatting
+    sections_to_filter << 'Contributors' if filter_contributors
+    sections_to_filter << 'Amendments' if filter_amendments
+
+    lines = filter_sections(lines, sections_to_filter)
+    lines = filter_autocorrectable_rules(lines) if filter_autocorrectable_rules
+    lines = filter_empty_sections(lines)
+    lines = filter_details_blocks(lines) if filter_rule_details
+    lines = filter_links(lines) if filter_links
+
+    # Exclude the badges from the site.
+    lines = lines.reject do |line|
+      stripped = line.strip
+      stripped.start_with?('[![](') && stripped.include?('swiftpackageindex.com')
+    end.map(&:rstrip)
+
+    content = (lines + ['']).join("\n")
+
+    # Remove consecutive blank lines (max 1 in a row)
+    content.gsub(/\n{3,}/, "\n\n")
   end
 
-  def filter_readme_lines
-    lines = File.readlines(readme_path, chomp: true)
+  def filter_sections(lines, section_names)
+    return lines if section_names.empty?
+
     filtered = []
-    skip_plugin_section = false
-    skip_amendments_section = false
+    skip_current_section = false
 
     lines.each do |line|
-      # Exclude the SPM command plugin section from the site.
-      if line.start_with?('## Swift Package Manager command plugin')
-        skip_plugin_section = true
-        next
-      elsif skip_plugin_section
-        skip_plugin_section = false if line.start_with?('## ')
-        next if skip_plugin_section
+      if line.start_with?('## ')
+        section_title = line.sub(/^## /, '')
+        skip_current_section = section_names.include?(section_title)
       end
 
-      if line.start_with?('## Amendments')
-        skip_amendments_section = true
-        next
-      elsif skip_amendments_section
-        skip_amendments_section = false if line.start_with?('** ')
-        next if skip_amendments_section
-      end
-
-      # Exclude the badges from the site.
-      stripped = line.strip
-      next if stripped.start_with?('[![](') && stripped.include?('swiftpackageindex.com')
-
-      filtered << line.rstrip
+      filtered << line unless skip_current_section
     end
 
     filtered
+  end
+
+  def filter_empty_sections(lines)
+    # First pass: identify which sections/subsections have rules
+    sections_with_rules = Set.new
+    current_section_start = nil
+    current_subsection_start = nil
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('## ')
+        current_section_start = index
+        current_subsection_start = nil
+      elsif line.start_with?('### ')
+        current_subsection_start = index
+      elsif line.start_with?('- ')
+        sections_with_rules.add(current_section_start) if current_section_start
+        sections_with_rules.add(current_subsection_start) if current_subsection_start
+      end
+    end
+
+    # Second pass: filter out empty sections/subsections
+    filtered = []
+    skip_until_next_section = false
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('## ') || line.start_with?('### ')
+        skip_until_next_section = !sections_with_rules.include?(index)
+      end
+
+      filtered << line unless skip_until_next_section
+    end
+
+    filtered
+  end
+
+  def filter_autocorrectable_rules(lines)
+    # First pass: identify which rules have SwiftFormat badges and/or <!-- ai-skill-include -->
+    rules_with_badges = Set.new
+    rules_with_include = Set.new
+    current_rule_start = nil
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('- ')
+        current_rule_start = index
+      elsif current_rule_start
+        if line.include?('img.shields.io/badge/SwiftFormat')
+          rules_with_badges.add(current_rule_start)
+        end
+
+        # Match <!-- ai-skill-include --> or <!-- ai-skill-include: explanation -->
+        if line.match?(/<!-- ai-skill-include(:.*)? -->/)
+          rules_with_include.add(current_rule_start)
+        end
+      end
+      if line.start_with?('## ') || line.include?('⬆ back to top')
+        current_rule_start = nil
+      end
+    end
+
+    # Second pass: filter out rules with badges unless they have <!-- ai-skill-include -->
+    filtered = []
+    skip_until_next_rule = false
+
+    lines.each_with_index do |line, index|
+      if line.start_with?('- ')
+        has_badge = rules_with_badges.include?(index)
+        has_include = rules_with_include.include?(index)
+        skip_until_next_rule = has_badge && !has_include
+      elsif line.start_with?('## ') || line.include?('⬆ back to top')
+        skip_until_next_rule = false
+      end
+
+      filtered << line unless skip_until_next_rule
+    end
+
+    filtered
+  end
+
+  def filter_details_blocks(lines)
+    filtered = []
+    inside_details = false
+
+    lines.each do |line|
+      if line.strip.start_with?('<details')
+        inside_details = true
+        next
+      elsif line.strip == '</details>'
+        inside_details = false
+        next
+      end
+
+      next if inside_details
+
+      # Skip "back to top" lines
+      next if line.strip == '**[⬆ back to top](#table-of-contents)**'
+
+      # Remove (link) anchors from lines
+      line = line.gsub(/<a id='[^']*'><\/a> ?\(?<a href='[^']*'>link<\/a>\)? ?/, '')
+
+      # Remove bold/italic markers
+      line = line.gsub('**', '')
+
+      filtered << line
+    end
+
+    filtered
+  end
+
+  def filter_links(lines)
+    lines.map do |line|
+      # Remove image-link badges like [![](img)](url)
+      line = line.gsub(/\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)/, '')
+
+      # Remove markdown links, keeping just the link text
+      line = line.gsub(/\[([^\]]+)\]\([^)]+\)/, '\1')
+
+      # Remove any anchor tags
+      line.gsub(/<a id='[^']*'><\/a> ?/, '')
+    end
   end
 end

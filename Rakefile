@@ -97,10 +97,15 @@ namespace :site do
   desc 'Prepares index.md and syntax highlighting assets'
   task :prepare do
     require_relative 'site/site_content'
+    site_content = SiteContent.new
     puts '📋 Generating index.md from README.md with frontmatter...'
-    SiteContent.new.write_index
+    site_content.write_index
+    puts '🤖 Generating SKILL.md from README.md with frontmatter...'
+    site_content.write_skill_md
+    puts '📄 Generating raw SKILL.md...'
+    site_content.write_skill_md_raw
     puts '🎨 Generating syntax highlighting CSS...'
-    SiteContent.new.generate_syntax_css
+    site_content.generate_syntax_css
   end
 
   desc 'Builds the static site into _site/'
@@ -119,5 +124,10 @@ namespace :site do
   task :filter_readme do
     require_relative 'site/site_content'
     puts SiteContent.new.filter_readme
+  end
+
+  desc 'Runs integration tests for site content'
+  task :test do
+    sh 'bundle exec rspec site/site_content_spec.rb'
   end
 end
