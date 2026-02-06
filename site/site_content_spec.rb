@@ -100,11 +100,5 @@ RSpec.describe SiteContent do
       expect(readme_content).to include('Use 2 spaces to indent lines')
     end
 
-    it 'does not include lint-only rules' do
-      # The 'unowned captures' rule is linted by SwiftLint,
-      # so it should be excluded from SKILL.md
-      expect(skill_content).not_to include('Avoid using `unowned` captures')
-      expect(readme_content).to include('Avoid using `unowned` captures')
-    end
   end
 end

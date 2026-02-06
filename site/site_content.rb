@@ -37,7 +37,8 @@ class SiteContent
       filter_contributors: true,
       filter_amendments: true,
       filter_rule_details: false,
-      filter_autocorrectable_rules: false
+      filter_autocorrectable_rules: false,
+      filter_links: false
     )
   end
 
@@ -55,7 +56,7 @@ class SiteContent
 
       AI skill for working with Swift code.
 
-      Summarizes the Airbnb Swift Style Guide, but excludes rules that are enforced automatically with formatting or linting.
+      Summarizes the Airbnb Swift Style Guide, but excludes rules that are automatically enforced with code formatting.
 
       Raw `SKILL.md` can be downloaded [here](/raw/SKILL.md).
 
@@ -93,7 +94,8 @@ class SiteContent
       filter_contributors: true,
       filter_amendments: true,
       filter_rule_details: true,
-      filter_autocorrectable_rules: true
+      filter_autocorrectable_rules: true,
+      filter_links: true
     )
   end
 
@@ -117,7 +119,8 @@ class SiteContent
     filter_contributors:,
     filter_amendments:,
     filter_rule_details:,
-    filter_autocorrectable_rules:
+    filter_autocorrectable_rules:,
+    filter_links:
   )
     lines = File.readlines(readme_path, chomp: true)
 
@@ -134,6 +137,7 @@ class SiteContent
     lines = filter_autocorrectable_rules(lines) if filter_autocorrectable_rules
     lines = filter_empty_sections(lines)
     lines = filter_details_blocks(lines) if filter_rule_details
+    lines = filter_links(lines) if filter_links
 
     # Exclude the badges from the site.
     lines = lines.reject do |line|
@@ -199,7 +203,7 @@ class SiteContent
   end
 
   def filter_autocorrectable_rules(lines)
-    # First pass: identify which rules have SwiftFormat/SwiftLint badges and/or <!-- ai-skill-include -->
+    # First pass: identify which rules have SwiftFormat badges and/or <!-- ai-skill-include -->
     rules_with_badges = Set.new
     rules_with_include = Set.new
     current_rule_start = nil
@@ -208,14 +212,16 @@ class SiteContent
       if line.start_with?('- ')
         current_rule_start = index
       elsif current_rule_start
-        if line.include?('img.shields.io/badge/SwiftFormat') || line.include?('img.shields.io/badge/SwiftLint')
+        if line.include?('img.shields.io/badge/SwiftFormat')
           rules_with_badges.add(current_rule_start)
         end
+
+        # Match <!-- ai-skill-include --> or <!-- ai-skill-include: explanation -->
         if line.match?(/<!-- ai-skill-include(:.*)? -->/)
           rules_with_include.add(current_rule_start)
         end
       end
-      if line.start_with?('## ') || line.start_with?('**[')
+      if line.start_with?('## ') || line.include?('⬆ back to top')
         current_rule_start = nil
       end
     end
@@ -229,7 +235,7 @@ class SiteContent
         has_badge = rules_with_badges.include?(index)
         has_include = rules_with_include.include?(index)
         skip_until_next_rule = has_badge && !has_include
-      elsif line.start_with?('## ') || line.start_with?('**[')
+      elsif line.start_with?('## ') || line.include?('⬆ back to top')
         skip_until_next_rule = false
       end
 
@@ -259,18 +265,26 @@ class SiteContent
 
       # Remove (link) anchors from lines
       line = line.gsub(/<a id='[^']*'><\/a> ?\(?<a href='[^']*'>link<\/a>\)? ?/, '')
-      # Remove any remaining standalone anchors
-      line = line.gsub(/<a id='[^']*'><\/a> ?/, '')
 
       # Remove bold/italic markers
       line = line.gsub('**', '')
-
-      # Remove markdown links, keeping just the link text (but not image links like [![](img)](url))
-      line = line.gsub(/\[(?!\!\[)([^\]]+)\]\([^)]+\)/, '\1')
 
       filtered << line
     end
 
     filtered
+  end
+
+  def filter_links(lines)
+    lines.map do |line|
+      # Remove image-link badges like [![](img)](url)
+      line = line.gsub(/\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)/, '')
+
+      # Remove markdown links, keeping just the link text
+      line = line.gsub(/\[([^\]]+)\]\([^)]+\)/, '\1')
+
+      # Remove any anchor tags
+      line.gsub(/<a id='[^']*'><\/a> ?/, '')
+    end
   end
 end
