@@ -142,7 +142,15 @@ class SiteContent
     lines = lines.reject do |line|
       stripped = line.strip
       stripped.start_with?('[![](') && stripped.include?('swiftpackageindex.com')
-    end.map(&:rstrip)
+    end
+
+    # Exclude Contributors and Amendments from the Table of Contents.
+    lines = lines.reject do |line|
+      (filter_contributors && line.include?('[Contributors](#contributors)')) ||
+        (filter_amendments && line.include?('[Amendments](#amendments)'))
+    end
+
+    lines = lines.map(&:rstrip)
 
     content = (lines + ['']).join("\n")
 

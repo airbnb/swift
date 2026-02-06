@@ -90,7 +90,7 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
 
 ## Xcode Formatting
 
-_You can enable the following settings in Xcode by running [this script](resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
+_You can enable the following settings in Xcode by running [this script](https://github.com/airbnb/swift/blob/master/resources/xcode_settings.bash), e.g. as part of a "Run Script" build phase._
 
 - <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
 
