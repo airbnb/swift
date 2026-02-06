@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
+  <link rel="preload" href="{{ '/assets/css/Cereal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  {{ content }}
-  <footer>
-    <a href="{{ site.github_url }}">View on GitHub</a>
-  </footer>
+  {% include navigation.html %}
+  <main class="content">
+    {{ content }}
+  </main>
 </body>
 </html>
