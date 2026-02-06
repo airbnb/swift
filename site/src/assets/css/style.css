@@ -17,6 +17,14 @@ body {
 }
 
 /* Navigation */
+:root {
+  --nav-height: 78px; /* Fallback, updated dynamically by JS */
+}
+
+html {
+  scroll-padding-top: var(--nav-height);
+}
+
 .top-nav {
   border-bottom: 1px solid #ddd;
   background: white;

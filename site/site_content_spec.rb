@@ -27,6 +27,10 @@ RSpec.describe SiteContent do
     it 'does not include command plugin section' do
       expect(index_content).not_to include('command plugin')
     end
+
+    it 'includes Table of Contents section' do
+      expect(index_content).to include('## Table of Contents')
+    end
   end
 
   describe 'SKILL.md' do
