@@ -5,15 +5,15 @@ require 'open3'
 require 'set'
 
 class SiteContent
-  attr_reader :readme_path, :index_path, :skill_md_path, :skill_md_raw_path, :syntax_css_path
+  attr_reader :readme_path, :index_path, :ai_skill_page_path, :ai_skill_raw_path, :syntax_css_path
 
   def initialize()
     site_dir = File.expand_path('src', __dir__)
     @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
     @readme_path = File.expand_path('../README.md', __dir__)
     @index_path = File.join(site_dir, 'index.md')
-    @skill_md_path = File.join(site_dir, 'SKILL.md')
-    @skill_md_raw_path = File.join(site_dir, 'raw', 'SKILL.md')
+    @ai_skill_page_path = File.join(site_dir, 'ai-skill.md')
+    @ai_skill_raw_path = File.join(site_dir, 'SKILL.md')
   end
   
   # Write index.md file (https://airbnb.swift.tech)
@@ -42,12 +42,12 @@ class SiteContent
     )
   end
 
-  # Write SKILL.md file (https://airbnb.swift.tech/SKILL.md)
+  # Write skill page (https://airbnb.swift.tech/skill)
   def write_skill_md
     front_matter = <<~FRONT
       ---
       layout: default
-      permalink: /SKILL.md
+      permalink: /skill
       ---
 
     FRONT
@@ -58,23 +58,22 @@ class SiteContent
 
       Summarizes the Airbnb Swift Style Guide, but excludes rules that are automatically enforced with code formatting.
 
-      Raw `SKILL.md` can be downloaded [here](/raw/SKILL.md).
+      Raw `SKILL.md` can be downloaded [here](/SKILL.md).
 
     HEADER
     wrapped_content = "#{header}````markdown\n#{skill_md_content}\n````\n"
-    File.write(skill_md_path, front_matter + wrapped_content)
+    File.write(ai_skill_page_path, front_matter + wrapped_content)
   end
 
-  # Write raw SKILL.md file (https://airbnb.swift.tech/SKILL.md.raw)
+  # Write raw SKILL.md file (https://airbnb.swift.tech/SKILL.md)
   def write_skill_md_raw
-    FileUtils.mkdir_p(File.dirname(skill_md_raw_path))
     jekyll_front_matter = <<~FRONT
       ---
       layout: raw
-      permalink: /raw/SKILL.md
+      permalink: /SKILL.md
       ---
     FRONT
-    File.write(skill_md_raw_path, jekyll_front_matter + skill_md_content)
+    File.write(ai_skill_raw_path, jekyll_front_matter + skill_md_content)
   end
 
   def skill_md_content
