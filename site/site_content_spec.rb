@@ -7,6 +7,17 @@ require_relative 'site_content'
 RSpec.describe SiteContent do
   subject(:site_content) { described_class.new }
 
+  describe 'README.md' do
+    let(:readme_content) { File.read(site_content.readme_path) }
+
+    # Relative file URLs resolve differently on github.com/airbnb/swift vs swift.airbnb.tech
+    it 'does not use relative URLs' do
+      # Match markdown links that don't start with # or https
+      relative_links = readme_content.scan(/\]\((?!#|https)([^)]+)\)/).flatten
+      expect(relative_links).to be_empty, "Found relative links: #{relative_links.join(', ')}"
+    end
+  end
+
   describe 'index.md' do
     let(:index_content) { site_content.index_content }
 
@@ -30,6 +41,32 @@ RSpec.describe SiteContent do
 
     it 'includes Table of Contents section' do
       expect(index_content).to include('## Table of Contents')
+    end
+
+    it 'has no invalid anchor links' do
+      # Extract all anchor links of the form [text](#anchor-name)
+      anchor_links = index_content.scan(/\[.*?\]\(#([^)]+)\)/).flatten
+
+      # Extract all markdown headers and convert to anchor format
+      # Headers like "## Xcode Formatting" become "xcode-formatting"
+      header_anchors = index_content.scan(/^##+ (.+)$/).flatten.map do |header|
+        header
+          .downcase
+          .gsub(/[^\w\s-]/, '') # Remove special characters except hyphens
+          .gsub(/\s+/, '-') # Replace spaces with hyphens
+          .gsub(/-+/, '-') # Collapse multiple hyphens
+          .gsub(/^-|-$/, '') # Remove leading/trailing hyphens
+      end
+
+      # Extract HTML anchor IDs of the form <a id='anchor-name'>
+      html_anchors = index_content.scan(/<a id=['"]([^'"]+)['"]>/).flatten
+
+      all_anchors = header_anchors + html_anchors
+
+      missing_anchors = anchor_links.reject { |anchor| all_anchors.include?(anchor) }
+
+      expect(missing_anchors).to be_empty,
+        "Found anchor links with no corresponding header: #{missing_anchors.join(', ')}"
     end
   end
 
