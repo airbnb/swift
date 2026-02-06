@@ -85,7 +85,6 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
 1. [File Organization](#file-organization)
 1. [SwiftUI](#swiftui)
 1. [Testing](#testing)
-1. [Objective-C Interoperability](#objective-c-interoperability)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
@@ -205,7 +204,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 - <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
-- <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
+- <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Acronyms in names (`ID`, `URL`, etc) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
   <details>
 
@@ -243,43 +242,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
-
-  <details>
-
-  ```swift
-  // WRONG
-  let rightTitleMargin: CGFloat
-  let leftTitleMargin: CGFloat
-  let bodyRightMargin: CGFloat
-  let bodyLeftMargin: CGFloat
-
-  // RIGHT
-  let titleMarginRight: CGFloat
-  let titleMarginLeft: CGFloat
-  let bodyMarginRight: CGFloat
-  let bodyMarginLeft: CGFloat
-  ```
-
-  </details>
-
-- <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Include a hint about type in a name if it would otherwise be ambiguous.**
-
-  <details>
-
-  ```swift
-  // WRONG
-  let title: String
-  let cancel: UIButton
-
-  // RIGHT
-  let titleText: String
-  let cancelButton: UIButton
-  ```
-
-  </details>
-
-- <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
+- <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Event-handling functions should be named like past-tense sentences** (e.g. `didTap`, not `handleTap`). The subject can be omitted if it's not needed for clarity.
 
   <details>
 
@@ -311,7 +274,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='avoid-class-prefixes'></a>(<a href='#avoid-class-prefixes'>link</a>) **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
+- <a id='avoid-class-prefixes'></a>(<a href='#avoid-class-prefixes'>link</a>) **Avoid Objective-C-style acronym prefixes.** This is not needed to avoid naming conflicts in Swift.
 
   <details>
 
@@ -326,15 +289,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ...
   }
   ```
-
-  </details>
-
-- <a id='avoid-controller-suffix'></a>(<a href='#avoid-controller-suffix'>link</a>) **Avoid `*Controller` in names of classes that aren't view controllers.**
-  <details>
-
-  #### Why?
-
-  Controller is an overloaded suffix that doesn't provide information about the responsibilities of the class.
 
   </details>
 
@@ -3046,13 +3000,13 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
+- <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Extract complex property observers into methods.** This reduces nestedness and separates side-effects from property declarations.
 
   <details>
 
   ```swift
   // WRONG
-  class TextField {
+  final class TextField {
     var text: String? {
       didSet {
         guard oldValue != text else {
@@ -3065,7 +3019,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
 
   // RIGHT
-  class TextField {
+  final class TextField {
     var text: String? {
       didSet { textDidUpdate(from: oldValue) }
     }
@@ -3082,50 +3036,74 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
+- <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Extract complex callback blocks into methods** to reduced nestedness.
 
   <details>
 
   ```swift
   // WRONG
-  class MyClass {
+  final class MyClass {
 
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
-        if let self {
-          // Processing and side effects
-        }
-        completion()
+    func performRequest() {
+      API.request { [weak self] response in
+        guard let self else { return }
+        // Complicated processing and side effects...
       }
     }
   }
 
   // RIGHT
-  class MyClass {
+  final class MyClass {
 
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
+    func performRequest() {
+      API.request { [weak self] response in
         guard let self else { return }
-        self.doSomething(with: self.property, response: response)
-        completion()
+        handleResponse(response: response)
       }
     }
 
-    func doSomething(with nonOptionalParameter: SomeClass, response: SomeResponseClass) {
-      // Processing and side effects
+    func handleResponse(_ response: SomeResponseClass) {
+      // Complicated processing and side effects...
     }
   }
   ```
 
   </details>
 
-- <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Prefer using `guard` at the beginning of a scope.**
+- <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **When validating preconditions at the start of a scope, prefer using `guard` statements over `if` statements.** This reduces nesting, and allows the compiler to verify that the `return` statement is present.
 
   <details>
 
-  #### Why?
+  ```swift
+  // WRONG
+  func land(on planet: Planet) {
+    if !planet.hasAtmosphere {
+      abortLanding()
+      return
+    }
 
-  It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
+    engine.decelerate()
+  }
+
+  // WRONG: Oops! forgot "return" in precondition.
+  func land(on planet: Planet) {
+    if !planet.hasAtmosphere {
+      abortLanding()
+    }
+
+    engine.decelerate()
+  }
+
+  // RIGHT
+  func land(on planet: Planet) {
+    guard planet.hasAtmosphere else {
+      abortLanding()
+      return
+    }
+
+    engine.decelerate()
+  }
+  ```
 
   </details>
 
@@ -3461,8 +3439,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='semantic-optionals'></a>(<a href='#semantic-optionals'>link</a>) **Use optionals only when they have semantic meaning.**
-
 - <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
   <details>
@@ -3620,28 +3596,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-- <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **Default type methods to `static`.**
-
-  <details>
-
-  #### Why?
-
-  If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
-
-  ```swift
-  // WRONG
-  class Fruit {
-    class func eatFruits(_ fruits: [Fruit]) { ... }
-  }
-
-  // RIGHT
-  class Fruit {
-    static func eatFruits(_ fruits: [Fruit]) { ... }
-  }
-  ```
-
-  </details>
-
 - <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Default classes to `final`.**
 
   <details>
@@ -3707,6 +3661,30 @@ _You can enable the following settings in Xcode by running [this script](resourc
     ...
   }
   #endif
+  ```
+
+  </details>
+
+- <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) When defining type functions in classes, prefer `static func` over `class func`.
+
+  <details>
+
+  #### Why?
+
+  `static func` and `class func` have the same behavior unless the class is subclassed and a subclass needs to override the declaration.
+
+  If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
+
+  ```swift
+  // WRONG
+  class Fruit {
+    class func eatFruits(_ fruits: [Fruit]) { ... }
+  }
+
+  // RIGHT
+  class Fruit {
+    static func eatFruits(_ fruits: [Fruit]) { ... }
+  }
   ```
 
   </details>
@@ -5379,36 +5357,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
     func habitability() {
       #expect(earth.isHabitable)
       #expect(!mars.isHabitable)
-    }
-  }
-  ```
-
-  </details>
-
-**[⬆ back to top](#table-of-contents)**
-
-## Objective-C Interoperability
-
-- <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
-
-  <details>
-
-  ```swift
-  class PriceBreakdownViewController {
-
-    private let acceptButton = UIButton()
-
-    private func setUpAcceptButton() {
-      acceptButton.addTarget(
-        self,
-        action: #selector(didTapAcceptButton),
-        forControlEvents: .touchUpInside
-      )
-    }
-
-    @objc
-    private func didTapAcceptButton() {
-      ...
     }
   }
   ```
