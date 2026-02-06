@@ -26,7 +26,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 ## Swift Package Manager command plugin
 
-This repo includes a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
+We offer a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
 
 ```swift
 dependencies: [
@@ -44,10 +44,10 @@ $ swift package format
 <summary>Usage guide</summary>
 
 ```shell
-# Supported in Xcode 14+. Prompts for permission to write to the package directory.
+# Prompts for permission to write to the package directory.
 $ swift package format
 
-# When using the Xcode 13 toolchain, or a noninteractive shell, you must use:
+# When using a noninteractive shell, you can use:
 $ swift package --allow-writing-to-package-directory format
 
 # To just lint without reformatting, you can use `--lint`:
@@ -63,7 +63,7 @@ $ swift package format --targets AirbnbSwiftFormatTool
 
 # The plugin infers your package's minimum Swift version from the `swift-tools-version`
 # in your `Package.swift`, but you can provide a custom value with `--swift-version`:
-$ swift package format --swift-version 5.3
+$ swift package format --swift-version 6.2
 ```
 
 The package plugin returns a non-zero exit code if there is a lint failure that requires attention.
