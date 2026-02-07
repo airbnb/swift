@@ -141,5 +141,11 @@ RSpec.describe SiteContent do
       expect(readme_content).to include('Use 2 spaces to indent lines')
     end
 
+    it 'does not include empty sections' do
+      # Find sections that are immediately followed by another section (no content between them)
+      empty_sections = skill_content.scan(/^(## .+)\n+(?=## )/).flatten
+      expect(empty_sections).to be_empty,
+        "Found empty sections: #{empty_sections.join(', ')}"
+    end
   end
 end
