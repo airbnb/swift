@@ -134,9 +134,9 @@ class SiteContent
 
     lines = filter_sections(lines, sections_to_filter)
     lines = filter_autocorrectable_rules(lines) if filter_autocorrectable_rules
-    lines = filter_empty_sections(lines)
     lines = filter_details_blocks(lines) if filter_rule_details
     lines = filter_links(lines) if filter_links
+    lines = filter_empty_sections(lines)
 
     # Exclude the badges from the site.
     lines = lines.reject do |line|
