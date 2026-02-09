@@ -147,5 +147,11 @@ RSpec.describe SiteContent do
       expect(empty_sections).to be_empty,
         "Found empty sections: #{empty_sections.join(', ')}"
     end
+
+    it 'removes backticks from inline code ending with !' do
+      # Inline code like `try!` can be interpreted as a bash command, so we remove the backticks
+      expect(readme_content).to include('`try!`')
+      expect(skill_content).not_to include('!`')
+    end
   end
 end
