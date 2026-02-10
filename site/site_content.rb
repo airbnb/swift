@@ -159,7 +159,11 @@ class SiteContent
     content = (lines + ['']).join("\n")
 
     # Remove consecutive blank lines (max 1 in a row)
-    content.gsub(/\n{3,}/, "\n\n")
+    content = content.gsub(/\n{3,}/, "\n\n")
+
+    # Remove backticks from inline code ending with ! (e.g. `try!`) to prevent shell command interpretation
+    # https://github.com/anthropics/claude-code/issues/12762#issuecomment-3830966564
+    content.gsub(/`([^`]*!)`/, '\1')
   end
 
   def filter_sections(lines, section_names)
