@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Swift Package Plugin
+title: Airbnb Swift Package Plugin
 permalink: /plugin
+description: Swift Package Manager command plugin to automatically reformat or lint your package according to the Airbnb Swift Style Guide.
 ---
 
 # Swift Package Plugin

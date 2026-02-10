@@ -21,6 +21,8 @@ class SiteContent
     front_matter = <<~FRONT
       ---
       layout: default
+      title: Airbnb Swift Style Guide
+      description: Airbnb's Swift Style Guide. Over 100 style rules spanning basic syntax, code organization, patterns, SwiftUI, testing, and other best practices.
       ---
 
     FRONT
@@ -48,6 +50,8 @@ class SiteContent
       ---
       layout: default
       permalink: /skill
+      title: Airbnb Swift AI Skill
+      description: AI skill for working with Swift code. Summarizes the Airbnb Swift Style Guide.
       ---
 
     FRONT
