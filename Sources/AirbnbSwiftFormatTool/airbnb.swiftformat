@@ -132,7 +132,6 @@
 --rules semicolons
 --rules propertyTypes
 --rules blankLinesBetweenChainedFunctions
---rules emptyExtensions
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
 --rules modifiersOnSameLine
