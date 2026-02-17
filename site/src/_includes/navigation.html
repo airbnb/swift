@@ -1,0 +1,16 @@
+<nav class="top-nav">
+  <div class="nav-content">
+    <a href="{{ '/' | relative_url }}" class="nav-brand">
+      <img class="airbnb-logo" src="{{ '/assets/belo.svg' | relative_url }}" alt="Airbnb logo">
+    </a>
+    <div class="nav-links">
+      <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' or page.url == '/index.html' %} active{% endif %}">Swift Style Guide</a>
+      <span class="nav-separator">·</span>
+      <a href="{{ '/skill' | relative_url }}" class="nav-link{% if page.url == '/skill' or page.url == '/skill.html' %} active{% endif %}">AI Skill</a>
+      <span class="nav-separator">·</span>
+      <a href="{{ '/plugin' | relative_url }}" class="nav-link{% if page.url == '/plugin' or page.url == '/plugin.html' %} active{% endif %}">Swift Package Plugin</a>
+      <span class="nav-separator">·</span>
+      <a href="{{ site.github_url }}" class="nav-link nav-link-external">View on GitHub</a>
+    </div>
+  </div>
+</nav>

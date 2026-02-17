@@ -16,9 +16,8 @@ struct AirbnbSwiftFormatPlugin {
   func performCommand(
     context: CommandContext,
     inputPaths: [String],
-    arguments: [String])
-    throws
-  {
+    arguments: [String]
+  ) throws {
     var argumentExtractor = ArgumentExtractor(arguments)
 
     // Filter out any excluded paths passed in with `--exclude`
@@ -107,7 +106,8 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
     try performCommand(
       context: context,
       inputPaths: inputPaths,
-      arguments: arguments)
+      arguments: arguments
+    )
   }
 
   // MARK: Private
@@ -126,7 +126,8 @@ extension AirbnbSwiftFormatPlugin: CommandPlugin {
     let packageDirectoryContents = try FileManager.default.contentsOfDirectory(
       at: URL(fileURLWithPath: package.directory.string),
       includingPropertiesForKeys: nil,
-      options: [.skipsHiddenFiles])
+      options: [.skipsHiddenFiles]
+    )
 
     let subdirectories = packageDirectoryContents.filter { $0.hasDirectoryPath }
     let rootSwiftFiles = packageDirectoryContents.filter { $0.pathExtension.hasSuffix("swift") }
@@ -155,7 +156,8 @@ extension AirbnbSwiftFormatPlugin: XcodeCommandPlugin {
     try performCommand(
       context: context,
       inputPaths: Array(inputPaths),
-      arguments: argumentExtractor.remainingArguments)
+      arguments: argumentExtractor.remainingArguments
+    )
   }
 
 }
@@ -207,13 +209,14 @@ extension Package {
     guard let projectDirectory = URL(string: directory.string) else { return [] }
 
     var supportedSwiftVersions = [
-      SwiftVersion(major: toolsVersion.major, minor: toolsVersion.minor),
+      SwiftVersion(major: toolsVersion.major, minor: toolsVersion.minor)
     ]
 
     // Look for all of the package manifest files in the directory root
     let filesInRootDirectory = try? FileManager.default.contentsOfDirectory(
       at: projectDirectory,
-      includingPropertiesForKeys: nil)
+      includingPropertiesForKeys: nil
+    )
 
     for fileURL in filesInRootDirectory ?? [] {
       let fileName = fileURL.lastPathComponent

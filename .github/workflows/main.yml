@@ -7,43 +7,63 @@ on:
     branches: [ master ]
 
 jobs:
-  test-package-plugin-macos-12:
+  test-package-plugin:
     name: Test Package Plugin
-    runs-on: macos-12
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
         xcode:
-        - '13.4.1' # Swift 5.6
+        - '16.0' # Swift 6.0
+        - '16.4' # Swift 6.1
+        - '26.0.1' # Swift 6.2
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Test Package Plugin
-        run: swift package --allow-writing-to-package-directory format --lint
-
-  test-package-plugin-macos-13:
-    name: Test Package Plugin
-    runs-on: macos-13
-    strategy:
-      fail-fast: false
-      matrix:
-        xcode:
-        - '14.2' # Swift 5.7
-        - '14.3' # Swift 5.8
-        - '15.0' # Swift 5.9
-    steps:
-      - uses: actions/checkout@v2
-      - name: Test Package Plugin
-        run: swift package --allow-writing-to-package-directory format --lint
+        run: bundle exec rake lint:swift
 
   unit-tests:
     name: Unit Tests
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
         xcode:
-        - '15.0' # Swift 5.9
+        - '26.0.1' # Swift 6.2
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Run Unit Tests
         run: swift test
+
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+      - name: Lint README.md
+        run: bundle exec rake lint:markdown
+
+  site-build:
+    name: Test Site
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Test site content
+        run: bundle exec rake site:test
+      - name: Build site
+        run: bundle exec rake site:build
+        env:
+          JEKYLL_ENV: production

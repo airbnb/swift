@@ -30,7 +30,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         swiftLintAutocorrect: {
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertNil(error)
     XCTAssertTrue(ranSwiftFormat)
@@ -57,7 +59,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         swiftLintAutocorrect: {
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertNil(error)
     XCTAssertTrue(ranSwiftFormat)
@@ -91,7 +95,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
           // When autocorrecting SwiftLint returns EXIT_SUCCESS
           // even if there were violations that were fixed
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertEqual(error as? ExitCode, ExitCode(SwiftFormatExitCode.lintFailure))
     XCTAssertTrue(ranSwiftFormat)
@@ -129,7 +135,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
           // In this case, SwiftLint still returns a zero exit code.
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     // Even though there was a SwiftLint failure, it was autocorrected so doesn't require attention.
     // The tool should not return an error (e.g. it should return a zero exit code).
@@ -159,7 +167,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         swiftLintAutocorrect: {
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertEqual(error as? ExitCode, ExitCode.failure)
     XCTAssertTrue(ranSwiftFormat)
@@ -186,7 +196,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         swiftLintAutocorrect: {
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertEqual(error as? ExitCode, ExitCode.failure)
     XCTAssertTrue(ranSwiftFormat)
@@ -213,7 +225,9 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
         swiftLintAutocorrect: {
           ranSwiftLintAutocorrect = true
           return EXIT_SUCCESS
-        }))
+        }
+      )
+    )
 
     XCTAssertEqual(error as? ExitCode, ExitCode.failure)
     XCTAssertTrue(ranSwiftFormat)
@@ -223,10 +237,12 @@ final class AirbnbSwiftFormatToolTest: XCTestCase {
 
   func testHandlesUnexpectedErrorCode() {
     let unexpectedSwiftFormatExitCode = runFormatTool(
-      with: MockCommands(swiftFormat: { 1234 }))
+      with: MockCommands(swiftFormat: { 1234 })
+    )
 
     let unexpectedSwiftLintExitCode = runFormatTool(
-      with: MockCommands(swiftLint: { 42 }))
+      with: MockCommands(swiftLint: { 42 })
+    )
 
     XCTAssertEqual(unexpectedSwiftFormatExitCode as? ExitCode, ExitCode(1234))
     XCTAssertEqual(unexpectedSwiftLintExitCode as? ExitCode, ExitCode(42))
