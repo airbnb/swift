@@ -126,7 +126,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## Naming
 
-- <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.**
+- <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Use UpperCamelCase for type and protocol names, and lowerCamelCase for everything else.**
 
   <details>
 
@@ -5013,7 +5013,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## Testing
 
-- <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, don't prefix test case methods with "`test`".**
+- <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, name test cases as sentences using raw identifiers, rather than using lowerCamelCase.** Don't prefix test case names with "`test`". Use UpperCamelCase for test suite names. Always omit the display name string from the `@Test` or `@Suite` macro.
 
   <details>
 
@@ -5023,7 +5023,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   ### Why?
 
+  Raw identifiers with spaces are easier to read than long function names in camel case. Enabling this use case for test cases was the main motivation of adding raw identifier support to Swift ([SE-0451](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0451-escaped-identifiers.md)).
+
   Prefixing test case methods with "`test`" was necessary with XCTest, but is not necessary in Swift Testing. [Idiomatic usage](https://developer.apple.com/documentation/testing/migratingfromxctest#Convert-test-methods) of Swift Testing excludes the "`test`" prefix.
+
+  Avoid using raw identifiers for test suite names, and instead prefer UpperCamelCase. Unlike test cases, which are just invoked automatically by the testing framework, it may be necessary to reference the test suite by name in other code (for example, to call a static helper method).
 
   ```swift
   import Testing
@@ -5032,18 +5036,25 @@ _You can enable the following settings in Xcode by running [this script](https:/
   struct SpaceshipTests {
     @Test
     func testWarpDriveEnablesFTLTravel() { ... }
+  }
 
+  // WRONG
+  @Suite("Spaceship tests")
+  struct SpaceshipTests {
+    @Test("Warp drive enables FTL travel")
+    func warpDriveEnablesFTLTravel() { ... }
+  }
+
+  /// WRONG
+  struct `Spaceship tests` {
     @Test
-    func testArtificialGravityMatchesEarthGravity() { ... }
+    func `warp drive enables FTL travel`() { ... }
   }
 
   /// RIGHT
   struct SpaceshipTests {
     @Test
-    func warpDriveEnablesFTLTravel() { ... }
-
-    @Test
-    func artificialGravityMatchesEarthGravity() { ... }
+    func `warp drive enables FTL travel`() { ... }
   }
   ```
 
