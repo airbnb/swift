@@ -5060,6 +5060,38 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='redundant-swift-testing-suite-macro'></a>(<a href='#redundant-swift-testing-suite-macro'>link</a>) **Omit the Swift Testing `@Suite` macro** unless providing configuration like `@Suite(.serialized)`. A `@Suite` macro without any arguments is redundant: `@Test` method discovery behaves the same with or without the `@Suite` macro.
+
+  <details>
+
+  [![SwiftFormat: redundantSwiftTestingSuite](https://img.shields.io/badge/SwiftFormat-redundantSwiftTestingSuite-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantSwiftTestingSuite)
+
+  ```swift
+  import Testing
+
+  /// WRONG
+  @Suite
+  struct SpaceshipTests {
+    @Test
+    func `warp drive enables FTL travel`() { ... }
+  }
+
+  /// RIGHT
+  struct SpaceshipTests {
+    @Test
+    func `warp drive enables FTL travel`() { ... }
+  }
+
+  /// ALSO RIGHT: @Suite with arguments is not redundant.
+  @Suite(.serialized)
+  struct SpaceshipTests {
+    @Test
+    func `warp drive enables FTL travel`() { ... }
+  }
+  ```
+
+  </details>
+
 - <a id='avoid-guard-in-tests'></a>(<a href='#avoid-guard-in-tests'>link</a>) **Avoid `guard` statements in unit tests**. XCTest and Swift Testing have APIs for unwrapping an optional and failing the test, which are much simpler than unwrapping the optionals yourself. Use assertions instead of guarding on boolean conditions.
 
   <details>

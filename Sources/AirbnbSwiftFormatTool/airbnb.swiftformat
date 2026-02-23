@@ -134,6 +134,7 @@
 --rules blankLinesBetweenChainedFunctions
 --rules preferCountWhere
 --rules swiftTestingTestCaseNames
+--rules redundantSwiftTestingSuite
 --rules modifiersOnSameLine
 --rules noForceTryInTests
 --rules noForceUnwrapInTests
