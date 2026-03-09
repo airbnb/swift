@@ -4222,15 +4222,15 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='redundant-property'></a>(<a href='#redundant-property'>link</a>) **Avoid defining properties that are then returned immediately.** Instead, return the value directly.
+- <a id='redundant-variable'></a>(<a href='#redundant-variable'>link</a>) **Avoid defining variables that are then returned immediately.** Instead, return the value directly.
 
   <details>
 
-  [![SwiftFormat: redundantProperty](https://img.shields.io/badge/SwiftFormat-redundantProperty-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantProperty)
+  [![SwiftFormat: redundantVariable](https://img.shields.io/badge/SwiftFormat-redundantVariable-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantVariable)
 
   ### Why?
 
-  Property declarations that are immediately returned are typically redundant and unnecessary. Sometimes these are unintentionally created as the byproduct of refactoring. Cleaning them up automatically simplifies the code. In some cases this also results in the `return` keyword itself being unnecessary, further simplifying the code.
+  Variables that are immediately returned are typically redundant and unnecessary. Sometimes these are unintentionally created as the byproduct of refactoring. Cleaning them up automatically simplifies the code. In some cases this also results in the `return` keyword itself being unnecessary, further simplifying the code.
 
   ```swift
   // WRONG

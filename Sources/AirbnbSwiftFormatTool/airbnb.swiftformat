@@ -98,7 +98,7 @@
 --rules redundantOptionalBinding
 --rules redundantInternal
 --rules redundantPublic
---rules redundantProperty
+--rules redundantVariable
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
