@@ -7,6 +7,8 @@ only_rules:
   - legacy_nsgeometry_functions
   - unused_optional_binding
   - unowned_variable_capture
+  - superfluous_disable_command
+  - invalid_swiftlint_command
   - custom_rules
 
 excluded:
