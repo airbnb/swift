@@ -16,6 +16,13 @@ RSpec.describe SiteContent do
       relative_links = readme_content.scan(/\]\((?!#|https)([^)]+)\)/).flatten
       expect(relative_links).to be_empty, "Found relative links: #{relative_links.join(', ')}"
     end
+
+    it 'has all rule descriptions include a bolded portion' do
+      rule_lines = readme_content.lines.map(&:chomp).select { |line| line.match?(/^- <a id='/) }
+      rules_without_bold = rule_lines.reject { |line| line.include?('**') }
+      expect(rules_without_bold).to be_empty,
+        "Found rule descriptions without bold text:\n#{rules_without_bold.join("\n")}"
+    end
   end
 
   describe 'index.md' do

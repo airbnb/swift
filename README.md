@@ -3665,7 +3665,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) When defining type functions in classes, prefer `static func` over `class func`.
+- <a id='static-type-methods-by-default'></a>(<a href='#static-type-methods-by-default'>link</a>) **When defining type functions in classes, prefer `static func` over `class func`.**
 
   <details>
 
