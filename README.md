@@ -4953,6 +4953,32 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='redundant-empty-view'></a>(<a href='#redundant-empty-view'>link</a>) **In SwiftUI result builders, omit redundant `else { EmptyView() }` branches.** An `if` statement without an `else` branch implicitly produces no content when the condition is false, making an explicit `else { EmptyView() }` unnecessary.
+
+  <details>
+
+  [![SwiftFormat: redundantEmptyView](https://img.shields.io/badge/SwiftFormat-redundantEmptyView-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantEmptyView)
+
+  ```swift
+  // WRONG
+  var body: some View {
+    if condition {
+      Text("Launch")
+    } else {
+      EmptyView()
+    }
+  }
+
+  // RIGHT
+  var body: some View {
+    if condition {
+      Text("Launch")
+    }
+  }
+  ```
+
+  </details>
+
 - <a id='redundant-viewbuilder'></a>(<a href='#redundant-viewbuilder'>link</a>) **Omit `@ViewBuilder` when it is not required.** `@ViewBuilder` is implicit on `View.body` properties and `ViewModifier.body(content:)` functions, and is unnecessary on single-expression properties or functions.
 
   <details>

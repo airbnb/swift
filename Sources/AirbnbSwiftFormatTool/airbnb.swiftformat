@@ -148,4 +148,5 @@
 --rules redundantTypedThrows
 --rules preferFinalClasses
 --rules simplifyGenericConstraints
+--rules redundantEmptyView
 --rules redundantViewBuilder
