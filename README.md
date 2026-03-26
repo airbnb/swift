@@ -3884,6 +3884,50 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 **[⬆ back to top](#table-of-contents)**
 
+* <a id='cifilter-builtins'></a>(<a href='#cifilter-builtins'>link</a>) **Prefer CIFilter's typed factory methods (via `CIFilterBuiltins`) over the string-based `CIFilter(name:)` initializer and KVO `setValue(_:forKey:)`.**
+
+  <details>
+
+  #### Why?
+
+  The typed factory methods introduced in iOS 14 (`import CoreImage.CIFilterBuiltins`) return non-optional, concrete filter objects with strongly-typed properties. This eliminates:
+
+  - The failable `CIFilter(name:)` initializer, which returns `nil` for typos and requires a `guard`/`if-let`.
+  - `setValue(_:forKey:)` calls that accept `Any?` and crash at runtime on wrong types or misspelled keys.
+
+  Using the built-in protocol conformances gives you compile-time type safety and autocompletion for every parameter.
+
+  > **Note:** You must add `import CoreImage.CIFilterBuiltins` (a submodule import) to access the factory methods.
+
+  ```swift
+  // WRONG
+  import CoreImage
+
+  guard
+    let kMeansFilter = CIFilter(name: "CIKMeans")
+  else { return nil }
+
+  kMeansFilter.setValue(ciImage, forKey: kCIInputImageKey)
+  kMeansFilter.setValue(CIVector(cgRect: ciImage.extent), forKey: "inputExtent")
+  kMeansFilter.setValue(1, forKey: "inputCount")
+  kMeansFilter.setValue(5, forKey: "inputPasses")
+  ```
+
+  ```swift
+  // RIGHT
+  import CoreImage.CIFilterBuiltins
+
+  let kMeansFilter = CIFilter.kMeans()
+  kMeansFilter.inputImage = ciImage
+  kMeansFilter.extent = CIVector(cgRect: ciImage.extent)
+  kMeansFilter.count = 1
+  kMeansFilter.passes = 5
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
 ## File Organization
 
 * <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file. Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#sortedImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#duplicateImports)
