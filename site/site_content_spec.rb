@@ -50,6 +50,26 @@ RSpec.describe SiteContent do
       expect(index_content).to include('## Table of Contents')
     end
 
+    it 'has the expected ordered list of markdown headers' do
+      headers = index_content.lines.map(&:chomp).grep(/^#+ /)
+      expect(headers).to eq [
+        '# Airbnb Swift Style Guide',
+        '## Goals',
+        '## Guiding Tenets',
+        '## Table of Contents',
+        '## Xcode Formatting',
+        '## Naming',
+        '## Style',
+        '### Functions',
+        '### Closures',
+        '### Operators',
+        '## Patterns',
+        '## File Organization',
+        '## SwiftUI',
+        '## Testing',
+      ]
+    end
+
     it 'has no invalid anchor links' do
       # Extract all anchor links of the form [text](#anchor-name)
       anchor_links = index_content.scan(/\[.*?\]\(#([^)]+)\)/).flatten
