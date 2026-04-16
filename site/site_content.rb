@@ -152,6 +152,9 @@ class SiteContent
       stripped.start_with?('[![](') && stripped.include?('swiftpackageindex.com')
     end
 
+    # Exclude the swift.airbnb.tech URL line from the site.
+    lines = lines.reject { |line| line.strip == 'https://swift.airbnb.tech' }
+
     # Exclude Contributors and Amendments from the Table of Contents.
     lines = lines.reject do |line|
       (filter_contributors && line.include?('[Contributors](#contributors)')) ||
