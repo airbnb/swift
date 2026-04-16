@@ -90,6 +90,7 @@ We offer an [AI skill](https://swift.airbnb.tech/skill) that summarizes the non-
 1. [File Organization](#file-organization)
 1. [SwiftUI](#swiftui)
 1. [Testing](#testing)
+1. [Apple Frameworks](#apple-frameworks)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
 
@@ -1686,22 +1687,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
     This has made a lot of people very angry and been widely regarded as a bad move.
     """
   }
-  ```
-
-  </details>
-
-- <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.**
-
-  <details>
-
-  [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://realm.github.io/SwiftLint/legacy_constructor)
-
-  ```swift
-  // WRONG
-  let range = NSMakeRange(10, 5)
-
-  // RIGHT
-  let range = NSRange(location: 10, length: 5)
   ```
 
   </details>
@@ -5449,6 +5434,26 @@ _You can enable the following settings in Xcode by running [this script](https:/
       #expect(!mars.isHabitable)
     }
   }
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
+## Apple Frameworks
+
+- <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Use constructors instead of Make() functions for NSRange and others.**
+
+  <details>
+
+  [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://realm.github.io/SwiftLint/legacy_constructor)
+
+  ```swift
+  // WRONG
+  let range = NSMakeRange(10, 5)
+
+  // RIGHT
+  let range = NSRange(location: 10, length: 5)
   ```
 
   </details>
