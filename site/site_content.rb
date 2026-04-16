@@ -34,6 +34,7 @@ class SiteContent
       filter_goals: false,
       filter_guiding_tenets: false,
       filter_spm_plugin: true,
+      filter_ai_skill: true,
       filter_table_of_contents: false,
       filter_xcode_formatting: false,
       filter_contributors: true,
@@ -92,6 +93,7 @@ class SiteContent
       filter_goals: true,
       filter_guiding_tenets: true,
       filter_spm_plugin: true,
+      filter_ai_skill: true,
       filter_table_of_contents: true,
       filter_xcode_formatting: true,
       filter_contributors: true,
@@ -117,6 +119,7 @@ class SiteContent
     filter_goals:,
     filter_guiding_tenets:,
     filter_spm_plugin:,
+    filter_ai_skill:,
     filter_table_of_contents:,
     filter_xcode_formatting:,
     filter_contributors:,
@@ -131,6 +134,7 @@ class SiteContent
     sections_to_filter << 'Goals' if filter_goals
     sections_to_filter << 'Guiding Tenets' if filter_guiding_tenets
     sections_to_filter << 'Swift Package Manager command plugin' if filter_spm_plugin
+    sections_to_filter << 'AI Skill' if filter_ai_skill
     sections_to_filter << 'Table of Contents' if filter_table_of_contents
     sections_to_filter << 'Xcode Formatting' if filter_xcode_formatting
     sections_to_filter << 'Contributors' if filter_contributors

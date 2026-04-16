@@ -1,12 +1,12 @@
 # Airbnb Swift Style Guide
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift)
+https://swift.airbnb.tech
 
 ## Goals
 
 Following this style guide should:
 
-- Make it easier to read and begin understanding unfamiliar code.
+- Make it easier to read and understand unfamiliar code.
 - Make code easier to maintain.
 - Reduce simple programmer errors.
 - Reduce cognitive load while coding.
@@ -16,17 +16,18 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 ## Guiding Tenets
 
+- Most rules should be autocorrectable using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat).
+  - Autocorrect results in the best developer experience.
+  - If a rule purely affects the syntactical format of the code, it must be autocorrectable.
+  - Autocorrect should be non-destructive and should not affect the runtime behavior of code.
+  - Linting is best suited for rules that affect the runtime behavior of code or that discourage patterns with no direct replacement.
+  - Best practices without autocorrect or linting are still welcomed as general advice for humans and [AI agents](https://swift.airbnb.tech/skill).
+- We strive to align with best practices of the broader [Swift community](https://forums.swift.org).
 - This guide is in addition to the official [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). These rules should not contradict that document.
-- These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
-- We strive to make every rule lintable:
-  - If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect).
-  - For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
-  - Exceptions to these rules should be rare and heavily justified.
-- Format rules should be non-destructive.
 
 ## Swift Package Manager command plugin
 
-We offer a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
+We offer a Swift Package Manager command plugin that autocorrects or lints your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
 
 ```swift
 dependencies: [
@@ -72,6 +73,10 @@ The package plugin returns a non-zero exit code if there is a lint failure that 
 - In standard autocorrect mode without `--lint`, only failures from SwiftLint lint-only rules will result in a non-zero exit code.
 
 </details>
+
+## AI Skill
+
+We offer an [AI skill](https://swift.airbnb.tech/skill) that summarizes the non-autocorrected best practices defined in style guide.
 
 ## Table of Contents
 
