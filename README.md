@@ -4554,7 +4554,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='blank-line-at-start-or-end-of-scopes'></a>(<a href='#blank-line-at-start-or-end-of-scopes'>link</a>) **Omit blank lines at the top and bottom of scopes.** Blank lines are permitted at the top of type bodies. Include a blank line at the bottom of a type body if it starts with a blank line.
+- <a id='blank-line-at-start-or-end-of-scopes'></a>(<a href='#blank-line-at-start-or-end-of-scopes'>link</a>) **Omit blank lines at the top and bottom of scopes.** Include a blank line at the bottom of a type body if and only if it starts with a blank line.
 
   <details>
 
@@ -4579,7 +4579,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   }
 
-  // RIGHT
+  // ALSO RIGHT
   class Planet {
 
     func terraform() {
