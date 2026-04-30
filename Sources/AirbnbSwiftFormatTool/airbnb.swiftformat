@@ -38,7 +38,7 @@
 --extension-acl on-declarations # extensionAccessControl
 --pattern-let inline # hoistPatternLet
 --property-types inferred # redundantType, propertyTypes
---type-blank-lines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
+--type-blank-lines consistent # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --empty-braces spaced # emptyBraces
 --ranges preserve # spaceAroundOperators
 --operator-func no-space # spaceAroundOperators
