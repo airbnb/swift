@@ -90,6 +90,7 @@
 --rules wrapArguments
 --rules wrapAttributes
 --rules wrapEnumCases
+--rules wrapSwitchCases
 --rules singlePropertyPerLine
 --rules braces
 --rules redundantClosure

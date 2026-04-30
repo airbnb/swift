@@ -1463,6 +1463,36 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Always wrap switch case bodies onto multiple lines.**
+
+  <details>
+
+  [![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#wrapSwitchCases)
+
+  #### Examples
+
+  ```swift
+  // WRONG
+  func planets(of type: PlanetType) -> [Planet] {
+    switch type {
+    case .terrestrial: [.mercury, .venus, .earth, .mars]
+    case .gasGiant: [.jupiter, .saturn, .uranus, .neptune]
+    }
+  }
+
+  // RIGHT
+  func planets(of type: PlanetType) -> [Planet] {
+    switch type {
+    case .terrestrial:
+      [.mercury, .venus, .earth, .mars]
+    case .gasGiant:
+      [.jupiter, .saturn, .uranus, .neptune]
+    }
+  }
+  ```
+
+  </details>
+
 - <a id='blank-line-after-multiline-switch-case'></a>(<a href='#blank-line-after-multiline-switch-case'>link</a>) **Insert a blank line following a switch case with a multi-line body.** Spacing within an individual switch statement should be consistent. If any case has a multi-line body then all cases should include a trailing blank line. The last switch case doesn't need a blank line, since it is already followed by a closing brace.
 
   <details>
