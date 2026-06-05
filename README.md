@@ -5129,6 +5129,67 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='redundant-state-init'></a>(<a href='#redundant-state-init'>link</a>) **Avoid calling the `State(wrappedValue:)` initializer explicitly** when equivalent to assigning the wrapped property directly.
+
+  <details>
+
+  [![SwiftFormat: redundantStateInit](https://img.shields.io/badge/SwiftFormat-redundantStateInit-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantStateInit)
+
+  #### Why?
+
+  ```swift
+  // WRONG
+  struct SpacecraftView: View {
+    init(telemetryService: TelemetryService) {
+      _spacecraftName = .init(wrappedValue: "Voyager")
+      _telemetryService = .init(wrappedValue: telemetryService)
+    }
+
+    @State private var spacecraftName: String
+    @ObservedObject private var telemetryService: TelemetryService
+  }
+
+  // RIGHT
+  struct SpacecraftView: View {
+    init(telemetryService: TelemetryService) {
+      spacecraftName = "Voyager"
+      self.telemetryService = telemetryService
+    }
+
+    @State private var spacecraftName: String
+    @ObservedObject private var telemetryService: TelemetryService
+  }
+  ```
+
+  This doesn't apply if the `@State` property declaration itself has an initial value:
+
+  ```swift
+  // ALSO RIGHT
+  struct SpacecraftView: View {
+    init() {
+      _spacecraftName = .init(wrappedValue: "Voyager") // Replaces the existing initial value
+      // `spacecraftName = "Voyager"` would have no effect here.
+    }
+
+    @State private var spacecraftName = "Pioneer"
+  }
+  ```
+
+  This doesn't apply to `StateObject(wrappedValue:)`: since a `@StateObject`'s value is not mutable, the property can't be assigned directly.
+
+  ```swift
+  // RIGHT: @StateObject must be initialized via its storage
+  struct SpacecraftView: View {
+    init() {
+      _navigationComputer = StateObject(wrappedValue: NavigationComputer())
+    }
+
+    @StateObject private var navigationComputer: NavigationComputer
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing
