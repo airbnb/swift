@@ -5073,6 +5073,62 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='redundant-swiftui-group'></a>(<a href='#redundant-swiftui-group'>link</a>) **Omit SwiftUI `Group` wrappers where redundant, and prefer `@ViewBuilder` over `Group` where equivalent.** Inside a `@ViewBuilder` context (like a `View.body` or a `@ViewBuilder` property), a `Group` that wraps the entire content and applies no modifiers is unnecessary and adds an extra layer of nesting.
+
+  <details>
+
+  [![SwiftFormat: redundantSwiftUIGroup](https://img.shields.io/badge/SwiftFormat-redundantSwiftUIGroup-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#redundantSwiftUIGroup)
+
+  #### Why?
+
+  The body of a `View` is implicitly a `@ViewBuilder`, so a `Group` that wraps the entire body and has no modifiers applied to it is completely redundant. In a `@ViewBuilder` property, `Group` and `@ViewBuilder` are equivalent, but `@ViewBuilder` is more idiomatic and reduces nesting.
+
+  ```swift
+  // WRONG
+  struct SpacecraftView: View {
+    var body: some View {
+      Group {
+        Text("Voyager")
+        instruments
+      }
+    }
+
+    var instruments: some View {
+      Group {
+        Text("Altimeter")
+        Text("Gyroscope")
+      }
+    }
+  }
+
+  // RIGHT
+  struct SpacecraftView: View {
+    var body: some View {
+      Text("Voyager")
+      instruments
+    }
+
+    @ViewBuilder
+    var instruments: some View {
+      Text("Altimeter")
+      Text("Gyroscope")
+    }
+  }
+
+  // ALSO RIGHT: Group is not redundant when a modifier is applied to it
+  struct SpacecraftView: View {
+    var body: some View {
+      Group {
+        Text("Voyager")
+        instruments
+      }
+      .padding()
+    }
+  }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing
