@@ -151,3 +151,4 @@
 --rules simplifyGenericConstraints
 --rules redundantEmptyView
 --rules redundantViewBuilder
+--rules redundantSwiftUIGroup
