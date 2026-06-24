@@ -4404,6 +4404,26 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-flatmap'></a>(<a href='#prefer-flatmap'>link</a>) **Prefer using `flatMap { ... }` over `map { ... }.reduce([], +)`**.
+
+  <details>
+
+  [![SwiftFormat: preferFlatMap](https://img.shields.io/badge/SwiftFormat-preferFlatMap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFlatMap)
+
+  #### Why?
+
+  `map { ... }.reduce([], +)` builds an intermediate array of arrays and then flattens it by repeated concatenation, reallocating on each `+`. `flatMap { ... }` produces the same result directly, avoids the intermediate allocations, and reads more clearly.
+
+  ```swift
+  // WRONG
+  let allItems = sections.map { $0.items }.reduce([], +)
+
+  // RIGHT
+  let allItems = sections.flatMap { $0.items }
+  ```
+
+  </details>
+
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
