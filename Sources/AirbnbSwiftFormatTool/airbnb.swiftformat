@@ -136,6 +136,7 @@
 --rules preferCountWhere
 --rules isEmpty
 --rules preferFlatMap
+--rules preferContainsOverRange
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite
 --rules modifiersOnSameLine

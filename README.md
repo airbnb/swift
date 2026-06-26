@@ -4446,6 +4446,28 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-contains-over-range'></a>(<a href='#prefer-contains-over-range'>link</a>) **Prefer using `contains` over `range(of:)` compared against `nil`**.
+
+  <details>
+
+  [![SwiftFormat: preferContainsOverRange](https://img.shields.io/badge/SwiftFormat-preferContainsOverRange-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferContainsOverRange)
+
+  #### Why?
+
+  `range(of:) != nil` computes a range only to discard it and test for membership. `contains` expresses that membership check directly and reads more clearly.
+
+  ```swift
+  // WRONG
+  if text.range(of: "needle") != nil { ... }
+  if text.range(of: "needle") == nil { ... }
+
+  // RIGHT
+  if text.contains("needle") { ... }
+  if !text.contains("needle") { ... }
+  ```
+
+  </details>
+
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
