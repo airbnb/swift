@@ -135,6 +135,7 @@
 --rules blankLinesBetweenChainedFunctions
 --rules preferCountWhere
 --rules isEmpty
+--rules preferFlatMap
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite
 --rules modifiersOnSameLine
