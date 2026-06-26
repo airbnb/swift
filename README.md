@@ -4404,6 +4404,28 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='is-empty'></a>(<a href='#is-empty'>link</a>) **Prefer using `isEmpty` over comparing `count` against zero**.
+
+  <details>
+
+  [![SwiftFormat: isEmpty](https://img.shields.io/badge/SwiftFormat-isEmpty-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#isEmpty)
+
+  #### Why?
+
+  `isEmpty` states the intent directly and, unlike `count`, is guaranteed to be O(1) for every `Collection` (computing `count` can be O(n) for types like `String` or lazy sequences). Checking emptiness by comparing `count` against zero is both less clear and potentially slower.
+
+  ```swift
+  // WRONG
+  if array.count == 0 { ... }
+  if array.count > 0 { ... }
+
+  // RIGHT
+  if array.isEmpty { ... }
+  if !array.isEmpty { ... }
+  ```
+
+  </details>
+
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
