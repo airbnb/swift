@@ -4468,6 +4468,26 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-first-where'></a>(<a href='#prefer-first-where'>link</a>) **Prefer using `first(where: { ... })` over `filter { ... }.first`**.
+
+  <details>
+
+  [![SwiftFormat: preferFirstWhere](https://img.shields.io/badge/SwiftFormat-preferFirstWhere-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferFirstWhere)
+
+  #### Why?
+
+  `filter { ... }.first` builds a filtered collection just to take its first element. `first(where:)` finds that element directly and stops at the first match.
+
+  ```swift
+  // WRONG
+  let firstActive = items.filter { $0.isActive }.first
+
+  // RIGHT
+  let firstActive = items.first(where: { $0.isActive })
+  ```
+
+  </details>
+
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>
