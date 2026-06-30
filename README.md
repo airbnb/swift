@@ -5367,13 +5367,34 @@ _You can enable the following settings in Xcode by running [this script](https:/
     @Test
     func something() throws {
       // WRONG:
-      guard let value = optionalValue, value.matchesCondition {
+      guard let value = optionalValue, value.matchesCondition else {
         return
       }
 
       // RIGHT:
       let value = try #require(optionalValue)
-      #expect(value.matchesCondition)
+      try #require(value.matchesCondition)
+    }
+  }
+  ```
+
+  The same applies to an `if` statement used like a `guard`, where the `if` is the last statement in the test:
+
+  ```swift
+  import Testing
+
+  struct SomeTests {
+    @Test
+    func something() throws {
+      // WRONG:
+      if let value = optionalValue, value.matchesCondition {
+        #expect(value.isValid)
+      }
+
+      // RIGHT:
+      let value = try #require(optionalValue)
+      try #require(value.matchesCondition)
+      #expect(value.isValid)
     }
   }
   ```
