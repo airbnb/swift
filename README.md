@@ -4488,6 +4488,28 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-contains-over-first'></a>(<a href='#prefer-contains-over-first'>link</a>) **Prefer using `contains(where:)` over `first(where:)` / `firstIndex(where:)` compared against `nil`**.
+
+  <details>
+
+  [![SwiftFormat: preferContainsOverFirst](https://img.shields.io/badge/SwiftFormat-preferContainsOverFirst-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md#preferContainsOverFirst)
+
+  #### Why?
+
+  `first(where:) != nil` (and `firstIndex(where:) != nil`) finds and returns the matched element or index only to discard it and test for existence. `contains(where:)` expresses that existence check directly and returns a `Bool`. The `== nil` forms become `!contains(where:)`.
+
+  ```swift
+  // WRONG
+  if items.first(where: { $0.isActive }) != nil { ... }
+  if items.firstIndex(where: { $0.isActive }) == nil { ... }
+
+  // RIGHT
+  if items.contains(where: { $0.isActive }) { ... }
+  if !items.contains(where: { $0.isActive }) { ... }
+  ```
+
+  </details>
+
 - <a id='url-macro'></a>(<a href='#url-macro'>link</a>) **If available in your project, prefer using a `#URL(_:)` macro instead of force-unwrapping `URL(string:)!` initializer**.
 
   <details>

@@ -136,6 +136,7 @@
 --rules preferCountWhere
 --rules isEmpty
 --rules preferFlatMap
+--rules preferContainsOverFirst
 --rules preferContainsOverRange
 --rules preferFirstWhere
 --rules swiftTestingTestCaseNames
