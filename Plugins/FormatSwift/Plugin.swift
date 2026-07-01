@@ -196,7 +196,7 @@ extension Package {
 
   /// The minimum Swift version supported by this package
   var minimumSwiftVersion: SwiftVersion {
-    supportedSwiftVersions.sorted().first!
+    supportedSwiftVersions.min()!
   }
 
   // MARK: Private
