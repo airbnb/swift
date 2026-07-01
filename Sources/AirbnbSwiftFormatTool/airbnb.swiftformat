@@ -138,6 +138,7 @@
 --rules preferFlatMap
 --rules preferContainsOverRange
 --rules preferFirstWhere
+--rules preferMinOverSorted
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite
 --rules modifiersOnSameLine
