@@ -12,8 +12,8 @@ RSpec.describe SiteContent do
 
     # Relative file URLs resolve differently on github.com/airbnb/swift vs swift.airbnb.tech
     it 'does not use relative URLs' do
-      # Match markdown links that don't start with # or https
-      relative_links = readme_content.scan(/\]\((?!#|https)([^)]+)\)/).flatten
+      # Match markdown links that don't start with # or http(s)
+      relative_links = readme_content.scan(/\]\((?!#|https?:)([^)]+)\)/).flatten
       expect(relative_links).to be_empty, "Found relative links: #{relative_links.join(', ')}"
     end
 
