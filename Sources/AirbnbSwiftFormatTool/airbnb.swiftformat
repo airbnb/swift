@@ -50,6 +50,7 @@
 --semicolons never # semicolons
 --doc-comments preserve # docComments
 --prefer-synthesized-init-for-internal-structs View,ViewBuilder # redundantMemberwiseInit
+--guard-like-if-statements convert # noGuardInTests
 
 # Customized default modifier order to put `override` after access control
 --modifier-order private,fileprivate,internal,package,public,open,private(set),fileprivate(set),internal(set),package(set),public(set),open(set),override,final,dynamic,optional,required,convenience,indirect,isolated,nonisolated,nonisolated(unsafe),lazy,weak,unowned,unowned(safe),unowned(unsafe),static,class,borrowing,consuming,mutating,nonmutating,prefix,infix,postfix,async # modifierOrder
@@ -136,8 +137,7 @@
 --rules preferCountWhere
 --rules isEmpty
 --rules preferFlatMap
---rules preferContainsOverFirst
---rules preferContainsOverRange
+--rules preferContains
 --rules preferFirstWhere
 --rules preferMinOverSorted
 --rules swiftTestingTestCaseNames
