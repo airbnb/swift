@@ -4446,24 +4446,30 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-contains-over-range'></a>(<a href='#prefer-contains-over-range'>link</a>) **Prefer using `contains` over `range(of:)` compared against `nil`**.
+- <a id='prefer-contains'></a>(<a href='#prefer-contains'>link</a>) **Prefer using `contains` over `filter(_:).isEmpty`, `first(where:) != nil`, and `range(of:) != nil`**.
 
   <details>
 
-  [![SwiftFormat: preferContainsOverRange](https://img.shields.io/badge/SwiftFormat-preferContainsOverRange-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContainsOverRange)
+  [![SwiftFormat: preferContains](https://img.shields.io/badge/SwiftFormat-preferContains-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContains)
 
   #### Why?
 
-  `range(of:) != nil` computes a range only to discard it and test for membership. `contains` expresses that membership check directly and reads more clearly.
+  Each of these patterns builds or finds something only to discard it and test for membership. `contains` expresses that membership check directly, short-circuits at the first match, and reads more clearly. The negated forms (`== nil`, or a `!`-prefixed `.isEmpty`) reconcile to `!contains` / `contains`.
 
   ```swift
   // WRONG
+  if messages.filter({ $0.isUnread }).isEmpty { ... }
+  let hasUnread = !messages.filter { $0.isUnread }.isEmpty
+  if items.first(where: { $0.isActive }) != nil { ... }
+  if items.firstIndex(where: { $0.isActive }) == nil { ... }
   if text.range(of: "needle") != nil { ... }
-  if text.range(of: "needle") == nil { ... }
 
   // RIGHT
+  if !messages.contains(where: { $0.isUnread }) { ... }
+  let hasUnread = messages.contains(where: { $0.isUnread })
+  if items.contains(where: { $0.isActive }) { ... }
+  if !items.contains(where: { $0.isActive }) { ... }
   if text.contains("needle") { ... }
-  if !text.contains("needle") { ... }
   ```
 
   </details>
@@ -4484,28 +4490,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   // RIGHT
   let firstActive = items.first(where: { $0.isActive })
-  ```
-
-  </details>
-
-- <a id='prefer-contains-over-first'></a>(<a href='#prefer-contains-over-first'>link</a>) **Prefer using `contains(where:)` over `first(where:)` / `firstIndex(where:)` compared against `nil`**.
-
-  <details>
-
-  [![SwiftFormat: preferContainsOverFirst](https://img.shields.io/badge/SwiftFormat-preferContainsOverFirst-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContainsOverFirst)
-
-  #### Why?
-
-  `first(where:) != nil` (and `firstIndex(where:) != nil`) finds and returns the matched element or index only to discard it and test for existence. `contains(where:)` expresses that existence check directly and returns a `Bool`. The `== nil` forms become `!contains(where:)`.
-
-  ```swift
-  // WRONG
-  if items.first(where: { $0.isActive }) != nil { ... }
-  if items.firstIndex(where: { $0.isActive }) == nil { ... }
-
-  // RIGHT
-  if items.contains(where: { $0.isActive }) { ... }
-  if !items.contains(where: { $0.isActive }) { ... }
   ```
 
   </details>
