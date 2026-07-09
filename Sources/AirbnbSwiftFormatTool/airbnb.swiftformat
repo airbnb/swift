@@ -48,6 +48,7 @@
 --single-line-for-each convert # preferForLoop
 --short-optionals always # typeSugar
 --semicolons never # semicolons
+--redundant-optional-binding always #redundantOptionalBinding
 --doc-comments preserve # docComments
 --prefer-synthesized-init-for-internal-structs View,ViewBuilder # redundantMemberwiseInit
 --guard-like-if-statements convert # noGuardInTests
