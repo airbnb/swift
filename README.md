@@ -1342,14 +1342,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
     case .jupiter, .saturn, .uranus, .neptune:
       .gasGiant
     }
-
-  // RIGHT
-  let moonName =
-    if let moon = planet.moon {
-      moon.name
-    } else {
-      "none"
-    }
   ```
 
   </details>
@@ -1461,6 +1453,33 @@ _You can enable the following settings in Xcode by running [this script](https:/
     let actualLocaton = galaxy.name ?? "the universe"
     planetLocation = "Rogue planet somewhere in \(actualLocation)"
   }
+  ```
+
+  </details>
+
+- <a id='wrap-if-statement-bodies'></a>(<a href='#wrap-if-statement-bodies'>link</a>) **Wrap `if` statement and `if` expression bodies onto multiple lines.**
+
+  <details>
+
+  [![SwiftFormat: wrapIfStatementBodies](https://img.shields.io/badge/SwiftFormat-wrapIfStatementBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfStatementBodies) [![SwiftFormat: wrapIfExpressionBodies](https://img.shields.io/badge/SwiftFormat-wrapIfExpressionBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfExpressionBodies)
+
+  ```swift
+  // WRONG
+  if treatPlutoAsPlanet { planets.append(.pluto) }
+
+  let moonName = if let moon = planet.moon { moon.name } else { "none" }
+
+  // RIGHT
+  if treatPlutoAsPlanet {
+    planets.append(.pluto)
+  }
+
+  let moonName =
+    if let moon = planet.moon {
+      moon.name
+    } else {
+      "none"
+    }
   ```
 
   </details>
@@ -2321,33 +2340,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
     func engage() -> Bool
     var fuelLevel: Double { get }
   }
-  ```
-
-  </details>
-
-- <a id='wrap-if-statement-bodies'></a>(<a href='#wrap-if-statement-bodies'>link</a>) **Wrap `if` statement and `if` expression bodies onto multiple lines.**
-
-  <details>
-
-  [![SwiftFormat: wrapIfStatementBodies](https://img.shields.io/badge/SwiftFormat-wrapIfStatementBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfStatementBodies) [![SwiftFormat: wrapIfExpressionBodies](https://img.shields.io/badge/SwiftFormat-wrapIfExpressionBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfExpressionBodies)
-
-  ```swift
-  // WRONG
-  if treatPlutoAsPlanet { planets.append(.pluto) }
-
-  let planetLocation = if let star { "\(star.name) system" } else { "Rogue planet" }
-
-  // RIGHT
-  if treatPlutoAsPlanet {
-    planets.append(.pluto)
-  }
-
-  let planetLocation =
-    if let star {
-      "The \(star.name) system"
-    } else {
-      "Rogue planet"
-    }
   ```
 
   </details>
