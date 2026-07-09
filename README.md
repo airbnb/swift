@@ -1132,41 +1132,41 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 - <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) **When unwrapping an optional, reuse the existing identifier rather than introducing a new identifier.**
 
-<!-- ai-skill-include: not fully autocorrectable (edge cases in complex cases) -->
-
   <details>
 
-[![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantOptionalBinding)
+  <!-- ai-skill-include: not fully autocorrectable (edge cases in complex cases) -->
 
-#### Why?
+  [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantOptionalBinding)
 
-Following the rationale in [SE-0345](https://github.com/apple/swift-evolution/blob/main/proposals/0345-if-let-shorthand.md), this shorthand syntax removes unnecessary boilerplate while retaining clarity. Reusing the optional's existing name, rather than introducing a new identifier for the unwrapped value, reduces cognitive load by avoiding introducing new variable names for the same object.
+  #### Why?
 
-```swift
-// WRONG
-if let ship = spaceship {
-  launch(ship)
-}
+  Following the rationale in [SE-0345](https://github.com/apple/swift-evolution/blob/main/proposals/0345-if-let-shorthand.md), this shorthand syntax removes unnecessary boilerplate while retaining clarity. Reusing the optional's existing name, rather than introducing a new identifier for the unwrapped value, reduces cognitive load by avoiding introducing new variable names for the same object.
 
-if
-  let galaxy = galaxy,
-  galaxy.name == "Milky Way"
-{ ... }
+  ```swift
+  // WRONG
+  if let ship = spaceship {
+    launch(ship)
+  }
 
-guard let self = self else { ... }
+  if
+    let galaxy = galaxy,
+    galaxy.name == "Milky Way"
+  { ... }
 
-// RIGHT
-if let spaceship {
-  launch(spaceship)
-}
+  guard let self = self else { ... }
 
-if
-  let galaxy,
-  galaxy.name == "Milky Way"
-{ ... }
+  // RIGHT
+  if let spaceship {
+    launch(spaceship)
+  }
 
-guard let self else { ... }
-```
+  if
+    let galaxy,
+    galaxy.name == "Milky Way"
+  { ... }
+
+  guard let self else { ... }
+  ```
 
   </details>
 
