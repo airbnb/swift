@@ -66,8 +66,8 @@ RSpec.describe SiteContent do
         '## Patterns',
         '## File Organization',
         '## SwiftUI',
-        '## Performance',
         '## Testing',
+        '## Performance',
         '## Apple Frameworks',
       ]
     end

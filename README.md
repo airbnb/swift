@@ -89,8 +89,8 @@ We offer an [AI skill](https://swift.airbnb.tech/skill) that summarizes the non-
 1. [Patterns](#patterns)
 1. [File Organization](#file-organization)
 1. [SwiftUI](#swiftui)
-1. [Performance](#performance)
 1. [Testing](#testing)
+1. [Performance](#performance)
 1. [Apple Frameworks](#apple-frameworks)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
@@ -5114,152 +5114,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 **[⬆ back to top](#table-of-contents)**
 
-## Performance
-
-- <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { ... })` over `filter { ... }.count`**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferCountWhere)
-
-  Swift 6.0 ([finally!](https://forums.swift.org/t/accepted-again-se-0220-count-where/66659)) added a `count(where:)` method to the standard library. Prefer using the `count(where:)` method over using the `filter(_:)` method followed by a `count` call.
-
-  ```swift
-  // WRONG
-  let planetsWithMoons = planets.filter { !$0.moons.isEmpty }.count
-
-  // RIGHT
-  let planetsWithMoons = planets.count(where: { !$0.moons.isEmpty })
-  ```
-
-  </details>
-
-- <a id='is-empty'></a>(<a href='#is-empty'>link</a>) **Prefer using `isEmpty` over comparing `count` against zero**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: isEmpty](https://img.shields.io/badge/SwiftFormat-isEmpty-7B0051.svg)](http://swiftformat.info/rules/prerelease#isEmpty)
-
-  #### Why?
-
-  `isEmpty` states the intent directly and, unlike `count`, is guaranteed to be O(1) for every `Collection` (computing `count` can be O(n) for types like `String` or lazy sequences). Checking emptiness by comparing `count` against zero is both less clear and potentially slower.
-
-  ```swift
-  // WRONG
-  if array.count == 0 { ... }
-  if array.count > 0 { ... }
-
-  // RIGHT
-  if array.isEmpty { ... }
-  if !array.isEmpty { ... }
-  ```
-
-  </details>
-
-- <a id='prefer-flatmap'></a>(<a href='#prefer-flatmap'>link</a>) **Prefer using `flatMap { ... }` over `map { ... }.reduce([], +)`**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: preferFlatMap](https://img.shields.io/badge/SwiftFormat-preferFlatMap-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFlatMap)
-
-  #### Why?
-
-  `map { ... }.reduce([], +)` builds an intermediate array of arrays and then flattens it by repeated concatenation, reallocating on each `+`. `flatMap { ... }` produces the same result directly, avoids the intermediate allocations, and reads more clearly.
-
-  ```swift
-  // WRONG
-  let allItems = sections.map { $0.items }.reduce([], +)
-
-  // RIGHT
-  let allItems = sections.flatMap { $0.items }
-  ```
-
-  </details>
-
-- <a id='prefer-contains'></a>(<a href='#prefer-contains'>link</a>) **Prefer using `contains` over `filter(_:).isEmpty`, `first(where:) != nil`, and `range(of:) != nil`**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: preferContains](https://img.shields.io/badge/SwiftFormat-preferContains-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContains)
-
-  #### Why?
-
-  Each of these patterns builds or finds something only to discard it and test for membership. `contains` expresses that membership check directly, short-circuits at the first match, and reads more clearly. The negated forms (`== nil`, or a `!`-prefixed `.isEmpty`) reconcile to `!contains` / `contains`.
-
-  ```swift
-  // WRONG
-  if messages.filter({ $0.isUnread }).isEmpty { ... }
-  let hasUnread = !messages.filter { $0.isUnread }.isEmpty
-  if items.first(where: { $0.isActive }) != nil { ... }
-  if items.firstIndex(where: { $0.isActive }) == nil { ... }
-  if text.range(of: "needle") != nil { ... }
-
-  // RIGHT
-  if !messages.contains(where: { $0.isUnread }) { ... }
-  let hasUnread = messages.contains(where: { $0.isUnread })
-  if items.contains(where: { $0.isActive }) { ... }
-  if !items.contains(where: { $0.isActive }) { ... }
-  if text.contains("needle") { ... }
-  ```
-
-  </details>
-
-- <a id='prefer-first-where'></a>(<a href='#prefer-first-where'>link</a>) **Prefer using `first(where: { ... })` over `filter { ... }.first`**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: preferFirstWhere](https://img.shields.io/badge/SwiftFormat-preferFirstWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFirstWhere)
-
-  #### Why?
-
-  `filter { ... }.first` builds a filtered collection just to take its first element. `first(where:)` finds that element directly and stops at the first match.
-
-  ```swift
-  // WRONG
-  let firstActive = items.filter { $0.isActive }.first
-
-  // RIGHT
-  let firstActive = items.first(where: { $0.isActive })
-  ```
-
-  </details>
-
-- <a id='prefer-min-over-sorted'></a>(<a href='#prefer-min-over-sorted'>link</a>) **Prefer using `min()` over `sorted().first`**.
-
-  <details>
-
-  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
-
-  [![SwiftFormat: preferMinOverSorted](https://img.shields.io/badge/SwiftFormat-preferMinOverSorted-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferMinOverSorted)
-
-  #### Why?
-
-  `sorted().first` sorts the entire sequence — `O(n log n)` plus a full copy — just to take the smallest element. `min()` finds it in a single `O(n)` pass with no allocation. `sorted(by:).first` likewise becomes `min(by:)`.
-
-  ```swift
-  // WRONG
-  let smallest = values.sorted().first
-  let earliest = events.sorted(by: { $0.date < $1.date }).first
-
-  // RIGHT
-  let smallest = values.min()
-  let earliest = events.min(by: { $0.date < $1.date })
-  ```
-
-  </details>
-
-**[⬆ back to top](#table-of-contents)**
-
 ## Testing
 
 - <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, name test cases as sentences using raw identifiers, rather than using lowerCamelCase.** Don't prefix test case names with "`test`". Use UpperCamelCase for test suite names. Always omit the display name string from the `@Test` or `@Suite` macro.
@@ -5688,6 +5542,152 @@ _You can enable the following settings in Xcode by running [this script](https:/
       #expect(!mars.isHabitable)
     }
   }
+  ```
+
+  </details>
+
+**[⬆ back to top](#table-of-contents)**
+
+## Performance
+
+- <a id='count-where'></a>(<a href='#count-where'>link</a>) **Prefer using `count(where: { ... })` over `filter { ... }.count`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferCountWhere)
+
+  Swift 6.0 ([finally!](https://forums.swift.org/t/accepted-again-se-0220-count-where/66659)) added a `count(where:)` method to the standard library. Prefer using the `count(where:)` method over using the `filter(_:)` method followed by a `count` call.
+
+  ```swift
+  // WRONG
+  let planetsWithMoons = planets.filter { !$0.moons.isEmpty }.count
+
+  // RIGHT
+  let planetsWithMoons = planets.count(where: { !$0.moons.isEmpty })
+  ```
+
+  </details>
+
+- <a id='is-empty'></a>(<a href='#is-empty'>link</a>) **Prefer using `isEmpty` over comparing `count` against zero**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: isEmpty](https://img.shields.io/badge/SwiftFormat-isEmpty-7B0051.svg)](http://swiftformat.info/rules/prerelease#isEmpty)
+
+  #### Why?
+
+  `isEmpty` states the intent directly and, unlike `count`, is guaranteed to be O(1) for every `Collection` (computing `count` can be O(n) for types like `String` or lazy sequences). Checking emptiness by comparing `count` against zero is both less clear and potentially slower.
+
+  ```swift
+  // WRONG
+  if array.count == 0 { ... }
+  if array.count > 0 { ... }
+
+  // RIGHT
+  if array.isEmpty { ... }
+  if !array.isEmpty { ... }
+  ```
+
+  </details>
+
+- <a id='prefer-flatmap'></a>(<a href='#prefer-flatmap'>link</a>) **Prefer using `flatMap { ... }` over `map { ... }.reduce([], +)`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferFlatMap](https://img.shields.io/badge/SwiftFormat-preferFlatMap-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFlatMap)
+
+  #### Why?
+
+  `map { ... }.reduce([], +)` builds an intermediate array of arrays and then flattens it by repeated concatenation, reallocating on each `+`. `flatMap { ... }` produces the same result directly, avoids the intermediate allocations, and reads more clearly.
+
+  ```swift
+  // WRONG
+  let allItems = sections.map { $0.items }.reduce([], +)
+
+  // RIGHT
+  let allItems = sections.flatMap { $0.items }
+  ```
+
+  </details>
+
+- <a id='prefer-contains'></a>(<a href='#prefer-contains'>link</a>) **Prefer using `contains` over `filter(_:).isEmpty`, `first(where:) != nil`, and `range(of:) != nil`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferContains](https://img.shields.io/badge/SwiftFormat-preferContains-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContains)
+
+  #### Why?
+
+  Each of these patterns builds or finds something only to discard it and test for membership. `contains` expresses that membership check directly, short-circuits at the first match, and reads more clearly. The negated forms (`== nil`, or a `!`-prefixed `.isEmpty`) reconcile to `!contains` / `contains`.
+
+  ```swift
+  // WRONG
+  if messages.filter({ $0.isUnread }).isEmpty { ... }
+  let hasUnread = !messages.filter { $0.isUnread }.isEmpty
+  if items.first(where: { $0.isActive }) != nil { ... }
+  if items.firstIndex(where: { $0.isActive }) == nil { ... }
+  if text.range(of: "needle") != nil { ... }
+
+  // RIGHT
+  if !messages.contains(where: { $0.isUnread }) { ... }
+  let hasUnread = messages.contains(where: { $0.isUnread })
+  if items.contains(where: { $0.isActive }) { ... }
+  if !items.contains(where: { $0.isActive }) { ... }
+  if text.contains("needle") { ... }
+  ```
+
+  </details>
+
+- <a id='prefer-first-where'></a>(<a href='#prefer-first-where'>link</a>) **Prefer using `first(where: { ... })` over `filter { ... }.first`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferFirstWhere](https://img.shields.io/badge/SwiftFormat-preferFirstWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFirstWhere)
+
+  #### Why?
+
+  `filter { ... }.first` builds a filtered collection just to take its first element. `first(where:)` finds that element directly and stops at the first match.
+
+  ```swift
+  // WRONG
+  let firstActive = items.filter { $0.isActive }.first
+
+  // RIGHT
+  let firstActive = items.first(where: { $0.isActive })
+  ```
+
+  </details>
+
+- <a id='prefer-min-over-sorted'></a>(<a href='#prefer-min-over-sorted'>link</a>) **Prefer using `min()` over `sorted().first`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferMinOverSorted](https://img.shields.io/badge/SwiftFormat-preferMinOverSorted-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferMinOverSorted)
+
+  #### Why?
+
+  `sorted().first` sorts the entire sequence — `O(n log n)` plus a full copy — just to take the smallest element. `min()` finds it in a single `O(n)` pass with no allocation. `sorted(by:).first` likewise becomes `min(by:)`.
+
+  ```swift
+  // WRONG
+  let smallest = values.sorted().first
+  let earliest = events.sorted(by: { $0.date < $1.date }).first
+
+  // RIGHT
+  let smallest = values.min()
+  let earliest = events.min(by: { $0.date < $1.date })
   ```
 
   </details>
