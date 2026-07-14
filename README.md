@@ -1287,7 +1287,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='wrap-multiline-conditional-assignment'></a>(<a href='#wrap-multiline-conditional-assignment'>link</a>) **Add a line break after the assignment operator (`=`) before a multi-line `if` or `switch` expression**, and indent the following `if` / `switch` expression. If the declaration fits on a single line, a line break is not required.
+- <a id='wrap-multiline-conditional-assignment'></a>(<a href='#wrap-multiline-conditional-assignment'>link</a>) **Add a line break after the assignment operator (`=`) before an `if` or `switch` expression**, and indent the following `if` / `switch` expression.
 
   <details>
 
@@ -1342,13 +1342,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
     case .jupiter, .saturn, .uranus, .neptune:
       .gasGiant
     }
-
-  // ALSO RIGHT. A line break is not required because the declaration fits on a single line.
-  let moonName = if let moon = planet.moon { moon.name } else { "none" }
-
-  // ALSO RIGHT. A line break is permitted if it helps with readability.
-  let moonName =
-    if let moon = planet.moon { moon.name } else { "none" }
   ```
 
   </details>
@@ -1464,7 +1457,34 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Always wrap switch case bodies onto multiple lines.**
+- <a id='wrap-if-statement-bodies'></a>(<a href='#wrap-if-statement-bodies'>link</a>) **Wrap `if` statement and `if` expression bodies onto multiple lines.**
+
+  <details>
+
+  [![SwiftFormat: wrapIfStatementBodies](https://img.shields.io/badge/SwiftFormat-wrapIfStatementBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfStatementBodies) [![SwiftFormat: wrapIfExpressionBodies](https://img.shields.io/badge/SwiftFormat-wrapIfExpressionBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfExpressionBodies)
+
+  ```swift
+  // WRONG
+  if treatPlutoAsPlanet { planets.append(.pluto) }
+
+  let moonName = if let moon = planet.moon { moon.name } else { "none" }
+
+  // RIGHT
+  if treatPlutoAsPlanet {
+    planets.append(.pluto)
+  }
+
+  let moonName =
+    if let moon = planet.moon {
+      moon.name
+    } else {
+      "none"
+    }
+  ```
+
+  </details>
+
+- <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Wrap switch case bodies onto multiple lines.**
 
   <details>
 
@@ -2278,7 +2298,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='wrap-single-line-declaration-bodies'></a>(<a href='#wrap-single-line-declaration-bodies'>link</a>) **Always wrap function and property bodies onto multiple lines.**
+- <a id='wrap-single-line-declaration-bodies'></a>(<a href='#wrap-single-line-declaration-bodies'>link</a>) **Wrap function and property bodies onto multiple lines.**
 
   <details>
 
