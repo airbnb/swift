@@ -1130,11 +1130,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) **When unwrapping an optional, reuse the existing identifier rather than introducing a new identifier.**
+- <a id='prefer-if-let-shorthand'></a>(<a href='#prefer-if-let-shorthand'>link</a>) **When unwrapping an optional, prefer reusing the existing identifier rather than introducing a new one.** However, it's fine to introduce a new name when doing so improves clarity at the use site.
 
   <details>
 
-  <!-- ai-skill-include: not fully autocorrectable (edge cases in complex cases) -->
+  <!-- ai-skill-include: autocorrect only applies to `if let galaxy = galaxy` -->
 
   [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantOptionalBinding)
 
@@ -1142,12 +1142,10 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   Following the rationale in [SE-0345](https://github.com/apple/swift-evolution/blob/main/proposals/0345-if-let-shorthand.md), this shorthand syntax removes unnecessary boilerplate while retaining clarity. Reusing the optional's existing name, rather than introducing a new identifier for the unwrapped value, reduces cognitive load by avoiding introducing new variable names for the same object.
 
+  A binding that reuses the same name (like `let galaxy = galaxy` or `guard let self = self`) is always redundant and should use the shorthand syntax:
+
   ```swift
   // WRONG
-  if let ship = spaceship {
-    launch(ship)
-  }
-
   if
     let galaxy = galaxy,
     galaxy.name == "Milky Way"
@@ -1156,16 +1154,33 @@ _You can enable the following settings in Xcode by running [this script](https:/
   guard let self = self else { ... }
 
   // RIGHT
-  if let spaceship {
-    launch(spaceship)
-  }
-
   if
     let galaxy,
     galaxy.name == "Milky Way"
   { ... }
 
   guard let self else { ... }
+  ```
+
+  ```swift
+  // PREFERRED
+  if let spaceship {
+    launch(spaceship)
+  }
+
+  // LESS PREFERRED
+  if let ship = spaceship {
+    launch(ship)
+  }
+  ```
+
+  It's fine to introduce a new name, however, when doing so improves clarity at the use site:
+
+  ```swift
+  // ALSO RIGHT
+  if let destination = pendingDestination {
+    spaceship.travel(to: destination)
+  }
   ```
 
   </details>
