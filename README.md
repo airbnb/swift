@@ -16,7 +16,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 ## Guiding Tenets
 
-- Most rules should be autocorrectable using [SwiftFormat](http://swiftformat.info).
+- Most rules should be autocorrectable using [SwiftFormat](https://swiftformat.info).
   - Autocorrect results in the best developer experience.
   - If a rule purely affects the syntactical format of the code, it must be autocorrectable.
   - Autocorrect should be non-destructive and should not affect the runtime behavior of code.
@@ -103,7 +103,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrap)
+  [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrap)
 
   #### Why?
 
@@ -117,7 +117,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](http://swiftformat.info/rules/prerelease#indent)
+  [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://swiftformat.info/rules/prerelease#indent)
 
   </details>
 
@@ -125,7 +125,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](http://swiftformat.info/rules/prerelease#trailingSpace)
+  [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://swiftformat.info/rules/prerelease#trailingSpace)
 
   </details>
 
@@ -309,7 +309,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantType)
+  [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantType)
 
   ```swift
   // WRONG
@@ -362,7 +362,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](http://swiftformat.info/rules/prerelease#propertyTypes)
+  [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://swiftformat.info/rules/prerelease#propertyTypes)
 
   Prefer using inferred types when the right-hand-side value is a static member with a leading dot (e.g. an `init`, a `static` property / function, or an enum case). This applies to both local variables and property declarations:
 
@@ -446,7 +446,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantSelf)
+  [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantSelf)
 
   ```swift
   final class Listing {
@@ -486,7 +486,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: strongifiedSelf](https://img.shields.io/badge/SwiftFormat-strongifiedSelf-7B0051.svg)](http://swiftformat.info/rules/prerelease#strongifiedSelf)
+  [![SwiftFormat: strongifiedSelf](https://img.shields.io/badge/SwiftFormat-strongifiedSelf-7B0051.svg)](https://swiftformat.info/rules/prerelease#strongifiedSelf)
 
   ```swift
   // WRONG
@@ -520,7 +520,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](http://swiftformat.info/rules/prerelease#trailingCommas)
+  [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://swiftformat.info/rules/prerelease#trailingCommas)
 
   ```swift
   // WRONG
@@ -594,7 +594,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceInsideBrackets)
+  [![SwiftFormat: spaceInsideBrackets](https://img.shields.io/badge/SwiftFormat-spaceInsideBrackets-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceInsideBrackets)
 
   ```swift
   // WRONG
@@ -643,7 +643,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](http://swiftformat.info/rules/prerelease#spacearoundoperators)
+  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](https://swiftformat.info/rules/prerelease#spacearoundoperators)
 
   ```swift
   // WRONG
@@ -690,7 +690,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](http://swiftformat.info/rules/prerelease#spacearoundoperators)
+  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](https://swiftformat.info/rules/prerelease#spacearoundoperators)
 
   ```swift
   // WRONG
@@ -722,7 +722,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantParens)
+  [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantParens)
 
   ```swift
   // WRONG
@@ -744,7 +744,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantPattern](https://img.shields.io/badge/SwiftFormat-redundantPattern-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantPattern)
+  [![SwiftFormat: redundantPattern](https://img.shields.io/badge/SwiftFormat-redundantPattern-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantPattern)
 
   ```swift
   // WRONG
@@ -770,7 +770,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: hoistPatternLet](https://img.shields.io/badge/SwiftFormat-hoistPatternLet-7B0051.svg)](http://swiftformat.info/rules/prerelease#hoistPatternLet)
+  [![SwiftFormat: hoistPatternLet](https://img.shields.io/badge/SwiftFormat-hoistPatternLet-7B0051.svg)](https://swiftformat.info/rules/prerelease#hoistPatternLet)
 
   ```swift
   // WRONG
@@ -824,7 +824,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapAttributes)
+  [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapAttributes)
 
   ```swift
   // WRONG
@@ -863,7 +863,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapAttributes)
+  [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapAttributes)
 
   ```swift
   // WRONG. These simple property wrappers should be written on the same line as the declaration.
@@ -1016,7 +1016,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: modifiersOnSameLine](https://img.shields.io/badge/SwiftFormat-modifiersOnSameLine-7B0051.svg)](http://swiftformat.info/rules/prerelease#modifiersOnSameLine)
+  [![SwiftFormat: modifiersOnSameLine](https://img.shields.io/badge/SwiftFormat-modifiersOnSameLine-7B0051.svg)](https://swiftformat.info/rules/prerelease#modifiersOnSameLine)
 
   ```swift
   // WRONG
@@ -1044,7 +1044,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapArguments)
+  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapArguments)
 
   ```swift
   // WRONG
@@ -1073,7 +1073,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapArguments)
+  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapArguments)
 
   ```swift
   // WRONG (too long)
@@ -1105,7 +1105,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: sortTypealiases](https://img.shields.io/badge/SwiftFormat-sortTypealiases-7B0051.svg)](http://swiftformat.info/rules/prerelease#sortTypealiases)
+  [![SwiftFormat: sortTypealiases](https://img.shields.io/badge/SwiftFormat-sortTypealiases-7B0051.svg)](https://swiftformat.info/rules/prerelease#sortTypealiases)
 
   #### Why?
 
@@ -1137,7 +1137,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: autocorrect only applies to `if let galaxy = galaxy` -->
 
-  [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantOptionalBinding)
+  [![SwiftFormat: redundantOptionalBinding](https://img.shields.io/badge/SwiftFormat-redundantOptionalBinding-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantOptionalBinding)
 
   #### Why?
 
@@ -1190,7 +1190,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](http://swiftformat.info/rules/prerelease#elseOnSameLine)
+  [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://swiftformat.info/rules/prerelease#elseOnSameLine)
 
   ```swift
   // WRONG
@@ -1248,7 +1248,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapArguments)
+  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapArguments)
 
   #### Why?
 
@@ -1310,7 +1310,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapMultilineConditionalAssignment](https://img.shields.io/badge/SwiftFormat-wrapMultilineConditionalAssignment-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapMultilineConditionalAssignment)
+  [![SwiftFormat: wrapMultilineConditionalAssignment](https://img.shields.io/badge/SwiftFormat-wrapMultilineConditionalAssignment-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapMultilineConditionalAssignment)
 
   #### Why?
 
@@ -1369,7 +1369,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](http://swiftformat.info/rules/prerelease#conditionalAssignment)
+  [![SwiftFormat: conditionalAssignment](https://img.shields.io/badge/SwiftFormat-conditionalAssignment-7B0051.svg)](https://swiftformat.info/rules/prerelease#conditionalAssignment)
 
   #### Why?
 
@@ -1480,7 +1480,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapIfStatementBodies](https://img.shields.io/badge/SwiftFormat-wrapIfStatementBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfStatementBodies) [![SwiftFormat: wrapIfExpressionBodies](https://img.shields.io/badge/SwiftFormat-wrapIfExpressionBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapIfExpressionBodies)
+  [![SwiftFormat: wrapIfStatementBodies](https://img.shields.io/badge/SwiftFormat-wrapIfStatementBodies-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapIfStatementBodies) [![SwiftFormat: wrapIfExpressionBodies](https://img.shields.io/badge/SwiftFormat-wrapIfExpressionBodies-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapIfExpressionBodies)
 
   ```swift
   // WRONG
@@ -1507,7 +1507,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapSwitchCases)
+  [![SwiftFormat: wrapSwitchCases](https://img.shields.io/badge/SwiftFormat-wrapSwitchCases-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapSwitchCases)
 
   #### Examples
 
@@ -1537,7 +1537,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: blankLineAfterSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterSwitchCase-7B0051.svg)](http://swiftformat.info/rules/prerelease#blankLineAfterSwitchCase) [![SwiftFormat: consistentSwitchCaseSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchCaseSpacing-7B0051.svg)](http://swiftformat.info/rules/prerelease#consistentSwitchCaseSpacing)
+  [![SwiftFormat: blankLineAfterSwitchCase](https://img.shields.io/badge/SwiftFormat-blankLineAfterSwitchCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLineAfterSwitchCase) [![SwiftFormat: consistentSwitchCaseSpacing](https://img.shields.io/badge/SwiftFormat-consistentSwitchCaseSpacing-7B0051.svg)](https://swiftformat.info/rules/prerelease#consistentSwitchCaseSpacing)
 
   #### Why?
 
@@ -1664,7 +1664,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantBreak](https://img.shields.io/badge/SwiftFormat-redundantBreak-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantBreak)
+  [![SwiftFormat: redundantBreak](https://img.shields.io/badge/SwiftFormat-redundantBreak-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantBreak)
 
   #### Why?
 
@@ -1696,7 +1696,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](http://swiftformat.info/rules/prerelease#elseOnSameLine)
+  [![SwiftFormat: elseOnSameLine](https://img.shields.io/badge/SwiftFormat-elseOnSameLine-7B0051.svg)](https://swiftformat.info/rules/prerelease#elseOnSameLine)
 
   ```swift
   // WRONG (else should be on its own line for multi-line guard statements)
@@ -1727,7 +1727,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](http://swiftformat.info/rules/prerelease#indent)
+  [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://swiftformat.info/rules/prerelease#indent)
 
   ```swift
   // WRONG
@@ -1765,7 +1765,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: typeSugar](https://img.shields.io/badge/SwiftFormat-typeSugar-7B0051.svg)](http://swiftformat.info/rules/prerelease#typeSugar)
+  [![SwiftFormat: typeSugar](https://img.shields.io/badge/SwiftFormat-typeSugar-7B0051.svg)](https://swiftformat.info/rules/prerelease#typeSugar)
 
   ```swift
   // WRONG
@@ -1785,7 +1785,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantInit)
+  [![SwiftFormat: redundantInit](https://img.shields.io/badge/SwiftFormat-redundantInit-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantInit)
 
   ```swift
   // WRONG
@@ -1801,7 +1801,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](http://swiftformat.info/rules/prerelease#braces)
+  [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://swiftformat.info/rules/prerelease#braces)
 
   ```swift
   // WRONG
@@ -1838,7 +1838,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapMultilineStatementBraces)
+  [![SwiftFormat: wrapMultilineStatementBraces](https://img.shields.io/badge/SwiftFormat-wrapMultilineStatementBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapMultilineStatementBraces)
 
   ```swift
   // WRONG
@@ -1863,7 +1863,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceAroundBraces)
+  [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceAroundBraces)
 
   ```swift
   // WRONG
@@ -1897,7 +1897,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceInsideParens](https://img.shields.io/badge/SwiftFormat-spaceInsideParens-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceInsideParens) [![SwiftFormat: spaceAroundParens](https://img.shields.io/badge/SwiftFormat-spaceAroundParens-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceAroundParens)
+  [![SwiftFormat: spaceInsideParens](https://img.shields.io/badge/SwiftFormat-spaceInsideParens-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceInsideParens) [![SwiftFormat: spaceAroundParens](https://img.shields.io/badge/SwiftFormat-spaceAroundParens-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceAroundParens)
 
   ```swift
   // WRONG
@@ -1917,7 +1917,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](http://swiftformat.info/rules/prerelease#blockComments)
+  [![SwiftFormat: blockComments](https://img.shields.io/badge/SwiftFormat-blockComments-7B0051.svg)](https://swiftformat.info/rules/prerelease#blockComments)
 
   ```swift
   // WRONG
@@ -1969,7 +1969,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](http://swiftformat.info/rules/prerelease#docComments)
+  [![SwiftFormat: docComments](https://img.shields.io/badge/SwiftFormat-docComments-7B0051.svg)](https://swiftformat.info/rules/prerelease#docComments)
 
   ```swift
   // WRONG
@@ -2092,7 +2092,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: docCommentsBeforeModifiers](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeModifiers-7B0051.svg)](http://swiftformat.info/rules/prerelease#docCommentsBeforeModifiers)
+  [![SwiftFormat: docCommentsBeforeModifiers](https://img.shields.io/badge/SwiftFormat-docCommentsBeforeModifiers-7B0051.svg)](https://swiftformat.info/rules/prerelease#docCommentsBeforeModifiers)
 
   ```swift
   // WRONG
@@ -2121,7 +2121,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceInsideComments)
+  [![SwiftFormat: spaceAroundComments](https://img.shields.io/badge/SwiftFormat-spaceAroundComments-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceAroundComments) [![SwiftFormat: spaceInsideComments](https://img.shields.io/badge/SwiftFormat-spaceInsideComments-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceInsideComments)
 
   ```swift
   // WRONG
@@ -2153,7 +2153,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: emptyBraces](https://img.shields.io/badge/SwiftFormat-emptyBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#emptyBraces)
+  [![SwiftFormat: emptyBraces](https://img.shields.io/badge/SwiftFormat-emptyBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#emptyBraces)
 
   ```swift
   // WRONG
@@ -2185,7 +2185,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable (e.g. forEach over an optional array) -->
 
-  [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](http://swiftformat.info/rules/prerelease#forLoop)
+  [![SwiftFormat: forLoop](https://img.shields.io/badge/SwiftFormat-forLoop-7B0051.svg)](https://swiftformat.info/rules/prerelease#forLoop)
 
   #### Why?
 
@@ -2224,7 +2224,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantVoidReturnType)
+  [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantVoidReturnType)
 
   ```swift
   // WRONG
@@ -2244,7 +2244,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](http://swiftformat.info/rules/prerelease#braces)
+  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://swiftformat.info/rules/prerelease#braces)
 
   ```swift
   class Universe {
@@ -2321,7 +2321,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapFunctionBodies](https://img.shields.io/badge/SwiftFormat-wrapFunctionBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapFunctionBodies) [![SwiftFormat: wrapPropertyBodies](https://img.shields.io/badge/SwiftFormat-wrapPropertyBodies-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapPropertyBodies)
+  [![SwiftFormat: wrapFunctionBodies](https://img.shields.io/badge/SwiftFormat-wrapFunctionBodies-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapFunctionBodies) [![SwiftFormat: wrapPropertyBodies](https://img.shields.io/badge/SwiftFormat-wrapPropertyBodies-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapPropertyBodies)
 
   ```swift
   // WRONG
@@ -2367,7 +2367,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapArguments)
+  [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapArguments)
 
   ```swift
   // WRONG
@@ -2413,7 +2413,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#unusedArguments)
+  [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#unusedArguments)
 
   #### Why?
 
@@ -2485,7 +2485,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenChainedFunctions-7B0051.svg)](http://swiftformat.info/rules/prerelease#blanklinesbetweenchainedfunctions)
+  [![SwiftFormat: blanklinesbetweenchainedfunctions](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenChainedFunctions-7B0051.svg)](https://swiftformat.info/rules/prerelease#blanklinesbetweenchainedfunctions)
 
   #### Why?
 
@@ -2531,7 +2531,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantTypedThrows)
+  [![SwiftFormat: redundantTypedThrows](https://img.shields.io/badge/SwiftFormat-redundantTypedThrows-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantTypedThrows)
 
   #### Why?
 
@@ -2565,7 +2565,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](http://swiftformat.info/rules/prerelease#void)
+  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://swiftformat.info/rules/prerelease#void)
 
   ```swift
   // WRONG
@@ -2585,7 +2585,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](http://swiftformat.info/rules/prerelease#unusedArguments)
+  [![SwiftFormat: unusedArguments](https://img.shields.io/badge/SwiftFormat-unusedArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#unusedArguments)
 
   #### Why?
 
@@ -2610,7 +2610,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](http://swiftformat.info/rules/prerelease#spaceAroundBraces)
+  [![SwiftFormat: spaceInsideBraces](https://img.shields.io/badge/SwiftFormat-spaceInsideBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceInsideBraces) [![SwiftFormat: spaceAroundBraces](https://img.shields.io/badge/SwiftFormat-spaceAroundBraces-7B0051.svg)](https://swiftformat.info/rules/prerelease#spaceAroundBraces)
 
   ```swift
   // WRONG
@@ -2650,7 +2650,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantVoidReturnType)
+  [![SwiftFormat: redundantVoidReturnType](https://img.shields.io/badge/SwiftFormat-redundantVoidReturnType-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantVoidReturnType)
 
   ```swift
   // WRONG
@@ -2670,7 +2670,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](http://swiftformat.info/rules/prerelease#trailingClosures)
+  [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://swiftformat.info/rules/prerelease#trailingClosures)
 
   ```swift
   // WRONG
@@ -2776,7 +2776,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](http://swiftformat.info/rules/prerelease#spacearoundoperators)
+  [![SwiftFormat: spaceAroundOperators](https://img.shields.io/badge/SwiftFormat-spaceAroundOperators-7B0051.svg)](https://swiftformat.info/rules/prerelease#spacearoundoperators)
 
   ```swift
   // WRONG
@@ -2810,7 +2810,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrap)
+  [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrap)
 
   ```swift
   // WRONG (too long)
@@ -2837,7 +2837,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](http://swiftformat.info/rules/prerelease#andOperator)
+  [![SwiftFormat: andOperator](https://img.shields.io/badge/SwiftFormat-andOperator-7B0051.svg)](https://swiftformat.info/rules/prerelease#andOperator)
 
   ```swift
   // WRONG
@@ -2875,7 +2875,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable (SwiftFormat doesn't know if the extension is of a concrete type or a protocol) -->
 
-  [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](http://swiftformat.info/rules/prerelease#genericExtensions)
+  [![SwiftFormat: genericExtensions](https://img.shields.io/badge/SwiftFormat-genericExtensions-7B0051.svg)](https://swiftformat.info/rules/prerelease#genericExtensions)
 
   ```swift
   // WRONG
@@ -2904,7 +2904,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: semicolons](https://img.shields.io/badge/SwiftFormat-semicolons-7B0051.svg)](http://swiftformat.info/rules/prerelease#semicolons)
+  [![SwiftFormat: semicolons](https://img.shields.io/badge/SwiftFormat-semicolons-7B0051.svg)](https://swiftformat.info/rules/prerelease#semicolons)
 
   ### Examples
 
@@ -2984,7 +2984,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable (e.g. have to preserve existing init parameter ordering to not break build) -->
 
-  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantMemberwiseInit)
+  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantMemberwiseInit)
 
   #### Why?
 
@@ -3171,7 +3171,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: modifierOrder](https://img.shields.io/badge/SwiftFormat-modifierOrder-7B0051.svg)](http://swiftformat.info/rules/prerelease#modifierOrder)
+  [![SwiftFormat: modifierOrder](https://img.shields.io/badge/SwiftFormat-modifierOrder-7B0051.svg)](https://swiftformat.info/rules/prerelease#modifierOrder)
 
   ```swift
   // WRONG
@@ -3189,7 +3189,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantFileprivate) [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantPublic)
+  [![SwiftFormat: redundantFileprivate](https://img.shields.io/badge/SwiftFormat-redundantFileprivate-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantFileprivate) [![SwiftFormat: redundantPublic](https://img.shields.io/badge/SwiftFormat-redundantPublic-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantPublic)
 
   ```swift
   // WRONG
@@ -3277,7 +3277,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantInternal)
+  [![SwiftFormat: redundantInternal](https://img.shields.io/badge/SwiftFormat-redundantInternal-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantInternal)
 
   ```swift
   // WRONG
@@ -3299,7 +3299,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](http://swiftformat.info/rules/prerelease#extensionaccesscontrol)
+  [![SwiftFormat: extensionAccessControl](https://img.shields.io/badge/SwiftFormat-extensionAccessControl-7B0051.svg)](https://swiftformat.info/rules/prerelease#extensionaccesscontrol)
 
   #### Why?
 
@@ -3370,7 +3370,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: enumNamespaces](https://img.shields.io/badge/SwiftFormat-enumNamespaces-7B0051.svg)](http://swiftformat.info/rules/prerelease#enumNamespaces)
+  [![SwiftFormat: enumNamespaces](https://img.shields.io/badge/SwiftFormat-enumNamespaces-7B0051.svg)](https://swiftformat.info/rules/prerelease#enumNamespaces)
   - Avoid creating non-namespaced global constants and functions.
   - Feel free to nest namespaces where it adds clarity.
   - `private` globals are permitted, since they are scoped to a single file and do not pollute the global namespace. Consider placing private globals in an `enum` namespace to match the guidelines for other declaration types.
@@ -3417,7 +3417,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantRawValues](https://img.shields.io/badge/SwiftFormat-redundantRawValues-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantRawValues)
+  [![SwiftFormat: redundantRawValues](https://img.shields.io/badge/SwiftFormat-redundantRawValues-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantRawValues)
 
   #### Why?
 
@@ -3613,7 +3613,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: simplifyGenericConstraints](https://img.shields.io/badge/SwiftFormat-simplifyGenericConstraints-7B0051.svg)](http://swiftformat.info/rules/prerelease#simplifyGenericConstraints)
+  [![SwiftFormat: simplifyGenericConstraints](https://img.shields.io/badge/SwiftFormat-simplifyGenericConstraints-7B0051.svg)](https://swiftformat.info/rules/prerelease#simplifyGenericConstraints)
 
   #### Why?
 
@@ -3662,7 +3662,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include -->
 
-  [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFinalClasses)
+  [![SwiftFormat: preferFinalClasses](https://img.shields.io/badge/SwiftFormat-preferFinalClasses-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferFinalClasses)
 
   ```swift
   // WRONG
@@ -3847,7 +3847,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantReturn)
+  [![SwiftFormat: redundantReturn](https://img.shields.io/badge/SwiftFormat-redundantReturn-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantReturn)
 
   ```swift
   // WRONG
@@ -3927,7 +3927,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](http://swiftformat.info/rules/prerelease#anyobjectprotocol)
+  [![SwiftFormat: anyObjectProtocol](https://img.shields.io/badge/SwiftFormat-anyObjectProtocol-7B0051.svg)](https://swiftformat.info/rules/prerelease#anyobjectprotocol)
 
   #### Why?
 
@@ -3985,7 +3985,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantClosure)
+  [![SwiftFormat: redundantClosure](https://img.shields.io/badge/SwiftFormat-redundantClosure-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantClosure)
 
   ```swift
   // WRONG
@@ -4019,7 +4019,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantGet)
+  [![SwiftFormat: redundantGet](https://img.shields.io/badge/SwiftFormat-redundantGet-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantGet)
 
   ```swift
   // WRONG
@@ -4049,7 +4049,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include -->
 
-  [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](http://swiftformat.info/rules/prerelease#opaqueGenericParameters)
+  [![SwiftFormat: opaqueGenericParameters](https://img.shields.io/badge/SwiftFormat-opaqueGenericParameters-7B0051.svg)](https://swiftformat.info/rules/prerelease#opaqueGenericParameters)
 
   #### Why?
 
@@ -4286,7 +4286,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantVariable](https://img.shields.io/badge/SwiftFormat-redundantVariable-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantVariable)
+  [![SwiftFormat: redundantVariable](https://img.shields.io/badge/SwiftFormat-redundantVariable-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantVariable)
 
   ### Why?
 
@@ -4326,7 +4326,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include -->
 
-  [![SwiftFormat: redundantEquatable](https://img.shields.io/badge/SwiftFormat-redundantEquatable-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantEquatable)
+  [![SwiftFormat: redundantEquatable](https://img.shields.io/badge/SwiftFormat-redundantEquatable-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantEquatable)
 
   ### Why?
 
@@ -4396,7 +4396,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](http://swiftformat.info/rules/prerelease#void)
+  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://swiftformat.info/rules/prerelease#void)
 
   ```swift
   // WRONG
@@ -4412,7 +4412,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](http://swiftformat.info/rules/prerelease#void)
+  [![SwiftFormat: void](https://img.shields.io/badge/SwiftFormat-void-7B0051.svg)](https://swiftformat.info/rules/prerelease#void)
 
   ```swift
   let completion: (Result<Void, Error>) -> Void
@@ -4432,7 +4432,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include -->
 
-  [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](http://swiftformat.info/rules/prerelease#urlMacro)
+  [![SwiftFormat: urlMacro](https://img.shields.io/badge/SwiftFormat-urlMacro-7B0051.svg)](https://swiftformat.info/rules/prerelease#urlMacro)
 
   #### Why?
 
@@ -4456,7 +4456,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](http://swiftformat.info/rules/prerelease#sortedImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](http://swiftformat.info/rules/prerelease#duplicateImports)
+  [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://swiftformat.info/rules/prerelease#sortedImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://swiftformat.info/rules/prerelease#duplicateImports)
 
   #### Why?
   - A standard organization method helps engineers more quickly determine which modules a file depends on.
@@ -4518,7 +4518,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: consecutiveBlankLines](https://img.shields.io/badge/SwiftFormat-consecutiveBlankLines-7B0051.svg)](http://swiftformat.info/rules/prerelease#consecutiveBlankLines) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-7B0051.svg)](http://swiftformat.info/rules/prerelease#consecutiveSpaces)
+  [![SwiftFormat: consecutiveBlankLines](https://img.shields.io/badge/SwiftFormat-consecutiveBlankLines-7B0051.svg)](https://swiftformat.info/rules/prerelease#consecutiveBlankLines) [![SwiftFormat: consecutiveSpaces](https://img.shields.io/badge/SwiftFormat-consecutiveSpaces-7B0051.svg)](https://swiftformat.info/rules/prerelease#consecutiveSpaces)
 
   ```swift
   // WRONG
@@ -4549,7 +4549,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: linebreakAtEndOfFile](https://img.shields.io/badge/SwiftFormat-linebreakAtEndOfFile-7B0051.svg)](http://swiftformat.info/rules/prerelease#linebreakatendoffile)
+  [![SwiftFormat: linebreakAtEndOfFile](https://img.shields.io/badge/SwiftFormat-linebreakAtEndOfFile-7B0051.svg)](https://swiftformat.info/rules/prerelease#linebreakatendoffile)
 
   </details>
 
@@ -4557,7 +4557,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-7B0051.svg)](http://swiftformat.info/rules/prerelease#blankLinesBetweenScopes)
+  [![SwiftFormat: blankLinesBetweenScopes](https://img.shields.io/badge/SwiftFormat-blankLinesBetweenScopes-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLinesBetweenScopes)
 
   #### Why?
 
@@ -4610,7 +4610,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: blankLinesAtStartOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtStartOfScope-7B0051.svg)](http://swiftformat.info/rules/prerelease#blankLinesAtStartOfScope) [![SwiftFormat: blankLinesAtEndOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtEndOfScope-7B0051.svg)](http://swiftformat.info/rules/prerelease#blankLinesAtEndOfScope)
+  [![SwiftFormat: blankLinesAtStartOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtStartOfScope-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLinesAtStartOfScope) [![SwiftFormat: blankLinesAtEndOfScope](https://img.shields.io/badge/SwiftFormat-blankLinesAtEndOfScope-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLinesAtEndOfScope)
 
   ```swift
   // WRONG
@@ -4672,7 +4672,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-7B0051.svg)](http://swiftformat.info/rules/prerelease#markTypes)
+  [![SwiftFormat: markTypes](https://img.shields.io/badge/SwiftFormat-markTypes-7B0051.svg)](https://swiftformat.info/rules/prerelease#markTypes)
 
   ```swift
   // MARK: - GalaxyView
@@ -4705,7 +4705,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](http://swiftformat.info/rules/prerelease#organizeDeclarations)
+  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](https://swiftformat.info/rules/prerelease#organizeDeclarations)
 
   </details>
 
@@ -4723,7 +4723,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](http://swiftformat.info/rules/prerelease#organizeDeclarations)
+  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](https://swiftformat.info/rules/prerelease#organizeDeclarations)
 
   Computed properties and properties with property observers should appear at the end of the set of declarations of the same kind. (e.g. instance properties.)
 
@@ -4846,7 +4846,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](http://swiftformat.info/rules/prerelease#organizeDeclarations)
+  [![SwiftFormat: organizeDeclarations](https://img.shields.io/badge/SwiftFormat-organizeDeclarations-7B0051.svg)](https://swiftformat.info/rules/prerelease#organizeDeclarations)
 
   ```swift
   // WRONG
@@ -4867,7 +4867,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: singlePropertyPerLine](https://img.shields.io/badge/SwiftFormat-singlePropertyPerLine-7B0051.svg)](http://swiftformat.info/rules/prerelease#singlePropertyPerLine) [![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051.svg)](http://swiftformat.info/rules/prerelease#wrapEnumCases)
+  [![SwiftFormat: singlePropertyPerLine](https://img.shields.io/badge/SwiftFormat-singlePropertyPerLine-7B0051.svg)](https://swiftformat.info/rules/prerelease#singlePropertyPerLine) [![SwiftFormat: wrapEnumCases](https://img.shields.io/badge/SwiftFormat-wrapEnumCases-7B0051.svg)](https://swiftformat.info/rules/prerelease#wrapEnumCases)
 
   #### Why?
   - Declarations that define a single property are much more common, and more idiomatic.
@@ -4916,7 +4916,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable (e.g. have to preserve existing init parameter ordering to not break build) -->
 
-  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantMemberwiseInit)
+  [![SwiftFormat: redundantMemberwiseInit](https://img.shields.io/badge/SwiftFormat-redundantMemberwiseInit-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantMemberwiseInit)
 
   #### Why?
 
@@ -4986,7 +4986,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](http://swiftformat.info/rules/prerelease#environmentEntry)
+  [![SwiftFormat: environmentEntry](https://img.shields.io/badge/SwiftFormat-environmentEntry-7B0051.svg)](https://swiftformat.info/rules/prerelease#environmentEntry)
 
   ### Why?
 
@@ -5017,7 +5017,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantViewBuilder](https://img.shields.io/badge/SwiftFormat-redundantViewBuilder-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantViewBuilder)
+  [![SwiftFormat: redundantViewBuilder](https://img.shields.io/badge/SwiftFormat-redundantViewBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantViewBuilder)
 
   #### Why?
 
@@ -5073,7 +5073,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantEmptyView](https://img.shields.io/badge/SwiftFormat-redundantEmptyView-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantEmptyView)
+  [![SwiftFormat: redundantEmptyView](https://img.shields.io/badge/SwiftFormat-redundantEmptyView-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantEmptyView)
 
   ```swift
   // WRONG
@@ -5099,7 +5099,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantSwiftUIGroup](https://img.shields.io/badge/SwiftFormat-redundantSwiftUIGroup-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantSwiftUIGroup)
+  [![SwiftFormat: redundantSwiftUIGroup](https://img.shields.io/badge/SwiftFormat-redundantSwiftUIGroup-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantSwiftUIGroup)
 
   #### Why?
 
@@ -5161,7 +5161,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](http://swiftformat.info/rules/prerelease#swiftTestingTestCaseNames)
+  [![SwiftFormat: swiftTestingTestCaseNames](https://img.shields.io/badge/SwiftFormat-swiftTestingTestCaseNames-7B0051.svg)](https://swiftformat.info/rules/prerelease#swiftTestingTestCaseNames)
 
   ### Why?
 
@@ -5206,7 +5206,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantSwiftTestingSuite](https://img.shields.io/badge/SwiftFormat-redundantSwiftTestingSuite-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantSwiftTestingSuite)
+  [![SwiftFormat: redundantSwiftTestingSuite](https://img.shields.io/badge/SwiftFormat-redundantSwiftTestingSuite-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantSwiftTestingSuite)
 
   ```swift
   import Testing
@@ -5278,7 +5278,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](http://swiftformat.info/rules/prerelease#noGuardInTests)
+  [![SwiftFormat: noGuardInTests](https://img.shields.io/badge/SwiftFormat-noGuardInTests-7B0051.svg)](https://swiftformat.info/rules/prerelease#noGuardInTests)
 
   ```swift
   import XCTest
@@ -5343,7 +5343,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](http://swiftformat.info/rules/prerelease#noForceTryInTests)
+  [![SwiftFormat: noForceTryInTests](https://img.shields.io/badge/SwiftFormat-noForceTryInTests-7B0051.svg)](https://swiftformat.info/rules/prerelease#noForceTryInTests)
 
   ```swift
   import XCTest
@@ -5387,7 +5387,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](http://swiftformat.info/rules/prerelease#testSuiteAccessControl)
+  [![SwiftFormat: testSuiteAccessControl](https://img.shields.io/badge/SwiftFormat-testSuiteAccessControl-7B0051.svg)](https://swiftformat.info/rules/prerelease#testSuiteAccessControl)
 
   #### Why?
 
@@ -5481,7 +5481,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](http://swiftformat.info/rules/prerelease#noForceUnwrapInTests)
+  [![SwiftFormat: noForceUnwrapInTests](https://img.shields.io/badge/SwiftFormat-noForceUnwrapInTests-7B0051.svg)](https://swiftformat.info/rules/prerelease#noForceUnwrapInTests)
 
   ```swift
   import XCTest
@@ -5543,7 +5543,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](http://swiftformat.info/rules/prerelease#redundantAsync)
+  [![SwiftFormat: redundantThrows](https://img.shields.io/badge/SwiftFormat-redundantThrows-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantThrows) [![SwiftFormat: redundantAsync](https://img.shields.io/badge/SwiftFormat-redundantAsync-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantAsync)
 
   ```swift
   import XCTest
@@ -5595,7 +5595,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferCountWhere)
+  [![SwiftFormat: preferCountWhere](https://img.shields.io/badge/SwiftFormat-preferCountWhere-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferCountWhere)
 
   Swift 6.0 ([finally!](https://forums.swift.org/t/accepted-again-se-0220-count-where/66659)) added a `count(where:)` method to the standard library. Prefer using the `count(where:)` method over using the `filter(_:)` method followed by a `count` call.
 
@@ -5615,7 +5615,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: isEmpty](https://img.shields.io/badge/SwiftFormat-isEmpty-7B0051.svg)](http://swiftformat.info/rules/prerelease#isEmpty)
+  [![SwiftFormat: isEmpty](https://img.shields.io/badge/SwiftFormat-isEmpty-7B0051.svg)](https://swiftformat.info/rules/prerelease#isEmpty)
 
   #### Why?
 
@@ -5639,7 +5639,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: preferFlatMap](https://img.shields.io/badge/SwiftFormat-preferFlatMap-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFlatMap)
+  [![SwiftFormat: preferFlatMap](https://img.shields.io/badge/SwiftFormat-preferFlatMap-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferFlatMap)
 
   #### Why?
 
@@ -5661,7 +5661,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: preferContains](https://img.shields.io/badge/SwiftFormat-preferContains-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferContains)
+  [![SwiftFormat: preferContains](https://img.shields.io/badge/SwiftFormat-preferContains-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferContains)
 
   #### Why?
 
@@ -5691,7 +5691,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: preferFirstWhere](https://img.shields.io/badge/SwiftFormat-preferFirstWhere-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferFirstWhere)
+  [![SwiftFormat: preferFirstWhere](https://img.shields.io/badge/SwiftFormat-preferFirstWhere-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferFirstWhere)
 
   #### Why?
 
@@ -5713,7 +5713,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
 
-  [![SwiftFormat: preferMinOverSorted](https://img.shields.io/badge/SwiftFormat-preferMinOverSorted-7B0051.svg)](http://swiftformat.info/rules/prerelease#preferMinOverSorted)
+  [![SwiftFormat: preferMinOverSorted](https://img.shields.io/badge/SwiftFormat-preferMinOverSorted-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferMinOverSorted)
 
   #### Why?
 
