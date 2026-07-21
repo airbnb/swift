@@ -33,17 +33,10 @@ custom_rules:
     severity: error
   no_file_literal:
     name: "#file is disallowed"
-    regex: "(\\b#file\\b)"
+    regex: "(#file\\b)"
     match_kinds:
-    - identifier
-    message: "Instead of #file, use #fileID"
-    severity: error
-  no_filepath_literal:
-    name: "#filePath is disallowed"
-    regex: "(\\b#filePath\\b)"
-    match_kinds:
-    - identifier
-    message: "Instead of #filePath, use #fileID."
+    - keyword
+    message: "Instead of #file, use #fileID by default, or #filePath if you need the exact file path"
     severity: error
   no_unchecked_sendable:
     name: "`@unchecked Sendable` is discouraged."
