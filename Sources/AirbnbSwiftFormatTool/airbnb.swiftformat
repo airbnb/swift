@@ -46,6 +46,7 @@
 --else-position same-line # elseOnSameLine
 --guard-else next-line # elseOnSameLine
 --single-line-for-each convert # preferForLoop
+--single-line-ternary convert # ifExpressions
 --short-optionals always # typeSugar
 --semicolons never # semicolons
 --doc-comments preserve # docComments
@@ -125,6 +126,7 @@
 --rules sortTypealiases
 --rules preferForLoop
 --rules conditionalAssignment
+--rules ifExpressions
 --rules wrapMultilineConditionalAssignment
 --rules wrapFunctionBodies
 --rules wrapPropertyBodies
