@@ -740,6 +740,36 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='redundant-backticks'></a>(<a href='#redundant-backticks'>link</a>) **Omit backticks around identifiers unless required by the language.**
+
+  <details>
+
+  [![SwiftFormat: redundantBackticks](https://img.shields.io/badge/SwiftFormat-redundantBackticks-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantBackticks)
+
+  #### Why?
+
+  Backticks are only required when escaping a keyword that would otherwise be invalid in that position. Many Swift keywords are contextual and are allowed as identifiers.
+
+  ```swift
+  // WRONG
+  func travel(to planet: Planet, orbit: Orbit = .`default`) { ... }
+
+  // RIGHT
+  func travel(to planet: Planet, orbit: Orbit = .default) { ... }
+  ```
+
+  Backticks are required, however, when declaring an enum case named after a keyword:
+
+  ```swift
+  // ALSO RIGHT
+  enum Orbit {
+    case `default`
+    case geostationary
+  }
+  ```
+
+  </details>
+
 - <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Omit enum associated values from case statements when all arguments are unlabeled.**
 
   <details>

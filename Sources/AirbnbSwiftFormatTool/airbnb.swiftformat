@@ -70,6 +70,7 @@
 --rules indent
 --rules markTypes
 --rules organizeDeclarations
+--rules redundantBackticks
 --rules redundantParens
 --rules redundantReturn
 --rules redundantSelf
