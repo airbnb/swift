@@ -1501,6 +1501,9 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   }
 
+  // ALSO RIGHT. Single-line ternaries are permitted.
+  var color: Color { spaceship.velocity > 0 ? .orange : .blue }
+
   // ALSO RIGHT. Use ternaries for conditions nested in other expressions,
   // like SwiftUI modifier conditions.
   Image(.spaceship)
