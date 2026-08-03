@@ -1484,6 +1484,10 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   [![SwiftFormat: ifExpressions](https://img.shields.io/badge/SwiftFormat-ifExpressions-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifExpressions)
 
+  #### Why?
+
+  If expressions are more readable than ternary expressions, especially for multiple nested conditions or multi-line values.
+
   ```swift
   // WRONG
   var destination: Planet {
