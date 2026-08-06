@@ -1506,6 +1506,56 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-if-expressions-over-ternary-operators'></a>(<a href='#prefer-if-expressions-over-ternary-operators'>link</a>) **Prefer `if` expressions over ternary operators for single-expression return values.** Use ternary operators for conditions nested in other expressions, such as SwiftUI modifier conditions. Generally prefer `if` expressions for assignments after `=` operators.
+
+  <details>
+
+  <!-- ai-skill-include: autocorrect doesn't apply to conditional assignments after `=`, but this is still a good best practice -->
+
+  [![SwiftFormat: ifExpressions](https://img.shields.io/badge/SwiftFormat-ifExpressions-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifExpressions)
+
+  #### Why?
+
+  If expressions are more readable than ternary expressions, especially for multiple nested conditions or multi-line values.
+
+  ```swift
+  // WRONG
+  var destination: Planet {
+    spaceship.hasWarpDrive
+      ? .proximaCentauri
+      : .mars
+  }
+
+  // RIGHT
+  var destination: Planet {
+    if spaceship.hasWarpDrive {
+      .proximaCentauri
+    } else {
+      .mars
+    }
+  }
+
+  // ALSO RIGHT. Single-line ternaries are permitted.
+  var color: Color {
+    spaceship.velocity > 0 ? .orange : .blue
+  }
+
+  // ALSO RIGHT. Use ternaries for conditions nested in other expressions,
+  // like SwiftUI modifier conditions.
+  Image(.spaceship)
+    .foregroundStyle(spaceship.velocity > 0 ? .orange : .blue)
+
+  // PREFERRED. `if` expressions are also generally preferred over ternaries for assignments.
+  let destination: Planet =
+    if spaceship.hasWarpDrive {
+      .proximaCentauri
+    } else {
+      .mars
+    }
+  ```
+
+  </details>
+
 - <a id='wrap-if-statement-bodies'></a>(<a href='#wrap-if-statement-bodies'>link</a>) **Wrap `if` statement and `if` expression bodies onto multiple lines.**
 
   <details>
