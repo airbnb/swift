@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  {% if page.title %}<meta property="og:title" content="{{ page.title }}">{% endif %}
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  {% if page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
+  <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/x-icon">
+  <link rel="preload" href="{{ '/assets/css/Cereal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  {% include navigation.html %}
+  <main class="content">
+    {{ content }}
+  </main>
+  <script>
+    function updateNavHeight() {
+      const nav = document.querySelector('.top-nav');
+      document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 15 + 'px');
+    }
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+  </script>
+</body>
+</html>

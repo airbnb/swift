@@ -1,22 +1,21 @@
 only_rules:
   - fatal_error_message
+  - implicitly_unwrapped_optional
   - legacy_cggeometry_functions
   - legacy_constant
   - legacy_constructor
   - legacy_nsgeometry_functions
   - unused_optional_binding
+  - superfluous_disable_command
+  - invalid_swiftlint_command
   - custom_rules
 
 excluded:
   - Carthage
   - Pods
-  - '**.build'
   - .build
+  - '**.build'
   - vendor
-
-
-colon:
-  apply_to_dictionaries: false
 
 indentation: 2
 
@@ -28,17 +27,10 @@ custom_rules:
     severity: error
   no_file_literal:
     name: "#file is disallowed"
-    regex: "(\\b#file\\b)"
+    regex: "(#file\\b)"
     match_kinds:
-    - identifier
-    message: "Instead of #file, use #fileID"
-    severity: error
-  no_filepath_literal:
-    name: "#filePath is disallowed"
-    regex: "(\\b#filePath\\b)"
-    match_kinds:
-    - identifier
-    message: "Instead of #filePath, use #fileID."
+    - keyword
+    message: "Instead of #file, use #fileID by default, or #filePath if you need the exact file path"
     severity: error
   no_unchecked_sendable:
     name: "`@unchecked Sendable` is discouraged."
