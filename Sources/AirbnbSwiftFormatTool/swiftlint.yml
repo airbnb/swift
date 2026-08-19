@@ -1,6 +1,5 @@
 only_rules:
   - fatal_error_message
-  - implicitly_unwrapped_optional
   - legacy_cggeometry_functions
   - legacy_constant
   - legacy_constructor
@@ -16,6 +15,9 @@ excluded:
   - .build
   - '**.build'
   - vendor
+
+colon:
+  apply_to_dictionaries: false
 
 indentation: 2
 

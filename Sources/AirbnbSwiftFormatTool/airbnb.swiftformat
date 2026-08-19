@@ -8,7 +8,7 @@
 --import-grouping testable-bottom # sortedImports
 --trailing-commas multi-element-lists # trailingCommas
 --trim-whitespace always # trailingSpace
---indent 2 #indent
+--indent 4 #indent
 --ifdef no-indent #indent
 --indent-strings true #indent
 --wrap-arguments before-first # wrapArguments
