@@ -5821,19 +5821,19 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  `map` allocates an array of every transformed element. When the only thing that happens to that array is a single walk over it, the allocation is pure waste: `lazy.map` transforms each element as it is visited instead. Operations that qualify are the ones that consume their receiver exactly once — `min`, `max`, `reduce`, `joined(separator:)` — plus `contains`, `allSatisfy`, and `first(where:)`, which can additionally stop early and skip transforming the rest.
+  `map` allocates an array of every transformed element. When the only thing that happens to that array is a single walk over it, the allocation is pure waste: `lazy.map` transforms each element as it is visited instead. With an operation that can exit early, it also stops transforming as soon as it has an answer — the eager version below transforms every row before looking at any of them, even if the first row is the empty one it is searching for.
 
   ```swift
   // WRONG
-  let minY = vertices.map { $0.y }.min()
-  let names = users.map { $0.name }.joined(separator: ", ")
   let hasEmpty = rows.map { $0.title }.contains(where: { $0.isEmpty })
+  let minY = vertices.map { $0.y }.min()
 
   // RIGHT
-  let minY = vertices.lazy.map { $0.y }.min()
-  let names = users.lazy.map { $0.name }.joined(separator: ", ")
   let hasEmpty = rows.lazy.map { $0.title }.contains(where: { $0.isEmpty })
+  let minY = vertices.lazy.map { $0.y }.min()
   ```
+
+  Operations that qualify are the ones that consume their receiver exactly once — `min`, `max`, `reduce`, `joined(separator:)` — plus `contains`, `allSatisfy`, and `first(where:)`, which can additionally stop early.
 
   Reach for `lazy` only when the result really is consumed once. `sorted()` has to materialize its receiver anyway, and anything that walks the result more than once will redo the transform on each pass.
 
