@@ -5314,25 +5314,54 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition.
+- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition. When a message does add context, phrase it as the intent behind the assertion — the reason the condition was expected to hold — rather than a restatement. Avoid hardcoding expected values into the message so that the message can't drift from the assertion.
 
   <details>
 
+  A message that restates the condition adds nothing over what `#expect` already reports on failure. Explain *why* the condition was expected to hold — here, because the test just engaged the warp drive:
+  
   ```swift
-  // WRONG: Restates what #expect already reports in failure output
+  // WRONG: Restates the condition
+  #expect(spaceship.isWarpDriveActive, "Warp drive should be active")
+  // RIGHT: Explains why the drive should be active
+  #expect(spaceship.isWarpDriveActive, "The warp drive should be active after calling engageWarpDrive()")
+  ```
+
+  A message can also capture the requirement behind the assertion, which the condition alone doesn't convey:
+  
+  ```swift
+  // WRONG: Restates the condition
+  #expect(spaceship.speed > lightSpeed, "Speed should be greater than light speed")
+
+  // RIGHT: Explains why reaching light speed matters
+  #expect(spaceship.speed > lightSpeed, "Spaceship must reach light speed before the warp bubble can form")
+  ```
+
+  Don't hardcode expected values into the message, where they can drift from the assertion. Describe the significance of the value instead:
+
+  ```swift
+  // WRONG: Hardcodes the expected value
+  #expect(spaceship.speed == expectedCruisingSpeed, "Cruising speed should be warp 5")
+
+  // RIGHT: Describes the value's significance so the message can't drift
+  #expect(spaceship.speed == expectedCruisingSpeed, "Cruise control should keep the spaceship at cruising speed")
+  ```
+
+  When a single-assertion test is named as a sentence, a message that repeats that name is redundant:
+  
+  ```swift
+  // WRONG: The message just repeats the test name
   @Test
-  func `engage warp drive`() {
+  func `warp drive activates after engaging`() {
     spaceship.engageWarpDrive()
-    #expect(spaceship.isWarpDriveActive, "Warp drive should be active")
-    #expect(spaceship.speed > lightSpeed, "Speed should be greater than light speed")
+    #expect(spaceship.isWarpDriveActive, "The warp drive should be active after engaging")
   }
 
-  // RIGHT: Omits the message string, or adds valuable context
+  // RIGHT: The test name already conveys the relevant information, so the message is omitted
   @Test
-  func `engage warp drive`() {
+  func `warp drive activates after engaging`() {
     spaceship.engageWarpDrive()
     #expect(spaceship.isWarpDriveActive)
-    #expect(spaceship.speed > lightSpeed, "Spaceship must reach light speed before the warp bubble can form")
   }
   ```
 
