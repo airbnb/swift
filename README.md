@@ -5811,6 +5811,34 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the result is consumed in a single pass**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferLazyMap](https://img.shields.io/badge/SwiftFormat-preferLazyMap-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferLazyMap)
+
+  #### Why?
+
+  `map` allocates an array of every transformed element. When the only thing that happens to that array is a single walk over it, the allocation is pure waste: `lazy.map` transforms each element as it is visited instead. Operations that qualify are the ones that consume their receiver exactly once — `min`, `max`, `reduce`, `joined(separator:)` — plus `contains`, `allSatisfy`, and `first(where:)`, which can additionally stop early and skip transforming the rest.
+
+  ```swift
+  // WRONG
+  let minY = vertices.map { $0.y }.min()
+  let names = users.map { $0.name }.joined(separator: ", ")
+  let hasEmpty = rows.map { $0.title }.contains(where: { $0.isEmpty })
+
+  // RIGHT
+  let minY = vertices.lazy.map { $0.y }.min()
+  let names = users.lazy.map { $0.name }.joined(separator: ", ")
+  let hasEmpty = rows.lazy.map { $0.title }.contains(where: { $0.isEmpty })
+  ```
+
+  Reach for `lazy` only when the result really is consumed once. `sorted()` has to materialize its receiver anyway, and anything that walks the result more than once will redo the transform on each pass.
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Apple Frameworks
