@@ -5811,7 +5811,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the result is consumed in a single pass**.
+- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the result is consumed in a single pass (`contains`, `min`, `max`, `reduce`, `joined(separator:)`, etc)**.
 
   <details>
 
