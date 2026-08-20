@@ -5811,7 +5811,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the result is consumed in a single pass (`contains`, `min`, `max`, `reduce`, `joined(separator:)`, etc)**.
+- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the chain reduces to a single result (`joined(separator:)`, `min`, `max`, `reduce`, `contains`, etc)**.
 
   <details>
 
@@ -5821,21 +5821,29 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  `map` allocates an array of every transformed element. When the only thing that happens to that array is a single walk over it, the allocation is pure waste: `lazy.map` transforms each element as it is visited instead. With an operation that can exit early, it also stops transforming as soon as it has an answer — the eager version below transforms every row before looking at any of them, even if the first row is the empty one it is searching for.
+  `map` allocates an array of every transformed element. When that array only exists to be reduced to one value, the allocation is pure waste — `lazy.map` transforms each element as the reducing operation reaches it, and nothing is stored.
+
+  ```swift
+  // WRONG
+  let names = users.map { $0.name }.joined(separator: ", ")
+  let minY = vertices.map { $0.y }.min()
+
+  // RIGHT
+  let names = users.lazy.map { $0.name }.joined(separator: ", ")
+  let minY = vertices.lazy.map { $0.y }.min()
+  ```
+
+  This applies to any operation that turns the sequence into a single value: `joined(separator:)`, `min`, `max`, `reduce`, and also `contains`, `allSatisfy`, and `first(where:)`, which stop as soon as they have an answer. It does not apply to an operation that produces another sequence, like `filter` or `sorted()`, since the transformed elements are needed more than once — or, in `sorted()`'s case, have to be materialized anyway.
+
+  When the operation takes a predicate, folding the transform into that predicate is better still, because then there is no `map` to make lazy:
 
   ```swift
   // WRONG
   let hasEmpty = rows.map { $0.title }.contains(where: { $0.isEmpty })
-  let minY = vertices.map { $0.y }.min()
 
   // RIGHT
-  let hasEmpty = rows.lazy.map { $0.title }.contains(where: { $0.isEmpty })
-  let minY = vertices.lazy.map { $0.y }.min()
+  let hasEmpty = rows.contains(where: { $0.title.isEmpty })
   ```
-
-  Operations that qualify are the ones that consume their receiver exactly once — `min`, `max`, `reduce`, `joined(separator:)` — plus `contains`, `allSatisfy`, and `first(where:)`, which can additionally stop early.
-
-  Reach for `lazy` only when the result really is consumed once. `sorted()` has to materialize its receiver anyway, and anything that walks the result more than once will redo the transform on each pass.
 
   </details>
 
