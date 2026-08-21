@@ -5347,7 +5347,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   #expect(spaceship.speed == expectedCruisingSpeed, "Cruise control should keep the spaceship at cruising speed")
   ```
 
-  When a single-assertion test is named as a sentence, a message that repeats that name is redundant:
+  It is fine to omit expectation message strings when there is no additional context to add that isn't already clear from surrounding context. For example, it's not necessary to restate the name of the test case itself in an assertion message:
   
   ```swift
   // WRONG: The message just repeats the test name
