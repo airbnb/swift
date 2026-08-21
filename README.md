@@ -5318,8 +5318,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  A message that restates the condition adds nothing over what `#expect` already reports on failure. Explain *why* the condition was expected to hold — here, because the test just engaged the warp drive:
-  
+  A message that restates the condition adds nothing over what `#expect` already reports on failure. Explain _why_ the condition was expected to hold — here, because the test just engaged the warp drive:
+
   ```swift
   // WRONG: Restates the condition
   #expect(spaceship.isWarpDriveActive, "Warp drive should be active")
@@ -5328,7 +5328,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   ```
 
   A message can also capture the requirement behind the assertion, which the condition alone doesn't convey:
-  
+
   ```swift
   // WRONG: Restates the condition
   #expect(spaceship.speed > lightSpeed, "Speed should be greater than light speed")
@@ -5348,7 +5348,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   ```
 
   It is fine to omit expectation message strings when there is no additional context to add that isn't already clear from surrounding context. For example, it's not necessary to restate the name of the test case itself in an assertion message:
-  
+
   ```swift
   // WRONG: The message just repeats the test name
   @Test
