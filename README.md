@@ -5314,7 +5314,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition. When a message does add context, phrase it as the intent behind the assertion — the reason the condition was expected to hold — rather than a restatement. Avoid hardcoding expected values into the message so that the message can't drift from the assertion.
+- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition. When an expectation message string does add valuable context, phrase it as the intent behind the assertion (the reason the condition was expected to hold) rather than restating the condition. Avoid hardcoding expected values into the message so that the message can't drift from the assertion.
 
   <details>
 
