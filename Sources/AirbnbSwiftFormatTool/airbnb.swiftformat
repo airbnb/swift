@@ -144,6 +144,7 @@
 --rules preferFlatMap
 --rules preferContains
 --rules preferFirstWhere
+--rules preferLazyMap
 --rules preferMinOverSorted
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite

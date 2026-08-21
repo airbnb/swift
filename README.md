@@ -5811,6 +5811,42 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-lazy-map'></a>(<a href='#prefer-lazy-map'>link</a>) **Prefer `lazy.map` over `map` when the chain reduces to a single result (`joined(separator:)`, `min`, `max`, `reduce`, `contains`, etc)**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferLazyMap](https://img.shields.io/badge/SwiftFormat-preferLazyMap-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferLazyMap)
+
+  #### Why?
+
+  `map` allocates an array of every transformed element. When that array only exists to be reduced to one value, the allocation is pure waste — `lazy.map` transforms each element as the reducing operation reaches it, and nothing is stored.
+
+  ```swift
+  // WRONG
+  let names = users.map { $0.name }.joined(separator: ", ")
+  let minY = vertices.map { $0.y }.min()
+
+  // RIGHT
+  let names = users.lazy.map { $0.name }.joined(separator: ", ")
+  let minY = vertices.lazy.map { $0.y }.min()
+  ```
+
+  This applies to any operation that turns the sequence into a single value: `joined(separator:)`, `min`, `max`, `reduce`, and also `contains`, `allSatisfy`, and `first(where:)`, which stop as soon as they have an answer. It does not apply to an operation that produces another sequence, like `filter` or `sorted()`, since the transformed elements are needed more than once — or, in `sorted()`'s case, have to be materialized anyway.
+
+  When the operation takes a predicate, folding the transform into that predicate is better still, because then there is no `map` to make lazy:
+
+  ```swift
+  // WRONG
+  let hasEmpty = rows.map { $0.title }.contains(where: { $0.isEmpty })
+
+  // RIGHT
+  let hasEmpty = rows.contains(where: { $0.title.isEmpty })
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Apple Frameworks
