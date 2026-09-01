@@ -5909,6 +5909,37 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-swift-string-api'></a>(<a href='#prefer-swift-string-api'>link</a>) **Prefer the Swift-native `replacing(_:with:)` over Foundation's `replacingOccurrences(of:with:)`**.
+
+  <details>
+
+  <!-- ai-skill-include: generally autocorrectable, but still an important best practice -->
+
+  [![SwiftFormat: preferSwiftStringAPI](https://img.shields.io/badge/SwiftFormat-preferSwiftStringAPI-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferSwiftStringAPI)
+
+  #### Why?
+
+  `replacingOccurrences(of:with:)` is an `NSString` method surfaced on `String` by Foundation. `replacing(_:with:)` is the Swift standard library's own spelling of the same operation: it reads better at the call site, is generic over `StringProtocol` and `RangeReplaceableCollection` rather than being String-specific, and it doesn't require Foundation.
+
+  ```swift
+  // WRONG
+  let slug = title.replacingOccurrences(of: " ", with: "-")
+
+  // RIGHT
+  let slug = title.replacing(" ", with: "-")
+  ```
+
+  Only the two-argument `of:with:` form has a native equivalent. The `options:` and `range:` overloads (`.caseInsensitive`, `.regularExpression`, and friends) have no direct counterpart, so leave those as they are.
+
+  Two behavioral differences to be aware of:
+
+  - On a `Substring` receiver, `replacing(_:with:)` returns a `Substring`, whereas `replacingOccurrences(of:with:)` returns a `String`.
+  - An _empty_ search string behaves differently: `"abc".replacingOccurrences(of: "", with: "-")` is a no-op, but `"abc".replacing("", with: "-")` returns `"-a-b-c-"`. This only matters when the search string is a runtime value that can be empty.
+
+  > **Note:** This is a readability and consistency preference, not a performance optimization. Foundation's implementation is currently the faster of the two — in local benchmarks `replacing(_:with:)` was between 1.1x and 4.2x slower, depending on input size and needle length. Both are well under a microsecond for the short strings this typically runs on, but prefer `replacingOccurrences(of:with:)`, or a different approach entirely, in a genuinely hot path over large strings.
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Contributors
