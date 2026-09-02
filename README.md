@@ -5921,10 +5921,10 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   ```swift
   // WRONG
-  let slug = planetName.replacingOccurrences(of: " ", with: "-")
+  let callSign = spaceshipName.replacingOccurrences(of: " ", with: "-")
 
   // RIGHT
-  let slug = planetName.replacing(" ", with: "-")
+  let callSign = spaceshipName.replacing(" ", with: "-")
   ```
 
   Only the two-argument `of:with:` form has a native equivalent. The `options:` and `range:` overloads (`.caseInsensitive`, `.regularExpression`, and friends) have no direct counterpart, so leave those as they are.
