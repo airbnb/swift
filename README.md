@@ -5899,6 +5899,30 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-swift-string-api'></a>(<a href='#prefer-swift-string-api'>link</a>) **Prefer the standard library `String` `replacing(_:with:)` API over Foundation's `replacingOccurrences(of:with:)`**.
+
+  <details>
+
+  [![SwiftFormat: preferSwiftStringAPI](https://img.shields.io/badge/SwiftFormat-preferSwiftStringAPI-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferSwiftStringAPI)
+
+  #### Why?
+
+  `replacingOccurrences(of:with:)` is an `NSString` method surfaced on `String` by Foundation. `replacing(_:with:)` is the modern replacement in the Swift standard library.
+
+  ```swift
+  // WRONG
+  let callSign = spaceshipName.replacingOccurrences(of: " ", with: "-")
+
+  // RIGHT
+  let callSign = spaceshipName.replacing(" ", with: "-")
+  ```
+
+  Only the two-argument `of:with:` form has a equivalent in the standard library. The `options:` and `range:` overloads (`.caseInsensitive`, `.regularExpression`, and friends) have no direct counterpart, so leave those as they are.
+
+  One behavioral difference to watch for when making this change by hand: an empty search string is a no-op in `replacingOccurrences(of: "", with: "-")`, but `"abc".replacing("", with: "-")` returns `"-a-b-c-"`.
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Contributors

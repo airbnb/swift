@@ -146,6 +146,7 @@
 --rules preferFirstWhere
 --rules preferLazyMap
 --rules preferMinOverSorted
+--rules preferSwiftStringAPI
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite
 --rules modifiersOnSameLine
