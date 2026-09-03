@@ -4532,7 +4532,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## File Organization
 
-- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.
+- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Add a single empty line before the first import and after the last import. Sort `@testable import` statements after the regular imports, followed by `@_spi` imports.
 
   <details>
 
@@ -4545,51 +4545,41 @@ _You can enable the following settings in Xcode by running [this script](https:/
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
-  //
-  import DLSPrimitives
-  import Constellation
-  import Constellation
-  import Epoxy
+  // Copyright © 2026 Airbnb. All rights reserved.
+
+  import SolarSystemFeature
+  import GalaxyUI
+  import GalaxyUI
+  import OrbitService
 
   import Foundation
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
-  //
+  // Copyright © 2026 Airbnb. All rights reserved.
 
-  import Constellation
-  import DLSPrimitives
-  import Epoxy
   import Foundation
+  import GalaxyUI
+  import OrbitService
+  import SolarSystemFeature
   ```
-
-  _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
-  //
-
-  import DLSPrimitives
-  @testable import Epoxy
   import Foundation
-  import Nimble
-  import Quick
+  @testable import OrbitService
+  import SolarSystemFeature
+  @_spi(Internal) import GalaxyUI
+  import Testing
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
-  //
-
-  import DLSPrimitives
   import Foundation
-  import Nimble
-  import Quick
-
-  @testable import Epoxy
+  import SolarSystemFeature
+  import Testing
+  @testable import OrbitService
+  @_spi(Internal) import GalaxyUI
   ```
 
   </details>
