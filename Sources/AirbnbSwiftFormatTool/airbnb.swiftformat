@@ -154,6 +154,7 @@
 --rules noForceUnwrapInTests
 --rules redundantThrows
 --rules redundantAsync
+--rules redundantExtendedLifetime
 --rules noGuardInTests
 --rules testSuiteAccessControl
 --rules validateTestCases
