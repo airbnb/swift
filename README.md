@@ -5927,7 +5927,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   let callSign = spaceshipName.replacing(" ", with: "-")
   ```
 
-  Only the two-argument `of:with:` form has a native equivalent. The `options:` and `range:` overloads (`.caseInsensitive`, `.regularExpression`, and friends) have no direct counterpart, so leave those as they are.
+  Only the two-argument `of:with:` form has a equivalent in the standard library. The `options:` and `range:` overloads (`.caseInsensitive`, `.regularExpression`, and friends) have no direct counterpart, so leave those as they are.
 
   One behavioral difference to watch for when making this change by hand: an empty search string is a no-op in `replacingOccurrences(of: "", with: "-")`, but `"abc".replacing("", with: "-")` returns `"-a-b-c-"`.
 
