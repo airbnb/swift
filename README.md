@@ -5225,6 +5225,20 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## Testing
 
+- <a id='prefer-swift-testing'></a>(<a href='#prefer-swift-testing'>link</a>) **Prefer [Swift Testing](https://developer.apple.com/documentation/testing) over XCTest for new test suites.**
+
+  <details>
+
+  <!-- ai-skill-include: not always autocorrectable -->
+
+  [![SwiftFormat: preferSwiftTesting](https://img.shields.io/badge/SwiftFormat-preferSwiftTesting-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferSwiftTesting)
+
+  #### Why?
+
+  Swift Testing is the modern replacement for XCTest.
+
+  </details>
+
 - <a id='swift-testing-test-case-names'></a>(<a href='#swift-testing-test-case-names'>link</a>) **In Swift Testing, name test cases as sentences using raw identifiers, rather than using lowerCamelCase.** Don't prefix test case names with "`test`". Use UpperCamelCase for test suite names. Always omit the display name string from the `@Test` or `@Suite` macro.
 
   <details>
