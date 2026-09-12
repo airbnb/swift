@@ -4532,7 +4532,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## File Organization
 
-- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Add a single empty line before the first import and after the last import. Sort `@testable import` statements after the regular imports, followed by `@_spi` imports.
+- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Add a single empty line before the first import and after the last import. Sort imports with attributes like `@testable` and `@_spi` last, alphabetized by the attribute name.
 
   <details>
 
@@ -4578,8 +4578,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
   import Foundation
   import SolarSystemFeature
   import Testing
-  @testable import OrbitService
   @_spi(Internal) import GalaxyUI
+  @testable import OrbitService
   ```
 
   </details>
