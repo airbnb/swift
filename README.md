@@ -5304,7 +5304,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-struct-swift-testing-suites'></a>(<a href='#prefer-struct-swift-testing-suites'>link</a>) **Prefer defining Swift Testing suites as `struct`s.** Swift Testing instantiates the suite type once per test case, so suites rarely need reference semantics.
+- <a id='prefer-struct-swift-testing-suites'></a>(<a href='#prefer-struct-swift-testing-suites'>link</a>) **Prefer defining Swift Testing suites as `struct`s.** Swift Testing instantiates the suite type once per test case, so suites rarely need reference semantics. Apple's [Swift Testing documentation](https://developer.apple.com/documentation/testing/organizingtests) uses a `struct` for every suite it shows.
 
   <details>
 
