@@ -5304,19 +5304,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-struct-swift-testing-suites'></a>(<a href='#prefer-struct-swift-testing-suites'>link</a>) **Prefer `struct` for Swift Testing suites.** Swift Testing instantiates the suite type once per test case, so suites rarely need reference semantics. Reach for a `class` only when the suite actually requires one.
+- <a id='prefer-struct-swift-testing-suites'></a>(<a href='#prefer-struct-swift-testing-suites'>link</a>) **Prefer defining Swift Testing suites as `struct`s.** Swift Testing instantiates the suite type once per test case, so suites rarely need reference semantics.
 
   <details>
 
   [![SwiftFormat: preferStructSwiftTestingSuites](https://img.shields.io/badge/SwiftFormat-preferStructSwiftTestingSuites-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferStructSwiftTestingSuites)
-
-  #### Why?
-
-  Swift Testing creates a fresh instance of the suite for every test case, so each case is already isolated from the others. A `struct` states that directly: there is no shared mutable instance, no inheritance to reason about, and no need for `final` to rule out subclassing.
-
-  An `enum` of `static` members is isolated too, but it cannot gain `init` setup or instance `@Test` methods later without being rewritten. A `struct` starts where an `enum` would end up.
-
-  This matches idiomatic usage: every suite in Apple's [Swift Testing documentation](https://developer.apple.com/documentation/testing/organizingtests) is a `struct`.
 
   ```swift
   import Testing
@@ -5327,40 +5319,10 @@ _You can enable the following settings in Xcode by running [this script](https:/
     func `warp drive enables FTL travel`() { ... }
   }
 
-  // WRONG
-  @Suite
-  enum TelescopeTests {
-    @Test
-    static func `telescope tracks target`() { ... }
-  }
-
   // RIGHT
   struct SpaceshipTests {
     @Test
     func `warp drive enables FTL travel`() { ... }
-  }
-
-  // RIGHT
-  @Suite
-  struct TelescopeTests {
-    @Test
-    static func `telescope tracks target`() { ... }
-  }
-  ```
-
-  A `@Test` method is not `mutating`, so a suite whose test cases assign to stored properties has to stay a `class`:
-
-  ```swift
-  // ALSO RIGHT: the test case assigns to stored state, which a non-mutating `@Test` method can't do in a struct.
-  final class ObservatoryTests {
-    var observatory: Observatory?
-
-    @Test
-    func `observatory opens the dome`() {
-      observatory = Observatory()
-      observatory?.openDome()
-      #expect(observatory?.isDomeOpen == true)
-    }
   }
   ```
 
