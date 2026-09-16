@@ -5304,6 +5304,30 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-struct-swift-testing-suites'></a>(<a href='#prefer-struct-swift-testing-suites'>link</a>) **Prefer defining Swift Testing suites as `struct`s.** Swift Testing instantiates the suite type once per test case, so suites rarely need reference semantics. Apple's [Swift Testing documentation](https://developer.apple.com/documentation/testing/organizingtests) uses a `struct` for every suite it shows.
+
+  <details>
+
+  [![SwiftFormat: preferStructSwiftTestingSuites](https://img.shields.io/badge/SwiftFormat-preferStructSwiftTestingSuites-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferStructSwiftTestingSuites)
+
+  ```swift
+  import Testing
+
+  // WRONG
+  final class SpaceshipTests {
+    @Test
+    func `warp drive enables FTL travel`() { ... }
+  }
+
+  // RIGHT
+  struct SpaceshipTests {
+    @Test
+    func `warp drive enables FTL travel`() { ... }
+  }
+  ```
+
+  </details>
+
 - <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition.
 
   <details>
