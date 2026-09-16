@@ -149,6 +149,7 @@
 --rules preferSwiftStringAPI
 --rules swiftTestingTestCaseNames
 --rules redundantSwiftTestingSuite
+--rules preferStructSwiftTestingSuites
 --rules modifiersOnSameLine
 --rules noForceTryInTests
 --rules noForceUnwrapInTests
