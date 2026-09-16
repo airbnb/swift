@@ -5316,6 +5316,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   An `enum` of `static` members is isolated too, but it cannot gain `init` setup or instance `@Test` methods later without being rewritten. A `struct` starts where an `enum` would end up.
 
+  This matches idiomatic usage: every suite in Apple's [Swift Testing documentation](https://developer.apple.com/documentation/testing/organizingtests) is a `struct`.
+
   ```swift
   import Testing
 
