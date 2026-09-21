@@ -2,7 +2,7 @@
 --exclude Carthage,Pods,.build
 
 # options
---swift-version 6.3
+--swift-version 6.4
 --language-mode 5
 --self remove # redundantSelf
 --import-grouping access-control,alpha,attributes-last # sortedImports
