@@ -4532,7 +4532,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
 ## File Organization
 
-- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Add a single empty line before the first import and after the last import. Sort `@testable import` statements after the regular imports, followed by `@_spi` imports.
+- <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file.** Place all imports at the top of the file below the header comments. Add a single empty line before the first import and after the last import. Sort imports with attributes like `@testable` and `@_spi` last, alphabetized by the attribute name.
 
   <details>
 
@@ -4578,8 +4578,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
   import Foundation
   import SolarSystemFeature
   import Testing
-  @testable import OrbitService
   @_spi(Internal) import GalaxyUI
+  @testable import OrbitService
   ```
 
   </details>
@@ -5664,6 +5664,55 @@ _You can enable the following settings in Xcode by running [this script](https:/
       #expect(earth.isHabitable)
       #expect(!mars.isHabitable)
     }
+  }
+  ```
+
+  </details>
+
+- <a id='avoid-extended-lifetime-in-tests'></a>(<a href='#avoid-extended-lifetime-in-tests'>link</a>) **Avoid using `withExtendedLifetime` in unit tests**. It usually has no effect on runtime behavior, since a variable declared in a function scope is never deallocated before the end of that scope. `withExtendedLifetime` is permitted in cases where the variable would otherwise cause an "unused variable" warning.
+
+  <details>
+
+  [![SwiftFormat: redundantExtendedLifetime](https://img.shields.io/badge/SwiftFormat-redundantExtendedLifetime-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantExtendedLifetime)
+
+  ```swift
+  // WRONG
+  @Test
+  func `telescope tracks target`() {
+    let observatory = Observatory()
+    let telescope = observatory.veryLargeTelescope()
+
+    telescope.track(.mars)
+    #expect(telescope.isTracking)
+
+    // Ensure the observatory isn't deallocated before we finish our observation
+    withExtendedLifetime(observatory) { }
+
+    // Also wrong / redundant: underscored assignment is often used for the same purpose as `withExtendedLifetime`
+    _ = observatory
+  }
+
+  // RIGHT
+  @Test
+  func `telescope tracks target`() {
+    let observatory = Observatory()
+    let telescope = observatory.veryLargeTelescope()
+
+    telescope.track(.mars)
+    #expect(telescope.isTracking)
+  }
+
+  // ALSO RIGHT. Without `withExtendedLifetime`, `cancellable` would cause an "unused variable" warning.
+  @Test
+  func `telescope publishes target updates`() {
+    let telescope = Telescope()
+    var publishedTarget: Planet?
+    let cancellable = telescope.targetPublisher.sink { publishedTarget = $0 }
+
+    telescope.track(.mars)
+    #expect(publishedTarget == .mars)
+
+    withExtendedLifetime(cancellable) { }
   }
   ```
 
