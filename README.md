@@ -730,12 +730,14 @@ _You can enable the following settings in Xcode by running [this script](https:/
   switch (someValue) { ... }
   let evens = userCounts.filter { (number) in number.isMultiple(of: 2) }
   let squares = userCounts.map() { $0 * $0 }
+  let destination: (any Planet)? = nil
 
   // RIGHT
   if userCount > 0 { ... }
   switch someValue { ... }
   let evens = userCounts.filter { number in number.isMultiple(of: 2) }
   let squares = userCounts.map { $0 * $0 }
+  let destination: any Planet? = nil
   ```
 
   </details>
