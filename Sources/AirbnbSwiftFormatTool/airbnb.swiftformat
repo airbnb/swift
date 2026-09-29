@@ -167,3 +167,4 @@
 --rules redundantEmptyView
 --rules redundantViewBuilder
 --rules redundantSwiftUIGroup
+--rules preferContentBuilder
