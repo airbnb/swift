@@ -5342,39 +5342,17 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) **In Swift Testing, avoid expectation message strings that restate the expectation without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition.
+- <a id='avoid-redundant-expectation-comments'></a>(<a href='#avoid-redundant-expectation-comments'>link</a>) - **In Swift Testing, avoid expectation message strings that trivially restate the expectation condition without adding additional context.** Unlike `XCTAssert`, the Swift Testing `#expect` macro generates detailed failure messages that include the expectation condition.
 
   <details>
 
   ```swift
-  // WRONG: Restates what #expect already reports in failure output
+  // WRONG: Trivially restates what #expect already reports in failure output
   @Test
-  func `engage warp drive`() {
+  func `engaging warp drive accelerates ship beyond light speed`() {
     spaceship.engageWarpDrive()
     #expect(spaceship.isWarpDriveActive, "Warp drive should be active")
     #expect(spaceship.speed > lightSpeed, "Speed should be greater than light speed")
-  }
-
-  // RIGHT: Omits the message string, or adds valuable context
-  @Test
-  func `engage warp drive`() {
-    spaceship.engageWarpDrive()
-    #expect(spaceship.isWarpDriveActive)
-    #expect(spaceship.speed > lightSpeed, "Spaceship must reach light speed before the warp bubble can form")
-  }
-  ```
-
-  Code comments also work well to add additional context:
-
-  ```swift
-  // ALSO RIGHT
-  @Test
-  func `engage warp drive`() {
-    spaceship.engageWarpDrive()
-    #expect(spaceship.isWarpDriveActive)
-
-    // Spaceship must reach light speed before the warp bubble can form
-    #expect(spaceship.speed > lightSpeed)
   }
   ```
 
