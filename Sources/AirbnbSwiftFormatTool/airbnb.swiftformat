@@ -50,7 +50,7 @@
 --short-optionals always # typeSugar
 --semicolons never # semicolons
 --doc-comments preserve # docComments
---prefer-synthesized-init-for-internal-structs View,ViewBuilder # redundantMemberwiseInit
+--prefer-synthesized-init-for-internal-structs View,ViewModifier # redundantMemberwiseInit
 --guard-like-if-statements convert # noGuardInTests
 
 # Customized default modifier order to put `override` after access control
