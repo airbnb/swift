@@ -3,17 +3,23 @@
 require 'fileutils'
 require 'open3'
 require 'set'
+require 'rouge'
+require 'yaml'
 
 class SiteContent
-  attr_reader :readme_path, :index_path, :ai_skill_page_path, :ai_skill_raw_path, :syntax_css_path
+  attr_reader :readme_path, :index_path, :ai_skill_page_path, :ai_skill_raw_path, :syntax_css_path,
+    :skill_dir, :skill_pages_dir, :skill_zip_path
 
-  def initialize()
-    site_dir = File.expand_path('src', __dir__)
+  def initialize(site_dir: File.expand_path('src', __dir__),
+    skill_dir: File.expand_path('swift', __dir__), readme_path: File.expand_path('../README.md', __dir__))
     @syntax_css_path = File.join(site_dir, 'assets/css/syntax.css')
-    @readme_path = File.expand_path('../README.md', __dir__)
+    @readme_path = readme_path
     @index_path = File.join(site_dir, 'index.md')
     @ai_skill_page_path = File.join(site_dir, 'ai-skill.md')
     @ai_skill_raw_path = File.join(site_dir, 'SKILL.md')
+    @skill_dir = skill_dir
+    @skill_pages_dir = File.join(site_dir, 'skill')
+    @skill_zip_path = File.join(site_dir, 'skills', 'swift.zip')
   end
   
   # Write index.md file (https://airbnb.swift.tech)
@@ -57,16 +63,28 @@ class SiteContent
 
     FRONT
     header = <<~HEADER
-      # SKILL.md
+      # Airbnb Swift AI Skill
 
       AI skill for working with Swift code.
 
-      Summarizes the Airbnb Swift Style Guide, but excludes rules that are automatically enforced with code formatting.
+      The main file summarizes rules that are not fully enforced by code formatting. Individual rule files include the full guidance from the Airbnb Swift Style Guide.
 
-      Raw `SKILL.md` can be downloaded [here](/SKILL.md).
+      Download: [skills/swift.zip](/skills/swift.zip)
 
     HEADER
-    wrapped_content = "#{header}````markdown\n#{skill_md_content}\n````\n"
+    rule_ids = rule_contents.keys.to_set
+    highlighted_content = Rouge.highlight(skill_md_content, 'markdown', 'html')
+    highlighted_content = highlighted_content.gsub(/\[([A-Za-z0-9_-]+)\]/) do |reference|
+      id = Regexp.last_match(1)
+      rule_ids.include?(id) ? %([<a href="/skill/#{id}">#{id}</a>]) : reference
+    end
+    wrapped_content = <<~HTML
+      #{header}{% raw %}
+      <div class="language-markdown highlighter-rouge"><div class="highlight">
+      <pre class="highlight skill-preview"><code>#{highlighted_content}</code></pre>
+      </div></div>
+      {% endraw %}
+    HTML
     File.write(ai_skill_page_path, front_matter + wrapped_content)
   end
 
@@ -89,7 +107,7 @@ class SiteContent
       ---
 
     FRONT
-    frontmatter + filter_readme(
+    content = filter_readme(
       filter_goals: true,
       filter_guiding_tenets: true,
       filter_spm_plugin: true,
@@ -102,6 +120,79 @@ class SiteContent
       filter_autocorrectable_rules: true,
       filter_links: true
     )
+    instructions = <<~TEXT
+      The Airbnb Swift Style Guide defines conventions and best practices for writing clear, consistent Swift code.
+
+      Each rule summary starts with `[rule-id]`, referring to `rules/<rule-id>.md` relative to this file.
+
+      Read the relevant rule files when applying or reviewing a rule to load its full explanation, examples, and exceptions.
+
+      Load only the rules needed for the current task. The `rules/` directory also includes rules that are omitted from this summary because they are automatically enforced by code formatting.
+    TEXT
+    frontmatter + content.sub("# Airbnb Swift Style Guide\n", "# Airbnb Swift Style Guide\n\n#{instructions}")
+  end
+
+  def rule_contents
+    rules = {}
+    current_id = nil
+
+    File.foreach(readme_path) do |line|
+      id = rule_id(line)
+      if id
+        raise "Duplicate rule ID: #{id}" if rules.key?(id)
+
+        current_id = id
+        rules[id] = [rule_description(line)]
+      elsif line.match?(/^\#{2,3} /) || line.include?('⬆ back to top')
+        current_id = nil
+      elsif current_id
+        rules[current_id] << line.sub(/^  /, '').rstrip
+      end
+    end
+
+    rules.transform_values do |lines|
+      lines = lines.reject { |line| line.strip.match?(/\A(?:<\/?details>|<!-- ai-skill-include.* -->)\z/) }
+      lines = lines.map do |line|
+        line.gsub(/\[!\[[^\]]*\]\(https?:\/\/img\.shields\.io\/[^)]*\)\]\([^)]+\)/, '')
+      end
+      content = lines.join("\n").strip.gsub(/\n{3,}/, "\n\n")
+      content.gsub(/\]\(#([^)]+)\)/, '](https://swift.airbnb.tech/#\1)') + "\n"
+    end
+  end
+
+  def write_skill_bundle
+    FileUtils.mkdir_p(skill_dir)
+    rules_dir = File.join(skill_dir, 'rules')
+    FileUtils.rm_rf(rules_dir)
+    FileUtils.mkdir_p(rules_dir)
+    File.write(File.join(skill_dir, 'SKILL.md'), skill_md_content)
+    rule_contents.each do |id, content|
+      File.write(File.join(rules_dir, "#{id}.md"), "# #{id}\n\n#{content}")
+    end
+
+    # Recreate the archive so removed rules are not retained by zip's update behavior.
+    FileUtils.mkdir_p(File.dirname(skill_zip_path))
+    FileUtils.rm_f(skill_zip_path)
+    archive_dir = File.basename(skill_dir)
+    stdout, stderr, status = Open3.capture3('zip', '-q', '-r', skill_zip_path,
+      "#{archive_dir}/SKILL.md", "#{archive_dir}/rules",
+      chdir: File.dirname(skill_dir))
+    raise "zip failed:\n#{stdout}#{stderr}" unless status.success?
+  end
+
+  def write_skill_rule_pages
+    FileUtils.rm_rf(skill_pages_dir)
+    FileUtils.mkdir_p(skill_pages_dir)
+    rule_contents.each do |id, content|
+      front_matter = {
+        'layout' => 'default',
+        'permalink' => "/skill/#{id}",
+        'title' => "#{id} · Airbnb Swift AI Skill",
+        'description' => "Full guidance for the #{id} rule in the Airbnb Swift Style Guide."
+      }.to_yaml + "---\n\n"
+      body = "[← Swift AI Skill](/skill)\n\n# #{id}\n\n#{content}"
+      File.write(File.join(skill_pages_dir, "#{id}.md"), front_matter + "{% raw %}\n#{body}{% endraw %}\n")
+    end
   end
 
   # Write syntax.css file.
@@ -113,6 +204,14 @@ class SiteContent
   end
 
   private
+
+  def rule_id(line)
+    line[/\A[-*] <a id=['"]([A-Za-z0-9_-]+)['"]><\/a>/, 1]
+  end
+
+  def rule_description(line)
+    line.sub(/\A[-*] (?:<a id=['"][^'"]+['"]><\/a>\s*)+\(<a href=['"][^'"]+['"]>link<\/a>\)\s*/, '').rstrip
+  end
 
   # Process the README.md by filtering out the given content
   def filter_readme(
@@ -231,7 +330,7 @@ class SiteContent
     current_rule_start = nil
 
     lines.each_with_index do |line, index|
-      if line.start_with?('- ')
+      if rule_id(line)
         current_rule_start = index
       elsif current_rule_start
         if line.include?('img.shields.io/badge/SwiftFormat')
@@ -253,7 +352,7 @@ class SiteContent
     skip_until_next_rule = false
 
     lines.each_with_index do |line, index|
-      if line.start_with?('- ')
+      if rule_id(line)
         has_badge = rules_with_badges.include?(index)
         has_include = rules_with_include.include?(index)
         skip_until_next_rule = has_badge && !has_include
@@ -285,8 +384,9 @@ class SiteContent
       # Skip "back to top" lines
       next if line.strip == '**[⬆ back to top](#table-of-contents)**'
 
-      # Remove (link) anchors from lines
-      line = line.gsub(/<a id='[^']*'><\/a> ?\(?<a href='[^']*'>link<\/a>\)? ?/, '')
+      if (id = rule_id(line))
+        line = "[#{id}] #{rule_description(line)}"
+      end
 
       # Remove bold/italic markers
       line = line.gsub('**', '')
