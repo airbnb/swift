@@ -94,7 +94,7 @@ namespace :update do
 end
 
 namespace :site do
-  desc 'Prepares index.md and syntax highlighting assets'
+  desc 'Prepares site pages, the Swift skill ZIP, and syntax highlighting assets'
   task :prepare do
     require_relative 'site/site_content'
     site_content = SiteContent.new
@@ -104,6 +104,10 @@ namespace :site do
     site_content.write_skill_md
     puts '📄 Generating raw SKILL.md...'
     site_content.write_skill_md_raw
+    puts '📦 Generating Swift skill bundle...'
+    site_content.write_skill_bundle
+    puts '📋 Generating skill rule pages...'
+    site_content.write_skill_rule_pages
     puts '🎨 Generating syntax highlighting CSS...'
     site_content.generate_syntax_css
   end
