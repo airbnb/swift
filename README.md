@@ -860,7 +860,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   // WRONG
   @objc class Spaceship {
 
-    @ViewBuilder var controlPanel: some View {
+    @ContentBuilder var controlPanel: some View {
       ...
     }
 
@@ -874,7 +874,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   @objc
   class Spaceship {
 
-    @ViewBuilder
+    @ContentBuilder
     var controlPanel: some View {
       ...
     }
@@ -3112,14 +3112,14 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
   ```
 
-  Parameters using result builders like `@ViewBuilder` can be replaced with the equivalent behavior by adding the result builder attribute to the stored property:
+  Parameters using result builders like `@ContentBuilder` can be replaced with the equivalent behavior by adding the result builder attribute to the stored property:
 
   ```swift
   /// WRONG
   struct DashboardView<Instrument: View>: View {
     let instrument: Instrument
 
-    init(@ViewBuilder instrument: () -> Instrument) {
+    init(@ContentBuilder instrument: () -> Instrument) {
       instrument = instrument()
     }
 
@@ -3130,7 +3130,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   // RIGHT
   struct DashboardView<Instrument: View>: View {
-    @ViewBuilder let instrument: Instrument
+    @ContentBuilder let instrument: Instrument
 
     var content: some View {
       instrument
@@ -5083,25 +5083,49 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='redundant-viewbuilder'></a>(<a href='#redundant-viewbuilder'>link</a>) **Omit `@ViewBuilder` when it is not required.** `@ViewBuilder` is implicit on `View.body` properties and `ViewModifier.body(content:)` functions, and is unnecessary on single-expression properties or functions.
+- <a id='prefer-content-builder'></a>(<a href='#prefer-content-builder'>link</a>) **Prefer `@ContentBuilder` over `@ViewBuilder`.**
 
   <details>
 
-  [![SwiftFormat: redundantViewBuilder](https://img.shields.io/badge/SwiftFormat-redundantViewBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantViewBuilder)
+  [![SwiftFormat: contentBuilder](https://img.shields.io/badge/SwiftFormat-contentBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#contentBuilder)
+
+  ```swift
+  // WRONG
+  @ViewBuilder
+  var telemetry: some View {
+    Text("Altitude")
+    Text("Velocity")
+  }
+
+  // RIGHT
+  @ContentBuilder
+  var telemetry: some View {
+    Text("Altitude")
+    Text("Velocity")
+  }
+  ```
+
+  </details>
+
+- <a id='redundant-viewbuilder'></a>(<a href='#redundant-viewbuilder'>link</a>) **Omit `@ContentBuilder` when it is not required.** `@ContentBuilder` is implicit on `View.body` properties and `ViewModifier.body(content:)` functions, and is unnecessary on single-expression properties or functions.
+
+  <details>
+
+  [![SwiftFormat: contentBuilder](https://img.shields.io/badge/SwiftFormat-contentBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#contentBuilder)
 
   #### Why?
 
-  `@ViewBuilder` is automatically applied by the compiler to `View.body` and `ViewModifier.body(content:)`, so adding it explicitly is redundant. Similarly, single-expression properties and functions don't need `@ViewBuilder` since there's only one view being returned.
+  `@ContentBuilder` is automatically applied by the compiler to `View.body` and `ViewModifier.body(content:)`, so adding it explicitly is redundant. Similarly, single-expression properties and functions don't need `@ContentBuilder` since there's only one view being returned.
 
   ```swift
   // WRONG
   struct PlanetView: View {
-    @ViewBuilder
+    @ContentBuilder
     var body: some View {
       Text("Hello, World!")
     }
 
-    @ViewBuilder
+    @ContentBuilder
     var subtitle: some View {
       Text("Subtitle")
     }
@@ -5118,7 +5142,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   }
 
-  // ALSO RIGHT: @ViewBuilder is necessary for conditionals
+  // ALSO RIGHT: @ContentBuilder is necessary for conditionals
   struct ConditionalView: View {
     var showDetails: Bool
 
@@ -5126,7 +5150,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
       title
     }
 
-    @ViewBuilder
+    @ContentBuilder
     var title: some View {
       if showDetails {
         Text("Details")
@@ -5165,7 +5189,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='redundant-swiftui-group'></a>(<a href='#redundant-swiftui-group'>link</a>) **Omit SwiftUI `Group` wrappers where redundant, and prefer `@ViewBuilder` over `Group` where equivalent.** Inside a `@ViewBuilder` context (like a `View.body` or a `@ViewBuilder` property), a `Group` that wraps the entire content and applies no modifiers is unnecessary and adds an extra layer of nesting.
+- <a id='redundant-swiftui-group'></a>(<a href='#redundant-swiftui-group'>link</a>) **Omit SwiftUI `Group` wrappers where redundant, and prefer `@ContentBuilder` over `Group` where equivalent.** Inside a `@ContentBuilder` context (like a `View.body` or a `@ContentBuilder` property), a `Group` that wraps the entire content and applies no modifiers is unnecessary and adds an extra layer of nesting.
 
   <details>
 
@@ -5173,7 +5197,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  The body of a `View` is implicitly a `@ViewBuilder`, so a `Group` that wraps the entire body and has no modifiers applied to it is completely redundant. In a `@ViewBuilder` property, `Group` and `@ViewBuilder` are equivalent, but `@ViewBuilder` is more idiomatic and reduces nesting.
+  The body of a `View` is implicitly a `@ContentBuilder`, so a `Group` that wraps the entire body and has no modifiers applied to it is completely redundant. In a `@ContentBuilder` property, `Group` and `@ContentBuilder` are equivalent, but `@ContentBuilder` is more idiomatic and reduces nesting.
 
   ```swift
   // WRONG
@@ -5200,7 +5224,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
       instruments
     }
 
-    @ViewBuilder
+    @ContentBuilder
     var instruments: some View {
       Text("Altimeter")
       Text("Gyroscope")
