@@ -5083,11 +5083,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-content-builder'></a>(<a href='#prefer-content-builder'>link</a>) **Prefer `@ContentBuilder` over `@ViewBuilder`, `@ToolbarContentBuilder`, and `@CommandsBuilder`.** SwiftUI in the Xcode 27 SDK uses `@ContentBuilder` for views, toolbar content, and commands, including the `body` requirements of `View` and `ViewModifier`.
+- <a id='prefer-content-builder'></a>(<a href='#prefer-content-builder'>link</a>) **Prefer `@ContentBuilder` over `@ViewBuilder`.**
 
   <details>
 
-  [![SwiftFormat: preferContentBuilder](https://img.shields.io/badge/SwiftFormat-preferContentBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferContentBuilder)
+  [![SwiftFormat: contentBuilder](https://img.shields.io/badge/SwiftFormat-contentBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#contentBuilder)
 
   ```swift
   // WRONG
@@ -5097,23 +5097,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
     Text("Velocity")
   }
 
-  @ToolbarContentBuilder
-  var toolbarItems: some ToolbarContent {
-    ToolbarItem { launchButton }
-    ToolbarItem { abortButton }
-  }
-
   // RIGHT
   @ContentBuilder
   var telemetry: some View {
     Text("Altitude")
     Text("Velocity")
-  }
-
-  @ContentBuilder
-  var toolbarItems: some ToolbarContent {
-    ToolbarItem { launchButton }
-    ToolbarItem { abortButton }
   }
   ```
 
@@ -5123,7 +5111,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: redundantViewBuilder](https://img.shields.io/badge/SwiftFormat-redundantViewBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantViewBuilder)
+  [![SwiftFormat: contentBuilder](https://img.shields.io/badge/SwiftFormat-contentBuilder-7B0051.svg)](https://swiftformat.info/rules/prerelease#contentBuilder)
 
   #### Why?
 
