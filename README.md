@@ -4693,10 +4693,12 @@ _You can enable the following settings in Xcode by running [this script](https:/
       orbiting: star,
       within: searchRadius,
     )
+    // Find any planets with atmospheres
     for planet in planets {
       guard planet.hasAtmosphere else {
         continue
       }
+      // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
@@ -4712,11 +4714,13 @@ _You can enable the following settings in Xcode by running [this script](https:/
       within: searchRadius,
     )
 
+    // Find any planets with atmospheres
     for planet in planets {
       guard planet.hasAtmosphere else {
         continue
       }
 
+      // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
