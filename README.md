@@ -1627,6 +1627,26 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
   ```
 
+  Keep `if case` when checking additional conditions, or when an `if` / `else if` chain mixes Boolean checks or matches different values.
+
+  ```swift
+  // ALSO RIGHT
+  if case .success(let planet) = scanResult, planet.isHabitable {
+    catalog(planet)
+  }
+  ```
+
+  ```swift
+  // ALSO RIGHT
+  if Task.isCancelled {
+    handleCancellation()
+  } else if case .success(let planet) = scanResult {
+    catalog(planet)
+  } else if case .success(let probe) = probeResult {
+    examine(probe)
+  }
+  ```
+
   </details>
 
 - <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Wrap switch case bodies onto multiple lines.**
