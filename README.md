@@ -4695,9 +4695,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
     )
     // Find any planets with atmospheres
     for planet in planets {
-      guard planet.hasAtmosphere else {
-        continue
-      }
+      guard planet.hasAtmosphere else { continue }
       // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
@@ -4716,9 +4714,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
     // Find any planets with atmospheres
     for planet in planets {
-      guard planet.hasAtmosphere else {
-        continue
-      }
+      guard planet.hasAtmosphere else { continue }
 
       // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
