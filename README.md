@@ -1591,7 +1591,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  A `switch` states which value is being matched once and places the patterns in a consistent structure. This makes both the matching case and fallback behavior easier to identify.
+  Switch statements are the more idiomatic pattern for destructuring an enum value. Switch statements put the variable before the condition, making the condition easier to read. Switch statements also encourage exhaustive switching, which is typically a best practice when handling enum values.
 
   ```swift
   // WRONG
