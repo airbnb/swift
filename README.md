@@ -1583,6 +1583,52 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) **Prefer `switch` over `if case` when matching patterns against a value.** This applies to a single `if case`, with or without an `else` branch, and chains of `else if case` matching the same value. Keep `if case` when combining pattern matching with additional conditions.
+
+  <details>
+
+  [![SwiftFormat: ifCase](https://img.shields.io/badge/SwiftFormat-ifCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifCase)
+
+  #### Why?
+
+  A `switch` states which value is being matched once and places the patterns in a consistent structure. This makes both the matching case and fallback behavior easier to identify.
+
+  ```swift
+  // WRONG
+  if case let .success(planet) = scanResult {
+    catalog(planet)
+  } else {
+    resumeScanning()
+  }
+
+  // RIGHT
+  switch scanResult {
+  case .success(let planet):
+    catalog(planet)
+  default:
+    resumeScanning()
+  }
+  ```
+
+  When there is no `else` branch, use `default: break` for the remaining cases.
+
+  ```swift
+  // WRONG
+  if case let .inhabited(civilization) = planet.status {
+    establishContact(with: civilization)
+  }
+
+  // RIGHT
+  switch planet.status {
+  case .inhabited(let civilization):
+    establishContact(with: civilization)
+  default:
+    break
+  }
+  ```
+
+  </details>
+
 - <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Wrap switch case bodies onto multiple lines.**
 
   <details>
