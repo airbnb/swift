@@ -4676,6 +4676,87 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='blank-lines-around-multiline-statements'></a>(<a href='#blank-lines-around-multiline-statements'>link</a>) **Separate multi-line statements from adjacent statements at the same indentation level with a blank line.** Individual properties before multi-line statements can stay grouped with the following statement.
+
+  <details>
+
+  [![SwiftFormat: blankLinesAroundMultilineStatements](https://img.shields.io/badge/SwiftFormat-blankLinesAroundMultilineStatements-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLinesAroundMultilineStatements)
+
+  #### Why?
+
+  Similar to adding [blank lines between scopes](#newline-between-scope-siblings), blank lines make it easier to distinguish individual statements when reading a function.
+
+  ```swift
+  // WRONG
+  func exploreSolarSystem() {
+    let planets = findPlanets(
+      orbiting: star,
+      within: searchRadius,
+    )
+    // Find any planets with atmospheres
+    for planet in planets {
+      guard planet.hasAtmosphere else { continue }
+      // Scan the atmosphere and record any planets with potential for life
+      let atmosphere = scanAtmosphere(of: planet)
+      if atmosphere.isBreathable {
+        recordDiscovery(planet)
+      }
+    }
+    reportDiscoveries()
+  }
+
+  // RIGHT
+  func exploreSolarSystem() {
+    let planets = findPlanets(
+      orbiting: star,
+      within: searchRadius,
+    )
+
+    // Find any planets with atmospheres
+    for planet in planets {
+      guard planet.hasAtmosphere else { continue }
+
+      // Scan the atmosphere and record any planets with potential for life
+      let atmosphere = scanAtmosphere(of: planet)
+      if atmosphere.isBreathable {
+        recordDiscovery(planet)
+      }
+    }
+
+    reportDiscoveries()
+  }
+  ```
+
+  ```swift
+  // WRONG
+  let destination = solarSystem.planets[0]
+  // Refuel before departing for the next planet.
+  spacecraft.refuel()
+  spacecraft.launch(toward: destination)
+
+  // RIGHT
+  let destination = solarSystem.planets[0]
+
+  // Refuel before departing for the next planet.
+  spacecraft.refuel()
+
+  spacecraft.launch(toward: destination)
+  ```
+
+  A single-line variable declaration can stay together with the following statement when that statement uses the variable and has no leading comment.
+
+  ```swift
+  // RIGHT
+  var totalMass = 0.0
+  for planet in planets {
+    totalMass += planet.mass
+  }
+
+  report(totalMass)
+  ```
+
+  </details>
+
 - <a id='blank-line-at-start-or-end-of-scopes'></a>(<a href='#blank-line-at-start-or-end-of-scopes'>link</a>) **Omit blank lines at the top and bottom of scopes.** Include a blank line at the bottom of a type body if and only if it starts with a blank line.
 
   <details>
