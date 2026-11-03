@@ -1583,6 +1583,72 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) **Prefer `switch` statements over `if case` statements.**
+
+  <details>
+
+  [![SwiftFormat: ifCase](https://img.shields.io/badge/SwiftFormat-ifCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifCase)
+
+  #### Why?
+
+  Switch statements are the more idiomatic pattern for destructuring an enum value. Switch statements put the variable before the condition, making the condition easier to read. Switch statements also encourage exhaustive switching, which is typically a best practice when handling enum values.
+
+  ```swift
+  // WRONG
+  if case let .success(planet) = scanResult {
+    catalog(planet)
+  } else {
+    resumeScanning()
+  }
+
+  // RIGHT
+  switch scanResult {
+  case .success(let planet):
+    catalog(planet)
+  default:
+    resumeScanning()
+  }
+  ```
+
+  When there is no `else` branch, use `default: break` for the remaining cases.
+
+  ```swift
+  // WRONG
+  if case let .inhabited(civilization) = planet.status {
+    establishContact(with: civilization)
+  }
+
+  // RIGHT
+  switch planet.status {
+  case .inhabited(let civilization):
+    establishContact(with: civilization)
+  default:
+    break
+  }
+  ```
+
+  `if case` statements are still permitted when checking additional conditions, or when an `if` / `else if` chain mixes Boolean checks or matches different values.
+
+  ```swift
+  // ALSO RIGHT
+  if case .success(let planet) = scanResult, planet.isHabitable {
+    catalog(planet)
+  }
+  ```
+
+  ```swift
+  // ALSO RIGHT
+  if Task.isCancelled {
+    handleCancellation()
+  } else if case .success(let planet) = scanResult {
+    catalog(planet)
+  } else if case .success(let probe) = probeResult {
+    examine(probe)
+  }
+  ```
+
+  </details>
+
 - <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Wrap switch case bodies onto multiple lines.**
 
   <details>
