@@ -4694,7 +4694,9 @@ _You can enable the following settings in Xcode by running [this script](https:/
       within: searchRadius,
     )
     for planet in planets {
-      guard planet.hasAtmosphere else { continue }
+      guard planet.hasAtmosphere else {
+        continue
+      }
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
@@ -4711,7 +4713,10 @@ _You can enable the following settings in Xcode by running [this script](https:/
     )
 
     for planet in planets {
-      guard planet.hasAtmosphere else { continue }
+      guard planet.hasAtmosphere else {
+        continue
+      }
+
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
