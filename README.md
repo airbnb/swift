@@ -4684,7 +4684,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  Similar to adding [blank lines between scopes](#newline-between-scope-siblings), blank lines make it easier to distinguish individual statements when reading a function, especially when statements span multiple lines.
+  Similar to adding [blank lines between scopes](#newline-between-scope-siblings), blank lines make it easier to distinguish individual statements when reading a function.
 
   ```swift
   // WRONG
