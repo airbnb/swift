@@ -4741,7 +4741,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='blank-lines-before-comments'></a>(<a href='#blank-lines-before-comments'>link</a>) **Insert a blank line before standalone comments that introduce a statement or declaration.** Keep the comment together with the code it describes. A blank line isn't needed before a comment at the start of a scope.
+- <a id='blank-lines-before-comments'></a>(<a href='#blank-lines-before-comments'>link</a>) **Insert a blank line before comments.** A blank line isn't needed before a comment at the start of a scope.
 
   <details>
 
