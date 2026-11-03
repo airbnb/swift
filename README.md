@@ -4749,7 +4749,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  A blank line before a comment visually separates the code it describes from the preceding code. This also helps distinguish properties with documentation comments.
+  A blank line before a comment visually separates the code it describes from the preceding code.
 
   ```swift
   // WRONG
