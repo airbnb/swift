@@ -4684,7 +4684,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   #### Why?
 
-  Similar to adding [blank lines between scopes](#newline-between-scope-siblings), blank lines make it easier to distinguish individual statements when reading a function.
+  Similar to adding [blank lines between scopes](#newline-between-scope-siblings), blank lines make it easier to distinguish individual statements when reading a function, especially when statements span multiple lines.
 
   ```swift
   // WRONG
@@ -4693,10 +4693,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
       orbiting: star,
       within: searchRadius,
     )
-    // Find any planets with atmospheres
     for planet in planets {
       guard planet.hasAtmosphere else { continue }
-      // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
@@ -4712,11 +4710,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
       within: searchRadius,
     )
 
-    // Find any planets with atmospheres
     for planet in planets {
       guard planet.hasAtmosphere else { continue }
-
-      // Scan the atmosphere and record any planets with potential for life
       let atmosphere = scanAtmosphere(of: planet)
       if atmosphere.isBreathable {
         recordDiscovery(planet)
@@ -4724,6 +4719,69 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
 
     reportDiscoveries()
+  }
+  ```
+
+  A single-line variable declaration can stay together with the following statement when that statement uses the variable and has no leading comment.
+
+  ```swift
+  // RIGHT
+  var totalMass = 0.0
+  for planet in planets {
+    totalMass += planet.mass
+  }
+
+  report(totalMass)
+  ```
+
+  </details>
+
+- <a id='blank-lines-before-comments'></a>(<a href='#blank-lines-before-comments'>link</a>) **Insert a blank line before standalone comments that introduce a statement or declaration.** Keep the comment together with the code it describes. A blank line isn't needed before a comment at the start of a scope.
+
+  <details>
+
+  [![SwiftFormat: blankLinesBeforeComments](https://img.shields.io/badge/SwiftFormat-blankLinesBeforeComments-7B0051.svg)](https://swiftformat.info/rules/prerelease#blankLinesBeforeComments)
+
+  #### Why?
+
+  A blank line before a comment visually separates the code it describes from the preceding code. This also helps distinguish properties with documentation comments.
+
+  ```swift
+  // WRONG
+  let destination = solarSystem.planets[0]
+  // Refuel before departing for the next planet.
+  spacecraft.refuel()
+  spacecraft.launch(toward: destination)
+
+  // RIGHT
+  let destination = solarSystem.planets[0]
+
+  // Refuel before departing for the next planet.
+  spacecraft.refuel()
+  spacecraft.launch(toward: destination)
+  ```
+
+  ```swift
+  // WRONG
+  struct SolarSystem {
+    /// The inner terrestrial planets
+    let innerPlanets = [mercury, venus, earth, mars]
+    /// The outer gas giants
+    let outerPlanets = [jupiter, saturn, uranus, neptune]
+    /// Minor dwarf planets in the asteroid belt and kuiper belt
+    let dwarfPlanets = [ceres, pluto, eris]
+  }
+
+  // RIGHT
+  struct SolarSystem {
+    /// The inner terrestrial planets
+    let innerPlanets = [mercury, venus, earth, mars]
+
+    /// The outer gas giants
+    let outerPlanets = [jupiter, saturn, uranus, neptune]
+
+    /// Minor dwarf planets in the asteroid belt and kuiper belt
+    let dwarfPlanets = [ceres, pluto, eris]
   }
   ```
 

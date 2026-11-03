@@ -64,6 +64,7 @@
 --rules anyObjectProtocol
 --rules blankLinesBetweenScopes
 --rules blankLinesAroundMultilineStatements
+--rules blankLinesBeforeComments
 --rules consecutiveSpaces
 --rules consecutiveBlankLines
 --rules duplicateImports
