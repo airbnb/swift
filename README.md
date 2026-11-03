@@ -1627,7 +1627,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
   ```
 
-  Keep `if case` when checking additional conditions, or when an `if` / `else if` chain mixes Boolean checks or matches different values.
+  `if case` statements are still permitted when checking additional conditions, or when an `if` / `else if` chain mixes Boolean checks or matches different values.
 
   ```swift
   // ALSO RIGHT
