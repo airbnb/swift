@@ -4753,17 +4753,21 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   ```swift
   // WRONG
-  let destination = solarSystem.planets[0]
-  // Refuel before departing for the next planet.
-  spacecraft.refuel()
-  spacecraft.launch(toward: destination)
+  func launchSpacecraft() {
+    let destination = solarSystem.planets[0]
+    // Refuel before departing for the next planet.
+    spacecraft.refuel()
+    spacecraft.launch(toward: destination)
+  }
 
   // RIGHT
-  let destination = solarSystem.planets[0]
+  func launchSpacecraft() {
+    let destination = solarSystem.planets[0]
 
-  // Refuel before departing for the next planet.
-  spacecraft.refuel()
-  spacecraft.launch(toward: destination)
+    // Refuel before departing for the next planet.
+    spacecraft.refuel()
+    spacecraft.launch(toward: destination)
+  }
   ```
 
   ```swift
