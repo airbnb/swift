@@ -4727,34 +4727,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
   ```
 
-  ```swift
-  // WRONG
-  let destination = solarSystem.planets[0]
-  // Refuel before departing for the next planet.
-  spacecraft.refuel()
-  spacecraft.launch(toward: destination)
-
-  // RIGHT
-  let destination = solarSystem.planets[0]
-
-  // Refuel before departing for the next planet.
-  spacecraft.refuel()
-
-  spacecraft.launch(toward: destination)
-  ```
-
-  A single-line variable declaration can stay together with the following statement when that statement uses the variable and has no leading comment.
-
-  ```swift
-  // RIGHT
-  var totalMass = 0.0
-  for planet in planets {
-    totalMass += planet.mass
-  }
-
-  report(totalMass)
-  ```
-
   </details>
 
 - <a id='blank-line-at-start-or-end-of-scopes'></a>(<a href='#blank-line-at-start-or-end-of-scopes'>link</a>) **Omit blank lines at the top and bottom of scopes.** Include a blank line at the bottom of a type body if and only if it starts with a blank line.
