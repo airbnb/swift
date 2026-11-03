@@ -1589,8 +1589,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   [![SwiftFormat: ifCase](https://img.shields.io/badge/SwiftFormat-ifCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifCase)
 
-  This applies to a single `if case`, with or without an `else` branch, and chains of `else if case` matching the same value. Keep `if case` when combining pattern matching with additional conditions.
-
   #### Why?
 
   A `switch` states which value is being matched once and places the patterns in a consistent structure. This makes both the matching case and fallback behavior easier to identify.
