@@ -1583,11 +1583,13 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) **Prefer `switch` over `if case` when matching patterns against a value.** This applies to a single `if case`, with or without an `else` branch, and chains of `else if case` matching the same value. Keep `if case` when combining pattern matching with additional conditions.
+- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) **Prefer `switch` statements over `if case` statements.**
 
   <details>
 
   [![SwiftFormat: ifCase](https://img.shields.io/badge/SwiftFormat-ifCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifCase)
+
+  This applies to a single `if case`, with or without an `else` branch, and chains of `else if case` matching the same value. Keep `if case` when combining pattern matching with additional conditions.
 
   #### Why?
 
