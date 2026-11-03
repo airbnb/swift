@@ -129,6 +129,7 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules ifExpressions
+--rules ifCase
 --rules wrapMultilineConditionalAssignment
 --rules wrapFunctionBodies
 --rules wrapPropertyBodies
