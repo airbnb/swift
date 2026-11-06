@@ -130,8 +130,8 @@ namespace :site do
     puts SiteContent.new.filter_readme
   end
 
-  desc 'Runs integration tests for site content'
+  desc 'Runs site content, generation, and rendering tests'
   task :test do
-    sh 'bundle exec rspec site/site_content_spec.rb'
+    sh 'bundle exec rspec site/*_spec.rb'
   end
 end

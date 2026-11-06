@@ -143,7 +143,7 @@ class SiteContent
 
         current_id = id
         rules[id] = [rule_description(line)]
-      elsif line.match?(/^\#{2,3} /) || line.include?('⬆ back to top')
+      elsif rule_boundary?(line)
         current_id = nil
       elsif current_id
         rules[current_id] << line.sub(/^  /, '').rstrip
@@ -211,6 +211,10 @@ class SiteContent
 
   def rule_description(line)
     line.sub(/\A[-*] (?:<a id=['"][^'"]+['"]><\/a>\s*)+\(<a href=['"][^'"]+['"]>link<\/a>\)\s*/, '').rstrip
+  end
+
+  def rule_boundary?(line)
+    line.start_with?('## ', '### ') || line.include?('⬆ back to top')
   end
 
   # Process the README.md by filtering out the given content
@@ -342,7 +346,7 @@ class SiteContent
           rules_with_include.add(current_rule_start)
         end
       end
-      if line.start_with?('## ') || line.include?('⬆ back to top')
+      if rule_boundary?(line)
         current_rule_start = nil
       end
     end
@@ -356,7 +360,7 @@ class SiteContent
         has_badge = rules_with_badges.include?(index)
         has_include = rules_with_include.include?(index)
         skip_until_next_rule = has_badge && !has_include
-      elsif line.start_with?('## ') || line.include?('⬆ back to top')
+      elsif rule_boundary?(line)
         skip_until_next_rule = false
       end
 
