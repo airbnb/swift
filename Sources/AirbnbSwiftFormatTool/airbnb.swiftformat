@@ -37,7 +37,7 @@
 --type-body-marks remove #organizeDeclarations
 --extension-acl on-declarations # extensionAccessControl
 --pattern-let inline # hoistPatternLet
---property-types inferred # redundantType, propertyTypes
+--property-types inferred # propertyTypes
 --type-blank-lines consistent # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --empty-braces spaced # emptyBraces
 --ranges preserve # spaceAroundOperators
@@ -76,7 +76,6 @@
 --rules redundantParens
 --rules redundantReturn
 --rules redundantSelf
---rules redundantType
 --rules redundantPattern
 --rules redundantGet
 --rules redundantFileprivate
