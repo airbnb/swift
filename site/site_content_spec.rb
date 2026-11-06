@@ -103,8 +103,10 @@ RSpec.describe SiteContent do
     let(:skill_content) { site_content.skill_md_content }
     let(:readme_content) { File.read(site_content.readme_path) }
 
-    it 'includes frontmatter with description' do
-      expect(skill_content).to include('description: Always use when creating and editing Swift files')
+    it 'includes valid skill frontmatter with a name and description' do
+      frontmatter = YAML.safe_load(skill_content.split('---', 3)[1])
+      expect(frontmatter).to eq(
+        'name' => 'swift', 'description' => 'Always use when creating and editing Swift files (*.swift)')
     end
 
     it 'has at least 5 ## sections' do
@@ -147,9 +149,36 @@ RSpec.describe SiteContent do
       expect(readme_content).to include('## Guiding Tenets')
     end
 
-    it 'does not include markdown links' do
-      expect(skill_content).not_to match(/\[.*\]\(.*\)/)
-      expect(readme_content).to match(/\[.*\]\(.*\)/)
+    it 'does not include Markdown link destinations' do
+      expect(skill_content).not_to match(/\[([^\]]+)\]\(([^)]+)\)/)
+    end
+
+    it 'identifies every summary with a bracketed rule ID' do
+      summaries = skill_content.lines.grep(/^\[/)
+      expect(summaries).not_to be_empty
+      expect(skill_content).not_to match(/^[-*] /)
+      summaries.each do |line|
+        expect(line).to match(/^\[([^\]]+)\] /)
+        expect(site_content.rule_contents).to have_key(line[/^\[([^\]]+)\]/, 1])
+      end
+    end
+
+    it 'explains when and how to load the full guidance' do
+      expect(skill_content).to include('`[rule-id]`, referring to `rules/<rule-id>.md` relative to this file')
+      expect(skill_content).to include('Read the relevant rule files')
+      expect(skill_content).to include('Load only the rules needed for the current task')
+    end
+
+    it 'introduces the style guide in one sentence before the rule ID instructions' do
+      introduction = skill_content.split("\n\n").find { |paragraph| paragraph.start_with?('The Airbnb Swift Style Guide') }
+      expect(introduction).to match(/\A[^\n.]+\.\z/)
+      expect(skill_content.index(introduction)).to be < skill_content.index('Each rule summary')
+    end
+
+    it 'keeps the rule loading instructions in one paragraph without hard line breaks' do
+      paragraph = skill_content.split("\n\n").find { |text| text.start_with?('Read the relevant rule files') }
+      expect(paragraph).to include('full explanation, examples, and exceptions.')
+      expect(paragraph).not_to include("\n")
     end
 
     it 'does not include HTML anchor tags' do
@@ -181,6 +210,49 @@ RSpec.describe SiteContent do
       # Inline code like `try!` can be interpreted as a bash command, so we remove the backticks
       expect(readme_content).to include('`try!`')
       expect(skill_content).not_to include('!`')
+    end
+  end
+
+  describe 'full rule content' do
+    let(:rules) { site_content.rule_contents }
+
+    it 'includes exactly one entry per rule, including rules omitted from the summary' do
+      ids = File.read(site_content.readme_path).scan(/^[-*] <a id=['"]([^'"]+)['"]>/).flatten
+      expect(rules.keys).to eq(ids)
+      expect(rules).to have_key('spaces-over-tabs')
+      expect(rules).to have_key('cifilter-builtins')
+      expect(rules).to have_key('prefer-for-loop-over-forEach')
+    end
+
+    it 'retains explanations, examples, and external links' do
+      content = rules.fetch('swift-testing-test-case-names')
+      expect(content).to include('**In Swift Testing, name test cases')
+      expect(content).to include('### Why?', 'Raw identifiers with spaces are easier to read')
+      expect(content).to include('```swift', 'func `warp drive enables FTL travel`() { ... }')
+      expect(content).to include('https://github.com/swiftlang/swift-evolution/blob/main/proposals/0451-escaped-identifiers.md')
+      expect(content).not_to include('redundant-swift-testing-suite-macro')
+    end
+
+    it 'retains exceptions and code indentation' do
+      content = rules.fetch('use-camel-case')
+      expect(content).to include('_Exception: You may prefix a private property')
+      expect(content).to include("```swift\nprotocol SpaceThing {\n  ...\n}")
+      expect(content).to include('private lazy var _view = CustomView()')
+    end
+
+    it 'makes style guide anchor links usable outside the main guide' do
+      expect(rules.fetch('long-typealias')).to include('[Long](https://swift.airbnb.tech/#column-width)')
+      rules.each_value do |content|
+        expect(content).not_to match(/\]\(#[^)]+\)/)
+      end
+    end
+
+    it 'removes list navigation, disclosure wrappers, and generator directives' do
+      rules.each_value do |content|
+        expect(content).not_to include('⬆ back to top', '<details>', '</details>', 'ai-skill-include', 'img.shields.io')
+        expect(content).not_to match(/^[-*] <a id=/)
+        expect(content).to end_with("\n")
+      end
     end
   end
 end

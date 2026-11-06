@@ -167,6 +167,16 @@ pre {
   overflow-x: auto;
 }
 
+.skill-preview {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.skill-preview a {
+  color: inherit;
+  font: inherit;
+}
+
 footer {
   max-width: 900px;
   margin: 0 auto;

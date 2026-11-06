@@ -6,7 +6,8 @@
     <div class="nav-links">
       <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' or page.url == '/index.html' %} active{% endif %}">Swift Style Guide</a>
       <span class="nav-separator">·</span>
-      <a href="{{ '/skill' | relative_url }}" class="nav-link{% if page.url == '/skill' or page.url == '/skill.html' %} active{% endif %}">AI Skill</a>
+      {% assign url_prefix = page.url | slice: 0, 7 %}
+      <a href="{{ '/skill' | relative_url }}" class="nav-link{% if page.url == '/skill' or page.url == '/skill.html' or url_prefix == '/skill/' %} active{% endif %}">AI Skill</a>
       <span class="nav-separator">·</span>
       <a href="{{ '/plugin' | relative_url }}" class="nav-link{% if page.url == '/plugin' or page.url == '/plugin.html' %} active{% endif %}">Swift Package Plugin</a>
       <span class="nav-separator">·</span>

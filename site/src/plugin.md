@@ -5,7 +5,7 @@ permalink: /plugin
 description: Swift Package Manager command plugin to automatically reformat or lint your package according to the Airbnb Swift Style Guide.
 ---
 
-# Swift Package Plugin
+# Airbnb Swift Package Plugin
 
 We offer a Swift Package Manager command plugin that you can use to automatically reformat or lint your package according to the style guide. To use this command plugin with your package, all you need to do is add this repo as a dependency:
 
