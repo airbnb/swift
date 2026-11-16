@@ -151,11 +151,19 @@ class SiteContent
     end
 
     rules.transform_values do |lines|
+
+      # Remove collapsible-section tags and AI skill markers used only by the README.
       lines = lines.reject { |line| line.strip.match?(/\A(?:<\/?details>|<!-- ai-skill-include.* -->)\z/) }
+
+      # Remove linked shields.io badges that describe formatter support.
       lines = lines.map do |line|
         line.gsub(/\[!\[[^\]]*\]\(https?:\/\/img\.shields\.io\/[^)]*\)\]\([^)]+\)/, '')
       end
+
+      # Trim surrounding whitespace and collapse extra blank lines left by removed content.
       content = lines.join("\n").strip.gsub(/\n{3,}/, "\n\n")
+
+      # Point README anchor links at the published guide so they work in standalone rule files.
       content.gsub(/\]\(#([^)]+)\)/, '](https://swift.airbnb.tech/#\1)') + "\n"
     end
   end

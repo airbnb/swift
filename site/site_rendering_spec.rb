@@ -59,7 +59,7 @@ RSpec.describe SiteContent do
       end
     end
 
-    it 'publishes full rule pages, including the Swift Testing example' do
+    it 'publishes full rule pages, preserving details with nested headings' do
       @generator.rule_contents.each_key do |id|
         expect(rendered_page("skill/#{id}")).to include("<h1 id=\"#{id.downcase}\">#{id}</h1>")
       end

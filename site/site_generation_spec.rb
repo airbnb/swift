@@ -203,7 +203,7 @@ RSpec.describe SiteContent do
       expect(page).not_to include('href="/skill/placeholder"')
     end
 
-    it 'escapes HTML in the Markdown preview without evaluating Liquid examples' do
+    it 'escapes HTML in the Markdown preview without evaluating string templates' do
       File.write(site_content.readme_path, readme.sub('**Use clear names.**', '**Use `<tag> & {{ template }}`.**'))
       site_content.write_skill_md
       page = File.read(site_content.ai_skill_page_path)
