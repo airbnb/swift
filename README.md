@@ -309,7 +309,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: redundantType](https://img.shields.io/badge/SwiftFormat-redundantType-7B0051.svg)](https://swiftformat.info/rules/prerelease#redundantType)
+  [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://swiftformat.info/rules/prerelease#propertyTypes)
 
   ```swift
   // WRONG
