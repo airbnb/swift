@@ -1583,6 +1583,35 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) - **Prefer exhaustive `switch` statements over `if case ... else` statements.**
+
+  <details>
+
+  [![SwiftFormat: ifCase](https://img.shields.io/badge/SwiftFormat-ifCase-7B0051.svg)](https://swiftformat.info/rules/prerelease#ifCase)
+
+  #### Why?
+
+  Switch statements are the canonical way to exhaustively switch over an enum. An `if case .. else` statement is also handling all cases, but lacks the full exhaustiveness checking of switch statements (for example, that a `default:` case is unreachable if the switch statement explicitly switches over all of the enum's cases).
+
+  ```swift
+  // WRONG
+  if case let .success(planet) = scanResult {
+    catalog(planet)
+  } else {
+    resumeScanning()
+  }
+
+  // RIGHT
+  switch scanResult {
+  case .success(let planet):
+    catalog(planet)
+  default:
+    resumeScanning()
+  }
+  ```
+
+  </details>
+
 - <a id='wrap-switch-case-bodies'></a>(<a href='#wrap-switch-case-bodies'>link</a>) **Wrap switch case bodies onto multiple lines.**
 
   <details>
