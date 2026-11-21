@@ -1583,7 +1583,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) - **Prefer exhaustive `switch` statements over `if case ... else` statements.** 
+- <a id='prefer-switch-over-if-case'></a>(<a href='#prefer-switch-over-if-case'>link</a>) - **Prefer exhaustive `switch` statements over `if case ... else` statements.**
 
   <details>
 
