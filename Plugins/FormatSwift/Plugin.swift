@@ -29,6 +29,7 @@ struct AirbnbSwiftFormatPlugin {
     }
 
     let launchPath = try context.tool(named: "AirbnbSwiftFormatTool").path.string
+
     let arguments = inputPaths + [
       "--swift-format-path",
       try context.tool(named: "swiftformat").path.string,
