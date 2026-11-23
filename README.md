@@ -5424,7 +5424,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   ```
 
-  The closure argument is a snapshot of the new value, while the observed property is read again each time it is used. Keep the argument when the value is used later, like in a `Task` or after the closure has modified the property, or when the observed value is a computed property that is non-trivial to evaluate.
+  The closure argument is a snapshot of the new value, while the observed property is read again each time it is used. Keep the argument when the value is used later, like in a `Task` or after the closure has modified the property, or when the observed value is a computed property that is non-trivial to evaluate. SwiftFormat only applies this automatically when it can see that the observed value is a stored property. Apply it by hand elsewhere when reading the value again is equivalent.
 
   ```swift
   // RIGHT: The Task may run after `destination` has changed again
