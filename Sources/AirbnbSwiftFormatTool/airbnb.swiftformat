@@ -170,4 +170,4 @@
 --rules redundantEmptyView
 --rules contentBuilder
 --rules redundantSwiftUIGroup
---rules onChangeArguments
+--rules onChangeParameters

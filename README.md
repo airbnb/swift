@@ -5398,7 +5398,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
-  [![SwiftFormat: onChangeArguments](https://img.shields.io/badge/SwiftFormat-onChangeArguments-7B0051.svg)](https://swiftformat.info/rules/prerelease#onChangeArguments)
+  [![SwiftFormat: onChangeParameters](https://img.shields.io/badge/SwiftFormat-onChangeParameters-7B0051.svg)](https://swiftformat.info/rules/prerelease#onChangeParameters)
 
   #### Why?
 
