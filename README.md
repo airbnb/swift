@@ -5394,6 +5394,50 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-zero-argument-on-change'></a>(<a href='#prefer-zero-argument-on-change'>link</a>) **Prefer the zero-argument SwiftUI `onChange(of:)` closure when the old value is unused.** Read the new value from the observed property instead of from a closure argument.
+
+  <details>
+
+  [![SwiftFormat: preferZeroArgumentOnChange](https://img.shields.io/badge/SwiftFormat-preferZeroArgumentOnChange-7B0051.svg)](https://swiftformat.info/rules/prerelease#preferZeroArgumentOnChange)
+
+  #### Why?
+
+  The two-argument closure makes the reader check whether the old value matters. When it doesn't, the zero-argument closure is shorter and reads the same value: SwiftUI runs the closure after the observed value has changed.
+
+  ```swift
+  // WRONG
+  Toggle("Autopilot", isOn: $isEngaged)
+    .onChange(of: isEngaged) { _, newValue in
+      spaceship.setAutopilot(engaged: newValue)
+    }
+
+  // RIGHT
+  Toggle("Autopilot", isOn: $isEngaged)
+    .onChange(of: isEngaged) {
+      spaceship.setAutopilot(engaged: isEngaged)
+    }
+
+  // ALSO RIGHT: The closure compares the old and new values
+  Text(altitude.formatted())
+    .onChange(of: altitude) { oldValue, newValue in
+      isClimbing = newValue > oldValue
+    }
+  ```
+
+  The closure argument is a snapshot of the new value, while the observed property is read again each time it is used. Keep the argument when the value is used later, like in a `Task` or after the closure has modified the property.
+
+  ```swift
+  // RIGHT: The Task may run after `destination` has changed again
+  StarMap(destination: $destination)
+    .onChange(of: destination) { _, newDestination in
+      Task {
+        await navigator.plotCourse(to: newDestination)
+      }
+    }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing

@@ -170,3 +170,4 @@
 --rules redundantEmptyView
 --rules contentBuilder
 --rules redundantSwiftUIGroup
+--rules preferZeroArgumentOnChange
