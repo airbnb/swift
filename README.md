@@ -5398,6 +5398,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <details>
 
+  <!-- ai-skill-include: not fully autocorrectable (SwiftFormat only replaces the new value when the observed value is a stored property declared in the same file) -->
+
   [![SwiftFormat: onChangeParameters](https://img.shields.io/badge/SwiftFormat-onChangeParameters-7B0051.svg)](https://swiftformat.info/rules/prerelease#onChangeParameters)
 
   #### Why?
@@ -5406,15 +5408,15 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   ```swift
   // WRONG
-  Toggle("Autopilot", isOn: $isEngaged)
-    .onChange(of: isEngaged) { _, newValue in
-      spaceship.setAutopilot(engaged: newValue)
+  TextField("Search planets", text: $query)
+    .onChange(of: query) { _, newQuery in
+      results = galaxy.planets(matching: newQuery)
     }
 
   // RIGHT
-  Toggle("Autopilot", isOn: $isEngaged)
-    .onChange(of: isEngaged) {
-      spaceship.setAutopilot(engaged: isEngaged)
+  TextField("Search planets", text: $query)
+    .onChange(of: query) {
+      results = galaxy.planets(matching: query)
     }
 
   // ALSO RIGHT: The closure compares the old and new values
