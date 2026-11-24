@@ -5394,11 +5394,11 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
-- <a id='prefer-zero-argument-on-change'></a>(<a href='#prefer-zero-argument-on-change'>link</a>) **Prefer the zero-argument SwiftUI `onChange(of:)` closure when the old value is unused.** Read the new value from the observed property instead of from a closure argument.
+- <a id='prefer-zero-argument-on-change'></a>(<a href='#prefer-zero-argument-on-change'>link</a>) **Prefer the zero-argument SwiftUI `onChange(of:)` closure when the old value is unused.** Read the new value from the observed property instead. However, keep the closure argument when reading the property again isn't equivalent, like when it is expensive to compute or is used later in a `Task`.
 
   <details>
 
-  <!-- ai-skill-include: not fully autocorrectable (SwiftFormat only replaces the new value when the observed value is a stored property declared in the same file) -->
+  <!-- ai-skill-include: not fully autocorrectable (SwiftFormat doesn't know if the observed value is a stored or computed property) -->
 
   [![SwiftFormat: onChangeParameters](https://img.shields.io/badge/SwiftFormat-onChangeParameters-7B0051.svg)](https://swiftformat.info/rules/prerelease#onChangeParameters)
 
@@ -5424,27 +5424,12 @@ _You can enable the following settings in Xcode by running [this script](https:/
     .onChange(of: altitude) { oldValue, newValue in
       isClimbing = newValue > oldValue
     }
-  ```
 
-  This rule doesn't apply when reading the observed value again isn't equivalent to using the closure argument. The argument is a snapshot of the new value that SwiftUI has already computed, while the observed value is evaluated again each time it is read. Keep the argument when:
-
-  - The observed value is a computed property that is expensive to evaluate. Reading it in the closure repeats that work.
-  - The value is used later, like in a `Task`, or after the closure has modified the property. By then the observed value may have changed.
-
-  ```swift
-  // RIGHT: `habitablePlanets` is a computed property that filters and sorts every planet.
-  // Reading it again in the closure would repeat that work.
+  // ALSO RIGHT: `habitablePlanets` is an expensive computed property,
+  // and reading it again in the closure would repeat that work
   PlanetList(planets: habitablePlanets)
     .onChange(of: habitablePlanets) { _, newPlanets in
       starMap.highlight(newPlanets)
-    }
-
-  // RIGHT: The Task may run after `destination` has changed again
-  StarMap(destination: $destination)
-    .onChange(of: destination) { _, newDestination in
-      Task {
-        await navigator.plotCourse(to: newDestination)
-      }
     }
   ```
 
