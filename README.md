@@ -5394,6 +5394,47 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   </details>
 
+- <a id='prefer-zero-argument-on-change'></a>(<a href='#prefer-zero-argument-on-change'>link</a>) **Prefer the zero-argument SwiftUI `onChange(of:)` closure when the old value is unused.** Read the new value from the observed property instead. However, keep the closure argument when reading the property again isn't equivalent, like when it is expensive to compute or is used later in a `Task`.
+
+  <details>
+
+  <!-- ai-skill-include: not fully autocorrectable (SwiftFormat doesn't know if the observed value is a stored or computed property) -->
+
+  [![SwiftFormat: onChangeParameters](https://img.shields.io/badge/SwiftFormat-onChangeParameters-7B0051.svg)](https://swiftformat.info/rules/prerelease#onChangeParameters)
+
+  #### Why?
+
+  The two-argument closure makes the reader check whether the old value matters. When it doesn't, the zero-argument closure is shorter and reads the same value: SwiftUI runs the closure after the observed value has changed.
+
+  ```swift
+  // WRONG
+  TextField("Search planets", text: $query)
+    .onChange(of: query) { _, newQuery in
+      results = galaxy.planets(matching: newQuery)
+    }
+
+  // RIGHT
+  TextField("Search planets", text: $query)
+    .onChange(of: query) {
+      results = galaxy.planets(matching: query)
+    }
+
+  // ALSO RIGHT: The closure compares the old and new values
+  Text(altitude.formatted())
+    .onChange(of: altitude) { oldValue, newValue in
+      isClimbing = newValue > oldValue
+    }
+
+  // ALSO RIGHT: `habitablePlanets` is an expensive computed property,
+  // and reading it again in the closure would repeat that work
+  PlanetList(planets: habitablePlanets)
+    .onChange(of: habitablePlanets) { _, newPlanets in
+      starMap.highlight(newPlanets)
+    }
+  ```
+
+  </details>
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Testing
