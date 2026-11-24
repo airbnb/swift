@@ -38,6 +38,8 @@
 --extension-acl on-declarations # extensionAccessControl
 --pattern-let inline # hoistPatternLet
 --property-types inferred # propertyTypes
+--init-types auto # implicitMemberExpressions
+--init-type-min-length 100 # implicitMemberExpressions
 --type-blank-lines consistent # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --empty-braces spaced # emptyBraces
 --ranges preserve # spaceAroundOperators
@@ -141,6 +143,7 @@
 --rules consistentSwitchCaseSpacing
 --rules semicolons
 --rules propertyTypes
+--rules implicitMemberExpressions
 --rules blankLinesBetweenChainedFunctions
 --rules preferCountWhere
 --rules isEmpty

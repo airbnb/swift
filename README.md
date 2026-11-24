@@ -309,7 +309,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
 
   <!-- ai-skill-include: not fully autocorrectable -->
 
-  [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://swiftformat.info/rules/prerelease#propertyTypes)
+  [![SwiftFormat: propertyTypes](https://img.shields.io/badge/SwiftFormat-propertyTypes-7B0051.svg)](https://swiftformat.info/rules/prerelease#propertyTypes) [![SwiftFormat: implicitMemberExpressions](https://img.shields.io/badge/SwiftFormat-implicitMemberExpressions-7B0051.svg)](https://swiftformat.info/rules/prerelease#implicitMemberExpressions)
 
   ```swift
   // WRONG
@@ -352,6 +352,32 @@ _You can enable the following settings in Xcode by running [this script](https:/
     } else {
       Planet.mercury
     }
+
+  // WRONG: Static members don't need an explicit type when it can be inferred from context.
+  spaceship.destination = Planet.mars
+  launchSpaceship(toward: Planet.mars)
+
+  func homePlanet() -> Planet {
+    Planet.earth
+  }
+
+  // RIGHT
+  spaceship.destination = .mars
+  launchSpaceship(toward: .mars)
+
+  func homePlanet() -> Planet {
+    .earth
+  }
+
+  // RIGHT: Initializers can be written with either the full type name or `.init`.
+  func makeSun() -> Star {
+    Star(mass: 1.989e30)
+  }
+
+  // ALSO RIGHT
+  func makeSun() -> Star {
+    .init(mass: 1.989e30)
+  }
   ```
 
   </details>
