@@ -354,20 +354,20 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
 
   // WRONG: Static members don't need an explicit type when it can be inferred from context.
-  launchSpaceship(toward: Planet.mars)
-  spaceship.destination = Planet.mars
-
   var planet: Planet {
     Planet.earth
   }
 
-  // RIGHT
-  launchSpaceship(toward: .mars)
-  spaceship.destination = .mars
+  launchSpaceship(toward: Planet.mars)
+  spaceship.destination = Planet.mars
 
+  // RIGHT
   var planet: Planet {
     .earth
   }
+
+  launchSpaceship(toward: .mars)
+  spaceship.destination = .mars
 
   // RIGHT: Initializers can be written with either the full type name or `.init`.
   func makeSun() -> Star {
