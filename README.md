@@ -354,18 +354,18 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
 
   // WRONG: Static members don't need an explicit type when it can be inferred from context.
-  spaceship.destination = Planet.mars
   launchSpaceship(toward: Planet.mars)
+  spaceship.destination = Planet.mars
 
-  func homePlanet() -> Planet {
+  var planet: Planet {
     Planet.earth
   }
 
   // RIGHT
-  spaceship.destination = .mars
   launchSpaceship(toward: .mars)
+  spaceship.destination = .mars
 
-  func homePlanet() -> Planet {
+  var planet: Planet {
     .earth
   }
 
