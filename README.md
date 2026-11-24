@@ -5448,8 +5448,6 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   ```
 
-  When the closure uses the new value, SwiftFormat only applies this rule automatically if it can see that the observed value is a stored property, declared in the same file. It leaves computed properties and values declared elsewhere unchanged, so apply the rule by hand in those cases when reading the value again is equivalent.
-
   </details>
 
 **[⬆ back to top](#table-of-contents)**
