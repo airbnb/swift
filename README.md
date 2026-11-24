@@ -5426,9 +5426,19 @@ _You can enable the following settings in Xcode by running [this script](https:/
     }
   ```
 
-  The closure argument is a snapshot of the new value, while the observed property is read again each time it is used. Keep the argument when the value is used later, like in a `Task` or after the closure has modified the property, or when the observed value is a computed property that is non-trivial to evaluate. SwiftFormat only applies this automatically when it can see that the observed value is a stored property. Apply it by hand elsewhere when reading the value again is equivalent.
+  This rule doesn't apply when reading the observed value again isn't equivalent to using the closure argument. The argument is a snapshot of the new value that SwiftUI has already computed, while the observed value is evaluated again each time it is read. Keep the argument when:
+
+  - The observed value is a computed property that is expensive to evaluate. Reading it in the closure repeats that work.
+  - The value is used later, like in a `Task`, or after the closure has modified the property. By then the observed value may have changed.
 
   ```swift
+  // RIGHT: `habitablePlanets` is a computed property that filters and sorts every planet.
+  // Reading it again in the closure would repeat that work.
+  PlanetList(planets: habitablePlanets)
+    .onChange(of: habitablePlanets) { _, newPlanets in
+      starMap.highlight(newPlanets)
+    }
+
   // RIGHT: The Task may run after `destination` has changed again
   StarMap(destination: $destination)
     .onChange(of: destination) { _, newDestination in
@@ -5437,6 +5447,8 @@ _You can enable the following settings in Xcode by running [this script](https:/
       }
     }
   ```
+
+  SwiftFormat only applies this rule automatically when it can see that the observed value is a stored property, declared in the same file. It leaves computed properties and values declared elsewhere unchanged, so apply the rule by hand in those cases when reading the value again is equivalent.
 
   </details>
 
