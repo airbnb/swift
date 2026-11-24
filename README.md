@@ -359,7 +359,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
 
   launchSpaceship(toward: Planet.mars)
-  spaceship.destination = Planet.mars
+  spaceship.style = SpaceshipStyle.futuristic
 
   // RIGHT
   var planet: Planet {
@@ -367,7 +367,7 @@ _You can enable the following settings in Xcode by running [this script](https:/
   }
 
   launchSpaceship(toward: .mars)
-  spaceship.destination = .mars
+  spaceship.style = .futuristic
 
   // RIGHT: Initializers can be written with either the full type name or `.init`.
   func makeSun() -> Star {
